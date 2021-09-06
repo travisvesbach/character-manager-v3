@@ -1,0 +1,21 @@
+name: ztools
+recipe: laravel
+config:
+  webroot: public
+services:
+  node:
+    type: node:12
+    build:
+      - npm install
+  phpmyadmin:
+    type: phpmyadmin
+tooling:
+  npm:
+    service: node
+  npx:
+    service: node
+  node:
+    service: node
+proxy:
+  phpmyadmin:
+    - pma.ztools.test
