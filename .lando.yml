@@ -16,6 +16,10 @@ tooling:
     service: node
   node:
     service: node
+  phpunit:
+    service: appserver
+    description: "Run PHP Unit tests: lando phpunit"
+    cmd: /app/vendor/bin/phpunit
 proxy:
   phpmyadmin:
     - pma.ztools.test

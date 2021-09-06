@@ -1204,9 +1204,6 @@ select {
 .ml-auto {
 	margin-left: auto;
 }
-.ml-0 {
-	margin-left: 0px;
-}
 .block {
 	display: block;
 }
@@ -2371,12 +2368,12 @@ select {
 		display: grid;
 	}
 
-	.md\:w-3\/4 {
-		width: 75%;
-	}
-
 	.md\:w-1\/2 {
 		width: 50%;
+	}
+
+	.md\:w-3\/4 {
+		width: 75%;
 	}
 
 	.md\:grid-cols-3 {
