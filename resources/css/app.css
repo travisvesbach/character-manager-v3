@@ -1,3 +1,12 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+
+.hover-trigger .hover-target {
+    visibility: hidden;
+}
+
+.hover-trigger:hover .hover-target, .hover-trigger .hover-target:focus, .hover-trigger .hover-target:focus-within {
+    visibility: visible;
+}
