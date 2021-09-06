@@ -54,6 +54,13 @@
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" />
                 <jet-input-error :message="form.errors.email" class="mt-2" />
             </div>
+
+            <!-- Theme -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="theme" value="Theme" />
+                <select-input id="theme" class="mt=1 block w-full" v-model="form.theme" :options="['light', 'dark']" />
+                <jet-input-error :message="form.errors.theme" class="mt-2" />
+            </div>
         </template>
 
         <template #actions>
@@ -77,6 +84,7 @@
     import JetLabel from '@/Jetstream/Label.vue'
     import JetActionMessage from '@/Jetstream/ActionMessage.vue'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
+    import SelectInput from '@/Components/SelectInput'
 
     export default defineComponent({
         components: {
@@ -87,6 +95,7 @@
             JetInputError,
             JetLabel,
             JetSecondaryButton,
+            SelectInput
         },
 
         props: ['user'],
@@ -98,12 +107,12 @@
                     name: this.user.name,
                     email: this.user.email,
                     photo: null,
+                    theme: this.user.theme,
                 }),
 
                 photoPreview: null,
             }
         },
-
         methods: {
             updateProfileInformation() {
                 if (this.$refs.photo) {
@@ -115,6 +124,12 @@
                     preserveScroll: true,
                     onSuccess: () => (this.clearPhotoFileInput()),
                 });
+                if(this.user.theme != this.form.theme) {
+                    let root = document.querySelector("html");
+                    root.classList.remove('dark');
+                    root.classList.remove('light');
+                    root.classList.add(this.form.theme);
+                }
             },
 
             selectNewPhoto() {

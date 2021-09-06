@@ -27,6 +27,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'theme',
+        'admin',
     ];
 
     /**
@@ -58,4 +60,15 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    protected static function booted()
+    {
+        static::creating(function ($user) {
+            //if there aren't any users, this user is an admin
+            if(User::count() == 0) {
+                $user->admin = true;
+            }
+        });
+    }
 }
