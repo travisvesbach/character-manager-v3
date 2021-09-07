@@ -6,7 +6,7 @@
 
         <div class="w-full md:w-3/4 xl:w-1/2 mx-auto pb-10 sm:px-6 lg:px-8 m-2">
 
-            <div class="flex mb-1 mx-2 text-color items-end">
+            <div class="flex mb-1 mx-2 items-end">
                 <div class="flex items-center">
                     <svg class="h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -14,13 +14,13 @@
                     <span class="ml-1">{{ users.length }} {{ users.length == 1 ? 'user' : 'users' }}</span>
                 </div>
 
-                <jet-button class="ml-auto">
-                    <Link :href="route('users.create')">New User</Link>
-                </jet-button>
+                <Link :href="route('users.create')" class="ml-auto btn btn-primary" :as="'button'">
+                        New User
+                </Link>
             </div>
 
-            <div class="border-b-2 border-color w-full"></div>
-            <div class="border-b-2 border-color w-full" v-for="user in users">
+            <div class="border-b-2 w-full border-color"></div>
+            <div class="border-b-2 w-full border-color" v-for="user in users">
                 <div class="pl-1 py-1 flex items-center flex-1 hover-trigger">
                     <div class="inline-block ml-2 flex-1">
                         <div class="mb-1 flex items-center">
@@ -42,7 +42,7 @@
 
                             <template #content>
                                 <div v-if="user.id != $page.props.user.id">
-                                    <jet-dropdown-link :href="route('users.edit', {id: user.id})">
+                                    <jet-dropdown-link :href="route('users.edit', user.id)">
                                         Edit User
                                     </jet-dropdown-link>
                                     <jet-dropdown-link @click.native="confirmingDeleteUser = user" as="button">
@@ -121,7 +121,7 @@
         methods: {
             deleteUser() {
                 this.form.id = this.confirmingDeleteUser.id;
-                this.form.delete('/users/' + this.form.id);
+                this.form.delete(route('users.delete', this.form.id));
                 this.confirmingDeleteUser = false;
             }
         }

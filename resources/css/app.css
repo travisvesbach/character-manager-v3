@@ -10,3 +10,64 @@
 .hover-trigger:hover .hover-target, .hover-trigger .hover-target:focus, .hover-trigger .hover-target:focus-within {
     visibility: visible;
 }
+
+.link {
+    @apply items-center text-sm font-medium focus:outline-none transition duration-150 ease-in-out;
+}
+
+.link-color {
+    @apply text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:text-gray-700 focus:border-gray-300;
+    @apply dark:text-green dark:hover:text-green-light dark:focus:text-green-light;
+}
+
+.text-color {
+    @apply text-gray-600;
+    @apply dark:text-gray-300;
+}
+
+.text-secondary-color {
+    @apply text-gray-500;
+    @apply dark:text-gray-400;
+}
+
+.form-input-color, .vs__selected, .vs__search, .vs__actions, .vs__dropdown-menu, .vs__dropdown-option {
+    @apply border-gray-300 focus:border-indigo-300 focus:ring-indigo-200;
+    @apply dark:bg-gray-600 dark:border-gray-800 dark:placeholder-gray-400 focus:border-green focus:ring-green;
+}
+
+.card {
+    @apply bg-white;
+    @apply dark:bg-gray-600;
+}
+
+.card-header-footer {
+    @apply p-3 flex items-center;
+    @apply bg-gray-200;
+    @apply dark:bg-gray-800;
+}
+
+.border-color {
+    @apply border-gray-200;
+    @apply dark:border-gray-600;
+}
+
+.btn {
+    @apply inline-flex items-center px-4 py-2 border rounded-md font-semibold text-xs uppercase tracking-widest focus:outline-none focus:ring disabled:opacity-25 transition;
+}
+
+.btn-primary {
+    @apply bg-gray-800 border-transparent text-white hover:bg-gray-700 active:bg-gray-900 focus:border-gray-900 focus:ring-gray;
+    @apply dark:bg-gray-300 dark:text-black dark:hover:bg-gray-200 dark:active:bg-gray-400 dark:focus:border-green dark:focus:ring-green;
+}
+
+.btn-secondary {
+    @apply shadow-sm;
+    @apply bg-white border-gray-300 text-gray-700 hover:text-gray-500 focus:border-blue-300 focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 ;
+    @apply dark:bg-gray-700 dark:border-gray-700 dark:text-gray-200 dark:hover:text-gray-400 dark:focus:border-green dark:focus:ring-green dark:active:text-gray-100 dark:active:bg-gray-900;
+}
+
+.btn-danger {
+    @apply justify-center;
+    @apply bg-red-600 border-transparent text-white hover:bg-red-500 focus:border-red-700 focus:ring-red-200 active:bg-red-600;
+    @apply dark:bg-red-700 dark:text-white dark:hover:bg-red-600 dark:focus:border-red-800 dark:focus:ring-red-800 dark:active:bg-red-700;
+}

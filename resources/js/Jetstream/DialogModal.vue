@@ -1,33 +1,30 @@
 <template>
     <modal :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
-        <div class="px-6 py-4">
-            <div class="text-lg">
-                <slot name="title">
-                </slot>
+        <card>
+            <div class="text-lg mb-2">
+                <slot name="title"></slot>
             </div>
 
-            <div class="mt-4">
-                <slot name="content">
-                </slot>
-            </div>
-        </div>
+            <slot name="content"></slot>
 
-        <div class="px-6 py-4 bg-gray-100 text-right">
-            <slot name="footer">
-            </slot>
-        </div>
+            <template #footerend>
+                <slot name="footer"></slot>
+            </template>
+        </card>
     </modal>
 </template>
 
 <script>
     import { defineComponent } from 'vue'
     import Modal from './Modal.vue'
+    import Card from '@/Components/Card'
 
     export default defineComponent({
         emits: ['close'],
 
         components: {
             Modal,
+            Card,
         },
 
         props: {

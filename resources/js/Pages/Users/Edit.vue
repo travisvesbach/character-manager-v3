@@ -96,9 +96,9 @@
         methods: {
             submit() {
                 if(this.editing) {
-                    this.form.patch('/users/' + this.form.id);
+                    this.form.patch(route('users.update', this.form.id));
                 } else {
-                    this.form.post('/users');
+                    this.form.post(route('users.store'));
                 }
             },
         },
