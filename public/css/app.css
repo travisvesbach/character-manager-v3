@@ -1261,6 +1261,9 @@ select {
 .h-20 {
 	height: 5rem;
 }
+.h-full {
+	height: 100%;
+}
 .min-h-screen {
 	min-height: 100vh;
 }
@@ -1994,10 +1997,6 @@ select {
 	border-color: rgba(165, 180, 252, var(--tw-border-opacity));
 	--tw-ring-opacity: 1;
 	--tw-ring-color: rgba(199, 210, 254, var(--tw-ring-opacity));
-	--tw-border-opacity: 1;
-	border-color: rgba(112, 201, 137, var(--tw-border-opacity));
-	--tw-ring-opacity: 1;
-	--tw-ring-color: rgba(112, 201, 137, var(--tw-ring-opacity));
 }
 .dark .form-input-color, .dark .vs__selected, .dark .vs__search, .dark .vs__actions, .dark .vs__dropdown-menu, .dark .vs__dropdown-option {
 	--tw-border-opacity: 1;
@@ -2016,6 +2015,12 @@ select {
 .dark .form-input-color::placeholder, .dark .vs__selected::placeholder, .dark .vs__search::placeholder, .dark .vs__actions::placeholder, .dark .vs__dropdown-menu::placeholder, .dark .vs__dropdown-option::placeholder {
 	--tw-placeholder-opacity: 1;
 	color: rgba(156, 163, 175, var(--tw-placeholder-opacity));
+}
+.dark .form-input-color:focus, .dark .vs__selected:focus, .dark .vs__search:focus, .dark .vs__actions:focus, .dark .vs__dropdown-menu:focus, .dark .vs__dropdown-option:focus {
+	--tw-border-opacity: 1;
+	border-color: rgba(112, 201, 137, var(--tw-border-opacity));
+	--tw-ring-opacity: 1;
+	--tw-ring-color: rgba(112, 201, 137, var(--tw-ring-opacity));
 }
 .card {
 	--tw-bg-opacity: 1;

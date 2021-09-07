@@ -1,5 +1,5 @@
 <template>
-    <Link :href="href" class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium leading-5 focus:outline-none transition" :class="classes">
+    <Link :href="href" class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium leading-5 focus:outline-none transition h-full" :class="classes">
         <slot />
     </Link>
 </template>

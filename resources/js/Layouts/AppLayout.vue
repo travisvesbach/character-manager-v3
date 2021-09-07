@@ -5,10 +5,10 @@
         <jet-banner />
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-700">
-            <nav class="py-1 bg-white border-b border-gray-100 dark:bg-gray-900 dark:border-gray-700">
+            <nav class="bg-white border-b border-gray-100 dark:bg-gray-900 dark:border-gray-700">
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto px-4">
-                    <div class="flex justify-between">
+                    <div class="flex justify-between h-9">
                         <div class="flex flex-grow">
                             <!-- Logo -->
                             <div class="flex-shrink-0 flex items-center">
@@ -23,7 +23,7 @@
                             </h2>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex flex-grow justify-end">
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex flex-grow items-center justify-end">
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </jet-nav-link>

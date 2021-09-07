@@ -20752,7 +20752,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     contentClasses: {
       "default": function _default() {
-        return ['py-1', 'bg-white', 'dark:bg-gray-800'];
+        return ['bg-white', 'dark:bg-gray-800'];
       }
     }
   },
@@ -23448,7 +23448,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return _ctx.open = false;
         })
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["rounded-md ring-1 ring-black ring-opacity-5", _ctx.contentClasses])
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["rounded-md ring-1 ring-black ring-opacity-5 overflow-hidden", _ctx.contentClasses])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "content")], 2
       /* CLASS */
       )], 2
@@ -23757,7 +23757,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Link, {
     href: _ctx.href,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium leading-5 focus:outline-none transition", _ctx.classes])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium leading-5 focus:outline-none transition h-full", _ctx.classes])
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")];
@@ -24000,13 +24000,13 @@ var _hoisted_1 = {
   "class": "min-h-screen bg-gray-100 dark:bg-gray-700"
 };
 var _hoisted_2 = {
-  "class": "py-1 bg-white border-b border-gray-100 dark:bg-gray-900 dark:border-gray-700"
+  "class": "bg-white border-b border-gray-100 dark:bg-gray-900 dark:border-gray-700"
 };
 var _hoisted_3 = {
   "class": "mx-auto px-4"
 };
 var _hoisted_4 = {
-  "class": "flex justify-between"
+  "class": "flex justify-between h-9"
 };
 var _hoisted_5 = {
   "class": "flex flex-grow"
@@ -24018,7 +24018,7 @@ var _hoisted_7 = {
   "class": "font-semibold text-xl ml-5 flex items-center"
 };
 var _hoisted_8 = {
-  "class": "hidden space-x-8 sm:-my-px sm:ml-10 sm:flex flex-grow justify-end"
+  "class": "hidden space-x-8 sm:-my-px sm:ml-10 sm:flex flex-grow items-center justify-end"
 };
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Dashboard ");

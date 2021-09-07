@@ -20,7 +20,7 @@
                     :class="[widthClass, alignmentClasses]"
                     style="display: none;"
                     @click="open = false">
-                <div class="rounded-md ring-1 ring-black ring-opacity-5" :class="contentClasses">
+                <div class="rounded-md ring-1 ring-black ring-opacity-5 overflow-hidden" :class="contentClasses">
                     <slot name="content"></slot>
                 </div>
             </div>
@@ -40,7 +40,7 @@ export default defineComponent({
             default: '48'
         },
         contentClasses: {
-            default: () => ['py-1', 'bg-white', 'dark:bg-gray-800']
+            default: () => ['bg-white', 'dark:bg-gray-800']
         }
     },
 
