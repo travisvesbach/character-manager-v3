@@ -9,13 +9,13 @@
         </template>
 
         <template #content>
-            <h3 class="text-lg font-medium" v-if="twoFactorEnabled">
+            <heading v-if="twoFactorEnabled">
                 You have enabled two factor authentication.
-            </h3>
+            </heading>
 
-            <h3 class="text-lg font-medium" v-else>
+            <heading v-else>
                 You have not enabled two factor authentication.
-            </h3>
+            </heading>
 
             <div class="mt-3 max-w-xl text-sm">
                 <p>
@@ -93,6 +93,7 @@
     import JetConfirmsPassword from '@/Jetstream/ConfirmsPassword.vue'
     import JetDangerButton from '@/Jetstream/DangerButton.vue'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
+    import Heading from '@/Components/Heading.vue'
 
     export default defineComponent({
         components: {
@@ -101,6 +102,7 @@
             JetConfirmsPassword,
             JetDangerButton,
             JetSecondaryButton,
+            Heading,
         },
 
         data() {

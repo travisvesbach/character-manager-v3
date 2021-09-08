@@ -1,5 +1,5 @@
 <template>
-    <div class="md:container shadow overflow-hidden sm:rounded-lg mx-auto card">
+    <div class="md:container shadow overflow-hidden sm:rounded-lg mx-auto card text-color">
         <div class="card-header-footer" v-if="hasHeader">
             <slot name="header"></slot>
         </div>

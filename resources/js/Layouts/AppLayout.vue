@@ -1,148 +1,150 @@
 <template>
-    <div>
-        <Head :title="title" />
+    <div :class="$page.props.user ? $page.props.user.theme : 'light'">
+        <div class="text-color">
+            <Head :title="title" />
 
-        <jet-banner />
+            <jet-banner />
 
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-700">
-            <nav class="bg-white border-b border-gray-100 dark:bg-gray-900 dark:border-gray-700">
-                <!-- Primary Navigation Menu -->
-                <div class="mx-auto px-4">
-                    <div class="flex justify-between h-9">
-                        <div class="flex flex-grow">
-                            <!-- Logo -->
-                            <div class="flex-shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
-                                    <jet-application-mark class="block h-5 w-auto" />
-                                </Link>
+            <div class="min-h-screen bg-gray-100 dark:bg-gray-800">
+                <nav class="bg-white border-b border-gray-100 dark:bg-gray-900 dark:border-gray-800">
+                    <!-- Primary Navigation Menu -->
+                    <div class="mx-auto px-4">
+                        <div class="flex justify-between h-9">
+                            <div class="flex flex-grow">
+                                <!-- Logo -->
+                                <div class="flex-shrink-0 flex items-center">
+                                    <Link :href="route('dashboard')">
+                                        <jet-application-mark class="block h-5 w-auto" />
+                                    </Link>
+                                </div>
+
+                                <!-- Header -->
+                                <h2 class="font-semibold text-xl ml-5 flex items-center heading-color">
+                                    <slot name="header"></slot>
+                                </h2>
+
+                                <!-- Navigation Links -->
+                                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex flex-grow items-center justify-end">
+                                    <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
+                                        Dashboard
+                                    </jet-nav-link>
+                                </div>
                             </div>
 
-                            <!-- Header -->
-                            <h2 class="font-semibold text-xl ml-5 flex items-center">
-                                <slot name="header"></slot>
-                            </h2>
 
-                            <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex flex-grow items-center justify-end">
-                                <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </jet-nav-link>
-                            </div>
-                        </div>
-
-
-                        <div class="hidden sm:flex sm:items-center">
-                            <!-- Settings Dropdown -->
-                            <div class="ml-3 relative">
-                                <jet-dropdown align="right" width="48">
-                                    <template #trigger>
-                                        <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex flex link link-color">
-                                            <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
-                                        </button>
-
-                                        <span v-else class="inline-flex rounded-md">
-                                            <button type="button" class="flex link link-color">
-                                                {{ $page.props.user.name }}
-
-                                                <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                                </svg>
+                            <div class="hidden sm:flex sm:items-center">
+                                <!-- Settings Dropdown -->
+                                <div class="ml-3 relative">
+                                    <jet-dropdown align="right" width="48">
+                                        <template #trigger>
+                                            <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex flex link link-color">
+                                                <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
                                             </button>
-                                        </span>
-                                    </template>
 
-                                    <template #content>
-                                        <!-- Account Management -->
-                                        <dropdown-heading>Manage Account</dropdown-heading>
+                                            <span v-else class="inline-flex rounded-md">
+                                                <button type="button" class="flex link link-color">
+                                                    {{ $page.props.user.name }}
 
-                                        <jet-dropdown-link :href="route('profile.show')">
-                                            Profile
-                                        </jet-dropdown-link>
+                                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </button>
+                                            </span>
+                                        </template>
 
-                                        <dropdown-divider/>
+                                        <template #content>
+                                            <!-- Account Management -->
+                                            <dropdown-heading>Manage Account</dropdown-heading>
 
-                                        <!-- Admin -->
-                                        <div v-if="$page.props.user.admin">
-                                            <dropdown-heading>Admin</dropdown-heading>
-
-                                            <jet-dropdown-link :href="route('users.index')">
-                                                Users
+                                            <jet-dropdown-link :href="route('profile.show')">
+                                                Profile
                                             </jet-dropdown-link>
 
                                             <dropdown-divider/>
-                                        </div>
 
-                                        <!-- Authentication -->
-                                        <form @submit.prevent="logout">
-                                            <jet-dropdown-link as="button">
-                                                Log Out
-                                            </jet-dropdown-link>
-                                        </form>
-                                    </template>
-                                </jet-dropdown>
+                                            <!-- Admin -->
+                                            <div v-if="$page.props.user.admin">
+                                                <dropdown-heading>Admin</dropdown-heading>
+
+                                                <jet-dropdown-link :href="route('users.index')">
+                                                    Users
+                                                </jet-dropdown-link>
+
+                                                <dropdown-divider/>
+                                            </div>
+
+                                            <!-- Authentication -->
+                                            <form @submit.prevent="logout">
+                                                <jet-dropdown-link as="button">
+                                                    Log Out
+                                                </jet-dropdown-link>
+                                            </form>
+                                        </template>
+                                    </jet-dropdown>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Hamburger -->
-                        <div class="-mr-2 flex items-center sm:hidden">
-                            <button @click="showingNavigationDropdown = ! showingNavigationDropdown" class="flex link link-color">
-                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                    <path :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                                    <path :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
+                            <!-- Hamburger -->
+                            <div class="-mr-2 flex items-center sm:hidden">
+                                <button @click="showingNavigationDropdown = ! showingNavigationDropdown" class="flex link link-color">
+                                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                        <path :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                        <path :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Responsive Navigation Menu -->
-                <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
-                    <div class="pt-2 pb-3 space-y-1">
-                        <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
-                        </jet-responsive-nav-link>
-                    </div>
-
-                    <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200">
-                        <div class="flex items-center px-4">
-                            <div v-if="$page.props.jetstream.managesProfilePhotos" class="flex-shrink-0 mr-3" >
-                                <img class="h-10 w-10 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
-                            </div>
-
-                            <div>
-                                <div class="font-medium text-base text-gray-800">{{ $page.props.user.name }}</div>
-                                <div class="font-medium text-sm text-gray-500">{{ $page.props.user.email }}</div>
-                            </div>
-                        </div>
-
-                        <div class="mt-3 space-y-1">
-                            <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
-                                Profile
+                    <!-- Responsive Navigation Menu -->
+                    <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
+                        <div class="pt-2 pb-3 space-y-1">
+                            <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
+                                Dashboard
                             </jet-responsive-nav-link>
+                        </div>
 
-                            <!-- Admin -->
-                            <div v-if="$page.props.user.admin">
-                                <jet-responsive-nav-link :href="route('users.index')">
-                                    Users
-                                </jet-responsive-nav-link>
+                        <!-- Responsive Settings Options -->
+                        <div class="pt-4 pb-1 border-t border-gray-200">
+                            <div class="flex items-center px-4">
+                                <div v-if="$page.props.jetstream.managesProfilePhotos" class="flex-shrink-0 mr-3" >
+                                    <img class="h-10 w-10 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
+                                </div>
+
+                                <div>
+                                    <div class="font-medium text-base text-gray-800">{{ $page.props.user.name }}</div>
+                                    <div class="font-medium text-sm text-gray-500">{{ $page.props.user.email }}</div>
+                                </div>
                             </div>
 
-                            <!-- Authentication -->
-                            <form method="POST" @submit.prevent="logout">
-                                <jet-responsive-nav-link as="button">
-                                    Log Out
+                            <div class="mt-3 space-y-1">
+                                <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
+                                    Profile
                                 </jet-responsive-nav-link>
-                            </form>
+
+                                <!-- Admin -->
+                                <div v-if="$page.props.user.admin">
+                                    <jet-responsive-nav-link :href="route('users.index')">
+                                        Users
+                                    </jet-responsive-nav-link>
+                                </div>
+
+                                <!-- Authentication -->
+                                <form method="POST" @submit.prevent="logout">
+                                    <jet-responsive-nav-link as="button">
+                                        Log Out
+                                    </jet-responsive-nav-link>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
 
-            <!-- Page Content -->
-            <main>
-                <slot></slot>
-            </main>
+                <!-- Page Content -->
+                <main>
+                    <slot></slot>
+                </main>
+            </div>
         </div>
     </div>
 </template>

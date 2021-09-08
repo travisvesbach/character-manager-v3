@@ -17,8 +17,11 @@
         computed: {
             classes() {
                 return this.active
-                    ? 'border-indigo-400 text-gray-900 focus:border-indigo-700 dark:text-green-light dark:border-green-light dark:focus:border-green-light'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:text-gray-700 focus:border-gray-300 dark:text-green dark:hover:text-green-light dark:hover:border-green-light dark:focus:text-green-light dark:focus:border-green-light'
+                    ? 'border-indigo-400 text-gray-900 focus:border-indigo-700 dark:text-yellow-500 dark:border-yellow-500 dark:focus:border-yellow-500'
+                    : 'border-transparent dark:hover:border-yellow-500 dark:focus:border-yellow-500 link-color'
+
+
+
             }
         }
     })

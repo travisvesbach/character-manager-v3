@@ -17,7 +17,7 @@
 
 .link-color {
     @apply text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:text-gray-700 focus:border-gray-300;
-    @apply dark:text-green dark:hover:text-green-light dark:focus:text-green-light;
+    @apply dark:text-yellow-600 dark:hover:text-yellow-500 dark:focus:text-yellow-500;
 }
 
 .text-color {
@@ -30,9 +30,14 @@
     @apply dark:text-gray-400;
 }
 
+.heading-color {
+    @apply text-gray-900;
+    @apply dark:text-yellow-500;
+}
+
 .form-input-color, .vs__selected, .vs__search, .vs__actions, .vs__dropdown-menu, .vs__dropdown-option {
     @apply border-gray-300 focus:border-indigo-300 focus:ring-indigo-200;
-    @apply dark:bg-gray-600 dark:border-gray-800 dark:placeholder-gray-400 dark:focus:border-green dark:focus:ring-green;
+    @apply dark:bg-gray-600 dark:border-gray-800 dark:placeholder-gray-400 dark:focus:border-yellow-600 dark:focus:ring-yellow-600;
 }
 
 .card {
@@ -43,7 +48,7 @@
 .card-header-footer {
     @apply p-3 flex items-center;
     @apply bg-gray-200;
-    @apply dark:bg-gray-800;
+    @apply dark:bg-gray-700;
 }
 
 .border-color {
@@ -57,13 +62,13 @@
 
 .btn-primary {
     @apply bg-gray-800 border-transparent text-white hover:bg-gray-700 active:bg-gray-900 focus:border-gray-900 focus:ring-gray;
-    @apply dark:bg-gray-300 dark:text-black dark:hover:bg-gray-200 dark:active:bg-gray-400 dark:focus:border-green dark:focus:ring-green;
+    @apply dark:bg-gray-300 dark:text-black dark:hover:bg-gray-200 dark:active:bg-gray-400 dark:focus:border-yellow-600 dark:focus:ring-yellow-600;
 }
 
 .btn-secondary {
     @apply shadow-sm;
     @apply bg-white border-gray-300 text-gray-700 hover:text-gray-500 focus:border-blue-300 focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 ;
-    @apply dark:bg-gray-700 dark:border-gray-700 dark:text-gray-200 dark:hover:text-gray-400 dark:focus:border-green dark:focus:ring-green dark:active:text-gray-100 dark:active:bg-gray-900;
+    @apply dark:bg-gray-700 dark:border-gray-700 dark:text-gray-200 dark:hover:text-gray-400 dark:focus:border-yellow-600 dark:focus:ring-yellow-600 dark:active:text-gray-100 dark:active:bg-gray-900;
 }
 
 .btn-danger {

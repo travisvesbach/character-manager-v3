@@ -25,7 +25,8 @@
         props: ['href', 'as'],
         computed: {
             colorClasses() {
-                return 'text-gray-700 hover:bg-gray-100 focus:bg-gray-100 dark:text-green dark:hover:bg-gray-600';
+                // return 'text-gray-700 hover:bg-gray-100 focus:bg-gray-100 dark:text-green dark:hover:bg-gray-600';
+                return 'hover:bg-gray-100 dark:hover:bg-gray-600 link-color';
             }
         }
     })
