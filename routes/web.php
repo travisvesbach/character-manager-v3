@@ -19,6 +19,10 @@ use App\Http\Controllers\CharactersController;
 */
 
 Route::get('/', function () {
+    if(Auth::user()) {
+        return redirect('/dashboard');
+    }
+
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -31,7 +35,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/users', [UsersController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UsersController::class, 'create'])->name('users.create');
     Route::post('/users', [UsersController::class, 'store'])->name('users.store');
