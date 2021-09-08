@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Character;
 
 class User extends Authenticatable
 {
@@ -70,5 +71,9 @@ class User extends Authenticatable
                 $user->admin = true;
             }
         });
+    }
+
+    public function characters() {
+        return $this->hasMany(Character::class);
     }
 }
