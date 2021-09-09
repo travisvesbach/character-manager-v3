@@ -13,7 +13,7 @@ class CreatureRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,10 +25,10 @@ class CreatureRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'max_hp' => 'required',
+            'max_hp' => 'required|integer',
             'hit_dice' => '',
             'ac' => 'required|integer',
-            'ac_source' => '',
+            'ac_source' => 'max:255',
             'initiative' => 'required|integer',
             'speed' => 'required|max:255',
             'strength' => 'required|integer',
@@ -67,7 +67,7 @@ class CreatureRequest extends FormRequest
             'intimidation' => 'required|integer',
             'performance' => 'required|integer',
             'persuasion' => 'required|integer',
-            'skills' => '',
+            'skills_auto_filled' => 'boolean',
             'proficient_skills' => '',
             'expert_skills' => '',
             'special_skill_modifiers' => '',

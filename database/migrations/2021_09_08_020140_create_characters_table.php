@@ -69,8 +69,8 @@ class CreateCharactersTable extends Migration
             $table->boolean('show_resources')->default(true);
             $table->boolean('show_spells')->default(true);
             $table->boolean('show_dice')->default(true);
-            $table->text('notes')->nullable();;
-            $table->json('skills')->nullable();
+            $table->text('notes')->nullable();
+            $table->boolean('skills_auto_filled')->default(true);
             $table->json('proficient_skills')->nullable();
             $table->json('expert_skills')->nullable();
             $table->json('special_skill_modifiers')->nullable();

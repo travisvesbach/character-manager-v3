@@ -23,4 +23,8 @@ class Character extends Creature
             'archive_date',
         ]);
     }
+
+    public function path() {
+        return route('characters.show', $this->id);
+    }
 }

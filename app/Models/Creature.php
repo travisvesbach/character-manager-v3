@@ -62,7 +62,7 @@ class Creature extends Model
         'show_spells',
         'show_dice',
         'notes',
-        'skills',
+        'skills_auto_filled',
         'proficient_skills',
         'expert_skills',
         'special_skill_modifiers',
