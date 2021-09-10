@@ -30,6 +30,26 @@ class CharactersController extends Controller
     }
 
     public function show(Character $character) {
+        $this->authorize('update', $character);
+
         return Inertia::render('Characters/Show', compact(['character']));
+    }
+
+    public function update(CharacterRequest $request, Character $character) {
+        $this->authorize('update', $character);
+
+        $validated = $request->validated();
+
+        $character->update($validated);
+
+        return redirect($character->path())->with(['flash_message' => $character->name . ' updated', 'flash_status' => 'success']);
+    }
+
+    public function destroy(Character $character) {
+        $this->authorize('update', $character);
+
+        $character->delete();
+
+        return redirect(route('characters.index'))->with(['flash_message' => $character->name . ' deleted', 'flash_status' => 'danger']);
     }
 }

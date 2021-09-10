@@ -26,7 +26,7 @@ class CharacterFactory extends Factory
     public function definition()
     {
         return [
-            // 'user_id' => User::factory()->create(),
+            'user_id' => User::factory()->create(),
             'name' => $this->faker->sentence(4),
             'max_hp' => $this->faker->numberBetween(1, 20),
             'hit_dice' => [],
@@ -79,15 +79,15 @@ class CharacterFactory extends Factory
             'spells' => [],
             'resources' => [],
             'notes' => $this->faker->sentence(4),
-            'show_notepad' => false,
-            'show_resources' => false,
-            'show_spells' => false,
-            'show_dice' => false,
+            'show_notepad' => 0,
+            'show_resources' => 0,
+            'show_spells' => 0,
+            'show_dice' => 0,
             'race' => 'Human',
             'class' => 'Wizard',
             'level' => $this->faker->numberBetween(1, 20),
             'current_hp' => $this->faker->numberBetween(1, 20),
-            'is_archived' => false,
+            'is_archived' => 0,
             'archive_date' => null,
         ];
     }

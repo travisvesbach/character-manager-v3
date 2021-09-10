@@ -25,13 +25,13 @@ class CharactersTest extends TestCase
 
     /** @test **/
     public function a_user_can_create_a_character() {
-        $this->withoutExceptionHandling();
-
         $this->signIn();
 
         $this->get(route('characters.create'))->assertStatus(200);
 
         $attributes = Character::factory()->raw();
+
+        $attributes['user_id'] = auth()->user()->id;
 
         $response = $this->post(route('characters.store'), $attributes);
 
@@ -42,5 +42,90 @@ class CharactersTest extends TestCase
         $this->get($character->path())
             ->assertSee($attributes['name'])
             ->assertSee($attributes['class']);
+    }
+
+    /** @test **/
+    public function a_user_can_update_their_character() {
+
+        $character = Character::factory()->create();
+
+        $attributes = Character::factory()->raw();
+        $attributes['user_id'] = $character->user_id;
+        $attributes['name'] = 'changed';
+
+        $this->actingAs($character->user)
+            ->patch($character->path(), $attributes)
+            ->assertRedirect($character->path());
+
+        $this->assertDatabaseHas('characters', ['name' => 'changed']);
+    }
+
+    /** @test **/
+    public function a_user_can_view_their_character() {
+        $character = Character::factory()->create();
+
+        $this->actingAs($character->user)
+            ->get($character->path())
+            ->assertSee($character->name);
+    }
+
+    /** @test **/
+    public function unathorized_users_cannot_delete_characters() {
+        $character = Character::factory()->create();
+
+        $this->delete($character->path())
+            ->assertRedirect(route('login'));
+
+        $this->signIn();
+
+        $this->delete($character->path())->assertStatus(403);
+    }
+
+    /** @test **/
+    public function a_user_can_delete_their_character() {
+        // $this->withoutExceptionHandling();
+        $character = Character::factory()->create();
+
+        $this->actingAs($character->user)
+            ->delete($character->path())
+            ->assertRedirect(route('characters.index'));
+
+        $this->assertDatabaseMissing('characters', $character->only('id'));
+    }
+
+    /** @test **/
+    public function an_authenticated_user_cannot_view_the_characters_of_others() {
+        $this->signIn();
+
+        $character = Character::factory()->create();
+
+        $this->get($character->path())->assertStatus(403);
+    }
+
+    /** @test **/
+    public function an_authenticated_user_cannot_update_the_characters_of_others() {
+        $this->signIn();
+
+        $character = Character::factory()->create();
+
+        $this->patch($character->path(), Character::factory()->raw())->assertStatus(403);
+    }
+
+    /** @test **/
+    public function an_authenticated_user_cannot_delete_the_characters_of_others() {
+        $this->signIn();
+
+        $character = Character::factory()->create();
+
+        $this->delete($character->path())->assertStatus(403);
+    }
+
+    /** @test **/
+    public function a_character_requires_a_name() {
+        $this->signIn();
+
+        $attributes = Character::factory()->raw(['name' => '']);
+
+        $this->post(route('characters.store'), $attributes)->assertSessionHasErrors('name');
     }
 }
