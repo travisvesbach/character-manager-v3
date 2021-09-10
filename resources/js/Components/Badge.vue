@@ -1,5 +1,5 @@
 <template>
-    <div class="inline-block px-1 mx-1 text-sm rounded-md" :class="colorClasses">
+    <div class="inline-block px-1 mx-1 rounded-md text-xs" :class="colorClasses">
         {{ value }}
     </div>
 </template>

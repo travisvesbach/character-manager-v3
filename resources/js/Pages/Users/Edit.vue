@@ -27,7 +27,8 @@
             <jet-input-error :message="form.errors.password_confirmation" class="mt-2" />
 
             <!-- Admin -->
-            <checkbox id="theme" class="mt-4" :label="'Admin'" v-model="form.admin"/>
+            <jet-label for="admin" value="Admin" class="inline-block mr-1 mt-4" />
+            <checkbox id="admin" v-model="form.admin"/>
             <jet-input-error :message="form.errors.admin" class="mt-2" />
 
             <template #actions>
