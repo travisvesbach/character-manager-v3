@@ -24,9 +24,12 @@
                                 </h2>
 
                                 <!-- Navigation Links -->
-                                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex flex-grow items-center justify-end">
+                                <div class="hidden sm:-my-px sm:ml-10 sm:flex flex-grow items-center justify-end">
                                     <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                         Dashboard
+                                    </jet-nav-link>
+                                    <jet-nav-link :href="route('characters.index')" :active="route().current('characters*')">
+                                        Characters
                                     </jet-nav-link>
                                 </div>
                             </div>
@@ -144,6 +147,9 @@
                 <main>
                     <slot></slot>
                 </main>
+
+                <!-- Flash Message -->
+                <flash v-bind:message="$page.props.flash.message" v-bind:status="$page.props.flash.status"></flash>
             </div>
         </div>
     </div>
@@ -160,6 +166,7 @@
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import DropdownHeading from '@/Components/DropdownHeading';
     import DropdownDivider from '@/Components/DropdownDivider';
+    import Flash from '@/Components/Flash'
 
     export default defineComponent({
         props: {
@@ -177,6 +184,7 @@
             Link,
             DropdownHeading,
             DropdownDivider,
+            Flash,
         },
 
         data() {

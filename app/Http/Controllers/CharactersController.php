@@ -11,11 +11,12 @@ use App\Http\Requests\CharacterRequest;
 class CharactersController extends Controller
 {
     public function index() {
-        return Inertia::render('Characters/Index');
+        $characters = auth()->user()->characters;
+        return Inertia::render('Characters/Index', compact(['characters']));
     }
 
     public function create() {
-        return Inertia::render('Characters/Create');
+        return Inertia::render('Characters/Edit');
     }
 
     public function store(CharacterRequest $request) {

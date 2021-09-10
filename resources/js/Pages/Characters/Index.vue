@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <template #header>
-            Users
+            Characters
         </template>
 
         <div class="w-full md:w-3/4 xl:w-1/2 mx-auto pb-10 sm:px-6 lg:px-8 m-2">
@@ -11,23 +11,21 @@
                     <svg class="h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
-                    <span class="ml-1">{{ users.length }} {{ users.length == 1 ? 'user' : 'users' }}</span>
+                    <span class="ml-1">{{ characters.length }} {{ characters.length == 1 ? 'character' : 'characters' }}</span>
                 </div>
 
-                <Link :href="route('users.create')" class="ml-auto btn btn-primary" :as="'button'">
-                        New User
+                <Link :href="route('characters.create')" class="ml-auto btn btn-primary" :as="'button'">
+                        New Character
                 </Link>
             </div>
 
             <div class="border-b-2 w-full border-color"></div>
-            <div class="border-b-2 w-full border-color" v-for="user in users">
+            <div class="border-b-2 w-full border-color" v-for="character in characters">
                 <div class="pl-1 py-1 flex items-center flex-1 hover-trigger">
                     <div class="inline-block ml-2 flex-1">
                         <div class="mb-1 flex items-center">
-                            <div class="text-lg">{{ user.name }}</div>
-                            <badge :value="'admin'" v-if="user.admin"/>
+                            <div class="text-lg">{{ character.name }}</div>
                         </div>
-                        <a :href="'mailto:' + user.email" class="text-sm link-color">{{ user.email }}</a>
                     </div>
                     <div class="inline-block">
                         <!-- dropdown -->
@@ -41,18 +39,14 @@
                             </template>
 
                             <template #content>
-                                <div v-if="user.id != $page.props.user.id">
-                                    <jet-dropdown-link :href="route('users.edit', user.id)">
-                                        Edit User
+                                <div>
+                                    <jet-dropdown-link :href="route('characters.edit', character.id)">
+                                        Edit Character
                                     </jet-dropdown-link>
-                                    <jet-dropdown-link @click.native="confirmingDeleteUser = user" as="button">
-                                        Delete User
+                                    <jet-dropdown-link @click.native="confirmingDeleteCharacter = character" as="button">
+                                        Delete Character
                                     </jet-dropdown-link>
                                 </div>
-
-                                <jet-dropdown-link :href="route('profile.show')" v-if="user.id == $page.props.user.id">
-                                    My Profile
-                                </jet-dropdown-link>
                             </template>
                         </jet-dropdown>
                     </div>
@@ -61,21 +55,21 @@
         </div>
 
         <!-- delete confirmation -->
-        <jet-confirmation-modal :show="confirmingDeleteUser" @close="confirmingDeleteUser = false">
+        <jet-confirmation-modal :show="confirmingDeleteCharacter" @close="confirmingDeleteCharacter = false">
             <template #title>
-                Delete User
+                Delete Character
             </template>
 
             <template #content>
-                Are you sure you want to delete this user? All of this user's characters, monsters (including public), and encounters will be deleted as well.
+                Are you sure you want to delete this character?
             </template>
 
             <template #footer>
-                <jet-secondary-button @click.native="confirmingDeleteUser = false">
+                <jet-secondary-button @click.native="confirmingDeleteCharacter = false">
                     Cancel
                 </jet-secondary-button>
                 <jet-danger-button class="ml-2" @click.native="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Delete User
+                    Delete Character
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>
@@ -95,7 +89,7 @@
     import { Link } from '@inertiajs/inertia-vue3'
 
     export default {
-        props: ['users'],
+        props: ['characters'],
 
         components: {
             AppLayout,
@@ -111,7 +105,7 @@
 
         data() {
             return {
-                confirmingDeleteUser: false,
+                confirmingDeleteCharacter: false,
                 form: this.$inertia.form({
                     id: null,
                 }),
@@ -120,9 +114,9 @@
 
         methods: {
             deleteUser() {
-                this.form.id = this.confirmingDeleteUser.id;
-                this.form.delete(route('users.destroy', this.form.id));
-                this.confirmingDeleteUser = false;
+                this.form.id = this.confirmingDeleteCharacter.id;
+                this.form.delete(route('characters.delete', this.form.id));
+                this.confirmingDeleteCharacter = false;
             }
         }
     }
