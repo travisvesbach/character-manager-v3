@@ -58,7 +58,7 @@
             <!-- Theme -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="theme" value="Theme" />
-                <select-input id="theme" class="mt=1 block w-full" v-model="form.theme" :options="['light', 'dark']" />
+                <select-input id="theme" class="mt-1 block w-full" v-model="form.theme" :options="['light', 'dark']" />
                 <jet-input-error :message="form.errors.theme" class="mt-2" />
             </div>
         </template>

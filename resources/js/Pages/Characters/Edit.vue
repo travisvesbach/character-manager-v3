@@ -8,7 +8,7 @@
 
             <div>
                 <h3 class="text-2xl font-bold inline-block heading-color">Basic Info</h3>
-                <div class="flex items-top mt-5">
+                <div class="md:flex items-top mt-5">
                     <div class="md:w-1/2 pr-1.5">
                         <!-- Name -->
                         <jet-label for="name" value="Name" />
@@ -40,6 +40,11 @@
                         <!-- max_hp -->
                         <jet-label for="max_hp" value="Max HP" />
                         <jet-input type="number" id="max_hp" class="mt-1 block w-full" v-model.number="form.max_hp" required/>
+                        <jet-input-error :message="form.errors.max_hp" class="mt-2" />
+
+                        <!-- hit_dice -->
+                        <jet-label for="hit_dice" value="Hit Dice" class="mt-4" />
+                        <dice-array-input v-model="form.hit_dice" />
                         <jet-input-error :message="form.errors.max_hp" class="mt-2" />
 
                         <!-- ac -->
@@ -298,6 +303,8 @@
     import Checkbox from '@/Components/Checkbox'
     import ProficiencyCheckbox from '@/Components/ProficiencyCheckbox'
     import Badge from '@/Components/Badge'
+    import DiceInput from '@/Components/DiceInput'
+    import DiceArrayInput from '@/Components/DiceArrayInput'
 
     import { creatureEdit } from '@/Mixins/Creature/Edit';
 
@@ -317,6 +324,8 @@
             Checkbox,
             ProficiencyCheckbox,
             Badge,
+            DiceInput,
+            DiceArrayInput,
         },
         mixins: [creatureEdit],
         created() {

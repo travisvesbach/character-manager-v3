@@ -5,8 +5,8 @@
 
             <jet-banner />
 
-            <div class="min-h-screen bg-gray-100 dark:bg-gray-800">
-                <nav class="bg-white border-b border-gray-100 dark:bg-gray-900 dark:border-gray-800">
+            <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+                <nav class="bg-white border-b border-gray-100 dark:bg-black dark:border-gray-900">
                     <!-- Primary Navigation Menu -->
                     <div class="mx-auto px-4">
                         <div class="flex justify-between h-9">
