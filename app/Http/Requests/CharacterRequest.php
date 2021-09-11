@@ -28,8 +28,8 @@ class CharacterRequest extends CreatureRequest
             'race'=> 'required|max:255',
             'class'=> 'required|max:255',
             'level'=> 'required|integer',
-            'current_hp'=> 'required|integer',
-            'is_archived'=> 'required|boolean',
+            'current_hp'=> 'integer',
+            'is_archived'=> 'boolean',
             'archive_date'=> 'date|nullable',
         ]);
     }

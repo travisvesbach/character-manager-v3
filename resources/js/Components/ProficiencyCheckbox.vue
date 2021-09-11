@@ -24,7 +24,7 @@
             JetLabel,
             Checkbox,
         },
-        emits: ['update:modelValue'],
+        emits: ['update:proficiency', 'update:expertise'],
         computed: {
             getSlug() {
                 if(this.slug) {

@@ -71,8 +71,6 @@ class CharacterFactory extends Factory
             'performance' => $this->faker->numberBetween(1, 20),
             'persuasion' => $this->faker->numberBetween(1, 20),
             'skills_auto_filled' => true,
-            'proficient_skills' => [],
-            'expert_skills' => [],
             'special_skill_modifiers' => [],
             'actions' => [],
             'modifiers' => [],

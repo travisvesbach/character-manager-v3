@@ -26,8 +26,6 @@ class CreateCharactersTable extends Migration
             $table->integer('initiative')->default(0);
             $table->string('speed');
             $table->integer('strength')->default(0);
-            $table->boolean('strength_proficiency')->default(0);
-            $table->boolean('strength_expertise')->default(0);
             $table->integer('strength_mod')->default(0);
             $table->integer('strength_save')->default(0);
             $table->boolean('strength_save_proficiency')->default(0);
@@ -35,8 +33,6 @@ class CreateCharactersTable extends Migration
             $table->boolean('athletics_proficiency')->default(0);
             $table->boolean('athletics_expertise')->default(0);
             $table->integer('dexterity')->default(0);
-            $table->boolean('dexterity_proficiency')->default(0);
-            $table->boolean('dexterity_expertise')->default(0);
             $table->integer('dexterity_mod')->default(0);
             $table->integer('dexterity_save')->default(0);
             $table->boolean('dexterity_save_proficiency')->default(0);
@@ -50,14 +46,10 @@ class CreateCharactersTable extends Migration
             $table->boolean('stealth_proficiency')->default(0);
             $table->boolean('stealth_expertise')->default(0);
             $table->integer('constitution')->default(0);
-            $table->boolean('constitution_proficiency')->default(0);
-            $table->boolean('constitution_expertise')->default(0);
             $table->integer('constitution_mod')->default(0);
             $table->integer('constitution_save')->default(0);
             $table->boolean('constitution_save_proficiency')->default(0);
             $table->integer('intelligence')->default(0);
-            $table->boolean('intelligence_proficiency')->default(0);
-            $table->boolean('intelligence_expertise')->default(0);
             $table->integer('intelligence_mod')->default(0);
             $table->integer('intelligence_save')->default(0);
             $table->boolean('intelligence_save_proficiency')->default(0);
@@ -77,8 +69,6 @@ class CreateCharactersTable extends Migration
             $table->boolean('religion_proficiency')->default(0);
             $table->boolean('religion_expertise')->default(0);
             $table->integer('wisdom')->default(0);
-            $table->boolean('wisdom_proficiency')->default(0);
-            $table->boolean('wisdom_expertise')->default(0);
             $table->integer('wisdom_mod')->default(0);
             $table->integer('wisdom_save')->default(0);
             $table->boolean('wisdom_save_proficiency')->default(0);
@@ -98,8 +88,6 @@ class CreateCharactersTable extends Migration
             $table->boolean('survival_proficiency')->default(0);
             $table->boolean('survival_expertise')->default(0);
             $table->integer('charisma')->default(0);
-            $table->boolean('charisma_proficiency')->default(0);
-            $table->boolean('charisma_expertise')->default(0);
             $table->integer('charisma_mod')->default(0);
             $table->integer('charisma_save')->default(0);
             $table->boolean('charisma_save_proficiency')->default(0);

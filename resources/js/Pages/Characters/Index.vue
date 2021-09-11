@@ -115,7 +115,7 @@
         methods: {
             deleteUser() {
                 this.form.id = this.confirmingDeleteCharacter.id;
-                this.form.delete(route('characters.delete', this.form.id));
+                this.form.delete(route('characters.destroy', this.form.id));
                 this.confirmingDeleteCharacter = false;
             }
         }
