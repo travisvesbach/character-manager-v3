@@ -295,7 +295,6 @@ export const creatureEdit = {
     },
     methods: {
         getStatModifier(stat) {
-            console.log(stat);
             let result = -99;
             switch(stat) {
                 case 1:
@@ -323,7 +322,6 @@ export const creatureEdit = {
                     break;
                 case 12:
                 case 13:
-                    console.log('here');
                     result = 1;
                     break;
                 case 14:
@@ -364,7 +362,7 @@ export const creatureEdit = {
             }
             return result;
         },
-        statChange(stat = 'all') {
+        setSkills(stat = 'all') {
             if(this.form.skills_auto_filled) {
                 if(stat == 'strength' || stat == 'all') {
                     this.setSkill('strength_mod', this.baseStrengthMod);
@@ -434,5 +432,11 @@ export const creatureEdit = {
                 this.form[skill] += ((this.form[skill+'_expertise'] ? 2 : 1) * this.proficiencyBonus);
             }
         },
+        toggleAutoSkills() {
+            this.form.skills_auto_filled = !this.form.skills_auto_filled;
+            if(this.form.skills_auto_filled) {
+                this.setSkills();
+            }
+        }
     }
 }

@@ -22108,8 +22108,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      console.log(this.form);
-
       if (this.editing) {
         this.form.patch(route('characters.update', this.form.id));
       } else {
@@ -26666,7 +26664,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               number: true
             },
             onChange: _cache[4] || (_cache[4] = function ($event) {
-              return _ctx.statChange();
+              return _ctx.setSkills();
             }),
             required: ""
           }, null, 8
@@ -26803,7 +26801,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
             "class": "md:w-1/3 pr-1.5",
             onChange: _cache[15] || (_cache[15] = function ($event) {
-              return _ctx.statChange('strength');
+              return _ctx.setSkills('strength');
             })
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" strength "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "strength",
@@ -26853,7 +26851,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
             "class": "md:w-1/3 px-1.5",
             onChange: _cache[24] || (_cache[24] = function ($event) {
-              return _ctx.statChange('dexterity');
+              return _ctx.setSkills('dexterity');
             })
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" dexterity "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "dexterity",
@@ -26927,7 +26925,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
             "class": "md:w-1/3 pl-1.5",
             onChange: _cache[27] || (_cache[27] = function ($event) {
-              return _ctx.statChange('constitution');
+              return _ctx.setSkills('constitution');
             })
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" constitution "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "constitution",
@@ -26965,7 +26963,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
             "class": "md:w-1/3 pr-1.5",
             onChange: _cache[40] || (_cache[40] = function ($event) {
-              return _ctx.statChange('intelligence');
+              return _ctx.setSkills('intelligence');
             })
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" intelligence "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "intelligence",
@@ -27063,7 +27061,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
             "class": "md:w-1/3 px-1.5",
             onChange: _cache[53] || (_cache[53] = function ($event) {
-              return _ctx.statChange('wisdom');
+              return _ctx.setSkills('wisdom');
             })
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" wisdom "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "wisdom",
@@ -27161,7 +27159,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
             "class": "md:w-1/3 pl-1.5",
             onChange: _cache[64] || (_cache[64] = function ($event) {
-              return _ctx.statChange('charisma');
+              return _ctx.setSkills('charisma');
             })
           }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" charisma "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "charisma",
@@ -27247,9 +27245,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
             type: "button",
             "class": "ml-5",
-            onClick: _cache[65] || (_cache[65] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-              return _ctx.form.skills_auto_filled = !_ctx.form.skills_auto_filled;
-            }, ["prevent"]))
+            onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(_ctx.toggleAutoSkills, ["prevent"])
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.skillsButtonText), 1
@@ -27259,7 +27255,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             _: 1
             /* STABLE */
 
-          })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.skillsText), 1
+          }, 8
+          /* PROPS */
+          , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.skillsText), 1
           /* TEXT */
           ), !_ctx.form.skills_auto_filled ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" strength "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "strength_save",
@@ -27269,7 +27267,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "strength_save",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.strength_save,
-            "onUpdate:modelValue": _cache[66] || (_cache[66] = function ($event) {
+            "onUpdate:modelValue": _cache[65] || (_cache[65] = function ($event) {
               return _ctx.form.strength_save = $event;
             }),
             modelModifiers: {
@@ -27291,7 +27289,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "athletics",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.athletics,
-            "onUpdate:modelValue": _cache[67] || (_cache[67] = function ($event) {
+            "onUpdate:modelValue": _cache[66] || (_cache[66] = function ($event) {
               return _ctx.form.athletics = $event;
             }),
             modelModifiers: {
@@ -27313,7 +27311,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "dexterity_save",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.dexterity_save,
-            "onUpdate:modelValue": _cache[68] || (_cache[68] = function ($event) {
+            "onUpdate:modelValue": _cache[67] || (_cache[67] = function ($event) {
               return _ctx.form.dexterity_save = $event;
             }),
             modelModifiers: {
@@ -27335,7 +27333,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "acrobatics",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.acrobatics,
-            "onUpdate:modelValue": _cache[69] || (_cache[69] = function ($event) {
+            "onUpdate:modelValue": _cache[68] || (_cache[68] = function ($event) {
               return _ctx.form.acrobatics = $event;
             }),
             modelModifiers: {
@@ -27357,7 +27355,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "sleight_of_hand",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.sleight_of_hand,
-            "onUpdate:modelValue": _cache[70] || (_cache[70] = function ($event) {
+            "onUpdate:modelValue": _cache[69] || (_cache[69] = function ($event) {
               return _ctx.form.sleight_of_hand = $event;
             }),
             modelModifiers: {
@@ -27379,7 +27377,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "stealth",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.stealth,
-            "onUpdate:modelValue": _cache[71] || (_cache[71] = function ($event) {
+            "onUpdate:modelValue": _cache[70] || (_cache[70] = function ($event) {
               return _ctx.form.stealth = $event;
             }),
             modelModifiers: {
@@ -27401,7 +27399,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "constitution_save",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.constitution_save,
-            "onUpdate:modelValue": _cache[72] || (_cache[72] = function ($event) {
+            "onUpdate:modelValue": _cache[71] || (_cache[71] = function ($event) {
               return _ctx.form.constitution_save = $event;
             }),
             modelModifiers: {
@@ -27423,7 +27421,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "intelligence_save",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.intelligence_save,
-            "onUpdate:modelValue": _cache[73] || (_cache[73] = function ($event) {
+            "onUpdate:modelValue": _cache[72] || (_cache[72] = function ($event) {
               return _ctx.form.intelligence_save = $event;
             }),
             modelModifiers: {
@@ -27445,7 +27443,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "arcana",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.arcana,
-            "onUpdate:modelValue": _cache[74] || (_cache[74] = function ($event) {
+            "onUpdate:modelValue": _cache[73] || (_cache[73] = function ($event) {
               return _ctx.form.arcana = $event;
             }),
             modelModifiers: {
@@ -27467,7 +27465,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "history",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.history,
-            "onUpdate:modelValue": _cache[75] || (_cache[75] = function ($event) {
+            "onUpdate:modelValue": _cache[74] || (_cache[74] = function ($event) {
               return _ctx.form.history = $event;
             }),
             modelModifiers: {
@@ -27489,7 +27487,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "investigation",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.investigation,
-            "onUpdate:modelValue": _cache[76] || (_cache[76] = function ($event) {
+            "onUpdate:modelValue": _cache[75] || (_cache[75] = function ($event) {
               return _ctx.form.investigation = $event;
             }),
             modelModifiers: {
@@ -27511,7 +27509,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "nature",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.nature,
-            "onUpdate:modelValue": _cache[77] || (_cache[77] = function ($event) {
+            "onUpdate:modelValue": _cache[76] || (_cache[76] = function ($event) {
               return _ctx.form.nature = $event;
             }),
             modelModifiers: {
@@ -27533,7 +27531,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "religion",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.religion,
-            "onUpdate:modelValue": _cache[78] || (_cache[78] = function ($event) {
+            "onUpdate:modelValue": _cache[77] || (_cache[77] = function ($event) {
               return _ctx.form.religion = $event;
             }),
             modelModifiers: {
@@ -27555,7 +27553,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "wisdom_save",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.wisdom_save,
-            "onUpdate:modelValue": _cache[79] || (_cache[79] = function ($event) {
+            "onUpdate:modelValue": _cache[78] || (_cache[78] = function ($event) {
               return _ctx.form.wisdom_save = $event;
             }),
             modelModifiers: {
@@ -27577,7 +27575,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "animal_handling",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.animal_handling,
-            "onUpdate:modelValue": _cache[80] || (_cache[80] = function ($event) {
+            "onUpdate:modelValue": _cache[79] || (_cache[79] = function ($event) {
               return _ctx.form.animal_handling = $event;
             }),
             modelModifiers: {
@@ -27599,7 +27597,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "insight",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.insight,
-            "onUpdate:modelValue": _cache[81] || (_cache[81] = function ($event) {
+            "onUpdate:modelValue": _cache[80] || (_cache[80] = function ($event) {
               return _ctx.form.insight = $event;
             }),
             modelModifiers: {
@@ -27621,7 +27619,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "medicine",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.medicine,
-            "onUpdate:modelValue": _cache[82] || (_cache[82] = function ($event) {
+            "onUpdate:modelValue": _cache[81] || (_cache[81] = function ($event) {
               return _ctx.form.medicine = $event;
             }),
             modelModifiers: {
@@ -27643,7 +27641,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "perception",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.perception,
-            "onUpdate:modelValue": _cache[83] || (_cache[83] = function ($event) {
+            "onUpdate:modelValue": _cache[82] || (_cache[82] = function ($event) {
               return _ctx.form.perception = $event;
             }),
             modelModifiers: {
@@ -27665,7 +27663,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "survival",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.survival,
-            "onUpdate:modelValue": _cache[84] || (_cache[84] = function ($event) {
+            "onUpdate:modelValue": _cache[83] || (_cache[83] = function ($event) {
               return _ctx.form.survival = $event;
             }),
             modelModifiers: {
@@ -27687,7 +27685,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "charisma_save",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.charisma_save,
-            "onUpdate:modelValue": _cache[85] || (_cache[85] = function ($event) {
+            "onUpdate:modelValue": _cache[84] || (_cache[84] = function ($event) {
               return _ctx.form.charisma_save = $event;
             }),
             modelModifiers: {
@@ -27709,7 +27707,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "deception",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.deception,
-            "onUpdate:modelValue": _cache[86] || (_cache[86] = function ($event) {
+            "onUpdate:modelValue": _cache[85] || (_cache[85] = function ($event) {
               return _ctx.form.deception = $event;
             }),
             modelModifiers: {
@@ -27731,7 +27729,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "intimidation",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.intimidation,
-            "onUpdate:modelValue": _cache[87] || (_cache[87] = function ($event) {
+            "onUpdate:modelValue": _cache[86] || (_cache[86] = function ($event) {
               return _ctx.form.intimidation = $event;
             }),
             modelModifiers: {
@@ -27753,7 +27751,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "performance",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.performance,
-            "onUpdate:modelValue": _cache[88] || (_cache[88] = function ($event) {
+            "onUpdate:modelValue": _cache[87] || (_cache[87] = function ($event) {
               return _ctx.form.performance = $event;
             }),
             modelModifiers: {
@@ -27775,7 +27773,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             id: "persuasion",
             "class": "mt-1 block w-full",
             modelValue: _ctx.form.persuasion,
-            "onUpdate:modelValue": _cache[89] || (_cache[89] = function ($event) {
+            "onUpdate:modelValue": _cache[88] || (_cache[88] = function ($event) {
               return _ctx.form.persuasion = $event;
             }),
             modelModifiers: {
@@ -30140,7 +30138,6 @@ var creatureEdit = {
   },
   methods: {
     getStatModifier: function getStatModifier(stat) {
-      console.log(stat);
       var result = -99;
 
       switch (stat) {
@@ -30175,7 +30172,6 @@ var creatureEdit = {
 
         case 12:
         case 13:
-          console.log('here');
           result = 1;
           break;
 
@@ -30226,7 +30222,7 @@ var creatureEdit = {
 
       return result;
     },
-    statChange: function statChange() {
+    setSkills: function setSkills() {
       var stat = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'all';
 
       if (this.form.skills_auto_filled) {
@@ -30300,6 +30296,13 @@ var creatureEdit = {
 
       if (this.form[skill + '_proficiency']) {
         this.form[skill] += (this.form[skill + '_expertise'] ? 2 : 1) * this.proficiencyBonus;
+      }
+    },
+    toggleAutoSkills: function toggleAutoSkills() {
+      this.form.skills_auto_filled = !this.form.skills_auto_filled;
+
+      if (this.form.skills_auto_filled) {
+        this.setSkills();
       }
     }
   }

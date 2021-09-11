@@ -27,7 +27,7 @@
 
                         <!-- level -->
                         <jet-label for="level" value="Level" class="mt-4" />
-                        <jet-input type="number" id="level" class="mt-1 block w-full" v-model.number="form.level" v-on:change="statChange()" required/>
+                        <jet-input type="number" id="level" class="mt-1 block w-full" v-model.number="form.level" v-on:change="setSkills()" required/>
                         <jet-input-error :message="form.errors.level" class="mt-2" />
 
                         <!-- speed -->
@@ -72,7 +72,7 @@
                     Enter stats and mark skill proficiencies and/or expertise. The first checkbox of each skill is proficiency and the second is expertise.
                 </p>
                 <div class="flex items-top mt-5">
-                    <div class="md:w-1/3 pr-1.5" v-on:change="statChange('strength')">
+                    <div class="md:w-1/3 pr-1.5" v-on:change="setSkills('strength')">
                         <!-- strength -->
                         <jet-label for="strength" value="Strength Score" />
                         <jet-input type="number" id="strength" class="mt-1 block w-full" v-model.number="form.strength" required/>
@@ -81,7 +81,7 @@
                         <proficiency-checkbox :label="'Save'" :slug="'strength_save'" v-model:proficiency="form.strength_save_proficiency" />
                         <proficiency-checkbox :label="'Athletics'" v-model:proficiency="form.athletics_proficiency" v-model:expertise="form.athletics_expertise"/>
                     </div>
-                    <div class="md:w-1/3 px-1.5" v-on:change="statChange('dexterity')">
+                    <div class="md:w-1/3 px-1.5" v-on:change="setSkills('dexterity')">
                         <!-- dexterity -->
                         <jet-label for="dexterity" value="Dexterity Score" />
                         <jet-input type="number" id="dexterity" class="mt-1 block w-full" v-model.number="form.dexterity" required/>
@@ -92,7 +92,7 @@
                         <proficiency-checkbox :label="'Sleight of Hand'" v-model:proficiency="form.sleight_of_hand_proficiency" v-model:expertise="form.sleight_of_hand_expertise"/>
                         <proficiency-checkbox :label="'Stealth'" v-model:proficiency="form.stealth_proficiency" v-model:expertise="form.stealth_expertise"/>
                     </div>
-                    <div class="md:w-1/3 pl-1.5" v-on:change="statChange('constitution')">
+                    <div class="md:w-1/3 pl-1.5" v-on:change="setSkills('constitution')">
                         <!-- constitution -->
                         <jet-label for="constitution" value="Constitution Score" />
                         <jet-input type="number" id="constitution" class="mt-1 block w-full" v-model.number="form.constitution" required/>
@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="flex items-top mt-10">
-                    <div class="md:w-1/3 pr-1.5" v-on:change="statChange('intelligence')">
+                    <div class="md:w-1/3 pr-1.5" v-on:change="setSkills('intelligence')">
                         <!-- intelligence -->
                         <jet-label for="intelligence" value="Intelligence Score" />
                         <jet-input type="number" id="intelligence" class="mt-1 block w-full" v-model.number="form.intelligence" required/>
@@ -116,7 +116,7 @@
                         <proficiency-checkbox :label="'Nature'" v-model:proficiency="form.nature_proficiency" v-model:expertise="form.nature_expertise"/>
                         <proficiency-checkbox :label="'Religion'" v-model:proficiency="form.religion_proficiency" v-model:expertise="form.religion_expertise"/>
                     </div>
-                    <div class="md:w-1/3 px-1.5" v-on:change="statChange('wisdom')">
+                    <div class="md:w-1/3 px-1.5" v-on:change="setSkills('wisdom')">
                         <!-- wisdom -->
                         <jet-label for="wisdom" value="Wisdom Score" />
                         <jet-input type="number" id="wisdom" class="mt-1 block w-full" v-model.number="form.wisdom" required/>
@@ -129,7 +129,7 @@
                         <proficiency-checkbox :label="'Perception'" v-model:proficiency="form.perception_proficiency" v-model:expertise="form.perception_expertise"/>
                         <proficiency-checkbox :label="'Survival'" v-model:proficiency="form.survival_proficiency" v-model:expertise="form.survival_expertise"/>
                     </div>
-                    <div class="md:w-1/3 pl-1.5" v-on:change="statChange('charisma')">
+                    <div class="md:w-1/3 pl-1.5" v-on:change="setSkills('charisma')">
                         <!-- charisma -->
                         <jet-label for="charisma" value="Charisma Score" />
                         <jet-input type="number" id="charisma" class="mt-1 block w-full" v-model.number="form.charisma" required/>
@@ -147,7 +147,7 @@
             <div class="border-t border-gray-700 mt-10 pt-2">
                 <div class="flex items-center">
                     <h3 class="text-2xl font-bold inline-block heading-color">Skill Modifiers</h3>
-                    <jet-secondary-button type="button" class="ml-5" @click.prevent="form.skills_auto_filled = !form.skills_auto_filled">
+                    <jet-secondary-button type="button" class="ml-5" @click.prevent="toggleAutoSkills">
                         {{ skillsButtonText }}
                     </jet-secondary-button>
                 </div>
@@ -337,7 +337,6 @@
         },
         methods: {
             submit() {
-                console.log(this.form);
                 if(this.editing) {
                     this.form.patch(route('characters.update', this.form.id));
                 } else {
