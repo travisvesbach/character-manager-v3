@@ -24,7 +24,15 @@ class Character extends Creature
         ]);
     }
 
+    protected $appends = [
+        'path',
+    ];
+
     public function path() {
         return route('characters.show', $this->id);
+    }
+
+    public function getPathAttribute() {
+        return $this->path();
     }
 }

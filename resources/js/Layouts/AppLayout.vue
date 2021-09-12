@@ -9,7 +9,7 @@
                 <nav class="bg-white border-b border-gray-100 dark:bg-black dark:border-gray-900">
                     <!-- Primary Navigation Menu -->
                     <div class="mx-auto px-4">
-                        <div class="flex justify-between h-9">
+                        <div class="flex justify-between h-10">
                             <div class="flex flex-grow">
                                 <!-- Logo -->
                                 <div class="flex-shrink-0 flex items-center">
@@ -142,6 +142,11 @@
                         </div>
                     </div>
                 </nav>
+
+                <!-- subheader -->
+                <div>
+                    <slot name="subheader"></slot>
+                </div>
 
                 <!-- Page Content -->
                 <main>

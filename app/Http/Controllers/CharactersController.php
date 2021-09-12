@@ -33,7 +33,9 @@ class CharactersController extends Controller
     public function show(Character $character) {
         $this->authorize('update', $character);
 
-        return Inertia::render('Characters/Show', compact(['character']));
+        $characters = auth()->user()->characters()->select(['id', 'name'])->get();
+
+        return Inertia::render('Characters/Show', compact(['character', 'characters']));
     }
 
     public function edit(Character $character) {

@@ -24,7 +24,9 @@
                 <div class="pl-1 py-1 flex items-center flex-1 hover-trigger">
                     <div class="inline-block ml-2 flex-1">
                         <div class="mb-1 flex items-center">
-                            <div class="text-lg">{{ character.name }}</div>
+                            <Link :href="character.path" class="text-lg link-color">
+                                {{ character.name }}
+                            </Link>
                         </div>
                     </div>
                     <div class="inline-block">
@@ -68,7 +70,7 @@
                 <jet-secondary-button @click.native="confirmingDeleteCharacter = false">
                     Cancel
                 </jet-secondary-button>
-                <jet-danger-button class="ml-2" @click.native="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <jet-danger-button class="ml-2" @click.native="deleteCharacter" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Delete Character
                 </jet-danger-button>
             </template>
@@ -113,7 +115,7 @@
         },
 
         methods: {
-            deleteUser() {
+            deleteCharacter() {
                 this.form.id = this.confirmingDeleteCharacter.id;
                 this.form.delete(route('characters.destroy', this.form.id));
                 this.confirmingDeleteCharacter = false;
