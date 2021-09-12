@@ -4,7 +4,7 @@
             {{ editing && editing.name ? 'Edit ' + editing.name : 'Create Character' }}
         </template>
 
-        <centered-form @submitted="submit" :width="'full'">
+        <centered-form @submitted="submit" width="full">
 
             <div>
                 <h3 class="text-2xl font-bold inline-block heading-color">Basic Info</h3>
@@ -78,8 +78,8 @@
                         <jet-input type="number" id="strength" class="mt-1 block w-full" v-model.number="form.strength" required/>
                         <jet-input-error :message="form.errors.strength" class="mt-2" />
 
-                        <proficiency-checkbox :label="'Save'" :slug="'strength_save'" v-model:proficiency="form.strength_save_proficiency" />
-                        <proficiency-checkbox :label="'Athletics'" v-model:proficiency="form.athletics_proficiency" v-model:expertise="form.athletics_expertise"/>
+                        <proficiency-checkbox label="Save" slug="strength_save" v-model:proficiency="form.strength_save_proficiency" />
+                        <proficiency-checkbox label="Athletics" v-model:proficiency="form.athletics_proficiency" v-model:expertise="form.athletics_expertise"/>
                     </div>
                     <div class="md:w-1/3 px-1.5" v-on:change="setSkills('dexterity')">
                         <!-- dexterity -->
@@ -87,10 +87,10 @@
                         <jet-input type="number" id="dexterity" class="mt-1 block w-full" v-model.number="form.dexterity" required/>
                         <jet-input-error :message="form.errors.dexterity" class="mt-2" />
 
-                        <proficiency-checkbox :label="'Save'" :slug="'dexterity_save'" v-model:proficiency="form.dexterity_save_proficiency" />
-                        <proficiency-checkbox :label="'Acrobatics'" v-model:proficiency="form.acrobatics_proficiency" v-model:expertise="form.acrobatics_expertise"/>
-                        <proficiency-checkbox :label="'Sleight of Hand'" v-model:proficiency="form.sleight_of_hand_proficiency" v-model:expertise="form.sleight_of_hand_expertise"/>
-                        <proficiency-checkbox :label="'Stealth'" v-model:proficiency="form.stealth_proficiency" v-model:expertise="form.stealth_expertise"/>
+                        <proficiency-checkbox label="Save" slug="dexterity_save" v-model:proficiency="form.dexterity_save_proficiency" />
+                        <proficiency-checkbox label="Acrobatics" v-model:proficiency="form.acrobatics_proficiency" v-model:expertise="form.acrobatics_expertise"/>
+                        <proficiency-checkbox label="Sleightof Hand'" v-model:proficiency="form.sleight_of_hand_proficiency" v-model:expertise="form.sleight_of_hand_expertise"/>
+                        <proficiency-checkbox label="Stealth" v-model:proficiency="form.stealth_proficiency" v-model:expertise="form.stealth_expertise"/>
                     </div>
                     <div class="md:w-1/3 pl-1.5" v-on:change="setSkills('constitution')">
                         <!-- constitution -->
@@ -98,7 +98,7 @@
                         <jet-input type="number" id="constitution" class="mt-1 block w-full" v-model.number="form.constitution" required/>
                         <jet-input-error :message="form.errors.constitution" class="mt-2" />
 
-                        <proficiency-checkbox :label="'Save'" :slug="'constitution_save'" v-model:proficiency="form.constitution_save_proficiency" />
+                        <proficiency-checkbox label="Save" slug="constitution_save" v-model:proficiency="form.constitution_save_proficiency" />
                     </div>
                 </div>
 
@@ -109,12 +109,12 @@
                         <jet-input type="number" id="intelligence" class="mt-1 block w-full" v-model.number="form.intelligence" required/>
                         <jet-input-error :message="form.errors.intelligence" class="mt-2" />
 
-                        <proficiency-checkbox :label="'Save'" :slug="'intelligence_save'" v-model:proficiency="form.intelligence_save_proficiency" />
-                        <proficiency-checkbox :label="'Arcana'" v-model:proficiency="form.arcana_proficiency" v-model:expertise="form.arcana_expertise"/>
-                        <proficiency-checkbox :label="'History'" v-model:proficiency="form.history_proficiency" v-model:expertise="form.history_expertise"/>
-                        <proficiency-checkbox :label="'Investigation'" v-model:proficiency="form.investigation_proficiency" v-model:expertise="form.investigation_expertise"/>
-                        <proficiency-checkbox :label="'Nature'" v-model:proficiency="form.nature_proficiency" v-model:expertise="form.nature_expertise"/>
-                        <proficiency-checkbox :label="'Religion'" v-model:proficiency="form.religion_proficiency" v-model:expertise="form.religion_expertise"/>
+                        <proficiency-checkbox label="Save" slug="intelligence_save" v-model:proficiency="form.intelligence_save_proficiency" />
+                        <proficiency-checkbox label="Arcana" v-model:proficiency="form.arcana_proficiency" v-model:expertise="form.arcana_expertise"/>
+                        <proficiency-checkbox label="History" v-model:proficiency="form.history_proficiency" v-model:expertise="form.history_expertise"/>
+                        <proficiency-checkbox label="Investigation" v-model:proficiency="form.investigation_proficiency" v-model:expertise="form.investigation_expertise"/>
+                        <proficiency-checkbox label="Nature" v-model:proficiency="form.nature_proficiency" v-model:expertise="form.nature_expertise"/>
+                        <proficiency-checkbox label="Religion" v-model:proficiency="form.religion_proficiency" v-model:expertise="form.religion_expertise"/>
                     </div>
                     <div class="md:w-1/3 px-1.5" v-on:change="setSkills('wisdom')">
                         <!-- wisdom -->
@@ -122,12 +122,12 @@
                         <jet-input type="number" id="wisdom" class="mt-1 block w-full" v-model.number="form.wisdom" required/>
                         <jet-input-error :message="form.errors.wisdom" class="mt-2" />
 
-                        <proficiency-checkbox :label="'Save'" :slug="'wisdom_save'" v-model:proficiency="form.wisdom_save_proficiency" />
-                        <proficiency-checkbox :label="'Animal Handling'" v-model:proficiency="form.animal_handling_proficiency" v-model:expertise="form.animal_handling_expertise"/>
-                        <proficiency-checkbox :label="'Insight'" v-model:proficiency="form.insight_proficiency" v-model:expertise="form.insight_expertise"/>
-                        <proficiency-checkbox :label="'Medicine'" v-model:proficiency="form.medicine_proficiency" v-model:expertise="form.medicine_expertise"/>
-                        <proficiency-checkbox :label="'Perception'" v-model:proficiency="form.perception_proficiency" v-model:expertise="form.perception_expertise"/>
-                        <proficiency-checkbox :label="'Survival'" v-model:proficiency="form.survival_proficiency" v-model:expertise="form.survival_expertise"/>
+                        <proficiency-checkbox label="Save" slug="wisdom_save" v-model:proficiency="form.wisdom_save_proficiency" />
+                        <proficiency-checkbox label="Animal Handling" v-model:proficiency="form.animal_handling_proficiency" v-model:expertise="form.animal_handling_expertise"/>
+                        <proficiency-checkbox label="Insight" v-model:proficiency="form.insight_proficiency" v-model:expertise="form.insight_expertise"/>
+                        <proficiency-checkbox label="Medicine" v-model:proficiency="form.medicine_proficiency" v-model:expertise="form.medicine_expertise"/>
+                        <proficiency-checkbox label="Perception" v-model:proficiency="form.perception_proficiency" v-model:expertise="form.perception_expertise"/>
+                        <proficiency-checkbox label="Survival" v-model:proficiency="form.survival_proficiency" v-model:expertise="form.survival_expertise"/>
                     </div>
                     <div class="md:w-1/3 pl-1.5" v-on:change="setSkills('charisma')">
                         <!-- charisma -->
@@ -135,11 +135,11 @@
                         <jet-input type="number" id="charisma" class="mt-1 block w-full" v-model.number="form.charisma" required/>
                         <jet-input-error :message="form.errors.charisma" class="mt-2" />
 
-                        <proficiency-checkbox :label="'Save'" :slug="'charisma_save'" v-model:proficiency="form.charisma_save_proficiency" />
-                        <proficiency-checkbox :label="'Deception'" v-model:proficiency="form.deception_proficiency" v-model:expertise="form.deception_expertise"/>
-                        <proficiency-checkbox :label="'Intimidation'" v-model:proficiency="form.intimidation_proficiency" v-model:expertise="form.intimidation_expertise"/>
-                        <proficiency-checkbox :label="'Performance'" v-model:proficiency="form.performance_proficiency" v-model:expertise="form.performance_expertise"/>
-                        <proficiency-checkbox :label="'Persuasion'" v-model:proficiency="form.persuasion_proficiency" v-model:expertise="form.persuasion_expertise"/>
+                        <proficiency-checkbox label="Save" slug="charisma_save" v-model:proficiency="form.charisma_save_proficiency" />
+                        <proficiency-checkbox label="Deception" v-model:proficiency="form.deception_proficiency" v-model:expertise="form.deception_expertise"/>
+                        <proficiency-checkbox label="Intimidation" v-model:proficiency="form.intimidation_proficiency" v-model:expertise="form.intimidation_expertise"/>
+                        <proficiency-checkbox label="Performance" v-model:proficiency="form.performance_proficiency" v-model:expertise="form.performance_expertise"/>
+                        <proficiency-checkbox label="Persuasion" v-model:proficiency="form.persuasion_proficiency" v-model:expertise="form.persuasion_expertise"/>
                     </div>
                 </div>
             </div>
@@ -300,10 +300,7 @@
     import JetInputError from '@/Jetstream/InputError'
     import JetLabel from '@/Jetstream/Label'
     import SelectInput from '@/Components/SelectInput'
-    import Checkbox from '@/Components/Checkbox'
     import ProficiencyCheckbox from '@/Components/ProficiencyCheckbox'
-    import Badge from '@/Components/Badge'
-    import DiceInput from '@/Components/DiceInput'
     import DiceArrayInput from '@/Components/DiceArrayInput'
 
     import { creatureEdit } from '@/Mixins/Creature/Edit';
@@ -321,10 +318,7 @@
             JetInputError,
             JetLabel,
             SelectInput,
-            Checkbox,
             ProficiencyCheckbox,
-            Badge,
-            DiceInput,
             DiceArrayInput,
         },
         mixins: [creatureEdit],

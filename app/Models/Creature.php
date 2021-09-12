@@ -102,10 +102,8 @@ class Creature extends Model
         'show_notepad',
         'show_resources',
         'show_spells',
-        'show_dice',
         'notes',
         'skills_auto_filled',
-        'special_skill_modifiers',
     ];
 
     protected $casts = [

@@ -20327,7 +20327,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['modelValue', 'label'],
+  props: ['modelValue'],
   emits: ['update:modelValue'],
   methods: {
     focus: function focus() {
@@ -22059,15 +22059,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
 /* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Components_SelectInput__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/SelectInput */ "./resources/js/Components/SelectInput.vue");
-/* harmony import */ var _Components_Checkbox__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Components/Checkbox */ "./resources/js/Components/Checkbox.vue");
-/* harmony import */ var _Components_ProficiencyCheckbox__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Components/ProficiencyCheckbox */ "./resources/js/Components/ProficiencyCheckbox.vue");
-/* harmony import */ var _Components_Badge__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Components/Badge */ "./resources/js/Components/Badge.vue");
-/* harmony import */ var _Components_DiceInput__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Components/DiceInput */ "./resources/js/Components/DiceInput.vue");
-/* harmony import */ var _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Components/DiceArrayInput */ "./resources/js/Components/DiceArrayInput.vue");
-/* harmony import */ var _Mixins_Creature_Edit__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/Mixins/Creature/Edit */ "./resources/js/Mixins/Creature/Edit.js");
-
-
-
+/* harmony import */ var _Components_ProficiencyCheckbox__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Components/ProficiencyCheckbox */ "./resources/js/Components/ProficiencyCheckbox.vue");
+/* harmony import */ var _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Components/DiceArrayInput */ "./resources/js/Components/DiceArrayInput.vue");
+/* harmony import */ var _Mixins_Creature_Edit__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Mixins/Creature/Edit */ "./resources/js/Mixins/Creature/Edit.js");
 
 
 
@@ -22092,13 +22086,10 @@ __webpack_require__.r(__webpack_exports__);
     JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_6__["default"],
     JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_7__["default"],
     SelectInput: _Components_SelectInput__WEBPACK_IMPORTED_MODULE_8__["default"],
-    Checkbox: _Components_Checkbox__WEBPACK_IMPORTED_MODULE_9__["default"],
-    ProficiencyCheckbox: _Components_ProficiencyCheckbox__WEBPACK_IMPORTED_MODULE_10__["default"],
-    Badge: _Components_Badge__WEBPACK_IMPORTED_MODULE_11__["default"],
-    DiceInput: _Components_DiceInput__WEBPACK_IMPORTED_MODULE_12__["default"],
-    DiceArrayInput: _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_13__["default"]
+    ProficiencyCheckbox: _Components_ProficiencyCheckbox__WEBPACK_IMPORTED_MODULE_9__["default"],
+    DiceArrayInput: _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_10__["default"]
   },
-  mixins: [_Mixins_Creature_Edit__WEBPACK_IMPORTED_MODULE_14__.creatureEdit],
+  mixins: [_Mixins_Creature_Edit__WEBPACK_IMPORTED_MODULE_11__.creatureEdit],
   created: function created() {
     if (this.editing) {
       this.form.race = this.editing.race;
@@ -26557,7 +26548,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_centered_form, {
         onSubmitted: $options.submit,
-        width: 'full'
+        width: "full"
       }, {
         actions: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_action_message, {
@@ -26826,8 +26817,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Save',
-            slug: 'strength_save',
+            label: "Save",
+            slug: "strength_save",
             proficiency: _ctx.form.strength_save_proficiency,
             "onUpdate:proficiency": _cache[12] || (_cache[12] = function ($event) {
               return _ctx.form.strength_save_proficiency = $event;
@@ -26835,7 +26826,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Athletics',
+            label: "Athletics",
             proficiency: _ctx.form.athletics_proficiency,
             "onUpdate:proficiency": _cache[13] || (_cache[13] = function ($event) {
               return _ctx.form.athletics_proficiency = $event;
@@ -26876,8 +26867,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Save',
-            slug: 'dexterity_save',
+            label: "Save",
+            slug: "dexterity_save",
             proficiency: _ctx.form.dexterity_save_proficiency,
             "onUpdate:proficiency": _cache[17] || (_cache[17] = function ($event) {
               return _ctx.form.dexterity_save_proficiency = $event;
@@ -26885,7 +26876,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Acrobatics',
+            label: "Acrobatics",
             proficiency: _ctx.form.acrobatics_proficiency,
             "onUpdate:proficiency": _cache[18] || (_cache[18] = function ($event) {
               return _ctx.form.acrobatics_proficiency = $event;
@@ -26897,7 +26888,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Sleight of Hand',
+            label: "Sleightof Hand'",
             proficiency: _ctx.form.sleight_of_hand_proficiency,
             "onUpdate:proficiency": _cache[20] || (_cache[20] = function ($event) {
               return _ctx.form.sleight_of_hand_proficiency = $event;
@@ -26909,7 +26900,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Stealth',
+            label: "Stealth",
             proficiency: _ctx.form.stealth_proficiency,
             "onUpdate:proficiency": _cache[22] || (_cache[22] = function ($event) {
               return _ctx.form.stealth_proficiency = $event;
@@ -26950,8 +26941,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Save',
-            slug: 'constitution_save',
+            label: "Save",
+            slug: "constitution_save",
             proficiency: _ctx.form.constitution_save_proficiency,
             "onUpdate:proficiency": _cache[26] || (_cache[26] = function ($event) {
               return _ctx.form.constitution_save_proficiency = $event;
@@ -26988,8 +26979,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Save',
-            slug: 'intelligence_save',
+            label: "Save",
+            slug: "intelligence_save",
             proficiency: _ctx.form.intelligence_save_proficiency,
             "onUpdate:proficiency": _cache[29] || (_cache[29] = function ($event) {
               return _ctx.form.intelligence_save_proficiency = $event;
@@ -26997,7 +26988,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Arcana',
+            label: "Arcana",
             proficiency: _ctx.form.arcana_proficiency,
             "onUpdate:proficiency": _cache[30] || (_cache[30] = function ($event) {
               return _ctx.form.arcana_proficiency = $event;
@@ -27009,7 +27000,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'History',
+            label: "History",
             proficiency: _ctx.form.history_proficiency,
             "onUpdate:proficiency": _cache[32] || (_cache[32] = function ($event) {
               return _ctx.form.history_proficiency = $event;
@@ -27021,7 +27012,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Investigation',
+            label: "Investigation",
             proficiency: _ctx.form.investigation_proficiency,
             "onUpdate:proficiency": _cache[34] || (_cache[34] = function ($event) {
               return _ctx.form.investigation_proficiency = $event;
@@ -27033,7 +27024,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Nature',
+            label: "Nature",
             proficiency: _ctx.form.nature_proficiency,
             "onUpdate:proficiency": _cache[36] || (_cache[36] = function ($event) {
               return _ctx.form.nature_proficiency = $event;
@@ -27045,7 +27036,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Religion',
+            label: "Religion",
             proficiency: _ctx.form.religion_proficiency,
             "onUpdate:proficiency": _cache[38] || (_cache[38] = function ($event) {
               return _ctx.form.religion_proficiency = $event;
@@ -27086,8 +27077,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Save',
-            slug: 'wisdom_save',
+            label: "Save",
+            slug: "wisdom_save",
             proficiency: _ctx.form.wisdom_save_proficiency,
             "onUpdate:proficiency": _cache[42] || (_cache[42] = function ($event) {
               return _ctx.form.wisdom_save_proficiency = $event;
@@ -27095,7 +27086,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Animal Handling',
+            label: "Animal Handling",
             proficiency: _ctx.form.animal_handling_proficiency,
             "onUpdate:proficiency": _cache[43] || (_cache[43] = function ($event) {
               return _ctx.form.animal_handling_proficiency = $event;
@@ -27107,7 +27098,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Insight',
+            label: "Insight",
             proficiency: _ctx.form.insight_proficiency,
             "onUpdate:proficiency": _cache[45] || (_cache[45] = function ($event) {
               return _ctx.form.insight_proficiency = $event;
@@ -27119,7 +27110,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Medicine',
+            label: "Medicine",
             proficiency: _ctx.form.medicine_proficiency,
             "onUpdate:proficiency": _cache[47] || (_cache[47] = function ($event) {
               return _ctx.form.medicine_proficiency = $event;
@@ -27131,7 +27122,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Perception',
+            label: "Perception",
             proficiency: _ctx.form.perception_proficiency,
             "onUpdate:proficiency": _cache[49] || (_cache[49] = function ($event) {
               return _ctx.form.perception_proficiency = $event;
@@ -27143,7 +27134,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Survival',
+            label: "Survival",
             proficiency: _ctx.form.survival_proficiency,
             "onUpdate:proficiency": _cache[51] || (_cache[51] = function ($event) {
               return _ctx.form.survival_proficiency = $event;
@@ -27184,8 +27175,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Save',
-            slug: 'charisma_save',
+            label: "Save",
+            slug: "charisma_save",
             proficiency: _ctx.form.charisma_save_proficiency,
             "onUpdate:proficiency": _cache[55] || (_cache[55] = function ($event) {
               return _ctx.form.charisma_save_proficiency = $event;
@@ -27193,7 +27184,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Deception',
+            label: "Deception",
             proficiency: _ctx.form.deception_proficiency,
             "onUpdate:proficiency": _cache[56] || (_cache[56] = function ($event) {
               return _ctx.form.deception_proficiency = $event;
@@ -27205,7 +27196,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Intimidation',
+            label: "Intimidation",
             proficiency: _ctx.form.intimidation_proficiency,
             "onUpdate:proficiency": _cache[58] || (_cache[58] = function ($event) {
               return _ctx.form.intimidation_proficiency = $event;
@@ -27217,7 +27208,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Performance',
+            label: "Performance",
             proficiency: _ctx.form.performance_proficiency,
             "onUpdate:proficiency": _cache[60] || (_cache[60] = function ($event) {
               return _ctx.form.performance_proficiency = $event;
@@ -27229,7 +27220,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8
           /* PROPS */
           , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: 'Persuasion',
+            label: "Persuasion",
             proficiency: _ctx.form.persuasion_proficiency,
             "onUpdate:proficiency": _cache[62] || (_cache[62] = function ($event) {
               return _ctx.form.persuasion_proficiency = $event;

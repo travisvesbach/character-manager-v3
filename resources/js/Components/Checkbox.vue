@@ -5,7 +5,7 @@
 <script>
 
     export default {
-        props: ['modelValue', 'label'],
+        props: ['modelValue'],
         emits: ['update:modelValue'],
         methods: {
             focus() {

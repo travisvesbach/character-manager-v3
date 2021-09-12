@@ -110,10 +110,8 @@ class CreateCharactersTable extends Migration
             $table->boolean('show_notepad')->default(1);
             $table->boolean('show_resources')->default(1);
             $table->boolean('show_spells')->default(1);
-            $table->boolean('show_dice')->default(1);
             $table->text('notes')->nullable();
             $table->boolean('skills_auto_filled')->default(1);
-            $table->json('special_skill_modifiers')->nullable();
             $table->string('race');
             $table->string('class');
             $table->integer('level')->default(0);

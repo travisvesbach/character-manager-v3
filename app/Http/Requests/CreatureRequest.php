@@ -110,7 +110,6 @@ class CreatureRequest extends FormRequest
             'persuasion_proficiency' => 'boolean',
             'persuasion_expertise' => 'boolean',
             'skills_auto_filled' => 'boolean',
-            'special_skill_modifiers' => '',
             'actions' => '',
             'modifiers' => '',
             'spells' => '',
@@ -119,7 +118,6 @@ class CreatureRequest extends FormRequest
             'show_notepad' => 'boolean',
             'show_resources' => 'boolean',
             'show_spells' => 'boolean',
-            'show_dice' => 'boolean',
         ];
     }
 }
