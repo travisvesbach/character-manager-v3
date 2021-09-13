@@ -1,7 +1,7 @@
 <template>
     <div class="alert-flash flex flex-col items-end">
         <div id="alert" class="rounded py-3 px-5 my-2 opacity-80" v-bind:class="getStatusClasses(messageObj.status)" role="alert" v-for="messageObj in messageArray">
-            <strong v-if="messageObj.status == 'success'">Success!</strong> {{ messageObj.message }}
+            <strong v-if="messageObj.status == 'success'">Success!</strong> <span v-html="messageObj.message"/>
         </div>
     </div>
 </template>

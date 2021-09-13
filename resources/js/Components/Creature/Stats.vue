@@ -2,29 +2,42 @@
     <div>
         <div>
             <p>AC: {{ creature.ac }} <span class="text-xs">({{ creature.ac_source }})</span></p>
-            <dice :modifier="creature.initiative" :message="creature.name + '\'s initiative: '">
+            <div class="inline-block cursor-pointer" @click="roll('Initiative', creature.initiative)">
                 Initiative: {{ creature.initiative }}
-            </dice>
+            </div>
+            <p>Speed: {{ creature.speed }}</p>
+            <div>
+                Hit Dice:
+                <div v-for="hit_dice in creature.hit_dice">
+                    {{ hit_dice.current }}/{{ hit_dice.total }}d{{ hit_dice.size }}
+                </div>
+            </div>
+            <div>
+                HP:
+
+            </div>
         </div>
         <div>
-            <p>Speed: {{ creature.speed }}</p>
-            <dice :modifier="creature.initiative" :message="creature.name + '\'s initiative: '">
-                Initiative: {{ creature.initiative }}
-            </dice>
         </div>
     </div>
 </template>
 
 <script>
-    import Dice from '@/Components/Dice'
+    import { flash } from '@/Mixins/Flash';
 
     export default {
         props: ['creature'],
         components: {
-            Dice
-        },
-        methods: {
 
+        },
+        mixins: [flash],
+        methods: {
+            roll(item, modifier) {
+                let result =  dice.roll();
+                let message = this.creature.name + ':<br>' +
+                    item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
+                this.flash(message, 'primary');
+            }
         }
     }
 </script>

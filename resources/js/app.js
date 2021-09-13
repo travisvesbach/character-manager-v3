@@ -18,3 +18,9 @@ createInertiaApp({
 });
 
 InertiaProgress.init({ color: '#4B5563' });
+
+window.dice = {
+    roll: function(number = 20) {
+        return Math.floor(Math.random() * number) + 1
+    }
+}

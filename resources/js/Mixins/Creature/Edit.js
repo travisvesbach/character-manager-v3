@@ -9,6 +9,7 @@ export const creatureEdit = {
                 hit_dice: [{
                     total: 0,
                     size: 0,
+                    current: 0,
                 }],
                 ac: 0,
                 ac_source: '',
