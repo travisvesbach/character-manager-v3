@@ -6,7 +6,7 @@
             <jet-banner />
 
             <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-                <nav class="bg-white border-b border-gray-100 dark:bg-black dark:border-gray-900">
+                <nav class="bg-white border-b border-gray-100 dark:bg-black dark:border-black">
                     <!-- Primary Navigation Menu -->
                     <div class="mx-auto px-4">
                         <div class="flex justify-between h-10">
@@ -144,7 +144,7 @@
                 </nav>
 
                 <!-- subheader -->
-                <div>
+                <div class="dark:bg-black">
                     <slot name="subheader"></slot>
                 </div>
 

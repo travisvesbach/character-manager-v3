@@ -20,6 +20,7 @@ class CreateCharactersTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->string('name');
             $table->integer('max_hp')->default(0);
+            $table->integer('current_hp')->default(0);
             $table->json('hit_dice')->nullable();
             $table->integer('ac')->default(0);
             $table->string('ac_source')->nullable();
@@ -115,7 +116,6 @@ class CreateCharactersTable extends Migration
             $table->string('race');
             $table->string('class');
             $table->integer('level')->default(0);
-            $table->integer('current_hp')->default(0);
             $table->boolean('is_archived')->default(0);
             $table->date('archive_date')->nullable()->default(null);
 

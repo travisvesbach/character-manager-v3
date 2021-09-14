@@ -31,14 +31,16 @@
 
 
         <template #subheader>
-            <div class="dark:bg-gray-900 flex items-center px-10">
-                <jet-nav-link :href="creature.path" :active="creature.id == character.id" preserve-state v-for="creature in characters">
+            <div class="flex items-center px-10">
+                <jet-nav-link :href="creature.path" :active="creature.id == character.id" preserve-state v-for="creature in characters" :title="'Level ' + creature.level + ' ' +  creature.race + ' ' +  creature.class">
                     {{ creature.name }}
                 </jet-nav-link>
             </div>
         </template>
 
         <character-nav :creatures="characters"/>
+
+        <heading v-model:creature="character"/>
 
         <stats v-model:creature="character"/>
 
@@ -75,6 +77,7 @@
     import JetDangerButton from '@/Jetstream/DangerButton'
     import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
     import JetNavLink from '@/Jetstream/NavLink.vue'
+    import Heading from '@/Components/Creature/Heading'
     import Stats from '@/Components/Creature/Stats'
 
     export default {
@@ -89,7 +92,8 @@
             JetDangerButton,
             JetConfirmationModal,
             JetNavLink,
-            Stats,
+            Heading,
+            Stats
         },
         data() {
             return {

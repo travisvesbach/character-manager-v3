@@ -27,7 +27,7 @@
 
                         <!-- level -->
                         <jet-label for="level" value="Level" class="mt-4" />
-                        <jet-input type="number" id="level" class="mt-1 block w-full" v-model.number="form.level" v-on:change="setSkills()" required/>
+                        <jet-input type="number" id="level" class="mt-1 block w-full" v-model.number="form.level" @input="setSkills()" required/>
                         <jet-input-error :message="form.errors.level" class="mt-2" />
 
                         <!-- speed -->
@@ -39,7 +39,7 @@
                     <div class="md:w-1/2 pl-1.5">
                         <!-- max_hp -->
                         <jet-label for="max_hp" value="Max HP" />
-                        <jet-input type="number" id="max_hp" class="mt-1 block w-full" v-model.number="form.max_hp" required/>
+                        <jet-input type="number" id="max_hp" class="mt-1 block w-full" v-model.number="form.max_hp" @input="form.current_hp = $event.target.value" required/>
                         <jet-input-error :message="form.errors.max_hp" class="mt-2" />
 
                         <!-- hit_dice -->

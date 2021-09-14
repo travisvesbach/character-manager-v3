@@ -6,6 +6,7 @@ export const creatureEdit = {
                 name: null,
                 speed: '',
                 max_hp: 0,
+                current_hp: 0,
                 hit_dice: [{
                     total: 0,
                     size: 0,
@@ -108,6 +109,7 @@ export const creatureEdit = {
                 name: this.editing.name,
                 speed: this.editing.speed,
                 max_hp: this.editing.max_hp,
+                current_hp: this.editing.current_hp,
                 hit_dice: this.editing.hit_dice,
                 ac: this.editing.ac,
                 ac_source: this.editing.ac_source,
