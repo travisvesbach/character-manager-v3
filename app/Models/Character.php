@@ -18,7 +18,7 @@ class Character extends Creature
             'race',
             'class',
             'level',
-            'current_hp',
+            'temp_hp',
             'is_archived',
             'archive_date',
         ]);

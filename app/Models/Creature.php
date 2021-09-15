@@ -12,6 +12,7 @@ class Creature extends Model
         'user_id',
         'name',
         'max_hp',
+        'current_hp',
         'hit_dice',
         'ac',
         'ac_source',

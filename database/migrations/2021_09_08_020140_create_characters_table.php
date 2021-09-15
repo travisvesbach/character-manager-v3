@@ -21,6 +21,7 @@ class CreateCharactersTable extends Migration
             $table->string('name');
             $table->integer('max_hp')->default(0);
             $table->integer('current_hp')->default(0);
+            $table->integer('temp_hp')->default(0);
             $table->json('hit_dice')->nullable();
             $table->integer('ac')->default(0);
             $table->string('ac_source')->nullable();
