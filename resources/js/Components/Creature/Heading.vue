@@ -75,10 +75,19 @@
         },
         data() {
             return {
-                hp_calculator: 0,
+                hp_calculator: null,
             }
         },
         mixins: [flash],
+        emits: ['updated'],
+        watch: {
+            creature: {
+                handler() {
+                    console.log('heading: ' + this.creature.current_hp);
+                },
+                deep: true,
+            }
+        },
         methods: {
             roll(item, modifier) {
                 let result =  dice.roll();
@@ -89,9 +98,13 @@
             adjustCurrentHp() {
                 if (Number.isInteger(this.creature.current_hp) && Number.isInteger(this.hp_calculator)) {
                     this.creature.current_hp += this.hp_calculator;
+                    this.emitUpdate();
                 }
                 this.hp_calculator = null;
             },
+            emitUpdate() {
+                this.$emit('updated', this.creature);
+            }
         }
     }
 </script>

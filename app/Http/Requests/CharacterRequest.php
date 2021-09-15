@@ -28,7 +28,7 @@ class CharacterRequest extends CreatureRequest
             'race' => 'required|max:255',
             'class' => 'required|max:255',
             'level' => 'required|integer',
-            'temp_hp' => 'integer';
+            'temp_hp' => 'integer',
             'is_archived' => 'boolean',
             'archive_date' => 'date|nullable',
         ]);

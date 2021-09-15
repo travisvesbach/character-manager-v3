@@ -26,7 +26,7 @@ class CreatureRequest extends FormRequest
         return [
             'name' => 'required',
             'max_hp' => 'required|integer',
-            'max_hp' => 'integer',
+            'current_hp' => 'integer',
             'hit_dice' => '',
             'ac' => 'required|integer',
             'ac_source' => 'max:255',

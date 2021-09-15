@@ -154,7 +154,7 @@
                 </main>
 
                 <!-- Flash Message -->
-                <flash v-bind:message="$page.props.flash.message" v-bind:status="$page.props.flash.status"></flash>
+                <flash v-bind:message="$page.props.flash.message" v-bind:status="$page.props.flash.status" v-bind:timestamp="$page.props.flash.timestamp ? $page.props.flash.timestamp : Date.now()"></flash>
             </div>
         </div>
     </div>

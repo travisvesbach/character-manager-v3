@@ -8,7 +8,7 @@
 
 <script>
     export default {
-        props: ['message', 'status'],
+        props: ['message', 'status', 'timestamp'],
         data() {
             return {
                 messageArray: []
@@ -20,7 +20,7 @@
             }
         },
         watch: {
-            message: function() {
+            timestamp: function() {
                 this.flash();
             }
         },
@@ -44,7 +44,7 @@
             hide() {
                 setTimeout(() => {
                     this.messageArray.shift();
-                }, 3000);
+                }, 5000);
             }
         }
     };
