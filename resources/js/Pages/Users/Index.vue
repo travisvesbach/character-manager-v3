@@ -1,5 +1,5 @@
 <template>
-    <app-layout>
+    <app-layout title="Users">
         <template #header>
             Users
         </template>

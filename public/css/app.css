@@ -1139,6 +1139,10 @@ select {
 	margin-left: 0.5rem;
 	margin-right: 0.5rem;
 }
+.my-1 {
+	margin-top: 0.25rem;
+	margin-bottom: 0.25rem;
+}
 .ml-3 {
 	margin-left: 0.75rem;
 }
@@ -2120,8 +2124,6 @@ select {
 	color: rgba(156, 163, 175, var(--tw-placeholder-opacity));
 }
 .dark .form-input-color:focus, .dark .vs__selected:focus, .dark .vs__search:focus, .dark .vs__actions:focus, .dark .vs__dropdown-menu:focus, .dark .vs__dropdown-option:focus {
-	--tw-border-opacity: 1;
-	border-color: rgba(217, 119, 6, var(--tw-border-opacity));
 	--tw-ring-opacity: 1;
 	--tw-ring-color: rgba(217, 119, 6, var(--tw-ring-opacity));
 }
@@ -2802,6 +2804,11 @@ input[type=number] {
 		grid-column: span 1 / span 1;
 	}
 
+	.md\:my-0 {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+
 	.md\:mt-0 {
 		margin-top: 0px;
 	}
@@ -2832,6 +2839,10 @@ input[type=number] {
 
 	.md\:grid-cols-2 {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.md\:grid-cols-4 {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
 
 	.md\:gap-6 {

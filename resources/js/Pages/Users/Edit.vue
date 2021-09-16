@@ -1,5 +1,5 @@
 <template>
-    <app-layout>
+    <app-layout :title="editing && editing.name ? 'Edit ' + editing.name : 'Create User'">
         <template #header>
             {{ editing && editing.name ? 'Edit ' + editing.name : 'Create User' }}
         </template>

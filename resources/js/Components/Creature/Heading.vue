@@ -1,9 +1,9 @@
 <template>
     <div class="px-5 py-2">
-        <div class="grid grid-cols-4">
+        <div class="grid sm:grid-cols-2 md:grid-cols-4">
             <div class="col-span-1">
                 <div class="hover-trigger flex items-center">
-                    <h2 class="text-4xl">{{ creature.name }}</h2>
+                    <h2 class="text-4xl heading-color">{{ creature.name }}</h2>
                     <jet-dropdown align="left" width="48" class="hover-target ml-1">
                         <template #trigger>
                             <button class="flex link link-color">
@@ -18,7 +18,7 @@
                                 <jet-dropdown-link :href="route('characters.edit', creature.id)">
                                     Edit Character
                                 </jet-dropdown-link>
-                                <jet-dropdown-link @click.native="confirmingDeleteCharacter = creature" as="button">
+                                <jet-dropdown-link @click.native="confirmingDeleteCreature = creature" as="button">
                                     Delete Character
                                 </jet-dropdown-link>
                             </div>
@@ -30,32 +30,52 @@
                 </span>
             </div>
 
-            <div class="col-span-3 flex justify-between">
-                <div class="flex flex-col justify-between">
+            <div class="col-span-3 flex justify-between flex-wrap">
+                <div class="flex flex-col justify-between my-1 md:my-0">
                     <p>AC: {{ creature.ac }} <span class="text-xs text-secondary-color">({{ creature.ac_source }})</span></p>
                     <p>Speed: {{ creature.speed }}</p>
-                    <div class="inline-block cursor-pointer" @click="roll('Initiative', creature.initiative)">
-                        Initiative: {{ creature.initiative }}
+                    <div>
+                        <button @click="roll('Initiative', creature.initiative)">
+                            Initiative: {{ creature.initiative }}
+                        </button>
                     </div>
                 </div>
-                <div class="">
+                <div class=" my-1 md:my-0">
                     Hit Dice:
                     <div v-for="hit_dice in creature.hit_dice">
                         {{ hit_dice.current }}/{{ hit_dice.total }}d{{ hit_dice.size }}
                     </div>
                 </div>
-                <div class="text-right">
+                <div class="text-right my-1 md:my-0">
                     HP: <jet-input type="number" class="w-16 p-1" v-model.number="creature.current_hp"/> / {{creature.max_hp}}<br>
                     <span class="text-xs">Calc:</span> <jet-input type="number" class="w-16 p-1 mt-1" @keyup.enter="adjustCurrentHp()" v-model.number="hp_calculator"/> <span class="invisible">/ {{creature.max_hp}}</span>
                 </div>
-                <div class="text-right">
-                    Temp HP: <jet-input type="number" class="w-16 p-1" v-model.number="creature.current_hp"/><br>
-                    <span class="text-xs">Calc:</span> <jet-input type="number" class="w-16 p-1 mt-1" @keyup.enter="adjustCurrentHp()" v-model.number="hp_calculator"/>
+                <div class="text-right my-1 md:my-0">
+                    Temp HP: <jet-input type="number" class="w-16 p-1" v-model.number="creature.temp_hp"/><br>
+                    <span class="text-xs">Calc:</span> <jet-input type="number" class="w-16 p-1 mt-1" @keyup.enter="adjustTempHp()" v-model.number="temp_hp_calculator"/>
                 </div>
             </div>
         </div>
-        <div>
-        </div>
+
+        <!-- delete confirmation -->
+        <jet-confirmation-modal :show="confirmingDeleteCreature" @close="confirmingDeleteCreature = false">
+            <template #title>
+                Delete Character
+            </template>
+
+            <template #content>
+                Are you sure you want to delete this character?
+            </template>
+
+            <template #footer>
+                <jet-secondary-button @click.native="confirmingDeleteCreature = false">
+                    Cancel
+                </jet-secondary-button>
+                <jet-danger-button class="ml-2" @click.native="deleteCreature" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Delete Character
+                </jet-danger-button>
+            </template>
+        </jet-confirmation-modal>
     </div>
 </template>
 
@@ -63,31 +83,34 @@
     import JetInput from '@/Jetstream/Input'
     import JetDropdown from '@/Jetstream/Dropdown'
     import JetDropdownLink from '@/Jetstream/DropdownLink'
+    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+    import JetDangerButton from '@/Jetstream/DangerButton'
+    import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
 
     import { flash } from '@/Mixins/Flash';
+    import { creatureEmit } from '@/Mixins/Creature/Emit';
 
     export default {
-        props: ['creature'],
+        props: ['creature', 'type'],
         components: {
             JetInput,
             JetDropdown,
             JetDropdownLink,
+            JetSecondaryButton,
+            JetDangerButton,
+            JetConfirmationModal,
         },
         data() {
             return {
+                confirmingDeleteCreature: false,
                 hp_calculator: null,
+                temp_hp_calculator: null,
+                form: this.$inertia.form({
+                    id: null,
+                }),
             }
         },
-        mixins: [flash],
-        emits: ['updated'],
-        watch: {
-            creature: {
-                handler() {
-                    console.log('heading: ' + this.creature.current_hp);
-                },
-                deep: true,
-            }
-        },
+        mixins: [flash, creatureEmit],
         methods: {
             roll(item, modifier) {
                 let result =  dice.roll();
@@ -98,12 +121,20 @@
             adjustCurrentHp() {
                 if (Number.isInteger(this.creature.current_hp) && Number.isInteger(this.hp_calculator)) {
                     this.creature.current_hp += this.hp_calculator;
-                    this.emitUpdate();
+                    this.updateCreature();
                 }
                 this.hp_calculator = null;
             },
-            emitUpdate() {
-                this.$emit('updated', this.creature);
+            adjustTempHp() {
+                if (Number.isInteger(this.creature.temp_hp) && Number.isInteger(this.temp_hp_calculator)) {
+                    this.creature.temp_hp += this.temp_hp_calculator;
+                    this.updateCreature();
+                }
+                this.temp_hp_calculator = null;
+            },
+            deleteCreature() {
+                this.form.id = this.creature.id;
+                this.form.delete(route(this.type + 's.destroy', this.form.id));
             }
         }
     }

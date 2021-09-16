@@ -19,7 +19,8 @@
                                 </div>
 
                                 <!-- Header -->
-                                <h2 class="font-semibold text-xl ml-5 flex items-center heading-color">
+                                <h2 class="font-semibold text-xl ml-5 flex items-center">
+                                    <!-- {{ $inertia.page.props.appName }} -->
                                     <slot name="header"></slot>
                                 </h2>
 
@@ -143,8 +144,15 @@
                     </div>
                 </nav>
 
+                <!-- Page Heading -->
+<!--                 <header class="bg-white shadow dark:bg-black"  v-if="this.$slots['header']">
+                    <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8 text-xl heading-color">
+                        <slot name="header"></slot>
+                    </div>
+                </header> -->
+
                 <!-- subheader -->
-                <div class="dark:bg-black">
+                <div class="bg-white dark:bg-black">
                     <slot name="subheader"></slot>
                 </div>
 

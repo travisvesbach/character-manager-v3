@@ -1,5 +1,5 @@
 <template>
-    <app-layout>
+    <app-layout :title="editing && editing.name ? 'Edit ' + editing.name : 'Create Character'">
         <template #header>
             {{ editing && editing.name ? 'Edit ' + editing.name : 'Create Character' }}
         </template>
@@ -89,7 +89,7 @@
 
                         <proficiency-checkbox label="Save" slug="dexterity_save" v-model:proficiency="form.dexterity_save_proficiency" />
                         <proficiency-checkbox label="Acrobatics" v-model:proficiency="form.acrobatics_proficiency" v-model:expertise="form.acrobatics_expertise"/>
-                        <proficiency-checkbox label="Sleightof Hand'" v-model:proficiency="form.sleight_of_hand_proficiency" v-model:expertise="form.sleight_of_hand_expertise"/>
+                        <proficiency-checkbox label="Sleightof Hand" v-model:proficiency="form.sleight_of_hand_proficiency" v-model:expertise="form.sleight_of_hand_expertise"/>
                         <proficiency-checkbox label="Stealth" v-model:proficiency="form.stealth_proficiency" v-model:expertise="form.stealth_expertise"/>
                     </div>
                     <div class="md:w-1/3 pl-1.5" v-on:change="setSkills('constitution')">

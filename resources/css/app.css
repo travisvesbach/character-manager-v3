@@ -37,7 +37,7 @@
 
 .form-input-color, .vs__selected, .vs__search, .vs__actions, .vs__dropdown-menu, .vs__dropdown-option {
     @apply border-gray-300 focus:border-indigo-300 focus:ring-indigo-200;
-    @apply dark:bg-gray-600 dark:border-gray-800 dark:placeholder-gray-400 dark:focus:border-yellow-600 dark:focus:ring-yellow-600;
+    @apply dark:bg-gray-600 dark:border-gray-800 dark:placeholder-gray-400 dark:focus:ring-yellow-600;
 }
 
 input[type=number] {
