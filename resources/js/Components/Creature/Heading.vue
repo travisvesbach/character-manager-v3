@@ -42,12 +42,12 @@
                 </div>
                 <div class=" my-1 md:my-0">
                     Hit Dice:
-                    <div v-for="hit_dice in creature.hit_dice">
+                    <button class="block" v-for="(hit_dice, index) in creature.hit_dice" @click="rollHitDice(index)">
                         {{ hit_dice.current }}/{{ hit_dice.total }}d{{ hit_dice.size }}
-                    </div>
+                    </button>
                 </div>
                 <div class="text-right my-1 md:my-0">
-                    HP: <jet-input type="number" class="w-16 p-1" v-model.number="creature.current_hp"/> / {{creature.max_hp}}<br>
+                    HP: <jet-input type="number" class="w-16 p-1" v-model.number="creature.current_hp" @input="updateCreature"/> / {{creature.max_hp}}<br>
                     <span class="text-xs">Calc:</span> <jet-input type="number" class="w-16 p-1 mt-1" @keyup.enter="adjustCurrentHp()" v-model.number="hp_calculator"/> <span class="invisible">/ {{creature.max_hp}}</span>
                 </div>
                 <div class="text-right my-1 md:my-0">
@@ -131,6 +131,32 @@
                     this.updateCreature();
                 }
                 this.temp_hp_calculator = null;
+            },
+            rollHitDice(dice_index) {
+                if (this.creature.current_hp >= this.creature.max_hp) {
+                    this.flash('Already at full HP', 'danger');
+                } else if (this.creature.hit_dice[dice_index].current == 0) {
+                    this.flash('Out of Hit Dice', 'danger');
+                } else {
+                    this.creature.hit_dice[dice_index].current--;
+                    let output = [];
+                    let result = dice.roll(this.creature.hit_dice[dice_index].size);
+                    let total = result + this.creature.constitution_mod;
+                    output.push(this.creature.name + ' rolled a hit dice:');
+                    if(this.creature.current_hp < 0) {
+                        output.push('HP is less than 0; setting HP to 0.');
+                        this.creature.current_hp = 0;
+                    }
+                    output.push('Previous: ' + this.creature.current_hp + ' HP');
+                    output.push('Recovered: [' + result + '] + ' + this.creature.constitution_mod + ' = ' + total + ' HP');
+                    this.creature.current_hp = this.creature.current_hp + total;
+                    if (this.creature.current_hp > this.creature.max_hp) {
+                        this.creature.current_hp = this.creature.max_hp;
+                    }
+                    output.push('New Total: ' + this.creature.current_hp + ' HP');
+                    this.flash(output.join('<br>'), 'primary');
+                    this.updateCreature();
+                }
             },
             deleteCreature() {
                 this.form.id = this.creature.id;
