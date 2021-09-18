@@ -1,5 +1,5 @@
 <template>
-    <button :type="type" class="btn btn-secondary">
+    <button :type="type" class="btn btn-secondary" :class="small ? 'btn-small' : ''">
         <slot></slot>
     </button>
 </template>
@@ -13,6 +13,10 @@
                 type: String,
                 default: 'button',
             },
+            small: {
+                type: Boolean,
+                default: false,
+            }
         }
     })
 </script>

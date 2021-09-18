@@ -1,6 +1,9 @@
 <template>
     <modal :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
         <card>
+            <template #header v-if="$slots.header">
+                <slot name="header"></slot>
+            </template>
             <div class="text-lg mb-2">
                 <slot name="title"></slot>
             </div>

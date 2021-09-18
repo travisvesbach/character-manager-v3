@@ -17,6 +17,10 @@
 
         <stats v-model:creature="character"/>
 
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+            <spells :spells_input="character.spells" type="character" @updated="updateSpells"/>
+        </div>
+
     </app-layout>
 </template>
 
@@ -31,6 +35,7 @@
     import JetNavLink from '@/Jetstream/NavLink.vue'
     import Heading from '@/Components/Creature/Heading'
     import Stats from '@/Components/Creature/Stats'
+    import Spells from '@/Components/Creature/Spells'
 
     export default {
         props: ['character', 'characters'],
@@ -45,9 +50,14 @@
             JetConfirmationModal,
             JetNavLink,
             Heading,
-            Stats
+            Stats,
+            Spells,
         },
         methods: {
+            updateSpells(input) {
+                this.character.spells = input;
+                this.updateCharacter();
+            },
             updateCharacter() {
                 let form = this.$inertia.form({
                     id: this.character.id,
@@ -139,6 +149,7 @@
                     persuasion_expertise: this.character.persuasion_expertise,
                     skills_auto_filled: this.character.skills_auto_filled,
                     special_skill_modifiers: this.character.special_skill_modifiers,
+                    spells: this.character.spells,
                     // character fields
                     race: this.character.race,
                     class: this.character.class,
