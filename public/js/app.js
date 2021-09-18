@@ -20581,7 +20581,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['spells_input', 'type'],
+  props: ['spells', 'type'],
   components: {
     JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__["default"],
     JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -20592,47 +20592,18 @@ __webpack_require__.r(__webpack_exports__);
     Accordion: _Components_Accordion__WEBPACK_IMPORTED_MODULE_6__["default"],
     AccordionItem: _Components_AccordionItem__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
+  emits: ['updated'],
   data: function data() {
     return {
       accordion_key: 0,
       spells_modal: false,
       spellPointsCosts: [0, 2, 3, 5, 6, 7, 9, 10, 11, 13],
-      spells: {
-        spell_type: null,
-        spell_dc: null,
-        max_spell_level: null,
-        max_spell_points: null,
-        current_spell_points: null,
-        recover_on_rest: 'long',
-        spell_list_type: 'known',
-        can_prepare_count: null,
-        prepared_spells: [],
-        slots_1: [],
-        slots_2: [],
-        slots_3: [],
-        slots_4: [],
-        slots_5: [],
-        slots_6: [],
-        slots_7: [],
-        slots_8: [],
-        slots_9: [],
-        list_0: [],
-        list_1: [],
-        list_2: [],
-        list_3: [],
-        list_4: [],
-        list_5: [],
-        list_6: [],
-        list_7: [],
-        list_8: [],
-        list_9: [],
-        spell_counters: []
-      }
+      form: {}
     };
   },
   computed: {
     spellListExplanation: function spellListExplanation() {
-      if (this.spells.spell_list_type == 'known') {
+      if (this.spells && this.spells.spell_list_type == 'known') {
         return "List all of your known spells below.  Spells should be separated by a comma.";
       } else {
         return "List all of the spells in your spellbook or class's spell list below.  You will have the option later to select which spells from your list you have prepared and then only show the prepared spells.  Seplls shoudl be separated by a comma.";
@@ -20643,31 +20614,29 @@ __webpack_require__.r(__webpack_exports__);
 
       var list = [];
 
-      for (var i = 0; i < 10; i++) {
-        var level_list = this.spells['list_' + i];
+      if (this.spells) {
+        for (var i = 0; i < 10; i++) {
+          var level_list = this.spells['list_' + i];
 
-        if (level_list && level_list.length > 0) {
-          if (this.spells.spell_list_type == 'known' || i == 0) {
-            list.push(level_list);
-          } else {
-            var common = checking.spells.filter(function (value) {
-              return _this.spells.prepared_spells.includes(value);
-            });
+          if (level_list && level_list.length > 0) {
+            if (this.spells.spell_list_type == 'known' || i == 0) {
+              list.push(level_list);
+            } else {
+              var common = checking.spells.filter(function (value) {
+                return _this.spells.prepared_spells.includes(value);
+              });
 
-            if (common.length > 0) {
-              list.push(common);
+              if (common.length > 0) {
+                list.push(common);
+              }
             }
           }
         }
+
+        this.accordion_key++;
       }
 
-      this.accordion_key++;
       return list;
-    }
-  },
-  created: function created() {
-    if (this.spells_input) {
-      this.spells = this.spells_input;
     }
   },
   methods: {
@@ -20689,6 +20658,51 @@ __webpack_require__.r(__webpack_exports__);
 
       return num + "th";
     },
+    setForm: function setForm() {
+      if (this.spells) {
+        this.form = JSON.parse(JSON.stringify(this.spells));
+
+        for (var i = 0; i < 10; i++) {
+          this.form['list_' + i] = this.joinList(this.form['list_' + i]);
+
+          if (i != 0) {
+            this.form['slots_' + i] = this.getSlotCount(this.form['slots_' + i]);
+          }
+        }
+      } else {
+        this.form = {
+          spell_type: null,
+          spell_dc: null,
+          max_spell_level: null,
+          max_spell_points: null,
+          current_spell_points: null,
+          recover_on_rest: 'long',
+          spell_list_type: 'known',
+          can_prepare_count: null,
+          prepared_spells: [],
+          slots_1: [],
+          slots_2: [],
+          slots_3: [],
+          slots_4: [],
+          slots_5: [],
+          slots_6: [],
+          slots_7: [],
+          slots_8: [],
+          slots_9: [],
+          list_0: [],
+          list_1: [],
+          list_2: [],
+          list_3: [],
+          list_4: [],
+          list_5: [],
+          list_6: [],
+          list_7: [],
+          list_8: [],
+          list_9: [],
+          spell_counters: []
+        };
+      }
+    },
     joinList: function joinList(list) {
       if (list != null) {
         return list.join(', ');
@@ -20703,23 +20717,50 @@ __webpack_require__.r(__webpack_exports__);
         return null;
       }
     },
-    openModal: function openModal() {
-      for (var i = 0; i < 10; i++) {
-        this.spells['list_' + i] = this.joinList(this.spells['list_' + i]);
+    getSlotCount: function getSlotCount(slots) {
+      if (slots && Array.isArray(slots)) {
+        return slots.length;
       }
 
+      return null;
+    },
+    getSlotArray: function getSlotArray(level, count) {
+      var output = [];
+
+      if (this.spells && this.spells['slots_' + level] && Array.isArray(this.spells['slots_' + level])) {
+        output = this.spells['slots_' + level];
+      }
+
+      if (count > output.length) {
+        for (var j = output.length; j < count; j++) {
+          output.push(false);
+        }
+      } else if (count < output.length) {
+        for (var _j = output.length; _j > count; _j--) {
+          output.pop();
+        }
+      }
+
+      return output;
+    },
+    openModal: function openModal() {
+      this.setForm();
       this.spells_modal = true;
     },
     closeModal: function closeModal() {
       this.spells_modal = false;
-
-      for (var i = 0; i < 10; i++) {
-        this.spells['list_' + i] = this.splitList(this.spells['list_' + i]);
-      }
     },
     saveSpells: function saveSpells() {
+      for (var i = 0; i < 10; i++) {
+        this.form['list_' + i] = this.splitList(this.form['list_' + i]);
+
+        if (i != 0) {
+          this.form['slots_' + i] = this.getSlotArray(i, this.form['slots_' + i]);
+        }
+      }
+
+      this.$emit('updated', this.form);
       this.closeModal();
-      this.$emit('updated', this.spells);
     }
   }
 });
@@ -24099,119 +24140,122 @@ var _hoisted_6 = {
   key: 0
 };
 var _hoisted_7 = {
+  key: 1
+};
+var _hoisted_8 = {
   "class": "ml-2"
 };
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Edit Spells ");
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Edit Spells ");
 
-var _hoisted_9 = {
+var _hoisted_10 = {
   "class": "flex"
 };
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Spellcasting Type:");
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Spellcasting Type:");
 
-var _hoisted_11 = {
+var _hoisted_12 = {
   "class": "inline-block"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("No spellcasting");
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("No spellcasting");
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Slots");
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Slots");
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Points (DMG Variant)");
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Points (DMG Variant)");
 
-var _hoisted_15 = {
+var _hoisted_16 = {
   "class": "my-2 flex"
 };
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Spell DC:");
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Spell DC:");
 
-var _hoisted_17 = {
+var _hoisted_18 = {
   key: 0,
   "class": "my-2 flex"
 };
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Recover on a rest:");
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Recover on a rest:");
 
-var _hoisted_19 = {
+var _hoisted_20 = {
   key: 1,
   "class": "my-2 flex"
 };
 
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Spellcaster Type:");
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Spellcaster Type:");
 
-var _hoisted_21 = {
+var _hoisted_22 = {
   key: 2,
   "class": "my-2"
 };
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Total number of spells you can prepare:");
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Total number of spells you can prepare:");
 
-var _hoisted_23 = {
+var _hoisted_24 = {
   key: 3,
   "class": "border-t"
 };
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "text-xl"
 }, "Spell Points", -1
 /* HOISTED */
 );
 
-var _hoisted_25 = {
+var _hoisted_26 = {
   "class": "my-2 flex"
 };
 
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Total Spell Points:");
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Total Spell Points:");
 
-var _hoisted_27 = {
+var _hoisted_28 = {
   "class": "my-2 flex"
 };
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Max Spell Level Avaibale:");
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Max Spell Level Avaibale:");
 
-var _hoisted_29 = {
+var _hoisted_30 = {
   key: 4,
   "class": "border-t"
 };
 
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "text-xl"
 }, "Spell Slots", -1
 /* HOISTED */
 );
 
-var _hoisted_31 = {
+var _hoisted_32 = {
   "class": "my-2 grid grid-cols-2 sm:grid-cols-3"
 };
-var _hoisted_32 = {
+var _hoisted_33 = {
   "class": "m-2 col-span-1 flex justify-center items-center"
 };
-var _hoisted_33 = {
+var _hoisted_34 = {
   key: 5,
   "class": "border-t"
 };
 
-var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "text-xl"
 }, "Spell List", -1
 /* HOISTED */
 );
 
-var _hoisted_35 = {
+var _hoisted_36 = {
   "class": "my-2"
 };
-var _hoisted_36 = {
+var _hoisted_37 = {
   "class": "grid grid-cols-1 sm:grid-cols-2"
 };
-var _hoisted_37 = {
+var _hoisted_38 = {
   "class": "m-2 col-span-1"
 };
-var _hoisted_38 = ["id", "onUpdate:modelValue"];
+var _hoisted_39 = ["id", "onUpdate:modelValue"];
 
-var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
+var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
 
-var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Save ");
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Save ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_secondary_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-secondary-button");
@@ -24242,7 +24286,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [!$data.spells || !$data.spells.spell_type && $data.spells.spell_counters.length == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, " If your " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type) + " is not a spellcaster, you can hide this section by clicking 'Toggle Spells' from the dropdown menu next to the " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type) + "'s name. ", 1
+  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [!$props.spells || !$props.spells.spell_type && $props.spells.spell_counters.length == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, " If your " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type) + " is not a spellcaster, you can hide this section by clicking 'Toggle Spells' from the dropdown menu next to the " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.type) + "'s name. ", 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.spells ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, "Spell Save DC: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.spells.spell_dc), 1
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_accordion, {
     key: $data.accordion_key
@@ -24262,7 +24308,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             )];
           }),
           content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_7, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(list, function (spell) {
+            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_8, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(list, function (spell) {
               return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(spell), 1
               /* TEXT */
               );
@@ -24288,54 +24334,33 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClose: $options.closeModal
   }, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_8];
+      return [_hoisted_9];
     }),
     content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "class": "inline-block w-1/2",
         "for": "spell_type"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_10];
+          return [_hoisted_11];
         }),
         _: 1
         /* STABLE */
 
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         "class": "inline-block",
         type: "radio",
         name: "spell_type",
         id: "no-spells",
         value: null,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-          return $data.spells.spell_type = $event;
+          return $data.form.spell_type = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.spells.spell_type]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.form.spell_type]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "class": "ml-1 inline-block",
         "for": "no-spells"
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_12];
-        }),
-        _: 1
-        /* STABLE */
-
-      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-        "class": "inline-block",
-        type: "radio",
-        name: "spell_type",
-        id: "yes-spell-slots",
-        value: "slots",
-        "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-          return $data.spells.spell_type = $event;
-        })
-      }, null, 512
-      /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.spells.spell_type]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-        "class": "ml-1 inline-block",
-        "for": "yes-spell-slots"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_13];
@@ -24347,16 +24372,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "inline-block",
         type: "radio",
         name: "spell_type",
-        id: "yes-spell-points",
-        value: "points",
-        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-          return $data.spells.spell_type = $event;
+        id: "yes-spell-slots",
+        value: "slots",
+        "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+          return $data.form.spell_type = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.spells.spell_type]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.form.spell_type]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "class": "ml-1 inline-block",
-        "for": "yes-spell-points"
+        "for": "yes-spell-slots"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_14];
@@ -24364,12 +24389,33 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
-      })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        "class": "inline-block",
+        type: "radio",
+        name: "spell_type",
+        id: "yes-spell-points",
+        value: "points",
+        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+          return $data.form.spell_type = $event;
+        })
+      }, null, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.form.spell_type]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+        "class": "ml-1 inline-block",
+        "for": "yes-spell-points"
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_15];
+        }),
+        _: 1
+        /* STABLE */
+
+      })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "class": "inline-block w-1/2",
         "for": "spell_dc"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_16];
+          return [_hoisted_17];
         }),
         _: 1
         /* STABLE */
@@ -24379,21 +24425,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "spell_dc",
         "class": "inline-block w-1/2",
         placeholder: "0",
-        modelValue: $data.spells.spell_dc,
+        modelValue: $data.form.spell_dc,
         "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-          return $data.spells.spell_dc = $event;
+          return $data.form.spell_dc = $event;
         }),
         modelModifiers: {
           number: true
         }
       }, null, 8
       /* PROPS */
-      , ["modelValue"])]), $data.spells.spell_type ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["modelValue"])]), $data.form.spell_type ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "class": "inline-block w-1/2",
         "for": "recover_on_rest"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_18];
+          return [_hoisted_19];
         }),
         _: 1
         /* STABLE */
@@ -24401,19 +24447,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
         id: "recover_on_rest",
         "class": "inline-block",
-        modelValue: $data.spells.recover_on_rest,
+        modelValue: $data.form.recover_on_rest,
         "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-          return $data.spells.recover_on_rest = $event;
+          return $data.form.recover_on_rest = $event;
         }),
         options: ['short', 'long']
       }, null, 8
       /* PROPS */
-      , ["modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.spells.spell_type ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.form.spell_type ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "class": "inline-block w-1/2",
         "for": "spell_list_type"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_20];
+          return [_hoisted_21];
         }),
         _: 1
         /* STABLE */
@@ -24421,18 +24467,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
         id: "spell_list_type",
         "class": "inline-block",
-        modelValue: $data.spells.spell_list_type,
+        modelValue: $data.form.spell_list_type,
         "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-          return $data.spells.spell_list_type = $event;
+          return $data.form.spell_list_type = $event;
         }),
         options: [['known', 'Known (learn on level up)'], ['prepared', 'Prepared (spellbook or full spell list)']]
       }, null, 8
       /* PROPS */
-      , ["modelValue", "options"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.spells.spell_type && _ctx.spell_list_type == 'prepared' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["modelValue", "options"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.form.spell_type && $data.form.spell_list_type == 'prepared' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "can_prepare_count"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_22];
+          return [_hoisted_23];
         }),
         _: 1
         /* STABLE */
@@ -24442,16 +24488,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         type: "number",
         id: "can_prepare_count",
         "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
-          return $data.spells.can_prepare_count = $event;
+          return $data.form.can_prepare_count = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.spells.can_prepare_count]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.spells.spell_type == 'points' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.can_prepare_count]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.form.spell_type == 'points' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "class": "inline-block w-1/2",
         "for": "spell-points"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_26];
+          return [_hoisted_27];
         }),
         _: 1
         /* STABLE */
@@ -24470,12 +24516,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
       }, null, 8
       /* PROPS */
-      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "class": "inline-block w-1/2",
         "for": "max_spell_level"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_28];
+          return [_hoisted_29];
         }),
         _: 1
         /* STABLE */
@@ -24494,8 +24540,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
       }, null, 8
       /* PROPS */
-      , ["modelValue"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.spells.spell_type == 'slots' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_29, [_hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(9, function (num) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["modelValue"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.form.spell_type == 'slots' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_30, [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(9, function (num) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
           "class": "inline-block mr-1",
           "for": 'slots_' + num
         }, {
@@ -24514,9 +24560,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "class": "inline-block w-14",
           id: 'slots_' + num,
           placeholder: "0",
-          modelValue: $data.spells['slots_' + num],
+          modelValue: $data.form['slots_' + num],
           "onUpdate:modelValue": function onUpdateModelValue($event) {
-            return $data.spells['slots_' + num] = $event;
+            return $data.form['slots_' + num] = $event;
           },
           modelModifiers: {
             number: true
@@ -24526,10 +24572,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , ["id", "modelValue", "onUpdate:modelValue"])]);
       }), 64
       /* STABLE_FRAGMENT */
-      ))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.spells.spell_type ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.spellListExplanation), 1
+      ))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.form.spell_type ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_34, [_hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.spellListExplanation), 1
       /* TEXT */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(10, function (num, index) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(10, function (num, index) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
           "for": 'list_' + index
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -24546,12 +24592,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           id: 'list_' + index,
           "class": "w-full form-input-color",
           "onUpdate:modelValue": function onUpdateModelValue($event) {
-            return $data.spells['list_' + index] = $event;
+            return $data.form['list_' + index] = $event;
           },
           placeholder: "Firebolt, Minor Illusion"
         }, null, 8
         /* PROPS */
-        , _hoisted_38), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.spells['list_' + index]]])]);
+        , _hoisted_39), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form['list_' + index]]])]);
       }), 64
       /* STABLE_FRAGMENT */
       ))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
@@ -24561,7 +24607,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $options.closeModal
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_39];
+          return [_hoisted_40];
         }),
         _: 1
         /* STABLE */
@@ -24573,7 +24619,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $options.saveSpells
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_40];
+          return [_hoisted_41];
         }),
         _: 1
         /* STABLE */
@@ -26891,7 +26937,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Heading "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                 <header class=\"bg-white shadow dark:bg-black\"  v-if=\"this.$slots['header']\">\n                    <div class=\"max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8 text-xl heading-color\">\n                        <slot name=\"header\"></slot>\n                    </div>\n                </header> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" subheader "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "subheader")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Content "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Flash Message "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_flash, {
     message: _ctx.$page.props.flash.message,
     status: _ctx.$page.props.flash.status,
-    timestamp: _ctx.$page.props.flash.timestamp ? _ctx.$page.props.flash.timestamp : Date.now()
+    timestamp: _ctx.$page.props.flash.timestamp
   }, null, 8
   /* PROPS */
   , ["message", "status", "timestamp"])])])], 2
@@ -29987,12 +30033,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 8
       /* PROPS */
       , ["creature"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_spells, {
-        spells_input: $props.character.spells,
+        spells: $props.character.spells,
         type: "character",
         onUpdated: $options.updateSpells
       }, null, 8
       /* PROPS */
-      , ["spells_input", "onUpdated"])])];
+      , ["spells", "onUpdated"])])];
     }),
     _: 1
     /* STABLE */

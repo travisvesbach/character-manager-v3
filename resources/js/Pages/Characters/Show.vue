@@ -18,7 +18,7 @@
         <stats v-model:creature="character"/>
 
         <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-            <spells :spells_input="character.spells" type="character" @updated="updateSpells"/>
+            <spells :spells="character.spells" type="character" @updated="updateSpells"/>
         </div>
 
     </app-layout>

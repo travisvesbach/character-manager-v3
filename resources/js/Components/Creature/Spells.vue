@@ -11,6 +11,8 @@
                 If your {{ type }} is not a spellcaster, you can hide this section by clicking 'Toggle Spells' from the dropdown menu next to the {{ type }}'s name.
             </div>
 
+            <div v-if="spells">Spell Save DC: {{ spells.spell_dc }}</div>
+
 
             <accordion :key="accordion_key">
                 <accordion-item :id="'list_' + index + '_accordion'" class="mt-2" v-for="(list, index) in filteredSpellLists" v-if="filteredSpellLists.length > 0" :key="index">
@@ -26,8 +28,6 @@
                     </template>
                 </accordion-item>
             </accordion>
-
-
          </div>
 
 
@@ -42,36 +42,36 @@
                     <jet-label class="inline-block w-1/2" for="spell_type">Spellcasting Type:</jet-label>
                     <div class="inline-block">
                         <div>
-                            <input class="inline-block" type="radio" name="spell_type" id="no-spells" :value="null" v-model="spells.spell_type">
+                            <input class="inline-block" type="radio" name="spell_type" id="no-spells" :value="null" v-model="form.spell_type">
                             <jet-label class="ml-1 inline-block" for="no-spells">No spellcasting</jet-label>
                         </div>
                         <div>
-                            <input class="inline-block" type="radio" name="spell_type" id="yes-spell-slots" value="slots" v-model="spells.spell_type"/>
+                            <input class="inline-block" type="radio" name="spell_type" id="yes-spell-slots" value="slots" v-model="form.spell_type"/>
                             <jet-label class="ml-1 inline-block" for="yes-spell-slots">Slots</jet-label>
                         </div>
                         <div>
-                            <input class="inline-block" type="radio" name="spell_type" id="yes-spell-points" value="points" v-model="spells.spell_type">
+                            <input class="inline-block" type="radio" name="spell_type" id="yes-spell-points" value="points" v-model="form.spell_type">
                             <jet-label class="ml-1 inline-block" for="yes-spell-points">Points (DMG Variant)</jet-label>
                         </div>
                     </div>
                 </div>
                 <div class="my-2 flex">
                     <jet-label class="inline-block w-1/2" for="spell_dc">Spell DC:</jet-label>
-                    <jet-input type="number" id="spell_dc" class="inline-block w-1/2" placeholder="0" v-model.number="spells.spell_dc"/>
+                    <jet-input type="number" id="spell_dc" class="inline-block w-1/2" placeholder="0" v-model.number="form.spell_dc"/>
                 </div>
-                <div class="my-2 flex" v-if="spells.spell_type">
+                <div class="my-2 flex" v-if="form.spell_type">
                     <jet-label class="inline-block w-1/2" for="recover_on_rest">Recover on a rest:</jet-label>
-                    <select-input id="recover_on_rest" class="inline-block" v-model="spells.recover_on_rest" :options="['short', 'long']"/>
+                    <select-input id="recover_on_rest" class="inline-block" v-model="form.recover_on_rest" :options="['short', 'long']"/>
                 </div>
-                <div class="my-2 flex" v-if="spells.spell_type">
+                <div class="my-2 flex" v-if="form.spell_type">
                     <jet-label class="inline-block w-1/2" for="spell_list_type">Spellcaster Type:</jet-label>
-                    <select-input id="spell_list_type" class="inline-block" v-model="spells.spell_list_type" :options="[['known', 'Known (learn on level up)'], ['prepared', 'Prepared (spellbook or full spell list)']]"/>
+                    <select-input id="spell_list_type" class="inline-block" v-model="form.spell_list_type" :options="[['known', 'Known (learn on level up)'], ['prepared', 'Prepared (spellbook or full spell list)']]"/>
                 </div>
-                <div class="my-2" v-if="spells.spell_type && spell_list_type == 'prepared'">
+                <div class="my-2" v-if="form.spell_type && form.spell_list_type == 'prepared'">
                     <jet-label for="can_prepare_count">Total number of spells you can prepare:</jet-label>
-                    <input class="input-short" type="number" id="can_prepare_count" v-model="spells.can_prepare_count">
+                    <input class="input-short" type="number" id="can_prepare_count" v-model="form.can_prepare_count">
                 </div>
-                <div class="border-t" v-if="spells.spell_type == 'points'">
+                <div class="border-t" v-if="form.spell_type == 'points'">
                     <p class="text-xl">Spell Points</p>
                     <div class="my-2 flex">
                         <jet-label class="inline-block w-1/2" for="spell-points">Total Spell Points:</jet-label>
@@ -82,22 +82,22 @@
                         <jet-input type="number" class="inline-block" id="max_spell_level" placeholder="0" v-model.number="max_spell_level"/>
                     </div>
                 </div>
-                <div class="border-t" v-if="spells.spell_type == 'slots'">
+                <div class="border-t" v-if="form.spell_type == 'slots'">
                     <p class="text-xl">Spell Slots</p>
                     <div class="my-2 grid grid-cols-2 sm:grid-cols-3">
                         <div class="m-2 col-span-1 flex justify-center items-center" v-for="num in 9">
                             <jet-label class="inline-block mr-1" :for="'slots_' + num">{{ ordinalSuffix(num) + ' Level' }}:</jet-label>
-                            <jet-input type="number" class="inline-block w-14" :id="'slots_' + num" placeholder="0" v-model.number="spells['slots_' + num]"/>
+                            <jet-input type="number" class="inline-block w-14" :id="'slots_' + num" placeholder="0" v-model.number="form['slots_' + num]"/>
                         </div>
                     </div>
                 </div>
-                <div class="border-t" v-if="spells.spell_type">
+                <div class="border-t" v-if="form.spell_type">
                     <p class="text-xl">Spell List</p>
                     <p class="my-2">{{spellListExplanation}}</p>
                     <div class="grid grid-cols-1 sm:grid-cols-2">
                         <div class="m-2 col-span-1" v-for="(num, index) in 10">
                             <jet-label :for="'list_' + index">{{ index == 0 ? 'Cantrips' : ordinalSuffix(index) + ' Level' }}:</jet-label>
-                            <textarea :id="'list_' + index" class="w-full form-input-color" v-model="spells['list_' + index]" placeholder="Firebolt, Minor Illusion"></textarea>
+                            <textarea :id="'list_' + index" class="w-full form-input-color" v-model="form['list_' + index]" placeholder="Firebolt, Minor Illusion"></textarea>
                         </div>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
     import AccordionItem from '@/Components/AccordionItem'
 
     export default {
-        props: ['spells_input', 'type'],
+        props: ['spells', 'type'],
         components: {
             JetButton,
             JetSecondaryButton,
@@ -138,47 +138,18 @@
             Accordion,
             AccordionItem,
         },
+        emits: ['updated'],
         data() {
             return {
                 accordion_key: 0,
                 spells_modal: false,
                 spellPointsCosts: [0,2,3,5,6,7,9,10,11,13],
-                spells: {
-                    spell_type: null,
-                    spell_dc: null,
-                    max_spell_level: null,
-                    max_spell_points: null,
-                    current_spell_points: null,
-                    recover_on_rest: 'long',
-                    spell_list_type: 'known',
-                    can_prepare_count: null,
-                    prepared_spells: [],
-                    slots_1: [],
-                    slots_2: [],
-                    slots_3: [],
-                    slots_4: [],
-                    slots_5: [],
-                    slots_6: [],
-                    slots_7: [],
-                    slots_8: [],
-                    slots_9: [],
-                    list_0: [],
-                    list_1: [],
-                    list_2: [],
-                    list_3: [],
-                    list_4: [],
-                    list_5: [],
-                    list_6: [],
-                    list_7: [],
-                    list_8: [],
-                    list_9: [],
-                    spell_counters: [],
-                },
+                form: {},
             };
         },
         computed: {
             spellListExplanation() {
-                if(this.spells.spell_list_type == 'known') {
+                if(this.spells && this.spells.spell_list_type == 'known') {
                     return "List all of your known spells below.  Spells should be separated by a comma.";
                 } else {
                     return "List all of the spells in your spellbook or class's spell list below.  You will have the option later to select which spells from your list you have prepared and then only show the prepared spells.  Seplls shoudl be separated by a comma.";
@@ -186,26 +157,23 @@
             },
             filteredSpellLists() {
                 let list = [];
-                for(let i=0;i<10;i++) {
-                    let level_list = this.spells['list_' + i];
-                    if(level_list && level_list.length > 0) {
-                        if(this.spells.spell_list_type == 'known' || i == 0) {
-                            list.push(level_list);
-                        } else {
-                            let common = checking.spells.filter(value => this.spells.prepared_spells.includes(value));
-                            if(common.length > 0) {
-                                list.push(common);
+                if(this.spells) {
+                    for(let i=0;i<10;i++) {
+                        let level_list = this.spells['list_' + i];
+                        if(level_list && level_list.length > 0) {
+                            if(this.spells.spell_list_type == 'known' || i == 0) {
+                                list.push(level_list);
+                            } else {
+                                let common = checking.spells.filter(value => this.spells.prepared_spells.includes(value));
+                                if(common.length > 0) {
+                                    list.push(common);
+                                }
                             }
                         }
                     }
+                    this.accordion_key++;
                 }
-                this.accordion_key++;
                 return list;
-            }
-        },
-        created() {
-            if(this.spells_input) {
-                this.spells = this.spells_input;
             }
         },
         methods: {
@@ -223,6 +191,49 @@
                 }
                 return num + "th";
             },
+            setForm() {
+                if(this.spells) {
+                    this.form = JSON.parse(JSON.stringify(this.spells));
+                    for(let i=0;i<10;i++) {
+                        this.form['list_' + i] = this.joinList(this.form['list_' + i]);
+                        if(i != 0) {
+                            this.form['slots_' + i] = this.getSlotCount(this.form['slots_' + i]);
+                        }
+                    }
+                } else {
+                    this.form = {
+                        spell_type: null,
+                        spell_dc: null,
+                        max_spell_level: null,
+                        max_spell_points: null,
+                        current_spell_points: null,
+                        recover_on_rest: 'long',
+                        spell_list_type: 'known',
+                        can_prepare_count: null,
+                        prepared_spells: [],
+                        slots_1: [],
+                        slots_2: [],
+                        slots_3: [],
+                        slots_4: [],
+                        slots_5: [],
+                        slots_6: [],
+                        slots_7: [],
+                        slots_8: [],
+                        slots_9: [],
+                        list_0: [],
+                        list_1: [],
+                        list_2: [],
+                        list_3: [],
+                        list_4: [],
+                        list_5: [],
+                        list_6: [],
+                        list_7: [],
+                        list_8: [],
+                        list_9: [],
+                        spell_counters: [],
+                    };
+                }
+            },
             joinList(list) {
                 if(list != null) {
                     return list.join(', ');
@@ -237,21 +248,44 @@
                     return null;
                 }
             },
-            openModal() {
-                for(let i=0;i<10;i++) {
-                    this.spells['list_' + i] = this.joinList(this.spells['list_' + i]);
+            getSlotCount(slots) {
+                if(slots && Array.isArray(slots)) {
+                    return slots.length;
                 }
+                return null;
+            },
+            getSlotArray(level, count) {
+                let output = [];
+                if(this.spells && this.spells['slots_' + level] && Array.isArray(this.spells['slots_' + level])) {
+                    output = this.spells['slots_' + level];
+                }
+                if(count > output.length) {
+                    for(let j=output.length; j < count; j++) {
+                        output.push(false);
+                    }
+                } else if(count < output.length) {
+                    for(let j=output.length;j>count;j--) {
+                        output.pop();
+                    }
+                }
+                return output;
+            },
+            openModal() {
+                this.setForm();
                 this.spells_modal = true;
             },
             closeModal() {
                 this.spells_modal = false;
-                for(let i=0;i<10;i++) {
-                    this.spells['list_' + i] = this.splitList(this.spells['list_' + i]);
-                }
             },
             saveSpells() {
+                for(let i=0;i<10;i++) {
+                    this.form['list_' + i] = this.splitList(this.form['list_' + i]);
+                    if(i != 0) {
+                        this.form['slots_' + i] = this.getSlotArray(i, this.form['slots_' + i]);
+                    }
+                }
+                this.$emit('updated', this.form);
                 this.closeModal();
-                this.$emit('updated', this.spells);
             },
         },
     }
