@@ -65,7 +65,7 @@
             <!-- Font -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="font" value="Font" />
-                <select-input id="font" class="mt-1 block w-full" v-model="form.font" :options="['default', 'MedievalSharp']" />
+                <select-input id="font" class="mt-1 block w-full" v-model="form.font" :options="['default', 'MedievalSharp', 'PirataOne']" />
                 <jet-input-error :message="form.errors.font" class="mt-2" />
             </div>
         </template>

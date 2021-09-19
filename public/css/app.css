@@ -2036,8 +2036,17 @@ select {
     font-weight: normal;
     src: url(/fonts/MedievalSharp-Regular.ttf?61d17230f3ad5cf34bf9b5f777017592) format('woff');
 }
+@font-face {
+    font-family: 'PirataOne-Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: url(/fonts/PirataOne-Regular.ttf?6e705d6876d8400515e07b47d757622c) format('woff');
+}
 .MedievalSharp {
     font-family: "MedievalSharp";
+}
+.PirataOne {
+    font-family: "PirataOne-Regular";
 }
 .hover-trigger .hover-target {
     visibility: hidden;

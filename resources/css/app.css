@@ -8,9 +8,19 @@
     font-weight: normal;
     src: url('../fonts/MedievalSharp-Regular.ttf') format('woff');
 }
+@font-face {
+    font-family: 'PirataOne-Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/PirataOne-Regular.ttf') format('woff');
+}
 
 .MedievalSharp {
     font-family: "MedievalSharp";
+}
+
+.PirataOne {
+    font-family: "PirataOne-Regular";
 }
 
 .hover-trigger .hover-target {
