@@ -128,4 +128,14 @@ class CharactersTest extends TestCase
 
         $this->post(route('characters.store'), $attributes)->assertSessionHasErrors('name');
     }
+
+    /** @test **/
+    public function a_character_is_deleted_with_its_user() {
+        $user = User::factory()->create();
+        Character::factory()->create(['user_id' => $user->id]);
+
+        $this->assertCount(1, Character::all());
+        $user->delete();
+        $this->assertCount(0, Character::all());
+    }
 }

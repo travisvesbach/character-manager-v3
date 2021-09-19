@@ -5,8 +5,8 @@ export const creatureEdit = {
                 id: null,
                 name: null,
                 speed: '',
-                max_hp: 0,
-                current_hp: 0,
+                hp_max: 0,
+                hp_current: 0,
                 hit_dice: [{
                     total: 0,
                     size: 0,
@@ -95,6 +95,34 @@ export const creatureEdit = {
                 persuasion_expertise: false,
                 skills_auto_filled: true,
                 special_skill_modifiers: [],
+                spellcaster: false,
+                spell_type: 'slots',
+                spell_dc: null,
+                spell_level: null,
+                spell_points_max: null,
+                spell_points_current: null,
+                spell_recover: 'long',
+                spell_list_type: 'known',
+                spell_prepare_count: null,
+                spell_slots_1: [],
+                spell_slots_2: [],
+                spell_slots_3: [],
+                spell_slots_4: [],
+                spell_slots_5: [],
+                spell_slots_6: [],
+                spell_slots_7: [],
+                spell_slots_8: [],
+                spell_slots_9: [],
+                spell_list_0: [],
+                spell_list_1: [],
+                spell_list_2: [],
+                spell_list_3: [],
+                spell_list_4: [],
+                spell_list_5: [],
+                spell_list_6: [],
+                spell_list_7: [],
+                spell_list_8: [],
+                spell_list_9: [],
                 // character fields
                 race: null,
                 class: null,
@@ -108,8 +136,8 @@ export const creatureEdit = {
                 id: this.editing.id,
                 name: this.editing.name,
                 speed: this.editing.speed,
-                max_hp: this.editing.max_hp,
-                current_hp: this.editing.current_hp,
+                hp_max: this.editing.hp_max,
+                hp_current: this.editing.hp_current,
                 hit_dice: this.editing.hit_dice,
                 ac: this.editing.ac,
                 ac_source: this.editing.ac_source,
@@ -194,11 +222,66 @@ export const creatureEdit = {
                 persuasion_expertise: this.editing.persuasion_expertise,
                 skills_auto_filled: this.editing.skills_auto_filled,
                 special_skill_modifiers: this.editing.special_skill_modifiers,
+                spellcaster: this.editing.spellcaster,
+                spell_type: this.editing.spell_type,
+                spell_dc: this.editing.spell_dc,
+                spell_level: this.editing.spell_level,
+                spell_points_max: this.editing.spell_points_max,
+                spell_points_current: this.editing.spell_points_current,
+                spell_recover: this.editing.spell_recover,
+                spell_list_type: this.editing.spell_list_type,
+                spell_prepare_count: this.editing.spell_prepare_count,
+                spell_slots_1: this.editing.spell_slots_1,
+                spell_slots_2: this.editing.spell_slots_2,
+                spell_slots_3: this.editing.spell_slots_3,
+                spell_slots_4: this.editing.spell_slots_4,
+                spell_slots_5: this.editing.spell_slots_5,
+                spell_slots_6: this.editing.spell_slots_6,
+                spell_slots_7: this.editing.spell_slots_7,
+                spell_slots_8: this.editing.spell_slots_8,
+                spell_slots_9: this.editing.spell_slots_9,
+                spell_slots_int_1: this.getSlotCount(this.editing.spell_slots_1),
+                spell_slots_int_2: this.getSlotCount(this.editing.spell_slots_2),
+                spell_slots_int_3: this.getSlotCount(this.editing.spell_slots_3),
+                spell_slots_int_4: this.getSlotCount(this.editing.spell_slots_4),
+                spell_slots_int_5: this.getSlotCount(this.editing.spell_slots_5),
+                spell_slots_int_6: this.getSlotCount(this.editing.spell_slots_6),
+                spell_slots_int_7: this.getSlotCount(this.editing.spell_slots_7),
+                spell_slots_int_8: this.getSlotCount(this.editing.spell_slots_8),
+                spell_slots_int_9: this.getSlotCount(this.editing.spell_slots_9),
+                spell_list_0: this.editing.spell_list_0,
+                spell_list_1: this.editing.spell_list_1,
+                spell_list_2: this.editing.spell_list_2,
+                spell_list_3: this.editing.spell_list_3,
+                spell_list_4: this.editing.spell_list_4,
+                spell_list_5: this.editing.spell_list_5,
+                spell_list_6: this.editing.spell_list_6,
+                spell_list_7: this.editing.spell_list_7,
+                spell_list_8: this.editing.spell_list_8,
+                spell_list_9: this.editing.spell_list_9,
+                spell_list_string_0: this.joinList(this.editing.spell_list_0),
+                spell_list_string_1: this.joinList(this.editing.spell_list_1),
+                spell_list_string_2: this.joinList(this.editing.spell_list_2),
+                spell_list_string_3: this.joinList(this.editing.spell_list_3),
+                spell_list_string_4: this.joinList(this.editing.spell_list_4),
+                spell_list_string_5: this.joinList(this.editing.spell_list_5),
+                spell_list_string_6: this.joinList(this.editing.spell_list_6),
+                spell_list_string_7: this.joinList(this.editing.spell_list_7),
+                spell_list_string_8: this.joinList(this.editing.spell_list_8),
+                spell_list_string_9: this.joinList(this.editing.spell_list_9),
                 // character fields
                 race: this.editing.race,
                 class: this.editing.class,
                 level: this.editing.level,
             });
+
+            // for(let i=0;i<10;i++) {
+            //     this.form['spell_list_' + i] = this.joinList(this.form['spell_list_' + i]);
+            //     if(i != 0) {
+            //         this.form['spell_slots_' + i] = this.getSlotCount(this.form['spell_slots_' + i]);
+            //     }
+            // }
+
         }
     },
     computed: {
@@ -214,6 +297,20 @@ export const creatureEdit = {
                 return 'Skills are automatically calculated based on stats and proficencies.  If there are other factors affecting skills, click the button to switch to manual skills.';
             } else {
                 return 'Enter in all of the skill modifiers. Changing stats and proficiencies in the section above will not change the skill modifiers while in manual skills mode.';
+            }
+        },
+        spellcasterButtonText() {
+            if (this.form.spellcaster) {
+                return 'Disable';
+            } else {
+                return 'Enable';
+            }
+        },
+        spellListExplanation() {
+            if(this.form.spell_list_type == 'known') {
+                return "List all of your known spells below.  Spells should be separated by a comma (ex: Firebolt, Minor Illusion).";
+            } else {
+                return "List all of the spells in your spellbook or class's spell list below.  You will have the option later to select which spells from your list you have prepared and then only show the prepared spells.  Spells should be separated by a comma (ex: Firebolt, Minor Illusion).";
             }
         },
         proficiencyBonus() {
@@ -297,6 +394,20 @@ export const creatureEdit = {
         },
     },
     methods: {
+        ordinalSuffix(num) {
+            let j = num % 10
+            let k = num % 100;
+            if (j == 1 && k != 11) {
+                return num + "st";
+            }
+            if (j == 2 && k != 12) {
+                return num + "nd";
+            }
+            if (j == 3 && k != 13) {
+                return num + "rd";
+            }
+            return num + "th";
+        },
         getStatModifier(stat) {
             let result = -99;
             switch(stat) {
@@ -439,6 +550,66 @@ export const creatureEdit = {
             this.form.skills_auto_filled = !this.form.skills_auto_filled;
             if(this.form.skills_auto_filled) {
                 this.setSkills();
+            }
+        },
+        joinList(list) {
+            if(list != null) {
+                return list.join(', ');
+            } else {
+                return '';
+            }
+        },
+        splitList(list) {
+            if(list && list != '') {
+                return list.split(', ').sort();
+            } else {
+                return null;
+            }
+        },
+        getSlotCount(slots) {
+            if(slots && Array.isArray(slots)) {
+                return slots.length;
+            }
+            return null;
+        },
+        getSlotArray(level, count) {
+            let output = [];
+            if(this.spells && this.spells['slots_' + level] && Array.isArray(this.spells['slots_' + level])) {
+                output = this.spells['slots_' + level];
+            }
+            if(count > output.length) {
+                for(let j=output.length; j < count; j++) {
+                    output.push(false);
+                }
+            } else if(count < output.length) {
+                for(let j=output.length;j>count;j--) {
+                    output.pop();
+                }
+            }
+            return output;
+        },
+        prepareSpellData() {
+            for(let i=0;i<10;i++) {
+                this.form['spell_list_' + i] = this.splitList(this.form['spell_list_string_' + i]);
+                if(i != 0) {
+                    this.form['spell_slots_' + i] = this.getSlotArray(i, this.form['spell_slots_int_' + i]);
+                }
+            }
+            if (this.form.spell_type == 'points') {
+                this.form.spell_points_current = this.form.spell_points_max;
+                this.form.spell_slots_1 = [];
+                this.form.spell_slots_2 = [];
+                this.form.spell_slots_3 = [];
+                this.form.spell_slots_4 = [];
+                this.form.spell_slots_5 = [];
+                this.form.spell_slots_6 = [];
+                this.form.spell_slots_7 = [];
+                this.form.spell_slots_8 = [];
+                this.form.spell_slots_9 = [];
+            } else if(this.form.spell_type == 'slots') {
+                this.form.spell_points_current = null;
+                this.form.spell_points_max = null;
+                this.form.spell_level = null;
             }
         }
     }

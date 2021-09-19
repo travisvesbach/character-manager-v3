@@ -4,7 +4,6 @@
             {{ character.name }}
         </template>
 
-
         <template #subheader>
             <div class="flex items-center px-10">
                 <jet-nav-link :href="creature.path" :active="creature.id == character.id" preserve-state v-for="creature in characters" :title="'Level ' + creature.level + ' ' +  creature.race + ' ' +  creature.class">
@@ -18,7 +17,7 @@
         <stats :creature="character"/>
 
         <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-            <spells :spells="character.spells" type="character" @updated="updateSpells"/>
+            <spells :creature="character" type="character" @updated="updateCharacter" v-if="character.spellcaster"/>
         </div>
 
     </app-layout>
@@ -39,7 +38,6 @@
 
     export default {
         props: ['character', 'characters'],
-
         components: {
             AppLayout,
             JetDropdown,
@@ -54,17 +52,14 @@
             Spells,
         },
         methods: {
-            updateSpells(input) {
-                this.character.spells = input;
-                this.updateCharacter();
-            },
             updateCharacter() {
                 let form = this.$inertia.form({
                     id: this.character.id,
                     name: this.character.name,
                     speed: this.character.speed,
-                    max_hp: this.character.max_hp,
-                    current_hp: this.character.current_hp,
+                    hp_max: this.character.hp_max,
+                    hp_current: this.character.hp_current,
+                    hp_temp: this.character.hp_temp,
                     hit_dice: this.character.hit_dice,
                     ac: this.character.ac,
                     ac_source: this.character.ac_source,
@@ -149,7 +144,34 @@
                     persuasion_expertise: this.character.persuasion_expertise,
                     skills_auto_filled: this.character.skills_auto_filled,
                     special_skill_modifiers: this.character.special_skill_modifiers,
-                    spells: this.character.spells,
+                    spellcaster: this.character.spellcaster,
+                    spell_type: this.character.spell_type,
+                    spell_dc: this.character.spell_dc,
+                    spell_level: this.character.spell_level,
+                    spell_points_max: this.character.spell_points_max,
+                    spell_points_current: this.character.spell_points_current,
+                    spell_recover: this.character.spell_recover,
+                    spell_list_type: this.character.spell_list_type,
+                    spell_prepare_count: this.character.spell_prepare_count,
+                    spell_slots_1: this.character.spell_slots_1,
+                    spell_slots_2: this.character.spell_slots_2,
+                    spell_slots_3: this.character.spell_slots_3,
+                    spell_slots_4: this.character.spell_slots_4,
+                    spell_slots_5: this.character.spell_slots_5,
+                    spell_slots_6: this.character.spell_slots_6,
+                    spell_slots_7: this.character.spell_slots_7,
+                    spell_slots_8: this.character.spell_slots_8,
+                    spell_slots_9: this.character.spell_slots_9,
+                    spell_list_0: this.character.spell_list_0,
+                    spell_list_1: this.character.spell_list_1,
+                    spell_list_2: this.character.spell_list_2,
+                    spell_list_3: this.character.spell_list_3,
+                    spell_list_4: this.character.spell_list_4,
+                    spell_list_5: this.character.spell_list_5,
+                    spell_list_6: this.character.spell_list_6,
+                    spell_list_7: this.character.spell_list_7,
+                    spell_list_8: this.character.spell_list_8,
+                    spell_list_9: this.character.spell_list_9,
                     // character fields
                     race: this.character.race,
                     class: this.character.class,
