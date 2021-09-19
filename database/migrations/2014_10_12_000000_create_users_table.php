@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->string('theme')->default('light');
+            $table->string('font')->default('default');
             $table->boolean('admin')->default(false);
             $table->timestamps();
         });

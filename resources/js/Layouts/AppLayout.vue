@@ -1,5 +1,5 @@
 <template>
-    <div :class="$page.props.user ? $page.props.user.theme : 'light'">
+    <div :class="classes">
         <div class="text-color">
             <Head :title="title" />
 
@@ -205,7 +205,15 @@
                 showingNavigationDropdown: false,
             }
         },
+        computed: {
+            classes() {
+                let classes = [];
+                classes.push(this.$page.props.user ? this.$page.props.user.theme : 'light');
+                classes.push(this.$page.props.user && this.$page.props.user.font != 'default' ? this.$page.props.user.font : 'font-sans');
 
+                return classes;
+            }
+        },
         methods: {
             switchToTeam(team) {
                 this.$inertia.put(route('current-team.update'), {

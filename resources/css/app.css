@@ -2,6 +2,16 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@font-face {
+    font-family: 'MedievalSharp';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/MedievalSharp-Regular.ttf') format('woff');
+}
+
+.MedievalSharp {
+    font-family: "MedievalSharp";
+}
 
 .hover-trigger .hover-target {
     visibility: hidden;

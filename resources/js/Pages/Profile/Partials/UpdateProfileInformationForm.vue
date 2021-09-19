@@ -61,6 +61,13 @@
                 <select-input id="theme" class="mt-1 block w-full" v-model="form.theme" :options="['light', 'dark']" />
                 <jet-input-error :message="form.errors.theme" class="mt-2" />
             </div>
+
+            <!-- Font -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="font" value="Font" />
+                <select-input id="font" class="mt-1 block w-full" v-model="form.font" :options="['default', 'MedievalSharp']" />
+                <jet-input-error :message="form.errors.font" class="mt-2" />
+            </div>
         </template>
 
         <template #actions>
@@ -108,6 +115,7 @@
                     email: this.user.email,
                     photo: null,
                     theme: this.user.theme,
+                    font: this.user.font,
                 }),
 
                 photoPreview: null,
