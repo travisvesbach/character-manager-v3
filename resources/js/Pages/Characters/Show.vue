@@ -13,9 +13,9 @@
             </div>
         </template>
 
-        <heading v-model:creature="character" type="character" @updated="updateCharacter"/>
+        <heading :creature="character" type="character" @updated="updateCharacter"/>
 
-        <stats v-model:creature="character"/>
+        <stats :creature="character"/>
 
         <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
             <spells :spells="character.spells" type="character" @updated="updateSpells"/>
