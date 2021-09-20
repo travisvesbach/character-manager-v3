@@ -152,7 +152,6 @@
                     spell_points_current: this.character.spell_points_current,
                     spell_recover: this.character.spell_recover,
                     spell_list_type: this.character.spell_list_type,
-                    spell_prepare_count: this.character.spell_prepare_count,
                     spell_slots_1: this.character.spell_slots_1,
                     spell_slots_2: this.character.spell_slots_2,
                     spell_slots_3: this.character.spell_slots_3,
@@ -172,6 +171,8 @@
                     spell_list_7: this.character.spell_list_7,
                     spell_list_8: this.character.spell_list_8,
                     spell_list_9: this.character.spell_list_9,
+                    spell_prepare_count: this.character.spell_prepare_count,
+                    spell_prepared: this.character.spell_prepared,
                     // character fields
                     race: this.character.race,
                     class: this.character.class,

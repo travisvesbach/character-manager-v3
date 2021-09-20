@@ -113,7 +113,6 @@ class CreateCharactersTable extends Migration
             $table->integer('spell_points_current')->nullable()->default(null);
             $table->string('spell_recover')->default('long');
             $table->string('spell_list_type')->default('known');
-            $table->integer('spell_prepare_count')->nullable()->default(null);
             $table->json('spell_slots_1')->nullable();
             $table->json('spell_slots_2')->nullable();
             $table->json('spell_slots_3')->nullable();
@@ -133,6 +132,7 @@ class CreateCharactersTable extends Migration
             $table->json('spell_list_7')->nullable();
             $table->json('spell_list_8')->nullable();
             $table->json('spell_list_9')->nullable();
+            $table->integer('spell_prepare_count')->nullable()->default(null);
             $table->json('spell_prepared')->nullable();
             $table->json('spell_counters')->nullable();
             $table->json('actions')->nullable();

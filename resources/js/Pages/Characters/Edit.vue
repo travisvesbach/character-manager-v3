@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-            <div class="border-t border-gray-600 mt-10 pt-2">
+            <div class="border-t dark:border-gray-600 mt-10 pt-2">
                 <h3 class="text-2xl font-bold inline-block heading-color">Stats and Proficiencies</h3>
                 <p>
                     Enter stats and mark skill proficiencies and/or expertise. The first checkbox of each skill is proficiency and the second is expertise.
@@ -147,7 +147,7 @@
                 </div>
             </div>
 
-            <div class="border-t border-gray-600 pt-2">
+            <div class="border-t dark:border-gray-600 pt-2">
                 <div class="flex items-center">
                     <h3 class="text-2xl font-bold inline-block heading-color">Skill Modifiers</h3>
                     <jet-secondary-button type="button" class="ml-5" @click.prevent="toggleAutoSkills">
@@ -276,7 +276,7 @@
                 </div>
             </div>
 
-            <div class="border-t border-gray-600 pt-2 mt-10">
+            <div class="border-t dark:border-gray-600 pt-2 mt-10">
                 <div class="flex items-center">
                     <h3 class="text-2xl font-bold inline-block heading-color">Spells</h3>
                     <jet-secondary-button type="button" class="ml-5" @click.prevent="form.spellcaster = !form.spellcaster">
@@ -311,12 +311,12 @@
                         </div>
                         <div class="col-span-1 px-1" v-if="form.spell_list_type == 'prepared'">
                             <!-- spell_prepare_count -->
-                            <jet-label for="spell_prepare_count" value="Total number of spells you can prepare" class="mt-4"/>
+                            <jet-label for="spell_prepare_count" value="Number of spells that can be prepared (include always prepared race/class/feat spells to total)" class="mt-4"/>
                             <jet-input type="number" id="spell_prepare_count" class="mt-1 w-full" v-model.number="form.spell_prepare_count"/>
                             <jet-input-error :message="form.errors.spell_prepare_count" class="mt-2"/>
                         </div>
                     </div>
-                    <div class="border-t border-gray-600 mt-10 pt-2" v-if="form.spell_type == 'points'">
+                    <div class="border-t dark:border-gray-600 mt-10 pt-2" v-if="form.spell_type == 'points'">
                         <p class="text-xl heading-color">Spell Points</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2">
                             <div class="col-span-1 px-1">
@@ -333,7 +333,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="border-t border-gray-600 mt-10 pt-2" v-if="form.spell_type == 'slots'">
+                    <div class="border-t dark:border-gray-600 mt-10 pt-2" v-if="form.spell_type == 'slots'">
                         <p class="text-xl heading-color">Spell Slots</p>
                         <div class="grid grid-cols-2 sm:grid-cols-3">
                             <!-- spell_slots -->
@@ -344,7 +344,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="border-t border-gray-600 mt-10 pt-2">
+                    <div class="border-t dark:border-gray-600 mt-10 pt-2">
                         <p class="text-xl heading-color">Spell List</p>
                         <p class="my-2">{{spellListExplanation}}</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2">

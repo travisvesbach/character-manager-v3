@@ -103,7 +103,6 @@ export const creatureEdit = {
                 spell_points_current: null,
                 spell_recover: 'long',
                 spell_list_type: 'known',
-                spell_prepare_count: null,
                 spell_slots_1: [],
                 spell_slots_2: [],
                 spell_slots_3: [],
@@ -123,6 +122,8 @@ export const creatureEdit = {
                 spell_list_7: [],
                 spell_list_8: [],
                 spell_list_9: [],
+                spell_prepare_count: null,
+                spell_prepared: null,
                 // character fields
                 race: null,
                 class: null,
@@ -230,7 +231,6 @@ export const creatureEdit = {
                 spell_points_current: this.editing.spell_points_current,
                 spell_recover: this.editing.spell_recover,
                 spell_list_type: this.editing.spell_list_type,
-                spell_prepare_count: this.editing.spell_prepare_count,
                 spell_slots_1: this.editing.spell_slots_1,
                 spell_slots_2: this.editing.spell_slots_2,
                 spell_slots_3: this.editing.spell_slots_3,
@@ -269,6 +269,8 @@ export const creatureEdit = {
                 spell_list_string_7: this.joinList(this.editing.spell_list_7),
                 spell_list_string_8: this.joinList(this.editing.spell_list_8),
                 spell_list_string_9: this.joinList(this.editing.spell_list_9),
+                spell_prepare_count: this.editing.spell_prepare_count,
+                spell_prepared: this.editing.spell_prepared,
                 // character fields
                 race: this.editing.race,
                 class: this.editing.class,
@@ -595,6 +597,11 @@ export const creatureEdit = {
                     this.form['spell_slots_' + i] = this.getSlotArray(i, this.form['spell_slots_int_' + i]);
                 }
             }
+            if(this.form.spell_list_type == 'known') {
+                this.form.spell_prepare_count = null;
+                this.form.spell_prepared = null;
+            }
+
             if (this.form.spell_type == 'points') {
                 this.form.spell_points_current = this.form.spell_points_max;
                 this.form.spell_slots_1 = [];

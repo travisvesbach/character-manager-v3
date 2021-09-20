@@ -2,12 +2,12 @@
     <div class="col-span-1 border dark:border-gray-700">
         <div class="p-2 flex justify-between">
             <h3 class="text-xl">Spells</h3>
-            <jet-secondary-button :small="true" @click="openModal">
-                Edit
+            <jet-secondary-button :small="true" @click="openPrepareModal" v-if="creature.spell_list_type == 'prepared'">
+                Prepare
             </jet-secondary-button>
         </div>
          <div class="px-2 p-1 bg-gray-50 border-t dark:bg-gray-800 dark:border-gray-700">
-            <div>Spell Save DC: {{ creature.spell_dc }}</div>
+            <p>Save DC: {{ creature.spell_dc }}</p>
 
             <div v-if="creature.spell_type == 'slots'">
                 <div v-for="level in 9">
@@ -48,22 +48,32 @@
          </div>
 
 
-        <!-- edit spells modal -->
-        <jet-dialog-modal :show="spells_modal" @close="closeModal">
+        <!-- prepare spells modal -->
+        <jet-dialog-modal :show="prepare_modal" @close="closePrepareModal">
             <template #header>
-                Edit Spells
+                Prepared Spells
             </template>
 
             <template #content>
-
+                <p class="text-lg">{{ preparedCount }} out of {{ creature.spell_prepare_count }} prepared</p>
+                <div v-for="(num, index) in 10">
+                    <div class="border-t dark:border-gray-600 pt-2" v-if="index != 0 && creature['spell_list_' + index] && creature['spell_list_' + index].length > 0">
+                        <p><strong>{{ ordinalSuffix(index) }}</strong></p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+                            <label class="col-span-1 py-1" :class="preparedCount == creature.spell_prepare_count && !prepared_spells.includes(spell) ? 'opacity-50' : ''" v-for="spell in creature['spell_list_' + index]">
+                                <input type="checkbox" v-model="prepared_spells" :value="spell" :disabled="preparedCount == creature.spell_prepare_count && !prepared_spells.includes(spell)"/> {{ spell }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </template>
 
             <template #footer>
-                <jet-secondary-button @click="closeModal">
+                <jet-secondary-button @click="closePrepareModal">
                     Cancel
                 </jet-secondary-button>
 
-                <jet-button class="ml-2" @click="saveSpells">
+                <jet-button class="ml-2" @click="savePrepared">
                     Save
                 </jet-button>
             </template>
@@ -103,9 +113,10 @@
         data() {
             return {
                 accordion_key: 0,
-                spells_modal: false,
+                prepare_modal: false,
                 spell_point_costs: [2,3,5,6,7,9,10,11,13],
                 form: {},
+                prepared_spells: [],
             };
         },
         computed: {
@@ -117,8 +128,8 @@
                         if(level_list && level_list.length > 0) {
                             if(this.creature.spell_list_type == 'known' || i == 0) {
                                 list.push(level_list);
-                            } else {
-                                let common = checking.creature.filter(value => this.creature.spells_prepared.includes(value));
+                            } else if(this.creature.spell_prepared) {
+                                let common = level_list.filter(value => this.creature.spell_prepared.includes(value));
                                 if(common.length > 0) {
                                     list.push(common);
                                 }
@@ -128,6 +139,9 @@
                     this.accordion_key++;
                 }
                 return list;
+            },
+            preparedCount() {
+                return this.prepared_spells ? this.prepared_spells.length : 0;
             }
         },
         methods: {
@@ -145,11 +159,17 @@
                 }
                 return num + "th";
             },
-            openModal() {
-                this.spells_modal = true;
+            openPrepareModal() {
+                this.prepared_spells = this.creature.spell_prepared || [];
+                this.prepare_modal = true;
             },
-            closeModal() {
-                this.spells_modal = false;
+            closePrepareModal() {
+                this.prepare_modal = false;
+            },
+            savePrepared() {
+                this.creature.spell_prepared = this.prepared_spells;
+                this.updateCreature();
+                this.closePrepareModal();
             },
             updateSlot(level, index) {
                 this.creature['spell_slots_' + level][index] = !this.creature['spell_slots_' + level][index];
