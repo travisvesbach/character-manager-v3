@@ -99,15 +99,6 @@ class ResourcesTest extends TestCase
     }
 
     /** @test **/
-    public function a_character_requires_a_name() {
-        $this->signIn();
-
-        $attributes = Character::factory()->raw(['name' => '']);
-
-        $this->post(route('characters.store'), $attributes)->assertSessionHasErrors('name');
-    }
-
-    /** @test **/
     public function a_resource_is_deleted_with_its_creature() {
         $user = User::factory()->create();
         $character = Character::factory()->create();
