@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Character;
 use App\Models\User;
-use App\Models\Section;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\WithFaker;
 
@@ -27,7 +26,7 @@ class CharacterFactory extends Factory
     {
         return [
             'user_id' => User::factory()->create(),
-            'name' => $this->faker->sentence(4),
+            'name' => $this->faker->name(),
             'hp_max' => $this->faker->numberBetween(1, 20),
             'hp_current' => $this->faker->numberBetween(1, 20),
             'hit_dice' => [],
@@ -75,7 +74,6 @@ class CharacterFactory extends Factory
             'actions' => [],
             'modifiers' => [],
             'spellcaster' => false,
-            'resources' => [],
             'notes' => $this->faker->sentence(4),
             'show_notepad' => 0,
             'show_resources' => 0,

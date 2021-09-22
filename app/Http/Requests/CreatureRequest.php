@@ -144,7 +144,6 @@ class CreatureRequest extends FormRequest
             'spell_prepare_count'           => 'nullable|integer',
             'spell_prepared'                => '',
             'spell_counters'                => '',
-            'resources'                     => '',
             'notes'                         => '',
             'show_notepad'                  => 'boolean',
             'show_resources'                => 'boolean',

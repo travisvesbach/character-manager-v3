@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Resource;
 
 class Creature extends Model
 {
@@ -129,7 +130,6 @@ class Creature extends Model
         'spell_prepare_count',
         'spell_prepared',
         'spell_counters',
-        'resources',
         'show_notepad',
         'show_resources',
         'notes',
@@ -139,7 +139,6 @@ class Creature extends Model
     protected $casts = [
         'actions'                   => 'array',
         'modifiers'                 => 'array',
-        'resources'                 => 'array',
         'special_skill_modifiers'   => 'array',
         'hit_dice'                  => 'array',
         'spell_slots_1'             => 'array',
@@ -165,7 +164,19 @@ class Creature extends Model
         'spell_counters'            => 'array',
     ];
 
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($creature) {
+            $creature->resources()->delete();
+        });
+    }
+
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function resources() {
+        return $this->morphMany(Resource::class, 'creature');
     }
 }

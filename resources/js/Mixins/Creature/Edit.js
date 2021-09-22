@@ -8,7 +8,7 @@ export const creatureEdit = {
                 hp_max: 0,
                 hp_current: 0,
                 hit_dice: [{
-                    total: 0,
+                    count: 0,
                     size: 0,
                     current: 0,
                 }],

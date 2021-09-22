@@ -1,6 +1,6 @@
 <template>
     <div>
-        <jet-input class="inline-block w-14" type="number" v-model.number="total" @input="this.$emit('update:total', $event.target.value);" v-if="total != 'hidden'" />
+        <jet-input class="inline-block w-14" type="number" v-model.number="count" @input="this.$emit('update:count', $event.target.value);" v-if="count != 'hidden'" />
         <span class="mx-1">d</span>
         <select-input class="inline-block" v-model="size" :options="sizes" @input="this.$emit('update:size', $event.target.value);" v-if="size != 'hidden'" />
         <span class="mx-1" v-if="modifier != 'hidden'">+</span>
@@ -20,7 +20,7 @@
             SelectInput,
         },
         props: {
-            total: {
+            count: {
                 default: 'hidden',
             },
             size: {
@@ -49,7 +49,7 @@
                 ],
             }
         },
-        emits: ['update:total', 'update:size', 'update:modifier', 'update:type'],
+        emits: ['update:count', 'update:size', 'update:modifier', 'update:type'],
         computed: {
             damageTypes() {
                 let types = [

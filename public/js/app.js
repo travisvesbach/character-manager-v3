@@ -20780,7 +20780,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     update: function update(dice) {
       if (this.current) {
-        dice.current = dice.total;
+        dice.current = dice.count;
       }
 
       this.$emit('update:modelValue', this.modelValue);
@@ -20811,7 +20811,7 @@ __webpack_require__.r(__webpack_exports__);
     SelectInput: _Components_SelectInput__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
-    total: {
+    count: {
       "default": 'hidden'
     },
     size: {
@@ -20832,7 +20832,7 @@ __webpack_require__.r(__webpack_exports__);
       sizes: [4, 6, 8, 10, 12, 20, 100]
     };
   },
-  emits: ['update:total', 'update:size', 'update:modifier', 'update:type'],
+  emits: ['update:count', 'update:size', 'update:modifier', 'update:type'],
   computed: {
     damageTypes: function damageTypes() {
       var types = ['Acid', 'Bludgeoning', 'Cold', 'Fire', 'Force', 'Lightning', 'Necrotic', 'Piercing', 'Poison', 'Psychic', 'Radiant', 'Slashing', 'Thunder'];
@@ -23992,7 +23992,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onClick: function onClick($event) {
         return $options.rollHitDice(index);
       }
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(hit_dice.current) + "/" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(hit_dice.total) + "d" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(hit_dice.size), 9
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(hit_dice.current) + "/" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(hit_dice.count) + "d" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(hit_dice.size), 9
     /* TEXT, PROPS */
     , _hoisted_15);
   }), 256
@@ -24637,9 +24637,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_dice_input, {
       id: "hit_dice",
       "class": "mt-1 inline-block",
-      total: object.total,
-      "onUpdate:total": function onUpdateTotal($event) {
-        return object.total = $event;
+      count: object.count,
+      "onUpdate:count": function onUpdateCount($event) {
+        return object.count = $event;
       },
       size: object.size,
       "onUpdate:size": function onUpdateSize($event) {
@@ -24658,7 +24658,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }
     }, null, 8
     /* PROPS */
-    , ["total", "onUpdate:total", "size", "onUpdate:size", "modifier", "onUpdate:modifier", "type", "onUpdate:type", "onInput"]), $props.modelValue && $props.modelValue.length > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_secondary_button, {
+    , ["count", "onUpdate:count", "size", "onUpdate:size", "modifier", "onUpdate:modifier", "type", "onUpdate:type", "onInput"]), $props.modelValue && $props.modelValue.length > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_secondary_button, {
       key: 0,
       "class": "ml-2",
       onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
@@ -24727,19 +24727,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_select_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("select-input");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [$props.total != 'hidden' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_input, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [$props.count != 'hidden' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_input, {
     key: 0,
     "class": "inline-block w-14",
     type: "number",
-    modelValue: $props.total,
+    modelValue: $props.count,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $props.total = $event;
+      return $props.count = $event;
     }),
     modelModifiers: {
       number: true
     },
     onInput: _cache[1] || (_cache[1] = function ($event) {
-      _this.$emit('update:total', $event.target.value);
+      _this.$emit('update:count', $event.target.value);
     })
   }, null, 8
   /* PROPS */
@@ -31952,7 +31952,7 @@ var creatureEdit = {
         hp_max: 0,
         hp_current: 0,
         hit_dice: [{
-          total: 0,
+          count: 0,
           size: 0,
           current: 0
         }],

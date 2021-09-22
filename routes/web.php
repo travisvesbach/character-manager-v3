@@ -6,6 +6,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CharactersController;
+use App\Http\Controllers\ResourcesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,4 +45,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
 
     Route::resource('characters', CharactersController::class);
+
+    Route::post('/resources', [ResourcesController::class, 'store'])->name('resources.store');
+    Route::patch('/resources/{resource}', [ResourcesController::class, 'update'])->name('resources.update');
+    Route::delete('/resources/{resource}', [ResourcesController::class, 'destroy'])->name('resources.destroy');
 });

@@ -43,7 +43,7 @@
                 <div class=" my-1 md:my-0">
                     Hit Dice:
                     <button class="block" v-for="(hit_dice, index) in creature.hit_dice" @click="rollHitDice(index)">
-                        {{ hit_dice.current }}/{{ hit_dice.total }}d{{ hit_dice.size }}
+                        {{ hit_dice.current }}/{{ hit_dice.count }}d{{ hit_dice.size }}
                     </button>
                 </div>
                 <div class="text-right my-1 md:my-0">

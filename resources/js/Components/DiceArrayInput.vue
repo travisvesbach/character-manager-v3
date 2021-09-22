@@ -1,6 +1,6 @@
 <template>
     <div v-for="(object, index) in modelValue">
-        <dice-input id="hit_dice" class="mt-1 inline-block" v-model:total="object.total" v-model:size="object.size" v-model:modifier="object.modifier" v-model:type="object.type" @input="update(object)"/>
+        <dice-input id="hit_dice" class="mt-1 inline-block" v-model:count="object.count" v-model:size="object.size" v-model:modifier="object.modifier" v-model:type="object.type" @input="update(object)"/>
         <jet-secondary-button class="ml-2" @click.prevent="modelValue.splice(index, 1)" v-if="modelValue && modelValue.length > 1" title="Remove Dice">&#x2212</jet-secondary-button>
         <jet-secondary-button class="ml-2" @click.prevent="add" v-if="index+1 == modelValue.length" title="Add Dice">+</jet-secondary-button>
     </div>
@@ -28,7 +28,7 @@
             },
             update(dice) {
                 if(this.current) {
-                    dice.current = dice.total;
+                    dice.current = dice.count;
                 }
                 this.$emit('update:modelValue', this.modelValue)
             }
