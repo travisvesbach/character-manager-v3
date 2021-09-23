@@ -2,11 +2,11 @@
     <div class="col-span-1 border dark:border-gray-700">
         <div class="p-2 flex justify-between">
             <h3 class="text-xl">Spells</h3>
-            <jet-secondary-button :small="true" @click="openPrepareModal" v-if="creature.spell_list_type == 'prepared'">
+            <jet-secondary-button :small="true" @click="openModal" v-if="creature.spell_list_type == 'prepared'">
                 Prepare
             </jet-secondary-button>
         </div>
-         <div class="px-2 p-1 bg-gray-50 border-t dark:bg-gray-800 dark:border-gray-700">
+        <div class="px-2 p-1 bg-gray-50 border-t dark:bg-gray-800 dark:border-gray-700">
             <p>Save DC: {{ creature.spell_dc }}</p>
 
             <div v-if="creature.spell_type == 'slots'">
@@ -45,11 +45,11 @@
                     </template>
                 </accordion-item>
             </accordion>
-         </div>
+        </div>
 
 
         <!-- prepare spells modal -->
-        <jet-dialog-modal :show="prepare_modal" @close="closePrepareModal">
+        <jet-dialog-modal :show="model_show" @close="closeModal">
             <template #header>
                 Prepared Spells
             </template>
@@ -68,8 +68,8 @@
                 </div>
             </template>
 
-            <template #footer>
-                <jet-secondary-button @click="closePrepareModal">
+            <template #footerend>
+                <jet-secondary-button @click="closeModal">
                     Cancel
                 </jet-secondary-button>
 
@@ -108,12 +108,11 @@
             AccordionItem,
             CounterSlot,
         },
-        emits: ['updated'],
         mixins: [flash, creatureEmit],
         data() {
             return {
                 accordion_key: 0,
-                prepare_modal: false,
+                model_show: false,
                 spell_point_costs: [2,3,5,6,7,9,10,11,13],
                 form: {},
                 prepared_spells: [],
@@ -159,17 +158,17 @@
                 }
                 return num + "th";
             },
-            openPrepareModal() {
+            openModal() {
                 this.prepared_spells = this.creature.spell_prepared || [];
-                this.prepare_modal = true;
+                this.model_show = true;
             },
-            closePrepareModal() {
-                this.prepare_modal = false;
+            closeModal() {
+                this.model_show = false;
             },
             savePrepared() {
                 this.creature.spell_prepared = this.prepared_spells;
                 this.updateCreature();
-                this.closePrepareModal();
+                this.closeModal();
             },
             updateSlot(level, index) {
                 this.creature['spell_slots_' + level][index] = !this.creature['spell_slots_' + level][index];

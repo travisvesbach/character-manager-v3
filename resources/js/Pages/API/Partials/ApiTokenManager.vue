@@ -150,7 +150,7 @@
                 Are you sure you would like to delete this API token?
             </template>
 
-            <template #footer>
+            <template #footerend>
                 <jet-secondary-button @click="apiTokenBeingDeleted = null">
                     Cancel
                 </jet-secondary-button>

@@ -27,8 +27,9 @@ class ResourceFactory extends Factory
         return [
             'name' => $this->faker->sentence(1),
             'type' => 'counter',
-            'counter_total' => $this->faker->numberBetween(1, 10),
             'counter_type' => 'slots',
+            'total'     => $this->faker->numberBetween(1, 10),
+            'recover'           => 'long',
         ];
     }
 }

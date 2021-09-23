@@ -55,7 +55,7 @@
                         <!-- hit_dice -->
                         <jet-label for="hit_dice" value="Hit Dice" class="mt-4"/>
                         <dice-array-input v-model="form.hit_dice" :current="true" />
-                        <jet-input-error :message="form.errors.hp_max" class="mt-2"/>
+                        <jet-input-error :message="form.errors.hit_dice" class="mt-2"/>
                     </div>
                     <div class="col-span-1 px-1">
                         <!-- ac -->

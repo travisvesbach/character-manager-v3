@@ -4,7 +4,7 @@
         <span class="mx-1">d</span>
         <select-input class="inline-block" v-model="size" :options="sizes" @input="this.$emit('update:size', $event.target.value);" v-if="size != 'hidden'" />
         <span class="mx-1" v-if="modifier != 'hidden'">+</span>
-        <jet-input class="inline-block w-14" type="number" v-model.number="modifier" v-if="modifier != 'hidden'" />
+        <jet-input class="inline-block w-14" type="number" v-model.number="modifier" v-if="modifier != 'hidden'" @input="this.$emit('update:modifier', $event.target.value);" />
         <select-input class="inline-block ml-1" v-model="type" :options="damageTypes" @input="this.$emit('update:type', $event.target.value);" v-if="type != 'hidden'" />
     </div>
 

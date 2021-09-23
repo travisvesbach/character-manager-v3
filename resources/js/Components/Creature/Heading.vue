@@ -160,7 +160,7 @@
             },
             deleteCreature() {
                 this.form.id = this.creature.id;
-                this.form.delete(route(this.type + 's.destroy', this.form.id));
+                this.form.delete(route(this.type.toLowerCase() + 's.destroy', this.form.id));
             }
         }
     }

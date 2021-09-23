@@ -22,7 +22,7 @@
                 </div>
             </template>
 
-            <template #footer>
+            <template #footerend>
                 <jet-secondary-button @click="closeModal">
                     Cancel
                 </jet-secondary-button>

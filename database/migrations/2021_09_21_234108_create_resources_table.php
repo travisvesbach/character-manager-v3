@@ -21,14 +21,12 @@ class CreateResourcesTable extends Migration
             $table->integer('creature_id');
             $table->string('creature_type');
             $table->string('type');
-            $table->integer('counter_total')->nullable();
             $table->string('counter_type')->nullable();
-            $table->json('counter_slots')->nullable();
-            $table->string('counter_current')->nullable();
+            $table->integer('total')->nullable();
+            $table->string('current')->nullable();
+            $table->json('slots')->nullable();
             $table->string('recover')->nullable();
-            $table->integer('dice_count')->nullable();
-            $table->integer('dice_size')->nullable();
-            $table->integer('dice_modifier')->nullable();
+            $table->json('dice')->nullable();
         });
     }
 

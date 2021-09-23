@@ -28,14 +28,12 @@ class ResourceRequest extends FormRequest
             'creature_id'       => 'required|integer',
             'creature_type'     => 'required|max:255',
             'type'              => 'required|max:255',
-            'counter_total'     => 'integer',
-            'counter_type'      => 'max:255',
-            'counter_slots'     => '',
-            'counter_current'   => 'integer',
-            'recover'           => '',
-            'dice_count'        => 'integer',
-            'dice_size'         => 'integer',
-            'dice_modifier'     => 'integer',
+            'counter_type'      => 'required_if:type,counter|max:255',
+            'total'             => 'required_if:type,counter|integer|nullable',
+            'current'           => 'integer|nullable',
+            'slots'             => '',
+            'recover'           => 'max:255',
+            'dice'              => 'required_if:type,dice',
         ];
     }
 }

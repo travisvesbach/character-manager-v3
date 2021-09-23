@@ -14,14 +14,19 @@ class Resource extends Model
             'creature_id',
             'creature_type',
             'type',
-            'counter_total',
             'counter_type',
-            'counter_slots',
-            'counter_current',
+            'total',
+            'current',
+            'slots',
             'recover',
-            'dice_count',
-            'dice_size',
-            'dice_modifier',
+            'dice',
+    ];
+
+
+
+    protected $casts = [
+        'slots' => 'array',
+        'dice'  => 'array',
     ];
 
     public function creature() {

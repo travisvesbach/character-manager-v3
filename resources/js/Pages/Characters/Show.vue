@@ -12,12 +12,14 @@
             </div>
         </template>
 
-        <heading :creature="character" type="character" @updated="updateCharacter"/>
+        <heading :creature="character" type="Character" @updated="updateCharacter"/>
 
         <stats :creature="character"/>
 
         <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-            <spells :creature="character" type="character" @updated="updateCharacter" v-if="character.spellcaster"/>
+            <spells :creature="character" @updated="updateCharacter" v-if="character.spellcaster"/>
+
+            <resources :creature="character" type="Character" @updated="updateCharacter"/>
         </div>
 
     </app-layout>
@@ -35,6 +37,7 @@
     import Heading from '@/Components/Creature/Heading'
     import Stats from '@/Components/Creature/Stats'
     import Spells from '@/Components/Creature/Spells'
+    import Resources from '@/Components/Creature/Resources'
 
     export default {
         props: ['character', 'characters'],
@@ -50,6 +53,7 @@
             Heading,
             Stats,
             Spells,
+            Resources,
         },
         methods: {
             updateCharacter() {
