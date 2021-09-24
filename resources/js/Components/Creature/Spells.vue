@@ -2,7 +2,7 @@
     <div class="col-span-1 border dark:border-gray-700">
         <div class="p-2 flex justify-between">
             <h3 class="text-xl">Spells</h3>
-            <jet-secondary-button :small="true" @click="openModal" v-if="creature.spell_list_type == 'prepared'">
+            <jet-secondary-button size="sm" @click="openModal" v-if="creature.spell_list_type == 'prepared'">
                 Prepare
             </jet-secondary-button>
         </div>

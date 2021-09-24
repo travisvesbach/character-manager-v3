@@ -2,7 +2,7 @@
     <div class="col-span-1 border dark:border-gray-700">
         <div class="p-2 flex justify-between">
             <h3 class="text-xl">Resources</h3>
-            <jet-secondary-button :small="true" @click="openModal()">
+            <jet-secondary-button size="sm" @click="openModal()">
                 Add
             </jet-secondary-button>
         </div>
@@ -10,11 +10,23 @@
 
             <div v-for="resource in creature.resources">
 
-                {{ resource.name }}
+                {{ resource.name }}:
+                <span v-if="resource.type == 'counter'">
+                    <counter-slot v-for="(slot, index) in resource.slots" :slot="slot" @click.native="updateSlot(resource, index)"/>
+                </span>
+                <span v-if="resource.type == 'dice'">
+                    <button class="inline-block" @click="rollDice(resource)">
+                        <div v-for="dice in resource.dice">
+                            {{ dice.count }}d{{ dice.size }}{{ dice.modifier ? '+' + dice.modifier : '' }}
+                        </div>
+                    </button>
+                </span>
 
-                <jet-secondary-button :small="true" @click="openModal(resource)">
-                    edit
-                </jet-secondary-button>
+                <div class="ml-2">
+                    <jet-secondary-button size="xs" @click="openModal(resource)">
+                        edit
+                    </jet-secondary-button>
+                </div>
 
             </div>
 
@@ -25,7 +37,7 @@
 
 
         <!-- resource modal -->
-        <jet-dialog-modal :show="show_modal" type="form" max-width="md" @close="closeModal" @submitted="saveResource">
+        <jet-dialog-modal :show="show_modal" type="form" max-width="md" @close="closeModal" @submitted="saveModal">
             <template #header>
                 {{ form.name ? 'Edit' : 'New' }} Resource
             </template>
@@ -76,7 +88,7 @@
                 <div v-if="form.type == 'dice'" class="px-1">
                     <!-- dice -->
                     <jet-label for="dice" value="Dice" class="mt-4"/>
-                    <dice-array-input v-model="form.dice" :current="true"/>
+                    <dice-array-input v-model="form.dice" :current="true" :multiple="true"/>
                     <jet-input-error :message="form.errors.dice" class="mt-2"/>
                 </div>
             </template>
@@ -104,9 +116,9 @@
     import JetInputError from '@/Jetstream/InputError'
     import SelectInput from '@/Components/SelectInput'
     import DiceArrayInput from '@/Components/DiceArrayInput'
+    import CounterSlot from '@/Components/CounterSlot'
 
     import { flash } from '@/Mixins/Flash';
-    import { creatureEmit } from '@/Mixins/Creature/Emit';
 
     export default {
         props: ['creature', 'type'],
@@ -119,8 +131,9 @@
             JetInputError,
             SelectInput,
             DiceArrayInput,
+            CounterSlot,
         },
-        mixins: [flash, creatureEmit],
+        mixins: [flash],
         data() {
             return {
                 show_modal: false,
@@ -128,27 +141,7 @@
             };
         },
         methods: {
-            resetForm() {
-                this.form = this.$inertia.form({
-                    id: null,
-                    name: null,
-                    creature_id: this.creature.id,
-                    creature_type: 'App\\Models\\'+this.type,
-                    type: null,
-                    total: null,
-                    counter_type: 'slots',
-                    slots: null,
-                    current: null,
-                    recover: '',
-                    dice: [{
-                        count: null,
-                        size: null,
-                        modifier: null,
-                    }],
-                });
-            },
-            openModal(resource = null) {
-                // this.prepared_spells = this.creature.spell_prepared || [];
+            setForm(resource = null) {
                 if(resource) {
                     this.form = this.$inertia.form({
                         id: resource.id,
@@ -165,15 +158,43 @@
                         editing: true,
                     });
                 } else {
-                    this.resetForm();
+                    this.form = this.$inertia.form({
+                        id: null,
+                        name: null,
+                        creature_id: this.creature.id,
+                        creature_type: 'App\\Models\\'+this.type,
+                        type: null,
+                        total: null,
+                        counter_type: 'slots',
+                        slots: null,
+                        current: null,
+                        recover: '',
+                        dice: [{
+                            count: null,
+                            size: null,
+                            modifier: null,
+                        }],
+                    });
                 }
+            },
+            openModal(resource = null) {
+                this.setForm(resource);
                 this.show_modal = true;
             },
             closeModal() {
                 this.show_modal = false;
             },
-            saveResource() {
+            saveModal() {
                 this.form.current = this.form.total;
+                if(this.form.type == 'counter') {
+                    this.form.slots = [];
+                    for(let j=0; j < this.form.total; j++) {
+                        this.form.slots.push(false);
+                    }
+                }
+                this.saveResource();
+            },
+            saveResource() {
                 if(this.form.editing) {
                     this.form.patch(route('resources.update', this.form.id), {
                         onSuccess: (response) => {
@@ -188,13 +209,35 @@
                     });
                 }
             },
+            updateSlot(resource, index) {
+                resource.slots[index] = !resource.slots[index];
+                this.setForm(resource);
+                this.saveResource();
+            },
+            rollDice(resource) {
+                let total = 0;
+                let message = this.creature.name + ':<br>';
+                message += resource.name + ':<br>';
+                let loop_total = 0;
+                for(let i=0;i<resource.dice.length;i++) {
+                    loop_total = 0;
+                    message += '[';
+                    for(let j=0;j<resource.dice[i].count;j++) {
+                        let result = dice.roll(resource.dice[i].size);
+                        loop_total += result;
+                        message += result + (j < resource.dice[i].count - 1 ? ', ' : '');
+                    }
+                    loop_total += getNumber(resource.dice[i].modifier);
+                    message += '] ' + (resource.dice[i].modifier ? '+ ' + resource.dice[i].modifier : '') + ' = ' + loop_total;
+
+                    total += loop_total;
+                    message += '<br>'
+                }
+                if(total != loop_total) {
+                    message += 'Total: ' + total;
+                }
+                this.flash(message, 'primary');
+            }
         }
     }
 </script>
-
-
-
-
-fruit = 'apple';
-
-fruits = ['apple', 'orange', 'cherry', .......]

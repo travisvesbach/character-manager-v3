@@ -1,5 +1,5 @@
 <template>
-    <button :type="type" class="btn btn-danger">
+    <button :type="type" class="btn btn-danger" :class="sizeClass">
         <slot></slot>
     </button>
 </template>
@@ -13,6 +13,19 @@
                 type: String,
                 default: 'button',
             },
+            size: {
+                type: String,
+                default: 'md',
+            }
+        },
+        computed: {
+            sizeClass() {
+                return {
+                    'xs': 'btn-xs',
+                    'sm': 'btn-sm',
+                    'md': '',
+                }[this.size]
+            }
         }
     })
 </script>

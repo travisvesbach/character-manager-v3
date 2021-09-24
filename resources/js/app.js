@@ -22,5 +22,12 @@ InertiaProgress.init({ color: '#4B5563' });
 window.dice = {
     roll: function(number = 20) {
         return Math.floor(Math.random() * number) + 1
-    }
+    },
+}
+
+// use parseInt() to get number from string
+// if isNaN, return passed default value
+window.getNumber = function(value, default_value = 0) {
+    let num = parseInt(value, 10);
+    return isNaN(num) ? default_value : num;
 }

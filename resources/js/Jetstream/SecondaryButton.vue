@@ -1,5 +1,5 @@
 <template>
-    <button :type="type" class="btn btn-secondary" :class="small ? 'btn-small' : ''">
+    <button :type="type" class="btn btn-secondary" :class="sizeClass">
         <slot></slot>
     </button>
 </template>
@@ -13,9 +13,18 @@
                 type: String,
                 default: 'button',
             },
-            small: {
-                type: Boolean,
-                default: false,
+            size: {
+                type: String,
+                default: 'md',
+            }
+        },
+        computed: {
+            sizeClass() {
+                return {
+                    'xs': 'btn-xs',
+                    'sm': 'btn-sm',
+                    'md': '',
+                }[this.size]
             }
         }
     })

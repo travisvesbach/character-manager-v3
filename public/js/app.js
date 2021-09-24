@@ -20589,8 +20589,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
 /* harmony import */ var _Components_SelectInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Components/SelectInput */ "./resources/js/Components/SelectInput.vue");
 /* harmony import */ var _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Components/DiceArrayInput */ "./resources/js/Components/DiceArrayInput.vue");
-/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Emit__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Mixins/Creature/Emit */ "./resources/js/Mixins/Creature/Emit.js");
+/* harmony import */ var _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/CounterSlot */ "./resources/js/Components/CounterSlot.vue");
+/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
 
 
 
@@ -20611,9 +20611,10 @@ __webpack_require__.r(__webpack_exports__);
     JetInput: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_4__["default"],
     JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_5__["default"],
     SelectInput: _Components_SelectInput__WEBPACK_IMPORTED_MODULE_6__["default"],
-    DiceArrayInput: _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_7__["default"]
+    DiceArrayInput: _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_7__["default"],
+    CounterSlot: _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_8__["default"]
   },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_8__.flash, _Mixins_Creature_Emit__WEBPACK_IMPORTED_MODULE_9__.creatureEmit],
+  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_9__.flash],
   data: function data() {
     return {
       show_modal: false,
@@ -20621,29 +20622,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    resetForm: function resetForm() {
-      this.form = this.$inertia.form({
-        id: null,
-        name: null,
-        creature_id: this.creature.id,
-        creature_type: 'App\\Models\\' + this.type,
-        type: null,
-        total: null,
-        counter_type: 'slots',
-        slots: null,
-        current: null,
-        recover: '',
-        dice: [{
-          count: null,
-          size: null,
-          modifier: null
-        }]
-      });
-    },
-    openModal: function openModal() {
+    setForm: function setForm() {
       var resource = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
-      // this.prepared_spells = this.creature.spell_prepared || [];
       if (resource) {
         this.form = this.$inertia.form({
           id: resource.id,
@@ -20660,18 +20641,48 @@ __webpack_require__.r(__webpack_exports__);
           editing: true
         });
       } else {
-        this.resetForm();
+        this.form = this.$inertia.form({
+          id: null,
+          name: null,
+          creature_id: this.creature.id,
+          creature_type: 'App\\Models\\' + this.type,
+          type: null,
+          total: null,
+          counter_type: 'slots',
+          slots: null,
+          current: null,
+          recover: '',
+          dice: [{
+            count: null,
+            size: null,
+            modifier: null
+          }]
+        });
       }
-
+    },
+    openModal: function openModal() {
+      var resource = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      this.setForm(resource);
       this.show_modal = true;
     },
     closeModal: function closeModal() {
       this.show_modal = false;
     },
+    saveModal: function saveModal() {
+      this.form.current = this.form.total;
+
+      if (this.form.type == 'counter') {
+        this.form.slots = [];
+
+        for (var j = 0; j < this.form.total; j++) {
+          this.form.slots.push(false);
+        }
+      }
+
+      this.saveResource();
+    },
     saveResource: function saveResource() {
       var _this = this;
-
-      this.form.current = this.form.total;
 
       if (this.form.editing) {
         this.form.patch(route('resources.update', this.form.id), {
@@ -20686,6 +20697,39 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       }
+    },
+    updateSlot: function updateSlot(resource, index) {
+      resource.slots[index] = !resource.slots[index];
+      this.setForm(resource);
+      this.saveResource();
+    },
+    rollDice: function rollDice(resource) {
+      var total = 0;
+      var message = this.creature.name + ':<br>';
+      message += resource.name + ':<br>';
+      var loop_total = 0;
+
+      for (var i = 0; i < resource.dice.length; i++) {
+        loop_total = 0;
+        message += '[';
+
+        for (var j = 0; j < resource.dice[i].count; j++) {
+          var result = dice.roll(resource.dice[i].size);
+          loop_total += result;
+          message += result + (j < resource.dice[i].count - 1 ? ', ' : '');
+        }
+
+        loop_total += getNumber(resource.dice[i].modifier);
+        message += '] ' + (resource.dice[i].modifier ? '+ ' + resource.dice[i].modifier : '') + ' = ' + loop_total;
+        total += loop_total;
+        message += '<br>';
+      }
+
+      if (total != loop_total) {
+        message += 'Total: ' + total;
+      }
+
+      this.flash(message, 'primary');
     }
   }
 });
@@ -20890,7 +20934,17 @@ __webpack_require__.r(__webpack_exports__);
     JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__["default"],
     DiceInput: _Components_DiceInput__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
-  props: ['modelValue', 'current'],
+  props: {
+    modelValue: {},
+    current: {
+      type: Boolean,
+      "default": false
+    },
+    multiple: {
+      type: Boolean,
+      "default": true
+    }
+  },
   emits: ['update:modelValue'],
   methods: {
     add: function add() {
@@ -21283,9 +21337,18 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": 'submit'
     },
-    small: {
-      type: Boolean,
-      "default": false
+    size: {
+      type: String,
+      "default": 'md'
+    }
+  },
+  computed: {
+    sizeClass: function sizeClass() {
+      return {
+        'xs': 'btn-xs',
+        'sm': 'btn-sm',
+        'md': ''
+      }[this.size];
     }
   }
 }));
@@ -21489,6 +21552,19 @@ __webpack_require__.r(__webpack_exports__);
     type: {
       type: String,
       "default": 'button'
+    },
+    size: {
+      type: String,
+      "default": 'md'
+    }
+  },
+  computed: {
+    sizeClass: function sizeClass() {
+      return {
+        'xs': 'btn-xs',
+        'sm': 'btn-sm',
+        'md': ''
+      }[this.size];
     }
   }
 }));
@@ -21896,9 +21972,18 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       "default": 'button'
     },
-    small: {
-      type: Boolean,
-      "default": false
+    size: {
+      type: String,
+      "default": 'md'
+    }
+  },
+  computed: {
+    sizeClass: function sizeClass() {
+      return {
+        'xs': 'btn-xs',
+        'sm': 'btn-sm',
+        'md': ''
+      }[this.size];
     }
   }
 }));
@@ -24273,21 +24358,19 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 var _hoisted_5 = {
   "class": "px-2 p-1 bg-gray-50 border-t dark:bg-gray-800 dark:border-gray-700"
 };
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" edit ");
-
-var _hoisted_7 = {
-  "class": "grid grid-cols-1 sm:grid-cols-2"
-};
-var _hoisted_8 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_9 = {
-  "class": "col-span-1 px-1 mt-4 sm:mt-0"
-};
-var _hoisted_10 = {
+var _hoisted_6 = {
   key: 0
 };
+var _hoisted_7 = {
+  key: 1
+};
+var _hoisted_8 = ["onClick"];
+var _hoisted_9 = {
+  "class": "ml-2"
+};
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" edit ");
+
 var _hoisted_11 = {
   "class": "grid grid-cols-1 sm:grid-cols-2"
 };
@@ -24295,22 +24378,36 @@ var _hoisted_12 = {
   "class": "col-span-1 px-1"
 };
 var _hoisted_13 = {
-  "class": "col-span-1 px-1"
+  "class": "col-span-1 px-1 mt-4 sm:mt-0"
 };
 var _hoisted_14 = {
-  "class": "col-span-1 px-1"
+  key: 0
 };
 var _hoisted_15 = {
+  "class": "grid grid-cols-1 sm:grid-cols-2"
+};
+var _hoisted_16 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_17 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_18 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_19 = {
   key: 1,
   "class": "px-1"
 };
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Save ");
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Save ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_secondary_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-secondary-button");
+
+  var _component_counter_slot = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("counter-slot");
 
   var _component_jet_label = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-label");
 
@@ -24327,7 +24424,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_dialog_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-dialog-modal");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
-    small: true,
+    size: "sm",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.openModal();
     })
@@ -24339,23 +24436,47 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.creature.resources, function (resource) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(resource.name) + " ", 1
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(resource.name) + ": ", 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
-      small: true,
+    ), resource.type == 'counter' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(resource.slots, function (slot, index) {
+      return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_counter_slot, {
+        slot: slot,
+        onClick: function onClick($event) {
+          return $options.updateSlot(resource, index);
+        }
+      }, null, 8
+      /* PROPS */
+      , ["slot", "onClick"]);
+    }), 256
+    /* UNKEYED_FRAGMENT */
+    ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), resource.type == 'dice' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      "class": "inline-block",
+      onClick: function onClick($event) {
+        return $options.rollDice(resource);
+      }
+    }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(resource.dice, function (dice) {
+      return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(dice.count) + "d" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(dice.size) + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(dice.modifier ? '+' + dice.modifier : ''), 1
+      /* TEXT */
+      );
+    }), 256
+    /* UNKEYED_FRAGMENT */
+    ))], 8
+    /* PROPS */
+    , _hoisted_8)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
+      size: "xs",
       onClick: function onClick($event) {
         return $options.openModal(resource);
       }
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [_hoisted_6];
+        return [_hoisted_10];
       }),
       _: 2
       /* DYNAMIC */
 
     }, 1032
     /* PROPS, DYNAMIC_SLOTS */
-    , ["onClick"])]);
+    , ["onClick"])])]);
   }), 256
   /* UNKEYED_FRAGMENT */
   ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" resource modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_dialog_modal, {
@@ -24363,7 +24484,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "form",
     "max-width": "md",
     onClose: $options.closeModal,
-    onSubmitted: $options.saveResource
+    onSubmitted: $options.saveModal
   }, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.form.name ? 'Edit' : 'New') + " Resource ", 1
@@ -24371,7 +24492,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       )];
     }),
     content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" name "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" name "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "name",
         value: "Name"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
@@ -24390,7 +24511,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mt-2"
       }, null, 8
       /* PROPS */
-      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" type "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" type "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "type",
         value: "Type"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
@@ -24409,7 +24530,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mt-2"
       }, null, 8
       /* PROPS */
-      , ["message"])])]), $data.form.type == 'counter' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" counter_type "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["message"])])]), $data.form.type == 'counter' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" counter_type "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "counter_type",
         value: "Counter Type",
         "class": "mt-4"
@@ -24429,7 +24550,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mt-2"
       }, null, 8
       /* PROPS */
-      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" total "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" total "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "total",
         value: "Total",
         "class": "mt-4"
@@ -24452,7 +24573,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mt-2"
       }, null, 8
       /* PROPS */
-      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" recover "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" recover "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "recover",
         value: "Recover",
         "class": "mt-4"
@@ -24471,7 +24592,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mt-2"
       }, null, 8
       /* PROPS */
-      , ["message"])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.form.type == 'dice' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" dice "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+      , ["message"])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.form.type == 'dice' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" dice "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
         "for": "dice",
         value: "Dice",
         "class": "mt-4"
@@ -24480,7 +24601,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
           return $data.form.dice = $event;
         }),
-        current: true
+        current: true,
+        multiple: true
       }, null, 8
       /* PROPS */
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
@@ -24495,7 +24617,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $options.closeModal
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_16];
+          return [_hoisted_20];
         }),
         _: 1
         /* STABLE */
@@ -24509,7 +24631,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         disabled: $data.form.processing
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_17];
+          return [_hoisted_21];
         }),
         _: 1
         /* STABLE */
@@ -24611,7 +24733,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, $props.creature.spell_list_type == 'prepared' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_secondary_button, {
     key: 0,
-    small: true,
+    size: "sm",
     onClick: $options.openModal
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -25095,7 +25217,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     }, 1032
     /* PROPS, DYNAMIC_SLOTS */
-    , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), index + 1 == $props.modelValue.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_secondary_button, {
+    , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.multiple && index + 1 == $props.modelValue.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_secondary_button, {
       key: 1,
       "class": "ml-2",
       onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.add, ["prevent"]),
@@ -25821,7 +25943,7 @@ var _hoisted_1 = ["type"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     type: _ctx.type,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary", _ctx.small ? 'btn-small' : ''])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-primary", _ctx.sizeClass])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 10
   /* CLASS, PROPS */
   , _hoisted_1);
@@ -26054,9 +26176,9 @@ var _hoisted_1 = ["type"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     type: _ctx.type,
-    "class": "btn btn-danger"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 8
-  /* PROPS */
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-danger", _ctx.sizeClass])
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 10
+  /* CLASS, PROPS */
   , _hoisted_1);
 }
 
@@ -26563,7 +26685,7 @@ var _hoisted_1 = ["type"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     type: _ctx.type,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-secondary", _ctx.small ? 'btn-small' : ''])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-secondary", _ctx.sizeClass])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 10
   /* CLASS, PROPS */
   , _hoisted_1);
@@ -33153,6 +33275,13 @@ window.dice = {
     var number = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 20;
     return Math.floor(Math.random() * number) + 1;
   }
+}; // use parseInt() to get number from string
+// if isNaN, return passed default value
+
+window.getNumber = function (value) {
+  var default_value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var num = parseInt(value, 10);
+  return isNaN(num) ? default_value : num;
 };
 
 /***/ }),
