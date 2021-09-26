@@ -1,6 +1,6 @@
 <template>
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 bg-gray-50 dark:bg-gray-800">
-        <div class="px-2 p-1 col-span-1 border dark:border-gray-700">
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+        <grid-section>
             <button class="block" @click="roll('Strength', creature.strength_mod)">
                 <strong>Strength: {{ creature.strength }} ({{ displayStat(creature.strength_mod) }})</strong>
             </button>
@@ -10,8 +10,8 @@
             <button class="block" :class="proficiencyClass(creature.athletics_proficiency)" @click="roll('Athletics', creature.athletics)">
                 Athletics: {{ displayStat(creature.athletics) }}
             </button>
-        </div>
-        <div class="px-2 p-1 col-span-1 border dark:border-gray-700">
+        </grid-section>
+        <grid-section>
             <button class="block" @click="roll('Dexterity', creature.dexterity_mod)">
                 <strong>Dexterity: {{ creature.dexterity }} ({{ displayStat(creature.dexterity_mod) }})</strong>
             </button>
@@ -27,16 +27,16 @@
             <button class="block" :class="proficiencyClass(creature.stealth_proficiency)" @click="roll('Stealth', creature.stealth)">
                 Stealth: {{ displayStat(creature.stealth) }}
             </button>
-        </div>
-        <div class="px-2 p-1 col-span-1 border dark:border-gray-700">
+        </grid-section>
+        <grid-section>
             <button class="block" @click="roll('Constitution', creature.constitution_mod)">
                 <strong>Constitution: {{ creature.constitution }} ({{ displayStat(creature.constitution_mod) }})</strong>
             </button>
             <button class="block" :class="proficiencyClass(creature.constitution_save_proficiency)" @click="roll('Constitution Save', creature.constitution_save)">
                 Save: {{ displayStat(creature.constitution_save) }}
             </button>
-        </div>
-        <div class="px-2 p-1 col-span-1 border dark:border-gray-700">
+        </grid-section>
+        <grid-section>
             <button class="block" @click="roll('Intelligence', creature.intelligence_mod)">
                 <strong>Intelligence: {{ creature.intelligence }} ({{ displayStat(creature.intelligence_mod) }})</strong>
             </button>
@@ -58,8 +58,8 @@
             <button class="block" :class="proficiencyClass(creature.religion_proficiency)" @click="roll('Religion', creature.religion)">
                 Religion: {{ displayStat(creature.religion) }}
             </button>
-        </div>
-        <div class="px-2 p-1 col-span-1 border dark:border-gray-700">
+        </grid-section>
+        <grid-section>
             <button class="block" @click="roll('Wisdom', creature.wisdom_mod)">
                 <strong>Wisdom: {{ creature.wisdom }} ({{ displayStat(creature.wisdom_mod) }})</strong>
             </button>
@@ -81,8 +81,8 @@
             <button class="block" :class="proficiencyClass(creature.survival_proficiency)" @click="roll('Survival', creature.survival)">
                 Survival: {{ displayStat(creature.survival) }}
             </button>
-        </div>
-        <div class="px-2 p-1 col-span-1 border dark:border-gray-700">
+        </grid-section>
+        <grid-section>
             <button class="block" @click="roll('Charisma', creature.charisma_mod)">
                 <strong>Charisma: {{ creature.charisma }} ({{ displayStat(creature.charisma_mod) }})</strong>
             </button>
@@ -101,16 +101,19 @@
             <button class="block" :class="proficiencyClass(creature.persuasion_proficiency)" @click="roll('Persuasion', creature.persuasion)">
                 Persuasion: {{ displayStat(creature.persuasion) }}
             </button>
-        </div>
+        </grid-section>
     </div>
 </template>
 
 <script>
+    import GridSection from '@/Components/GridSection';
+
     import { flash } from '@/Mixins/Flash';
 
     export default {
         props: ['creature'],
         components: {
+            GridSection,
         },
         mixins: [flash],
         methods: {

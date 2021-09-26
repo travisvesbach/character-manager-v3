@@ -1,40 +1,32 @@
 <template>
-    <div class="col-span-1 border dark:border-gray-700">
-        <div class="p-2 flex justify-between">
-            <h3 class="text-xl">Resources</h3>
+    <grid-section title="Resources">
+        <template #button>
             <jet-secondary-button size="sm" @click="openModal()">
                 Add
             </jet-secondary-button>
-        </div>
-        <div class="px-2 p-1 bg-gray-50 border-t dark:bg-gray-800 dark:border-gray-700">
+        </template>
 
-            <div v-for="resource in creature.resources">
-
-                {{ resource.name }}:
+        <div v-for="resource in creature.resources">
+            <div class="flex justify-between">
+                <span>
+                    {{ resource.name }}:
+                </span>
                 <span v-if="resource.type == 'counter'">
                     <counter-slot v-for="(slot, index) in resource.slots" :slot="slot" @click.native="updateSlot(resource, index)"/>
                 </span>
-                <span v-if="resource.type == 'dice'">
-                    <button class="inline-block" @click="rollDice(resource)">
-                        <div v-for="dice in resource.dice">
-                            {{ dice.count }}d{{ dice.size }}{{ dice.modifier ? '+' + dice.modifier : '' }}
-                        </div>
-                    </button>
-                </span>
-
-                <div class="ml-2">
-                    <jet-secondary-button size="xs" @click="openModal(resource)">
-                        edit
-                    </jet-secondary-button>
-                </div>
-
+                <jet-secondary-button size="sm" class="ml-auto inline-block" @click="rollDice(resource)" v-if="resource.type == 'dice'">
+                    <div v-for="dice in resource.dice">
+                        {{ dice.count }}d{{ dice.size }}{{ dice.modifier ? '+' + dice.modifier : '' }}
+                    </div>
+                </jet-secondary-button>
             </div>
 
-
-
+            <div class="ml-2">
+                <jet-secondary-button size="xs" @click="openModal(resource)">
+                    edit
+                </jet-secondary-button>
+            </div>
         </div>
-
-
 
         <!-- resource modal -->
         <jet-dialog-modal :show="show_modal" type="form" max-width="md" @close="closeModal" @submitted="saveModal">
@@ -104,7 +96,7 @@
             </template>
         </jet-dialog-modal>
 
-    </div>
+    </grid-section>
 </template>
 
 <script>
@@ -117,6 +109,7 @@
     import SelectInput from '@/Components/SelectInput'
     import DiceArrayInput from '@/Components/DiceArrayInput'
     import CounterSlot from '@/Components/CounterSlot'
+    import GridSection from '@/Components/GridSection'
 
     import { flash } from '@/Mixins/Flash';
 
@@ -132,6 +125,7 @@
             SelectInput,
             DiceArrayInput,
             CounterSlot,
+            GridSection,
         },
         mixins: [flash],
         data() {
@@ -154,7 +148,7 @@
                         slots: resource.slots,
                         current: resource.current,
                         recover: resource.recover,
-                        dice: resource.dice,
+                        dice: JSON.parse(JSON.stringify(resource.dice)),
                         editing: true,
                     });
                 } else {

@@ -1,51 +1,49 @@
 <template>
-    <div class="col-span-1 border dark:border-gray-700">
-        <div class="p-2 flex justify-between">
-            <h3 class="text-xl">Spells</h3>
+    <grid-section title="Spells">
+        <template #button>
             <jet-secondary-button size="sm" @click="openModal" v-if="creature.spell_list_type == 'prepared'">
                 Prepare
             </jet-secondary-button>
-        </div>
-        <div class="px-2 p-1 bg-gray-50 border-t dark:bg-gray-800 dark:border-gray-700">
-            <p>Save DC: {{ creature.spell_dc }}</p>
+        </template>
 
-            <div v-if="creature.spell_type == 'slots'">
-                <div v-for="level in 9">
-                    <span v-if="creature['spell_slots_' + level] && creature['spell_slots_' + level].length > 0">
-                        {{ level }}:
-                        <counter-slot v-for="(slot, index) in creature['spell_slots_' + level]" :slot="slot" @click.native="updateSlot(level, index)"/>
-                    </span>
-                </div>
+        <p>Save DC: {{ creature.spell_dc }}</p>
+
+        <div v-if="creature.spell_type == 'slots'">
+            <div v-for="level in 9">
+                <span v-if="creature['spell_slots_' + level] && creature['spell_slots_' + level].length > 0">
+                    {{ level }}:
+                    <counter-slot v-for="(slot, index) in creature['spell_slots_' + level]" :slot="slot" @click.native="updateSlot(level, index)"/>
+                </span>
             </div>
-
-            <div v-if="creature.spell_type == 'points'">
-                <div>
-                    Points:
-                    <jet-input type="number" class="w-14" v-model.number="creature.spell_points_current" @change="usePoints();"/>
-                    / {{creature.spell_points_max}}
-                </div>
-                <div v-for="(cost, level) in spell_point_costs">
-                    <button v-if="level != 0 && level <= creature.spell_level" @click="usePoints(cost)">
-                        {{level}}: {{cost}} points
-                    </button>
-                </div>
-            </div>
-
-            <accordion :key="accordion_key">
-                <accordion-item :id="'list_' + index + '_accordion'" class="mt-2" v-for="(list, index) in filteredSpellLists" v-if="filteredSpellLists.length > 0" :key="index">
-                    <template v-slot:title>
-                        {{ index == 0 ? 'Cantrips' : ordinalSuffix(index) + ' Level' }}:
-                    </template>
-                    <template v-slot:content>
-                        <ul class="ml-2">
-                            <li v-for="spell in list">
-                                {{spell}}
-                            </li>
-                        </ul>
-                    </template>
-                </accordion-item>
-            </accordion>
         </div>
+
+        <div v-if="creature.spell_type == 'points'">
+            <div>
+                Points:
+                <jet-input type="number" class="w-14" v-model.number="creature.spell_points_current" @change="usePoints();"/>
+                / {{creature.spell_points_max}}
+            </div>
+            <div v-for="(cost, level) in spell_point_costs">
+                <button v-if="level != 0 && level <= creature.spell_level" @click="usePoints(cost)">
+                    {{level}}: {{cost}} points
+                </button>
+            </div>
+        </div>
+
+        <accordion :key="accordion_key">
+            <accordion-item :id="'list_' + index + '_accordion'" class="mt-2" v-for="(list, index) in filteredSpellLists" v-if="filteredSpellLists.length > 0" :key="index">
+                <template v-slot:title>
+                    {{ index == 0 ? 'Cantrips' : ordinalSuffix(index) + ' Level' }}:
+                </template>
+                <template v-slot:content>
+                    <ul class="ml-2">
+                        <li v-for="spell in list">
+                            {{spell}}
+                        </li>
+                    </ul>
+                </template>
+            </accordion-item>
+        </accordion>
 
 
         <!-- prepare spells modal -->
@@ -78,7 +76,7 @@
                 </jet-button>
             </template>
         </jet-dialog-modal>
-    </div>
+    </grid-section>
 </template>
 
 <script>
@@ -91,6 +89,7 @@
     import Accordion from '@/Components/Accordion'
     import AccordionItem from '@/Components/AccordionItem'
     import CounterSlot from '@/Components/CounterSlot'
+    import GridSection from '@/Components/GridSection'
 
     import { flash } from '@/Mixins/Flash';
     import { creatureEmit } from '@/Mixins/Creature/Emit';
@@ -107,6 +106,7 @@
             Accordion,
             AccordionItem,
             CounterSlot,
+            GridSection,
         },
         mixins: [flash, creatureEmit],
         data() {
