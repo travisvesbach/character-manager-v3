@@ -13,13 +13,14 @@ class UsersTest extends TestCase
 
     /** @test **/
     public function first_user_is_an_admin() {
-        $user = User::factory()->create();
-        $this->assertTrue($user->admin);
+        // first user is created in TestCase SetUp()
+        $user = User::find(1);
+        $this->assertTrue((boolean)$user->admin);
     }
 
     /** @test **/
     public function users_added_after_the_first_are_not_admins() {
-        $this->assertTrue(User::factory()->create()->admin);
+        $this->assertTrue((boolean)$this->admin->admin);
         $this->assertNull(User::factory()->create()->admin);
         $this->assertNull(User::factory()->create()->admin);
     }
@@ -36,17 +37,17 @@ class UsersTest extends TestCase
                 'admin' => false,
             ])
             ->assertRedirect('login');
-        $this->assertCount(0, User::all());
+        $this->assertCount(1, User::all());
 
         $other_user = User::factory()->create();
         $this->patch('users/' . $other_user->id, $attributes)->assertRedirect('login');
         $this->delete('users/' . $other_user->id)->assertRedirect('login');
-        $this->assertCount(1, User::all());
+        $this->assertCount(2, User::all());
     }
 
     /** @test **/
     public function non_admins_cannot_manage_users() {
-        $admin_user = User::factory()->create();
+        // $admin_user = User::factory()->create();
         $this->signIn();
 
         $this->get('/users')->assertStatus(403);
@@ -69,7 +70,7 @@ class UsersTest extends TestCase
 
     /** @test **/
     public function an_admin_can_create_users() {
-        $admin_user = User::factory()->create();
+        $admin_user = $this->admin;
 
         $this->actingAs($admin_user)
             ->post('users', [
@@ -86,7 +87,7 @@ class UsersTest extends TestCase
 
     /** @test **/
     public function an_admin_can_update_users() {
-        $admin_user = User::factory()->create();
+        $admin_user = $this->admin;
 
         $user_to_update = User::factory()->create();
 
@@ -105,7 +106,7 @@ class UsersTest extends TestCase
 
     /** @test **/
     public function an_admin_can_delete_users() {
-        $admin_user = User::factory()->create();
+        $admin_user = $this->admin;
         $delete_user = User::factory()->create();
         $this->assertCount(2, User::all());
 

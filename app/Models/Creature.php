@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Resource;
+use App\Models\Modifier;
 
 class Creature extends Model
 {
@@ -98,8 +99,6 @@ class Creature extends Model
         'persuasion',
         'persuasion_proficiency',
         'persuasion_expertise',
-        'actions',
-        'modifiers',
         'spellcaster',
         'spell_type',
         'spell_dc',
@@ -137,9 +136,6 @@ class Creature extends Model
     ];
 
     protected $casts = [
-        'actions'                   => 'array',
-        'modifiers'                 => 'array',
-        'special_skill_modifiers'   => 'array',
         'hit_dice'                  => 'array',
         'spell_slots_1'             => 'array',
         'spell_slots_2'             => 'array',
@@ -169,6 +165,7 @@ class Creature extends Model
 
         static::deleting(function($creature) {
             $creature->resources()->delete();
+            $creature->modifiers()->delete();
         });
     }
 
@@ -178,5 +175,9 @@ class Creature extends Model
 
     public function resources() {
         return $this->morphMany(Resource::class, 'creature');
+    }
+
+    public function modifiers() {
+        return $this->morphMany(Modifier::class, 'creature');
     }
 }

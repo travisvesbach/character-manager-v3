@@ -18,7 +18,7 @@ class CreateResourcesTable extends Migration
             $table->timestamps();
 
             $table->string('name');
-            $table->integer('creature_id');
+            $table->foreignId('creature_id');
             $table->string('creature_type');
             $table->string('type');
             $table->string('counter_type')->nullable();

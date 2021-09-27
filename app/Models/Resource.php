@@ -22,8 +22,6 @@ class Resource extends Model
             'dice',
     ];
 
-
-
     protected $casts = [
         'slots' => 'array',
         'dice'  => 'array',

@@ -17,7 +17,7 @@ class CreateCharactersTable extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->bigInteger('user_id')->unsigned();
+            $table->foreignId('user_id');
             $table->string('name');
             $table->integer('hp_max')->default(0);
             $table->integer('hp_current')->default(0);
@@ -135,9 +135,6 @@ class CreateCharactersTable extends Migration
             $table->integer('spell_prepare_count')->nullable()->default(null);
             $table->json('spell_prepared')->nullable();
             $table->json('spell_counters')->nullable();
-            $table->json('actions')->nullable();
-            $table->json('modifiers')->nullable();
-            $table->json('resources')->nullable();
             $table->boolean('show_notepad')->default(1);
             $table->boolean('show_resources')->default(1);
             $table->text('notes')->nullable();

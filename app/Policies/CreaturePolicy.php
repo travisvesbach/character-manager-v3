@@ -10,6 +10,6 @@ class CreaturePolicy
     use HandlesAuthorization;
 
     public function update(User $user, $creature) {
-        return $user->is($creature->user);
+        return $user->is($creature->user) || $user->admin;
     }
 }
