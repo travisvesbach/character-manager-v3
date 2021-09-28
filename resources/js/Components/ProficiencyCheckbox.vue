@@ -1,7 +1,7 @@
 <template>
     <div class="mt-2">
         <jet-checkbox :id="getSlug + '_proficiency'" v-model:checked="proficiency" :title="'Proficiency'" @input="updateProficiency($event.target.checked)"/>
-        <jet-checkbox :id="getSlug + '_expertise'" class="ml-1" :class="(expertise == 'hidden' ? 'invisible' : '')" v-model:checked="expertise" :title="'Expertise'" @input="updateExpertise($event.target.checked)" v-if="expertise != 'hidden'"/>
+        <jet-checkbox :id="getSlug + '_expertise'" class="ml-1" :class="(expertise == 'hidden' ? 'invisible' : '')" v-model:checked="expertise" :title="'Expertise'" @input="updateExpertise($event.target.checked)"/>
         <jet-label :for="getSlug + '_proficiency'" :value="label" class="inline-block ml-1" />
     </div>
 </template>

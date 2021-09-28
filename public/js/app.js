@@ -21532,7 +21532,7 @@ __webpack_require__.r(__webpack_exports__);
   emits: ['update:checked'],
   props: {
     checked: {
-      type: [Array, Boolean, Number],
+      type: [Array, Boolean, Number, String],
       "default": false
     },
     value: {
@@ -21542,7 +21542,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     proxyChecked: {
       get: function get() {
-        return this.checked ? true : false;
+        return this.checked && this.checked != 'hidden' ? true : false;
       },
       set: function set(val) {
         this.$emit("update:checked", val);
@@ -26048,8 +26048,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 8
   /* PROPS */
-  , ["id", "checked"]), $props.expertise != 'hidden' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_checkbox, {
-    key: 0,
+  , ["id", "checked"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_checkbox, {
     id: $options.getSlug + '_expertise',
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["ml-1", $props.expertise == 'hidden' ? 'invisible' : '']),
     checked: $props.expertise,
@@ -26062,7 +26061,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 8
   /* PROPS */
-  , ["id", "class", "checked"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+  , ["id", "class", "checked"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
     "for": $options.getSlug + '_proficiency',
     value: $props.label,
     "class": "inline-block ml-1"
@@ -26546,9 +26545,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return _ctx.proxyChecked = $event;
     }),
-    "class": "h-5 w-5 form-input dark:text-yellow-500 dark:hover:text-yellow-500 dark:hover:bg-yellow-500"
-  }, null, 8
-  /* PROPS */
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["h-5 w-5 form-input dark:text-yellow-500 dark:hover:text-yellow-500 dark:hover:bg-yellow-500", _ctx.checked == 'hidden' ? 'invisible' : ''])
+  }, null, 10
+  /* CLASS, PROPS */
   , _hoisted_1)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, _ctx.proxyChecked]]);
 }
 

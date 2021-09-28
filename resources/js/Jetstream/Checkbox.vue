@@ -1,6 +1,6 @@
 <template>
     <input type="checkbox" :value="value" v-model="proxyChecked"
-           class="h-5 w-5 form-input dark:text-yellow-500 dark:hover:text-yellow-500 dark:hover:bg-yellow-500">
+           class="h-5 w-5 form-input dark:text-yellow-500 dark:hover:text-yellow-500 dark:hover:bg-yellow-500" :class="checked == 'hidden' ? 'invisible' : ''">
 </template>
 
 <script>
@@ -11,7 +11,7 @@ export default defineComponent({
 
     props: {
         checked: {
-            type: [Array, Boolean, Number],
+            type: [Array, Boolean, Number, String],
             default: false,
         },
         value: {
@@ -22,7 +22,7 @@ export default defineComponent({
     computed: {
         proxyChecked: {
             get() {
-                return this.checked ? true : false;
+                return this.checked && this.checked != 'hidden' ? true : false;
             },
 
             set(val) {

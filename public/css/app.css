@@ -1913,10 +1913,6 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(55, 48, 163, var(--tw-text-opacity));
 }
-.text-yellow-600 {
-	--tw-text-opacity: 1;
-	color: rgba(217, 119, 6, var(--tw-text-opacity));
-}
 .underline {
 	text-decoration: underline;
 }
@@ -2575,37 +2571,25 @@ input[type=number] {
 	--tw-text-opacity: 1;
 	color: rgba(209, 213, 219, var(--tw-text-opacity));
 }
-.dark .dark\:text-green {
-	--tw-text-opacity: 1;
-	color: rgba(112, 201, 137, var(--tw-text-opacity));
-}
 .dark .dark\:text-yellow-500 {
 	--tw-text-opacity: 1;
 	color: rgba(245, 158, 11, var(--tw-text-opacity));
 }
-.dark .dark\:text-yellow-600 {
+.dark .dark\:text-green {
 	--tw-text-opacity: 1;
-	color: rgba(217, 119, 6, var(--tw-text-opacity));
+	color: rgba(112, 201, 137, var(--tw-text-opacity));
 }
 .dark .dark\:hover\:border-yellow-500:hover {
 	--tw-border-opacity: 1;
 	border-color: rgba(245, 158, 11, var(--tw-border-opacity));
 }
-.dark .dark\:hover\:bg-gray-600:hover {
-	--tw-bg-opacity: 1;
-	background-color: rgba(75, 85, 99, var(--tw-bg-opacity));
-}
-.dark .dark\:hover\:bg-yellow-600:hover {
-	--tw-bg-opacity: 1;
-	background-color: rgba(217, 119, 6, var(--tw-bg-opacity));
-}
 .dark .dark\:hover\:bg-yellow-500:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgba(245, 158, 11, var(--tw-bg-opacity));
 }
-.dark .dark\:hover\:text-yellow-600:hover {
-	--tw-text-opacity: 1;
-	color: rgba(217, 119, 6, var(--tw-text-opacity));
+.dark .dark\:hover\:bg-gray-600:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(75, 85, 99, var(--tw-bg-opacity));
 }
 .dark .dark\:hover\:text-yellow-500:hover {
 	--tw-text-opacity: 1;
