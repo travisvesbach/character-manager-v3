@@ -19,7 +19,9 @@
         <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
             <spells :creature="character" @updated="updateCharacter" v-if="character.spellcaster"/>
 
-            <resources :creature="character" type="Character" @updated="updateCharacter"/>
+            <resources :creature="character" type="Character"/>
+
+            <modifiers :creature="character" type="Character"/>
         </div>
 
     </app-layout>
@@ -38,6 +40,7 @@
     import Stats from '@/Components/Creature/Stats'
     import Spells from '@/Components/Creature/Spells'
     import Resources from '@/Components/Creature/Resources'
+    import Modifiers from '@/Components/Creature/Modifiers'
 
     export default {
         props: ['character', 'characters'],
@@ -54,6 +57,7 @@
             Stats,
             Spells,
             Resources,
+            Modifiers,
         },
         methods: {
             updateCharacter() {

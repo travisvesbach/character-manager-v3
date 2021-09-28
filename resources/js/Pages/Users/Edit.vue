@@ -28,7 +28,7 @@
 
             <!-- Admin -->
             <jet-label for="admin" value="Admin" class="inline-block mr-1 mt-4" />
-            <checkbox id="admin" v-model="form.admin"/>
+            <jet-checkbox id="admin" v-model:checked="form.admin"/>
             <jet-input-error :message="form.errors.admin" class="mt-2" />
 
             <template #actions>
@@ -53,8 +53,8 @@
     import JetInput from '@/Jetstream/Input'
     import JetInputError from '@/Jetstream/InputError'
     import JetLabel from '@/Jetstream/Label'
+    import JetCheckbox from '@/Jetstream/Checkbox'
     import SelectInput from '@/Components/SelectInput'
-    import Checkbox from '@/Components/Checkbox'
 
     export default {
         props: ['editing'],
@@ -68,7 +68,7 @@
             JetInputError,
             JetLabel,
             SelectInput,
-            Checkbox,
+            JetCheckbox,
         },
         data() {
             return {

@@ -215,14 +215,17 @@
                 let loop_total = 0;
                 for(let i=0;i<resource.dice.length;i++) {
                     loop_total = 0;
-                    message += '[';
-                    for(let j=0;j<resource.dice[i].count;j++) {
-                        let result = dice.roll(resource.dice[i].size);
-                        loop_total += result;
-                        message += result + (j < resource.dice[i].count - 1 ? ', ' : '');
+                    if(resource.dice[i].size > 0) {
+                        message += '[';
+                        for(let j=0;j<resource.dice[i].count;j++) {
+                            let result = dice.roll(resource.dice[i].size);
+                            loop_total += result;
+                            message += result + (j < resource.dice[i].count - 1 ? ', ' : '');
+                        }
+                        message += '] ';
                     }
                     loop_total += getNumber(resource.dice[i].modifier);
-                    message += '] ' + (resource.dice[i].modifier ? '+ ' + resource.dice[i].modifier : '') + ' = ' + loop_total;
+                    message += (resource.dice[i].modifier ? (resource.dice[i].size > 0 ? '+ ' : '') + resource.dice[i].modifier : '') + ' = ' + loop_total;
 
                     total += loop_total;
                     message += '<br>'

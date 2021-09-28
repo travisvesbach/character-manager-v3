@@ -1,14 +1,14 @@
 <template>
     <div class="mt-2">
-        <checkbox :id="getSlug + '_proficiency'" v-model="proficiency" :title="'Proficiency'" @input="updateProficiency($event.target.checked)"/>
-        <checkbox :id="getSlug + '_expertise'" class="ml-1" :class="(expertise == 'hidden' ? 'invisible' : '')" v-model="expertise" :title="'Expertise'" @input="updateExpertise($event.target.checked)"/>
+        <jet-checkbox :id="getSlug + '_proficiency'" v-model:checked="proficiency" :title="'Proficiency'" @input="updateProficiency($event.target.checked)"/>
+        <jet-checkbox :id="getSlug + '_expertise'" class="ml-1" :class="(expertise == 'hidden' ? 'invisible' : '')" v-model:checked="expertise" :title="'Expertise'" @input="updateExpertise($event.target.checked)" v-if="expertise != 'hidden'"/>
         <jet-label :for="getSlug + '_proficiency'" :value="label" class="inline-block ml-1" />
     </div>
 </template>
 
 <script>
     import JetLabel from '@/Jetstream/Label'
-    import Checkbox from '@/Components/Checkbox'
+    import JetCheckbox from '@/Jetstream/Checkbox'
 
 
     export default {
@@ -22,7 +22,7 @@
         },
         components: {
             JetLabel,
-            Checkbox,
+            JetCheckbox,
         },
         emits: ['update:proficiency', 'update:expertise'],
         computed: {

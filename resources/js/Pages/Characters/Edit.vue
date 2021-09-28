@@ -54,7 +54,7 @@
                     <div class="col-span-1 px-1">
                         <!-- hit_dice -->
                         <jet-label for="hit_dice" value="Hit Dice" class="mt-4"/>
-                        <dice-array-input v-model="form.hit_dice" :current="true" />
+                        <dice-array-input v-model="form.hit_dice" :current="true" :multiple="true"/>
                         <jet-input-error :message="form.errors.hit_dice" class="mt-2"/>
                     </div>
                     <div class="col-span-1 px-1">
@@ -351,7 +351,7 @@
                             <!-- spell_list -->
                             <div class="col-span-1 px-1" v-for="(num, index) in 10">
                                 <jet-label :for="'spell_list_string_' + index" :value="index == 0 ? 'Cantrips' : ordinalSuffix(index) + ' Level'" class="mt-4"/>
-                                <textarea :id="'spell_list_string_' + index" class="w-full form-input-color" v-model="form['spell_list_string_' + index]"></textarea>
+                                <textarea :id="'spell_list_string_' + index" class="w-full form-input" v-model="form['spell_list_string_' + index]"></textarea>
                                 <jet-input-error :message="form.errors['spell_list_' + index]" class="mt-2"/>
                             </div>
                         </div>

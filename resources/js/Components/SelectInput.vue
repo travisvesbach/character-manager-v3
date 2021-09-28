@@ -1,5 +1,5 @@
 <template>
-    <select class="focus:ring focus:ring-opacity-50 rounded-md shadow-sm form-input-color" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)">
+    <select class="form-input" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)">
         <option v-for="option in options" :value="optionContents(option, 0)">{{ optionContents(option, 1) }}</option>
     </select>
 </template>

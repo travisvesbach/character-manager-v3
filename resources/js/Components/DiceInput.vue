@@ -39,6 +39,7 @@
         data() {
             return {
                 sizes: [
+                    0,
                     4,
                     6,
                     8,

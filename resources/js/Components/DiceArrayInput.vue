@@ -25,7 +25,7 @@
             },
             multiple: {
                 type: Boolean,
-                default: true,
+                default: false,
             }
         },
         emits: ['update:modelValue'],
