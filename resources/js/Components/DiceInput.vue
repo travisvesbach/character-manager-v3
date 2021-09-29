@@ -32,7 +32,7 @@
             type: {
                 default: 'hidden',
             },
-            is_modifier: {
+            same: {
                 default: false,
             },
         },
@@ -69,7 +69,7 @@
                     'Thunder',
                 ];
 
-                if(this.is_modifier) {
+                if(this.same) {
                     types.push('Same as attack');
                 }
                 return types;

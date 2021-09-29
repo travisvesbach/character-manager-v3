@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\DiceArray;
 
 class CreatureRequest extends FormRequest
 {
@@ -28,7 +29,7 @@ class CreatureRequest extends FormRequest
             'hp_max'                        => 'required|integer',
             'hp_current'                    => 'nullable|integer',
             'hp_temp'                       => 'nullable|integer',
-            'hit_dice'                      => 'nullable',
+            'hit_dice'                      => ['nullable', new DiceArray],
             'ac'                            => 'required|integer',
             'ac_source'                     => 'nullable|max:255',
             'initiative'                    => 'required|integer',

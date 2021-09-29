@@ -33,11 +33,11 @@
         <accordion :key="accordion_key">
             <accordion-item :id="'list_' + index + '_accordion'" class="mt-2" v-for="(list, index) in filteredSpellLists" v-if="filteredSpellLists.length > 0" :key="index">
                 <template v-slot:title>
-                    {{ index == 0 ? 'Cantrips' : ordinalSuffix(index) + ' Level' }}:
+                    {{ list[0] == 0 ? 'Cantrips' : ordinalSuffix(list[0]) + ' Level' }}:
                 </template>
                 <template v-slot:content>
                     <ul class="ml-2">
-                        <li v-for="spell in list">
+                        <li v-for="spell in list[1]">
                             {{spell}}
                         </li>
                     </ul>
@@ -126,11 +126,11 @@
                         let level_list = this.creature['spell_list_' + i];
                         if(level_list && level_list.length > 0) {
                             if(this.creature.spell_list_type == 'known' || i == 0) {
-                                list.push(level_list);
+                                list.push([i, level_list]);
                             } else if(this.creature.spell_prepared) {
                                 let common = level_list.filter(value => this.creature.spell_prepared.includes(value));
                                 if(common.length > 0) {
-                                    list.push(common);
+                                    list.push([i, common]);
                                 }
                             }
                         }

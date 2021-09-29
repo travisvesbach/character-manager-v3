@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\DiceArray;
 
 class ModifierRequest extends FormRequest
 {
@@ -27,19 +28,20 @@ class ModifierRequest extends FormRequest
             'name'                  => 'required|max:255',
             'creature_id'           => 'required|integer',
             'creature_type'         => 'required|max:255',
-            'ability'               => 'required_without:save,attack,critical_range,damage',
-            'ability_dice'          => 'required_if:ability,1|nullable',
-            'save'                  => 'required_without:ability,attack,critical_range,damage',
-            'save_dice'             => 'required_if:save,1|nullable',
-            'attack'                => 'required_without:ability,save,critical_range,damage',
-            'attack_dice'           => 'required_if:attack,1|nullable',
-            'critical_range'        => 'required_without:ability,save,attack,damage',
-            'critical_range_start'  => 'required_if:critical_range,1|integer|nullable',
-            'damage'                => 'required_without:ability,save,attack,critical_range',
-            'damage_as'             => 'required_if:damage,1|max:255|nullable',
+            'ability'               => 'required_without:save,attack,critical_range,damage|boolean',
+            'ability_dice'          => ['required_unless:ability,false', 'nullable', new DiceArray($this->ability)],
+            'save'                  => 'required_without:ability,attack,critical_range,damage|boolean',
+            'save_dice'             => ['required_unless:save,false', 'nullable', new DiceArray($this->save)],
+            'attack'                => 'required_without:ability,save,critical_range,damage|boolean',
+            'attack_dice'           => ['required_unless:attack,false', 'nullable', new DiceArray($this->attack)],
+            'critical_range'        => 'required_without:ability,save,attack,damage|boolean',
+            'critical_range_start'  => 'required_unless:critical_range,false|integer|nullable',
+            'damage'                => 'required_without:ability,save,attack,critical_range|boolean',
+            'damage_as'             => 'required_unless:damage,false|max:255|nullable',
             'damage_dc'             => 'required_if:damage_as,save|integer|nullable',
             'damage_save'           => 'required_if:damage_as,save|max:255|nullable',
-            'damage_dice'           => 'required_if:damage,1|nullable',
+            'damage_dice'           => ['required_unless:damage,false', 'nullable', new DiceArray($this->damage)],
+            'enabled'               => 'boolean',
         ];
     }
 }

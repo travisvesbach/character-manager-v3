@@ -32,6 +32,7 @@ class CreateModifiersTable extends Migration
             $table->integer('damage_dc')->nullable();
             $table->string('damage_save')->nullable();
             $table->json('damage_dice')->nullable();
+            $table->boolean('enabled')->default(0);
         });
     }
 
