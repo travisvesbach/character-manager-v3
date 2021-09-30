@@ -20696,7 +20696,6 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     toggleEnabled: function toggleEnabled(modifier) {
-      console.log('here');
       this.setForm(modifier);
       this.form.enabled = modifier.enabled;
       this.saveModifier();
@@ -21037,6 +21036,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
 /* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -21046,9 +21051,58 @@ __webpack_require__.r(__webpack_exports__);
   },
   mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_1__.flash],
   methods: {
-    roll: function roll(item, modifier) {
-      var result = dice.roll();
-      var message = this.creature.name + ':<br>' + item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
+    roll: function roll(item, modifier, type) {
+      var modifiers = this.creature.modifiers.filter(function (value) {
+        return value.enabled && value[type];
+      });
+      var total = dice.roll();
+      var message = this.creature.name + ':<br>' + item + ': [' + total + ']' + (modifier ? ' + ' + modifier : '');
+      total += modifier;
+
+      var _iterator = _createForOfIteratorHelper(modifiers),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var mod = _step.value;
+
+          var _iterator2 = _createForOfIteratorHelper(mod[type + '_dice']),
+              _step2;
+
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var mod_dice = _step2.value;
+              message += ' + ' + (mod_dice.count > 0 ? '[' : '');
+
+              for (var x = 0; x < mod_dice.count; x++) {
+                var result = dice.roll(mod_dice.size);
+                message += (x > 0 ? ', ' : '') + result;
+                total += result;
+              }
+
+              message += mod_dice.count > 0 ? ']' : '';
+
+              if (mod_dice.modifier) {
+                message += ' + ' + (mod_dice.modifier ? ' + ' + mod_dice.modifier : '');
+                total += mod_dice.modifier;
+              }
+
+              message += ' [' + mod.name + ']';
+              total += mod_dice.modifier;
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      message += ' = ' + total;
       this.flash(message, 'primary');
     },
     displayStat: function displayStat(stat) {
@@ -25559,21 +25613,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "block",
         onClick: _cache[0] || (_cache[0] = function ($event) {
-          return $options.roll('Strength', $props.creature.strength_mod);
+          return $options.roll('Strength', $props.creature.strength_mod, 'ability');
         })
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Strength: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.creature.strength) + " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.strength_mod)) + ")", 1
       /* TEXT */
       )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.strength_save_proficiency)]),
         onClick: _cache[1] || (_cache[1] = function ($event) {
-          return $options.roll('Strength Save', $props.creature.strength_save);
+          return $options.roll('Strength Save', $props.creature.strength_save, 'save');
         })
       }, " Save: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.strength_save)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.athletics_proficiency)]),
         onClick: _cache[2] || (_cache[2] = function ($event) {
-          return $options.roll('Athletics', $props.creature.athletics);
+          return $options.roll('Athletics', $props.creature.athletics, 'ability');
         })
       }, " Athletics: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.athletics)), 3
       /* TEXT, CLASS */
@@ -25587,35 +25641,35 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "block",
         onClick: _cache[3] || (_cache[3] = function ($event) {
-          return $options.roll('Dexterity', $props.creature.dexterity_mod);
+          return $options.roll('Dexterity', $props.creature.dexterity_mod, 'ability');
         })
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Dexterity: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.creature.dexterity) + " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.dexterity_mod)) + ")", 1
       /* TEXT */
       )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.dexterity_save_proficiency)]),
         onClick: _cache[4] || (_cache[4] = function ($event) {
-          return $options.roll('Dexterity Save', $props.creature.dexterity_save);
+          return $options.roll('Dexterity Save', $props.creature.dexterity_save, 'save');
         })
       }, " Save: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.dexterity_save)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.acrobatics_proficiency)]),
         onClick: _cache[5] || (_cache[5] = function ($event) {
-          return $options.roll('Acrobatics', $props.creature.acrobatics);
+          return $options.roll('Acrobatics', $props.creature.acrobatics, 'ability');
         })
       }, " Acrobatics: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.acrobatics)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.sleight_of_hand_proficiency)]),
         onClick: _cache[6] || (_cache[6] = function ($event) {
-          return $options.roll('Slight of Hand', $props.creature.sleight_of_hand);
+          return $options.roll('Slight of Hand', $props.creature.sleight_of_hand, 'ability');
         })
       }, " Slight of Hand: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.sleight_of_hand)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.stealth_proficiency)]),
         onClick: _cache[7] || (_cache[7] = function ($event) {
-          return $options.roll('Stealth', $props.creature.stealth);
+          return $options.roll('Stealth', $props.creature.stealth, 'ability');
         })
       }, " Stealth: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.stealth)), 3
       /* TEXT, CLASS */
@@ -25629,14 +25683,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "block",
         onClick: _cache[8] || (_cache[8] = function ($event) {
-          return $options.roll('Constitution', $props.creature.constitution_mod);
+          return $options.roll('Constitution', $props.creature.constitution_mod, 'ability');
         })
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Constitution: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.creature.constitution) + " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.constitution_mod)) + ")", 1
       /* TEXT */
       )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.constitution_save_proficiency)]),
         onClick: _cache[9] || (_cache[9] = function ($event) {
-          return $options.roll('Constitution Save', $props.creature.constitution_save);
+          return $options.roll('Constitution Save', $props.creature.constitution_save, 'save');
         })
       }, " Save: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.constitution_save)), 3
       /* TEXT, CLASS */
@@ -25650,49 +25704,49 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "block",
         onClick: _cache[10] || (_cache[10] = function ($event) {
-          return $options.roll('Intelligence', $props.creature.intelligence_mod);
+          return $options.roll('Intelligence', $props.creature.intelligence_mod, 'ability');
         })
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Intelligence: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.creature.intelligence) + " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.intelligence_mod)) + ")", 1
       /* TEXT */
       )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.intelligence_save_proficiency)]),
         onClick: _cache[11] || (_cache[11] = function ($event) {
-          return $options.roll('Intelligence Save', $props.creature.intelligence_save);
+          return $options.roll('Intelligence Save', $props.creature.intelligence_save, 'save');
         })
       }, " Save: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.intelligence_save)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.arcana_proficiency)]),
         onClick: _cache[12] || (_cache[12] = function ($event) {
-          return $options.roll('Arcana', $props.creature.arcana);
+          return $options.roll('Arcana', $props.creature.arcana, 'ability');
         })
       }, " Arcana: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.arcana)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.history_proficiency)]),
         onClick: _cache[13] || (_cache[13] = function ($event) {
-          return $options.roll('History', $props.creature.history);
+          return $options.roll('History', $props.creature.history, 'ability');
         })
       }, " History: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.history)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.investigation_proficiency)]),
         onClick: _cache[14] || (_cache[14] = function ($event) {
-          return $options.roll('Investigation', $props.creature.investigation);
+          return $options.roll('Investigation', $props.creature.investigation, 'ability');
         })
       }, " Investigation: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.investigation)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.nature_proficiency)]),
         onClick: _cache[15] || (_cache[15] = function ($event) {
-          return $options.roll('Nature', $props.creature.nature);
+          return $options.roll('Nature', $props.creature.nature, 'ability');
         })
       }, " Nature: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.nature)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.religion_proficiency)]),
         onClick: _cache[16] || (_cache[16] = function ($event) {
-          return $options.roll('Religion', $props.creature.religion);
+          return $options.roll('Religion', $props.creature.religion, 'ability');
         })
       }, " Religion: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.religion)), 3
       /* TEXT, CLASS */
@@ -25706,49 +25760,49 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "block",
         onClick: _cache[17] || (_cache[17] = function ($event) {
-          return $options.roll('Wisdom', $props.creature.wisdom_mod);
+          return $options.roll('Wisdom', $props.creature.wisdom_mod, 'ability');
         })
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Wisdom: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.creature.wisdom) + " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.wisdom_mod)) + ")", 1
       /* TEXT */
       )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.wisdom_save_proficiency)]),
         onClick: _cache[18] || (_cache[18] = function ($event) {
-          return $options.roll('Wisdom Save', $props.creature.wisdom_save);
+          return $options.roll('Wisdom Save', $props.creature.wisdom_save, 'save');
         })
       }, " Save: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.wisdom_save)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.animal_handling_proficiency)]),
         onClick: _cache[19] || (_cache[19] = function ($event) {
-          return $options.roll('Animal Handling', $props.creature.animal_handling);
+          return $options.roll('Animal Handling', $props.creature.animal_handling, 'ability');
         })
       }, " Animal Handling: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.animal_handling)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.insight_proficiency)]),
         onClick: _cache[20] || (_cache[20] = function ($event) {
-          return $options.roll('Insight', $props.creature.insight);
+          return $options.roll('Insight', $props.creature.insight, 'ability');
         })
       }, " Insight: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.insight)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.medicine_proficiency)]),
         onClick: _cache[21] || (_cache[21] = function ($event) {
-          return $options.roll('Medicine', $props.creature.medicine);
+          return $options.roll('Medicine', $props.creature.medicine, 'ability');
         })
       }, " Medicine: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.medicine)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.perception_proficiency)]),
         onClick: _cache[22] || (_cache[22] = function ($event) {
-          return $options.roll('Perception', $props.creature.perception);
+          return $options.roll('Perception', $props.creature.perception, 'ability');
         })
       }, " Perception: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.perception)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.survival_proficiency)]),
         onClick: _cache[23] || (_cache[23] = function ($event) {
-          return $options.roll('Survival', $props.creature.survival);
+          return $options.roll('Survival', $props.creature.survival, 'ability');
         })
       }, " Survival: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.survival)), 3
       /* TEXT, CLASS */
@@ -25762,42 +25816,42 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "block",
         onClick: _cache[24] || (_cache[24] = function ($event) {
-          return $options.roll('Charisma', $props.creature.charisma_mod);
+          return $options.roll('Charisma', $props.creature.charisma_mod, 'ability');
         })
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Charisma: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.creature.charisma) + " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.charisma_mod)) + ")", 1
       /* TEXT */
       )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.charisma_save_proficiency)]),
         onClick: _cache[25] || (_cache[25] = function ($event) {
-          return $options.roll('Charisma Save', $props.creature.charisma_save);
+          return $options.roll('Charisma Save', $props.creature.charisma_save, 'save');
         })
       }, " Save: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.charisma_save)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.deception_proficiency)]),
         onClick: _cache[26] || (_cache[26] = function ($event) {
-          return $options.roll('Deception', $props.creature.deception);
+          return $options.roll('Deception', $props.creature.deception, 'ability');
         })
       }, " Deception: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.deception)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.intimidation_proficiency)]),
         onClick: _cache[27] || (_cache[27] = function ($event) {
-          return $options.roll('Intimidation', $props.creature.intimidation);
+          return $options.roll('Intimidation', $props.creature.intimidation, 'ability');
         })
       }, " Intimidation: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.intimidation)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.performance_proficiency)]),
         onClick: _cache[28] || (_cache[28] = function ($event) {
-          return $options.roll('Performance', $props.creature.performance);
+          return $options.roll('Performance', $props.creature.performance, 'ability');
         })
       }, " Performance: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.performance)), 3
       /* TEXT, CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block", $options.proficiencyClass($props.creature.persuasion_proficiency)]),
         onClick: _cache[29] || (_cache[29] = function ($event) {
-          return $options.roll('Persuasion', $props.creature.persuasion);
+          return $options.roll('Persuasion', $props.creature.persuasion, 'ability');
         })
       }, " Persuasion: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat($props.creature.persuasion)), 3
       /* TEXT, CLASS */

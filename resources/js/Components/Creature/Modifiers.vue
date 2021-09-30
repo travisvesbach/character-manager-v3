@@ -281,7 +281,6 @@
                 }
             },
             toggleEnabled(modifier) {
-                console.log('here');
                 this.setForm(modifier);
                 this.form.enabled = modifier.enabled;
                 this.saveModifier();
