@@ -2,5 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/fonts/MedievalSharp-Regular.ttf": "/fonts/MedievalSharp-Regular.ttf",
-    "/fonts/PirataOne-Regular.ttf": "/fonts/PirataOne-Regular.ttf"
+    "/fonts/PirataOne-Regular.ttf": "/fonts/PirataOne-Regular.ttf",
+    "/fonts/GermaniaOne-Regular.ttf": "/fonts/GermaniaOne-Regular.ttf",
+    "/fonts/UncialAntiqua-Regular.ttf": "/fonts/UncialAntiqua-Regular.ttf"
 }

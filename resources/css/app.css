@@ -14,6 +14,18 @@
     font-weight: normal;
     src: url('../fonts/PirataOne-Regular.ttf') format('woff');
 }
+@font-face {
+    font-family: 'GermaniaOne-Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/GermaniaOne-Regular.ttf') format('woff');
+}
+@font-face {
+    font-family: 'UncialAntiqua-Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/UncialAntiqua-Regular.ttf') format('woff');
+}
 
 .MedievalSharp {
     font-family: "MedievalSharp";
@@ -21,6 +33,14 @@
 
 .PirataOne {
     font-family: "PirataOne-Regular";
+}
+
+.GermaniaOne {
+    font-family: "GermaniaOne-Regular";
+}
+
+.UncialAntiqua {
+    font-family: "UncialAntiqua-Regular";
 }
 
 .hover-trigger .hover-target {

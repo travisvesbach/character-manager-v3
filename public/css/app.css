@@ -2025,11 +2025,29 @@ select {
     font-weight: normal;
     src: url(/fonts/PirataOne-Regular.ttf?6e705d6876d8400515e07b47d757622c) format('woff');
 }
+@font-face {
+    font-family: 'GermaniaOne-Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: url(/fonts/GermaniaOne-Regular.ttf?64fd4aecc6e0b1315fb934ad34d51cd2) format('woff');
+}
+@font-face {
+    font-family: 'UncialAntiqua-Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: url(/fonts/UncialAntiqua-Regular.ttf?63c6ff17a876c5a4290c50372a0e03e4) format('woff');
+}
 .MedievalSharp {
     font-family: "MedievalSharp";
 }
 .PirataOne {
     font-family: "PirataOne-Regular";
+}
+.GermaniaOne {
+    font-family: "GermaniaOne-Regular";
+}
+.UncialAntiqua {
+    font-family: "UncialAntiqua-Regular";
 }
 .hover-trigger .hover-target {
     visibility: hidden;
