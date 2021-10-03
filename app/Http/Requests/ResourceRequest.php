@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\DiceArray;
 
 class ResourceRequest extends FormRequest
 {
@@ -33,7 +34,7 @@ class ResourceRequest extends FormRequest
             'current'           => 'integer|nullable',
             'slots'             => '',
             'recover'           => 'max:255',
-            'dice'              => 'required_if:type,dice',
+            'dice'              => ['required_if:type,dice', 'nullable', new DiceArray($this->dice)],
         ];
     }
 }

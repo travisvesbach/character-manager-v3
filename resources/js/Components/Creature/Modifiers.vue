@@ -6,15 +6,15 @@
             </jet-secondary-button>
         </template>
 
-        <div v-for="modifier in creature.modifiers">
-            <jet-checkbox :id="'enable_' + modifier.name" v-model:checked="modifier.enabled" @change.native="toggleEnabled(modifier)"/>
-            <jet-label class="inline-block ml-1" :for="'enable_' + modifier.name" :value="modifier.name"/>
+        <div class="flex justify-between" :class="index != 0 ? 'my-1' : 'mb-1'" v-for="(modifier, index) in creature.modifiers">
+            <jet-label class="inline-block ml-1 cursor-pointer" :value="modifier.name" @click="openModal(modifier)"/>
+            <jet-checkbox :id="'enable_' + modifier.name" class="cursor-pointer" v-model:checked="modifier.enabled" @change.native="toggleEnabled(modifier)"/>
 
-            <div class="ml-2">
+<!--             <div class="ml-2">
                 <jet-secondary-button size="xs" @click="openModal(modifier)">
                     edit
                 </jet-secondary-button>
-            </div>
+            </div> -->
         </div>
 
         <!-- modifier modal -->
@@ -124,15 +124,6 @@
                     <jet-input-error :message="form.errors.damage_dice" class="mt-2"/>
                 </div>
 
-
-        <!--
-            'damage_as',
-            'damage_dc',
-            'damage_save',
-            'damage_dice',
-        -->
-
-
                 </div>
 
                 <div v-if="form.type == 'dice'" class="px-1">
@@ -141,6 +132,12 @@
                     <dice-array-input v-model="form.dice" :current="true" :multiple="true"/>
                     <jet-input-error :message="form.errors.dice" class="mt-2"/>
                 </div>
+            </template>
+
+            <template #footer>
+                <jet-danger-button @click="show_delete_modal = true" v-if="form.editing">
+                    Delete
+                </jet-danger-button>
             </template>
 
             <template #footerend>
@@ -154,13 +151,34 @@
             </template>
         </jet-dialog-modal>
 
+        <!-- delete confirmation -->
+        <jet-confirmation-modal :show="show_delete_modal" @close="show_delete_modal = false">
+            <template #title>
+                Delete {{ form.name }}
+            </template>
+
+            <template #content>
+                Are you sure you want to delete this resource?
+            </template>
+
+            <template #footer>
+                <jet-secondary-button @click.native="show_delete_modal = false">
+                    Cancel
+                </jet-secondary-button>
+                <jet-danger-button class="ml-2" @click.native="deleteModifier" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Delete Resource
+                </jet-danger-button>
+            </template>
+        </jet-confirmation-modal>
     </grid-section>
 </template>
 
 <script>
     import JetButton from '@/Jetstream/Button'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+    import JetDangerButton from '@/Jetstream/DangerButton'
     import JetDialogModal from '@/Jetstream/DialogModal'
+    import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
     import JetLabel from '@/Jetstream/Label'
     import JetInput from '@/Jetstream/Input'
     import JetInputError from '@/Jetstream/InputError'
@@ -177,7 +195,9 @@
         components: {
             JetButton,
             JetSecondaryButton,
+            JetDangerButton,
             JetDialogModal,
+            JetConfirmationModal,
             JetLabel,
             JetInput,
             JetInputError,
@@ -191,6 +211,7 @@
         data() {
             return {
                 show_modal: false,
+                show_delete_modal: false,
                 form: this.$inertia.form({}),
             };
         },
@@ -284,7 +305,12 @@
                 this.setForm(modifier);
                 this.form.enabled = modifier.enabled;
                 this.saveModifier();
-            }
+            },
+            deleteModifier() {
+                this.form.delete(route('modifiers.destroy', this.form.id));
+                this.closeModal();
+                this.show_delete_modal = false;
+            },
         }
     }
 </script>

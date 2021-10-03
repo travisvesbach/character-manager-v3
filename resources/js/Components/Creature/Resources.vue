@@ -6,24 +6,18 @@
             </jet-secondary-button>
         </template>
 
-        <div v-for="resource in creature.resources">
+        <div :class="index != 0 ? 'my-1' : 'mb-1'" v-for="(resource, index) in creature.resources">
             <div class="flex justify-between">
-                <span>
+                <span class="cursor-pointer" @click="openModal(resource)">
                     {{ resource.name }}:
                 </span>
                 <span v-if="resource.type == 'counter'">
                     <counter-slot v-for="(slot, index) in resource.slots" :slot="slot" @click.native="updateSlot(resource, index)"/>
                 </span>
-                <jet-secondary-button size="sm" class="ml-auto inline-block" @click="rollDice(resource)" v-if="resource.type == 'dice'">
+                <jet-secondary-button size="xs" class="ml-auto inline-block" @click="rollDice(resource)" v-if="resource.type == 'dice'">
                     <div v-for="dice in resource.dice">
                         {{ dice.count }}d{{ dice.size }}{{ dice.modifier ? '+' + dice.modifier : '' }}
                     </div>
-                </jet-secondary-button>
-            </div>
-
-            <div class="ml-2">
-                <jet-secondary-button size="xs" @click="openModal(resource)">
-                    edit
                 </jet-secondary-button>
             </div>
         </div>
@@ -85,6 +79,12 @@
                 </div>
             </template>
 
+            <template #footer>
+                <jet-danger-button @click="show_delete_modal = true" v-if="form.editing">
+                    Delete
+                </jet-danger-button>
+            </template>
+
             <template #footerend>
                 <jet-secondary-button @click="closeModal">
                     Cancel
@@ -96,13 +96,35 @@
             </template>
         </jet-dialog-modal>
 
+        <!-- delete confirmation -->
+        <jet-confirmation-modal :show="show_delete_modal" @close="show_delete_modal = false">
+            <template #title>
+                Delete {{ form.name }}
+            </template>
+
+            <template #content>
+                Are you sure you want to delete this resource?
+            </template>
+
+            <template #footer>
+                <jet-secondary-button @click.native="show_delete_modal = false">
+                    Cancel
+                </jet-secondary-button>
+                <jet-danger-button class="ml-2" @click.native="deleteResource" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Delete Resource
+                </jet-danger-button>
+            </template>
+        </jet-confirmation-modal>
+
     </grid-section>
 </template>
 
 <script>
     import JetButton from '@/Jetstream/Button'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+    import JetDangerButton from '@/Jetstream/DangerButton'
     import JetDialogModal from '@/Jetstream/DialogModal'
+    import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
     import JetLabel from '@/Jetstream/Label'
     import JetInput from '@/Jetstream/Input'
     import JetInputError from '@/Jetstream/InputError'
@@ -118,7 +140,9 @@
         components: {
             JetButton,
             JetSecondaryButton,
+            JetDangerButton,
             JetDialogModal,
+            JetConfirmationModal,
             JetLabel,
             JetInput,
             JetInputError,
@@ -131,6 +155,7 @@
         data() {
             return {
                 show_modal: false,
+                show_delete_modal: false,
                 form: this.$inertia.form({}),
             };
         },
@@ -234,7 +259,12 @@
                     message += 'Total: ' + total;
                 }
                 this.flash(message, 'primary');
-            }
+            },
+            deleteResource() {
+                this.form.delete(route('resources.destroy', this.form.id));
+                this.closeModal();
+                this.show_delete_modal = false;
+            },
         }
     }
 </script>

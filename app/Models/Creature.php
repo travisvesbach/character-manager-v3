@@ -178,6 +178,6 @@ class Creature extends Model
     }
 
     public function modifiers() {
-        return $this->morphMany(Modifier::class, 'creature');
+        return $this->morphMany(Modifier::class, 'creature')->orderBy('name');
     }
 }
