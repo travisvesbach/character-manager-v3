@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Resource;
 use App\Models\Modifier;
+use App\Models\Action;
 
 class Creature extends Model
 {
@@ -166,6 +167,7 @@ class Creature extends Model
         static::deleting(function($creature) {
             $creature->resources()->delete();
             $creature->modifiers()->delete();
+            $creature->actions()->delete();
         });
     }
 
@@ -179,5 +181,9 @@ class Creature extends Model
 
     public function modifiers() {
         return $this->morphMany(Modifier::class, 'creature')->orderBy('name');
+    }
+
+    public function actions() {
+        return $this->morphMany(Action::class, 'creature')->orderBy('name');
     }
 }

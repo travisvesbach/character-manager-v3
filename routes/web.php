@@ -8,6 +8,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CharactersController;
 use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\ModifiersController;
+use App\Http\Controllers\ActionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,4 +55,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::post('/modifiers', [ModifiersController::class, 'store'])->name('modifiers.store');
     Route::patch('/modifiers/{modifier}', [ModifiersController::class, 'update'])->name('modifiers.update');
     Route::delete('/modifiers/{modifier}', [ModifiersController::class, 'destroy'])->name('modifiers.destroy');
+
+    Route::post('/actions', [ActionsController::class, 'store'])->name('actions.store');
+    Route::patch('/actions/{action}', [ActionsController::class, 'update'])->name('actions.update');
+    Route::delete('/actions/{action}', [ActionsController::class, 'destroy'])->name('actions.destroy');
 });
