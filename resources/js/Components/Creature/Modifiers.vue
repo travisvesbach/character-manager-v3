@@ -37,6 +37,7 @@
 
                         <div class="px-1 col-span-1">
                             <jet-label value="Modifier Types"/>
+                            <jet-input-error :message="form.errors.types" class="mt-2"/>
                         </div>
 
                         <div  class="px-1 col-span-1">
@@ -72,58 +73,57 @@
                         </div>
                     </div>
 
-                <div class="px-1 col-span-1 sm:col-span-2 mt-4" v-if="form.ability">
-                    <!-- ability dice -->
-                    <jet-label for="ability_dice" value="Ability Modifier"/>
-                    <dice-array-input v-model="form.ability_dice"/>
-                    <jet-input-error :message="form.errors.ability_dice" class="mt-2"/>
-                </div>
-
-                <div class="px-1 col-span-1 sm:col-span-2 mt-4" v-if="form.save">
-                    <!-- save dice -->
-                    <jet-label for="save_dice" value="Save Modifier"/>
-                    <dice-array-input v-model="form.save_dice"/>
-                    <jet-input-error :message="form.errors.save_dice" class="mt-2"/>
-                </div>
-
-                <div class="px-1 col-span-1 sm:col-span-2 mt-4" v-if="form.attack">
-                    <!-- attack dice -->
-                    <jet-label for="attack_dice" value="Attack Modifier"/>
-                    <dice-array-input v-model="form.attack_dice"/>
-                    <jet-input-error :message="form.errors.attack_dice" class="mt-2"/>
-                </div>
-
-                <div class="px-1 col-span-1 sm:col-span-2 mt-4" v-if="form.critical_range">
-                    <!-- critical hit range  -->
-                    <jet-label for="critical_range_start" value="Critial Hit Range"/>
-                    <jet-input type="number" class="mt-1 w-14" v-model.number="form.critical_range_start"/> - 20
-                    <jet-input-error :message="form.errors.critical_range_start" class="mt-2"/>
-                </div>
-
-                <div class="px-1 col-span-1 sm:col-span-2 mt-4" v-if="form.damage">
-                    <!-- damage_as  -->
-                    <jet-label for="damage_as" value="Damage Added As"/>
-                    <select-input class="mt-1" v-model="form.damage_as" :options="[['attack', 'Part of the Attack'], ['save', 'Save']]"/>
-                    <jet-input-error :message="form.errors.damage_as" class="mt-2"/>
-
-                    <div v-if="form.damage_as == 'save'">
-                        <!-- damage_dc  -->
-                        <jet-label for="damage_dc" value="Save DC"/>
-                        <jet-input type="number" class="mt-1 w-14" v-model.number="form.damage_dc"/> - 20
-                        <jet-input-error :message="form.errors.damage_dc" class="mt-2"/>
-
-                        <!-- damage_save  -->
-                        <jet-label for="damage_save" value="Save DC"/>
-                        <select-input class="mt-1" v-model="form.damage_save" :options="['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA']"/>
-                        <jet-input-error :message="form.errors.damage_save" class="mt-2"/>
+                    <div class="px-1 col-span-1 sm:col-span-2 mt-4" v-if="form.ability">
+                        <!-- ability dice -->
+                        <jet-label for="ability_dice" value="Ability Modifier"/>
+                        <dice-array-input v-model="form.ability_dice"/>
+                        <jet-input-error :message="form.errors.ability_dice" class="mt-2"/>
                     </div>
 
-                    <!-- damage_dice -->
-                    <jet-label for="damage_dice" value="Damage"/>
-                    <dice-array-input v-model="form.damage_dice" :multiple="true" :same="true"/>
-                    <jet-input-error :message="form.errors.damage_dice" class="mt-2"/>
-                </div>
+                    <div class="px-1 col-span-1 sm:col-span-2 mt-4" v-if="form.save">
+                        <!-- save dice -->
+                        <jet-label for="save_dice" value="Save Modifier"/>
+                        <dice-array-input v-model="form.save_dice"/>
+                        <jet-input-error :message="form.errors.save_dice" class="mt-2"/>
+                    </div>
 
+                    <div class="px-1 col-span-1 sm:col-span-2 mt-4" v-if="form.attack">
+                        <!-- attack dice -->
+                        <jet-label for="attack_dice" value="Attack Modifier"/>
+                        <dice-array-input v-model="form.attack_dice"/>
+                        <jet-input-error :message="form.errors.attack_dice" class="mt-2"/>
+                    </div>
+
+                    <div class="px-1 col-span-1 sm:col-span-2 mt-4" v-if="form.critical_range">
+                        <!-- critical hit range  -->
+                        <jet-label for="critical_range_start" value="Critial Hit Range"/>
+                        <jet-input type="number" class="mt-1 w-14" v-model.number="form.critical_range_start"/> - 20
+                        <jet-input-error :message="form.errors.critical_range_start" class="mt-2"/>
+                    </div>
+
+                    <div class="px-1 col-span-1 sm:col-span-2 mt-4" v-if="form.damage">
+                        <!-- damage_as  -->
+                        <jet-label for="damage_as" value="Damage Added As"/>
+                        <select-input class="mt-1" v-model="form.damage_as" :options="[['attack', 'Part of the Attack'], ['save', 'Save']]"/>
+                        <jet-input-error :message="form.errors.damage_as" class="mt-2"/>
+
+                        <div v-if="form.damage_as == 'save'">
+                            <!-- damage_dc  -->
+                            <jet-label for="damage_dc" value="Save DC"/>
+                            <jet-input type="number" class="mt-1 w-14" v-model.number="form.damage_dc"/> - 20
+                            <jet-input-error :message="form.errors.damage_dc" class="mt-2"/>
+
+                            <!-- damage_save  -->
+                            <jet-label for="damage_save" value="Save DC"/>
+                            <select-input class="mt-1" v-model="form.damage_save" :options="['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA']"/>
+                            <jet-input-error :message="form.errors.damage_save" class="mt-2"/>
+                        </div>
+
+                        <!-- damage_dice -->
+                        <jet-label for="damage_dice" value="Damage"/>
+                        <dice-array-input v-model="form.damage_dice" :multiple="true" :same="true"/>
+                        <jet-input-error :message="form.errors.damage_dice" class="mt-2"/>
+                    </div>
                 </div>
 
                 <div v-if="form.type == 'dice'" class="px-1">
@@ -158,7 +158,7 @@
             </template>
 
             <template #content>
-                Are you sure you want to delete this resource?
+                Are you sure you want to delete this modifier?
             </template>
 
             <template #footer>
@@ -166,7 +166,7 @@
                     Cancel
                 </jet-secondary-button>
                 <jet-danger-button class="ml-2" @click.native="deleteModifier" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Delete Resource
+                    Delete Modifier
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>
@@ -287,6 +287,13 @@
                 this.show_modal = false;
             },
             saveModifier() {
+                if(this.form.ability == false && this.form.save == false && this.form.attack == false && this.form.critical_range == false && this.form.damage == false) {
+                    this.form.errors.types = 'required';
+                    return;
+                } else {
+                    this.form.errors.types = null;
+                }
+
                 if(this.form.editing) {
                     this.form.patch(route('modifiers.update', this.form.id), {
                         onSuccess: (response) => {

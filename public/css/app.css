@@ -1120,6 +1120,9 @@ select {
 .col-span-3 {
 	grid-column: span 3 / span 3;
 }
+.col-span-2 {
+	grid-column: span 2 / span 2;
+}
 .float-right {
 	float: right;
 }
@@ -2873,6 +2876,10 @@ input[type=number] {
 
 	.md\:col-span-1 {
 		grid-column: span 1 / span 1;
+	}
+
+	.md\:col-span-3 {
+		grid-column: span 3 / span 3;
 	}
 
 	.md\:my-0 {

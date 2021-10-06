@@ -22,6 +22,8 @@
             <resources :creature="character" type="Character"/>
 
             <modifiers :creature="character" type="Character"/>
+
+            <actions class="sm:col-span-2 md:col-span-3" :creature="character" type="Character"/>
         </div>
 
     </app-layout>
@@ -41,6 +43,7 @@
     import Spells from '@/Components/Creature/Spells'
     import Resources from '@/Components/Creature/Resources'
     import Modifiers from '@/Components/Creature/Modifiers'
+    import Actions from '@/Components/Creature/Actions'
 
     export default {
         props: ['character', 'characters'],
@@ -58,6 +61,7 @@
             Spells,
             Resources,
             Modifiers,
+            Actions,
         },
         methods: {
             updateCharacter() {
