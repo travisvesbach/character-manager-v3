@@ -7,14 +7,8 @@
         </template>
 
         <div class="flex justify-between" :class="index != 0 ? 'my-1' : 'mb-1'" v-for="(modifier, index) in creature.modifiers">
-            <jet-label class="inline-block ml-1 cursor-pointer" :value="modifier.name" @click="openModal(modifier)"/>
+            <jet-label class="inline-block cursor-pointer" title="Edit modifier" :value="modifier.name" @click="openModal(modifier)"/>
             <jet-checkbox :id="'enable_' + modifier.name" class="cursor-pointer" v-model:checked="modifier.enabled" @change.native="toggleEnabled(modifier)"/>
-
-<!--             <div class="ml-2">
-                <jet-secondary-button size="xs" @click="openModal(modifier)">
-                    edit
-                </jet-secondary-button>
-            </div> -->
         </div>
 
         <!-- modifier modal -->

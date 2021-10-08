@@ -6,8 +6,26 @@
             </jet-secondary-button>
         </template>
 
-        <div class="flex justify-between" :class="index != 0 ? 'my-1' : 'mb-1'" v-for="(action, index) in creature.actions">
-            <jet-label class="inline-block ml-1 cursor-pointer" :value="action.name" @click="openModal(action)"/>
+        <div class="" :class="index != 0 ? 'my-1' : 'mb-1'" v-for="(action, index) in creature.actions">
+            <span class="cursor-pointer" @click="openModal(action)" title="Edit action">
+                {{ action.name }}
+            </span>
+            <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Action type">
+                {{ action.type }}
+            </span>
+            <span v-if="action.attack">
+                <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Range">
+                    {{ action.range }}
+                </span>
+                <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Attack modifier">
+                    {{ action.attack_modifier > 0 ? '+' : '' }}{{ action.attack_modifier }}
+                </span>
+                <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Damage">
+                    <span v-for="(dice, index) in action.attack_dice">
+                        {{ index > 0 ? ' &' : '' }} {{ dice.count }}d{{ dice.size }}{{ dice.modifier ? '+' + dice.modifier : '' }} {{ dice.type }}
+                    </span>
+                </span>
+            </span>
         </div>
 
         <!-- action modal -->
@@ -82,7 +100,7 @@
                         <div v-if="form.attack_does_damage">
                             <!-- attack_dice -->
                             <jet-label for="attack_dice" value="Damage" class="mt-4"/>
-                            <dice-array-input v-model="form.attack_dice"/>
+                            <dice-array-input v-model="form.attack_dice" :multiple="true"/>
                             <jet-input-error :message="form.errors.attack_dice" class="mt-2"/>
                         </div>
                     </div>
@@ -94,13 +112,6 @@
                     <div class="px-1 col-span-1 sm:col-span-2 mt-4" v-if="form.auto">
 
                     </div>
-                </div>
-
-                <div v-if="form.type == 'dice'" class="px-1">
-                    <!-- dice -->
-                    <jet-label for="dice" value="Dice" class="mt-4"/>
-                    <dice-array-input v-model="form.dice" :current="true" :multiple="true"/>
-                    <jet-input-error :message="form.errors.dice" class="mt-2"/>
                 </div>
             </template>
 
@@ -199,15 +210,15 @@
                         attack: action.attack,
                         attack_modifier: action.attack_modifier,
                         attack_does_damage: action.attack_does_damage,
-                        attack_dice: action.attack_dice,
+                        attack_dice: JSON.parse(JSON.stringify(action.attack_dice)),
                         save: action.save,
                         save_type: action.save_type,
                         save_dc: action.save_dc,
                         save_does_damage: action.save_does_damage,
-                        save_dice: action.save_dice,
+                        save_dice: JSON.parse(JSON.stringify(action.save_dice)),
                         auto: action.auto,
                         auto_does_damage: action.auto_does_damage,
-                        auto_dice: action.auto_dice,
+                        auto_dice: JSON.parse(JSON.stringify(action.auto_dice)),
                         editing: true,
                     });
                 } else {

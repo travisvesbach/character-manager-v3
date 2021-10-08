@@ -8,7 +8,7 @@
 
         <div :class="index != 0 ? 'my-1' : 'mb-1'" v-for="(resource, index) in creature.resources">
             <div class="flex justify-between">
-                <span class="cursor-pointer" @click="openModal(resource)">
+                <span class="cursor-pointer" @click="openModal(resource)" title="Edit resource">
                     {{ resource.name }}:
                 </span>
                 <span v-if="resource.type == 'counter'">
