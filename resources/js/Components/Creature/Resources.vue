@@ -8,9 +8,9 @@
 
         <div :class="index != 0 ? 'my-1' : 'mb-1'" v-for="(resource, index) in creature.resources">
             <div class="flex justify-between">
-                <span class="cursor-pointer" @click="openModal(resource)" title="Edit resource">
+                <button class="btn-text" @click="openModal(resource)" title="Edit resource">
                     {{ resource.name }}:
-                </span>
+                </button>
                 <span v-if="resource.type == 'counter'">
                     <counter-slot v-for="(slot, index) in resource.slots" :slot="slot" @click.native="updateSlot(resource, index)"/>
                 </span>

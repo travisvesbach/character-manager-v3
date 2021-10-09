@@ -35,14 +35,14 @@
                     <p>AC: {{ creature.ac }} <span class="text-xs text-secondary-color">({{ creature.ac_source }})</span></p>
                     <p>Speed: {{ creature.speed }}</p>
                     <div>
-                        <button @click="roll('Initiative', creature.initiative)">
+                        <button class="btn-text" @click="roll('Initiative', creature.initiative)">
                             Initiative: {{ creature.initiative }}
                         </button>
                     </div>
                 </div>
                 <div class=" my-1 md:my-0">
                     Hit Dice:
-                    <button class="block" v-for="(hit_dice, index) in creature.hit_dice" @click="rollHitDice(index)">
+                    <button class="block btn-text" v-for="(hit_dice, index) in creature.hit_dice" @click="rollHitDice(index)">
                         {{ hit_dice.current }}/{{ hit_dice.count }}d{{ hit_dice.size }}
                     </button>
                 </div>

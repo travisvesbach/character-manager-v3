@@ -6,26 +6,57 @@
             </jet-secondary-button>
         </template>
 
-        <div class="" :class="index != 0 ? 'my-1' : 'mb-1'" v-for="(action, index) in creature.actions">
-            <span class="cursor-pointer" @click="openModal(action)" title="Edit action">
-                {{ action.name }}
-            </span>
-            <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Action type">
-                {{ action.type }}
-            </span>
-            <span v-if="action.attack">
-                <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Range">
-                    {{ action.range }}
-                </span>
-                <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Attack modifier">
-                    {{ action.attack_modifier > 0 ? '+' : '' }}{{ action.attack_modifier }}
-                </span>
-                <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Damage">
-                    <span v-for="(dice, index) in action.attack_dice">
-                        {{ index > 0 ? ' &' : '' }} {{ dice.count }}d{{ dice.size }}{{ dice.modifier ? '+' + dice.modifier : '' }} {{ dice.type }}
+        <div class="" :class="index != 0 ? 'my-1 border-t dark:border-gray-600 pt-1' : 'mb-1'" v-for="(action, index) in creature.actions">
+            <div class="flex items-start">
+                <div>
+                    <button class="btn-text" @click="openModal(action)" title="Edit action">
+                        {{ action.name }}
+                    </button>
+                    <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Action type">
+                        {{ action.type }}
                     </span>
-                </span>
-            </span>
+                    <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Range">
+                        {{ action.range }}
+                    </span>
+                </div>
+                <div>
+                    <div v-if="action.attack">
+                        <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Attack modifier">
+                            {{ action.attack_modifier > 0 ? '+' : '' }}{{ action.attack_modifier }}
+                        </span>
+                        <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Attack damage" v-if="action.attack_does_damage">
+                            <span v-for="(dice, index) in action.attack_dice">
+                                {{ index > 0 ? ' &' : '' }} {{ dice.count }}d{{ dice.size }}{{ dice.modifier ? '+' + dice.modifier : '' }} {{ dice.type }}
+                            </span>
+                        </span>
+                    </div>
+                    <div v-if="action.save">
+                        <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Save DC and saving throw type">
+                            DC {{ action.save_dc }} {{ action.save_type }} save
+                        </span>
+                        <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Save damage" v-if="action.save_does_damage">
+                            <span v-for="(dice, index) in action.save_dice">
+                                {{ index > 0 ? ' &' : '' }} {{ dice.count }}d{{ dice.size }}{{ dice.modifier ? '+' + dice.modifier : '' }} {{ dice.type }}
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <accordion class="pl-4" :class="action.save && (action.attack || action.auto) ? '-mt-6' : ''" v-if="action.notes">
+                <accordion-item justify="start" icon_size="sm" button_width="w-auto">
+                    <template v-slot:title>
+                        <span class="text-sm font-medium mr-2">Notes</span>
+                    </template>
+                    <template v-slot:content>
+                        {{ action.notes }}
+                    </template>
+                </accordion-item>
+            </accordion>
+
+
+<!--             <div class="pl-4" v-if="action.notes">
+                {{ action.notes }}
+            </div> -->
         </div>
 
         <!-- action modal -->
@@ -82,7 +113,7 @@
                         </div>
                     </div>
 
-                    <div class="col-span-1 sm:col-span-2 mt-4" v-if="form.attack">
+                    <div class="col-span-1 sm:col-span-2 mt-4 pt-2 border-t dark:border-gray-600" v-if="form.attack">
                         <div class="grid grid-cols-1 sm:grid-cols-2">
                             <div class="col-span-1 px-1">
                                 <!-- attack_modifier -->
@@ -105,12 +136,57 @@
                         </div>
                     </div>
 
-                    <div class="px-1 col-span-1 sm:col-span-2 mt-4" v-if="form.save">
+                    <div class="col-span-1 sm:col-span-2 mt-4 pt-2 border-t dark:border-gray-600" v-if="form.save">
+                        <div class="grid grid-cols-1 sm:grid-cols-2">
+                            <div class="col-span-1 px-1">
+                                <!-- save_type -->
+                                <jet-label for="save_type" value="Save Type"/>
+                                <select-input id="save_type" class="mt-1 w-full" v-model="form.save_type" :options="['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA']"/>
+                                <jet-input-error :message="form.errors.save_type" class="mt-2"/>
+                            </div>
+                            <div class="col-span-1 px-1 mt-4 sm:mt-0">
+                                <!-- save_dc -->
+                                <jet-label for="save_dc" value="Save DC"/>
+                                <jet-input type="number" id="save_dc" class="mt-1 w-full" v-model.number="form.save_dc"/>
+                                <jet-input-error :message="form.errors.attack_modifier" class="mt-2"/>
+                            </div>
+                            <div class="col-span-1 px-1 mt-4">
+                                <!-- save_does_damage -->
+                                <jet-label for="save_does_damage" value="Does Damage"/>
+                                <jet-checkbox id="save_does_damage" v-model:checked="form.save_does_damage"/>
+                                <jet-input-error :message="form.errors.save_does_damage" class="mt-2"/>
+                            </div>
+                        </div>
+                        <div v-if="form.save_does_damage">
+                            <!-- save_dice -->
+                            <jet-label for="save_dice" value="Damage" class="mt-4"/>
+                            <dice-array-input v-model="form.save_dice" :multiple="true"/>
+                            <jet-input-error :message="form.errors.save_dice" class="mt-2"/>
+                        </div>
 
                     </div>
 
-                    <div class="px-1 col-span-1 sm:col-span-2 mt-4" v-if="form.auto">
+                    <div class="col-span-1 sm:col-span-2 mt-4 pt-2 border-t dark:border-gray-600" v-if="form.auto">
+                        <div class="grid grid-cols-1 sm:grid-cols-2">
+                            <div class="col-span-1 px-1">
+                                <!-- auto_does_damage -->
+                                <jet-label for="auto_does_damage" value="Does Damage"/>
+                                <jet-checkbox id="auto_does_damage" v-model:checked="form.auto_does_damage"/>
+                                <jet-input-error :message="form.errors.auto_does_damage" class="mt-2"/>
+                            </div>
+                        </div>
+                        <div v-if="form.auto_does_damage">
+                            <!-- auto_dice -->
+                            <jet-label for="auto_dice" value="Damage" class="mt-4"/>
+                            <dice-array-input v-model="form.auto_dice" :multiple="true"/>
+                            <jet-input-error :message="form.errors.auto_dice" class="mt-2"/>
+                        </div>
+                    </div>
 
+                    <div class="col-span-1 sm:col-span-2 mt-4 pt-2 border-t dark:border-gray-600">
+                        <jet-label :for="notes" value="Notes"/>
+                        <textarea :id="notes" class="w-full form-input" v-model="form.notes"></textarea>
+                        <jet-input-error :message="form.errors.notes" class="mt-2"/>
                     </div>
                 </div>
             </template>
@@ -168,6 +244,8 @@
     import CounterSlot from '@/Components/CounterSlot'
     import GridSection from '@/Components/GridSection'
     import JetCheckbox from '@/Jetstream/Checkbox'
+    import Accordion from '@/Components/Accordion'
+    import AccordionItem from '@/Components/AccordionItem'
 
     import { flash } from '@/Mixins/Flash';
 
@@ -187,6 +265,8 @@
             CounterSlot,
             GridSection,
             JetCheckbox,
+            Accordion,
+            AccordionItem,
         },
         mixins: [flash],
         data() {
