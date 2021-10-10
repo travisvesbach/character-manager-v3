@@ -129,7 +129,7 @@
                         for(let x=0;x<mod_dice.count;x++) {
                             let result = dice.roll(mod_dice.size);
                             message += (x > 0 ? ', ' : '') + result;
-                            total += result
+                            total += result;
                         }
                         message += mod_dice.count > 0 ? ']' : '';
                         if(mod_dice.modifier) {
