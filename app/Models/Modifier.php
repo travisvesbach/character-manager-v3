@@ -26,6 +26,7 @@ class Modifier extends Model
         'damage_dc',
         'damage_save',
         'damage_dice',
+        'notes',
         'enabled',
     ];
 

@@ -107,7 +107,7 @@
                             <div class="col-span-1 mt-4">
                                 <!-- damage_dc  -->
                                 <jet-label for="damage_dc" value="Save DC"/>
-                                <jet-input type="number" class="mt-1 w-14" v-model.number="form.damage_dc"/> - 20
+                                <jet-input type="number" class="mt-1 w-14" v-model.number="form.damage_dc"/>
                                 <jet-input-error :message="form.errors.damage_dc" class="mt-2"/>
                             </div>
 
@@ -123,6 +123,12 @@
                         <jet-label for="damage_dice" value="Damage" class="mt-4"/>
                         <dice-array-input v-model="form.damage_dice" :multiple="true" :same="true"/>
                         <jet-input-error :message="form.errors.damage_dice" class="mt-2"/>
+                    </div>
+
+                    <div class="px-1 col-span-1 sm:col-span-2 mt-4 pt-2 border-t dark:border-gray-600">
+                        <jet-label for="notes" value="Notes"/>
+                        <textarea id="notes" class="w-full form-input" v-model="form.notes"></textarea>
+                        <jet-input-error :message="form.errors.notes" class="mt-2"/>
                     </div>
                 </div>
             </template>
@@ -229,6 +235,7 @@
                         damage_dc: modifier.damage_dc,
                         damage_save: modifier.damage_save,
                         damage_dice: modifier.damage_dice,
+                        notes: modifier.notes,
                         enabled: modifier.enabled,
                         editing: true,
                     });
@@ -268,6 +275,7 @@
                             modifier: 0,
                             type: null,
                         }],
+                        notes: null,
                         enabled: false,
                     });
                 }

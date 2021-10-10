@@ -20492,6 +20492,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Accordion__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Components/Accordion */ "./resources/js/Components/Accordion.vue");
 /* harmony import */ var _Components_AccordionItem__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/Components/AccordionItem */ "./resources/js/Components/AccordionItem.vue");
 /* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 
 
@@ -20637,6 +20643,262 @@ __webpack_require__.r(__webpack_exports__);
       this.form["delete"](route('actions.destroy', this.form.id));
       this.closeModal();
       this.show_delete_modal = false;
+    },
+    roll: function roll(action) {
+      var advantage = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var critical = null;
+      var output_array = [];
+      output_array.push(this.creature.name + ':<br>' + action.name + (advantage ? ' with ' + advantage : '') + ':'); // get attack roll(s)
+
+      if (action.attack) {
+        var attack_rolls = [];
+        attack_rolls.push(dice.roll());
+
+        if (advantage) {
+          attack_rolls.push(dice.roll());
+        }
+
+        var attack_total = attack_rolls[0];
+
+        if (advantage == 'advantage') {
+          attack_total = Math.max.apply(Math, attack_rolls);
+        } else if (advantage == 'disadvantage') {
+          attack_total = Math.min.apply(Math, attack_rolls);
+        } // check if critical hit
+
+
+        var crit_min = this.creature.modifiers.reduce(function (min, modifier) {
+          return modifier.enabled && modifier.critical_range ? modifier.critical_range_start < min ? modifier.critical_range_start : min : min;
+        }, 20);
+        critical = attack_total >= crit_min ? 'success' : attack_total == 1 ? 'fail' : false;
+
+        if (action.attack_modifier) {
+          attack_total += action.attack_modifier;
+        }
+
+        var message = 'Attack roll: [' + attack_rolls.join(',') + ']' + (action.attack_modifier ? ' + ' + action.attack_modifier : ''); // get attack modifiers
+
+        var attack_modifiers = this.creature.modifiers.filter(function (value) {
+          return value.enabled && value['attack'];
+        });
+
+        var _iterator = _createForOfIteratorHelper(attack_modifiers),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var mod = _step.value;
+
+            var _iterator2 = _createForOfIteratorHelper(mod['attack_dice']),
+                _step2;
+
+            try {
+              for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                var mod_dice = _step2.value;
+                message += mod_dice.count > 0 ? ' + [' : '';
+
+                for (var x = 0; x < mod_dice.count; x++) {
+                  var result = dice.roll(mod_dice.size);
+                  message += (x > 0 ? ', ' : '') + result;
+                  attack_total += result;
+                }
+
+                message += mod_dice.count > 0 ? ']' : '';
+
+                if (mod_dice.modifier) {
+                  message += mod_dice.modifier ? ' + ' + mod_dice.modifier : '';
+                  attack_total += mod_dice.modifier;
+                }
+
+                message += ' [' + mod.name + ']';
+              }
+            } catch (err) {
+              _iterator2.e(err);
+            } finally {
+              _iterator2.f();
+            }
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+
+        message += ' = ' + attack_total;
+        output_array.push(message);
+
+        if (critical == 'success') {
+          output_array.push('Critical Hit!');
+        }
+
+        if (critical == 'fail') {
+          output_array.push('Critical Fail...');
+          this.flash(output_array.join('<br>'), 'danger');
+          return;
+        }
+      }
+
+      var damage = {
+        types: [],
+        total: 0,
+        saves: [],
+        output_array: []
+      }; // roll damage/save
+
+      if (action.attack && action.attack_does_damage) {
+        damage = this.rollDamage(damage, action.attack_dice, critical);
+      }
+
+      if (action.auto && action.auto_does_damage) {
+        damage = this.rollDamage(damage, action.auto_dice);
+      }
+
+      if (action.save) {
+        damage = this.rollSave(damage, action);
+      } // roll active damage modifiers
+
+
+      this.creature.modifiers.filter(function (value) {
+        return value.enabled && value['damage'];
+      }).forEach(function (modifier) {
+        if (modifier.damage_as == 'attack') {
+          damage = this.rollDamage(damage, modifier.damage_dice, critical, modifier.name);
+        }
+
+        if (modifier.damage_as == 'save') {
+          damage = this.rollSave(damage, {
+            name: modifier.name,
+            save_dc: modifier.damage_dc,
+            save_type: modifier.damage_save,
+            save_dice: modifier.damage_dice,
+            save_does_damage: true
+          });
+        }
+      }, this); // add damage.types to ouput_array
+
+      if (damage.types && damage.types.length > 0) {
+        damage.types.forEach(function (type) {
+          output_array.push(type.output + ' = ' + type.total);
+        });
+
+        if (damage.types.length > 1) {
+          output_array.push('Total Attack Damage: ' + damage.total);
+        }
+      } // add damage.saves to ouput_array
+
+
+      if (damage.saves && damage.saves.length > 0) {
+        damage.saves.forEach(function (damage_save) {
+          output_array = output_array.concat(damage_save.output_array);
+        });
+      } // add notes to output
+
+
+      var notes = [];
+
+      if (action.notes && action.notes.length > 0) {
+        notes.push(action.notes);
+      }
+
+      this.creature.modifiers.filter(function (value) {
+        return value.enabled && value['attack'];
+      }).forEach(function (modifier) {
+        if (modifier.notes && modifier.notes.length > 0) {
+          notes.push(modifier.name + ': ' + modifier.notes);
+        }
+      });
+      this.creature.modifiers.filter(function (value) {
+        return value.enabled && value['damage'];
+      }).forEach(function (modifier) {
+        if (modifier.notes && modifier.notes.length > 0) {
+          notes.push(modifier.name + ': ' + modifier.notes);
+        }
+      });
+
+      if (notes.length > 0) {
+        output_array.push('-------------------------');
+        output_array = output_array.concat(notes);
+      }
+
+      this.flash(output_array.join('<br>'), critical == 'success' ? 'success' : 'primary');
+    },
+    rollDamage: function rollDamage(damage, dice_array) {
+      var critical = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var name = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      dice_array.forEach(function (dice_obj) {
+        var damage_roll = null;
+        var total = dice_obj.modifier;
+        var damage_rolls_array = [];
+
+        if (dice_obj.count > 0) {
+          for (var i = 0; i < (critical == 'success' ? 2 : 1); i++) {
+            for (var x = 0; x < dice_obj.count; x++) {
+              damage_roll = dice.roll(dice_obj.size);
+              total = total + damage_roll;
+              damage_rolls_array.push(damage_roll);
+            }
+          }
+        }
+
+        var type_index = dice_obj.type == 'Same as attack' ? 0 : damage.types.findIndex(function (x) {
+          return x.type == dice_obj.type;
+        });
+        var new_index = false;
+
+        if (type_index < 0) {
+          damage.types.push({
+            type: dice_obj.type,
+            total: 0,
+            output: dice_obj.type + ' Damage: '
+          });
+          type_index = damage.types.findIndex(function (x) {
+            return x.type == dice_obj.type;
+          });
+          new_index = true;
+        }
+
+        damage.types[type_index].total += total;
+        damage.types[type_index].output += (!new_index ? ' + ' : '') + (damage_rolls_array.length > 0 ? '[' + damage_rolls_array.join(', ') + ']' : '') + (damage_rolls_array.length > 0 && dice_obj.modifier && dice_obj.modifier != 0 ? ' + ' + dice_obj.modifier : '') + (name ? ' [' + name + ']' : '');
+        damage.total += total;
+      });
+      return damage;
+    },
+    rollSave: function rollSave(damage, action) {
+      var output_array = [];
+      var total = 0;
+
+      if (!damage.saves) {
+        damage.saves = [];
+      }
+
+      output_array.push('Target(s) make a DC ' + action.save_dc + ' ' + action.save_type + ' saving throw.');
+
+      if (action.save_does_damage) {
+        action.save_dice.forEach(function (dice_obj) {
+          var damage_roll = null;
+          var total = dice_obj.modifier;
+          var damage_rolls_array = [];
+
+          for (var i = 0; i < dice_obj.count; i++) {
+            damage_roll = dice.roll(dice_obj.size);
+            total += damage_roll;
+            damage_rolls_array.push(damage_roll);
+          }
+
+          output_array.push(dice_obj.type + ' Damage: [' + damage_rolls_array + '] ' + (dice_obj.modifier ? '+ ' + dice_obj.modifier : '') + ' = ' + total);
+          total += total;
+        }, action);
+
+        if (action.save_dice.length > 1) {
+          output_array.push('Total Save Damage: ' + total);
+        }
+      }
+
+      damage.saves.push({
+        name: action.name,
+        output_array: output_array
+      });
+      return damage;
     }
   }
 });
@@ -20839,6 +21101,7 @@ __webpack_require__.r(__webpack_exports__);
           damage_dc: modifier.damage_dc,
           damage_save: modifier.damage_save,
           damage_dice: modifier.damage_dice,
+          notes: modifier.notes,
           enabled: modifier.enabled,
           editing: true
         });
@@ -20878,6 +21141,7 @@ __webpack_require__.r(__webpack_exports__);
             modifier: 0,
             type: null
           }],
+          notes: null,
           enabled: false
         });
       }
@@ -21308,7 +21572,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           try {
             for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
               var mod_dice = _step2.value;
-              message += ' + ' + (mod_dice.count > 0 ? '[' : '');
+              message += mod_dice.count > 0 ? ' + [' : '';
 
               for (var x = 0; x < mod_dice.count; x++) {
                 var result = dice.roll(mod_dice.size);
@@ -21319,12 +21583,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
               message += mod_dice.count > 0 ? ']' : '';
 
               if (mod_dice.modifier) {
-                message += ' + ' + (mod_dice.modifier ? ' + ' + mod_dice.modifier : '');
+                message += mod_dice.modifier ? ' + ' + mod_dice.modifier : '';
                 total += mod_dice.modifier;
               }
 
               message += ' [' + mod.name + ']';
-              total += mod_dice.modifier;
             }
           } catch (err) {
             _iterator2.e(err);
@@ -24528,95 +24791,103 @@ var _hoisted_11 = {
   "class": "border-l-2 dark:border-gray-600 pl-2 ml-2",
   title: "Save damage"
 };
+var _hoisted_12 = {
+  "class": "ml-auto"
+};
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" - ");
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Roll ");
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" + ");
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "text-sm font-medium mr-2"
 }, "Notes", -1
 /* HOISTED */
 );
 
-var _hoisted_13 = {
-  "class": "grid grid-cols-1 sm:grid-cols-2"
-};
-var _hoisted_14 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_15 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_16 = {
-  "class": "col-span-1 px-1"
-};
 var _hoisted_17 = {
-  "class": "col-span-1 px-1"
+  "class": "grid grid-cols-1 sm:grid-cols-2"
 };
 var _hoisted_18 = {
-  "class": "px-1 col-span-1"
+  "class": "col-span-1 px-1"
 };
 var _hoisted_19 = {
-  key: 0,
-  "class": "col-span-1 sm:col-span-2 mt-4 pt-2 border-t dark:border-gray-600"
+  "class": "col-span-1 px-1"
 };
 var _hoisted_20 = {
-  "class": "grid grid-cols-1 sm:grid-cols-2"
+  "class": "col-span-1 px-1"
 };
 var _hoisted_21 = {
   "class": "col-span-1 px-1"
 };
 var _hoisted_22 = {
-  "class": "col-span-1 px-1 mt-4 sm:mt-0"
+  "class": "px-1 col-span-1"
 };
 var _hoisted_23 = {
-  key: 0
+  key: 0,
+  "class": "col-span-1 sm:col-span-2 mt-4 pt-2 border-t dark:border-gray-600"
 };
 var _hoisted_24 = {
+  "class": "grid grid-cols-1 sm:grid-cols-2"
+};
+var _hoisted_25 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_26 = {
+  "class": "col-span-1 px-1 mt-4 sm:mt-0"
+};
+var _hoisted_27 = {
+  key: 0
+};
+var _hoisted_28 = {
   key: 1,
   "class": "col-span-1 sm:col-span-2 mt-4 pt-2 border-t dark:border-gray-600"
 };
-var _hoisted_25 = {
-  "class": "grid grid-cols-1 sm:grid-cols-2"
-};
-var _hoisted_26 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_27 = {
-  "class": "col-span-1 px-1 mt-4 sm:mt-0"
-};
-var _hoisted_28 = {
-  "class": "col-span-1 px-1 mt-4"
-};
 var _hoisted_29 = {
-  key: 0
+  "class": "grid grid-cols-1 sm:grid-cols-3"
 };
 var _hoisted_30 = {
-  key: 2,
-  "class": "col-span-1 sm:col-span-2 mt-4 pt-2 border-t dark:border-gray-600"
+  "class": "col-span-1 px-1"
 };
 var _hoisted_31 = {
-  "class": "grid grid-cols-1 sm:grid-cols-2"
+  "class": "col-span-1 px-1 mt-4 sm:mt-0"
 };
 var _hoisted_32 = {
-  "class": "col-span-1 px-1"
+  "class": "col-span-1 px-1 mt-4 sm:mt-0"
 };
 var _hoisted_33 = {
   key: 0
 };
 var _hoisted_34 = {
+  key: 2,
   "class": "col-span-1 sm:col-span-2 mt-4 pt-2 border-t dark:border-gray-600"
 };
-var _hoisted_35 = ["id"];
+var _hoisted_35 = {
+  "class": "grid grid-cols-1 sm:grid-cols-2"
+};
+var _hoisted_36 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_37 = {
+  key: 0
+};
+var _hoisted_38 = {
+  "class": "col-span-1 sm:col-span-2 mt-4 pt-2 border-t dark:border-gray-600"
+};
 
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete ");
-
-var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
-
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Save ");
-
-var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to delete this action? ");
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete ");
 
 var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
 
-var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete Action ");
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Save ");
+
+var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to delete this action? ");
+
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
+
+var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete Action ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_secondary_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-secondary-button");
@@ -24697,7 +24968,53 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           );
         }), 256
         /* UNKEYED_FRAGMENT */
-        ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), action.notes ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_accordion, {
+        ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [action.attack ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_secondary_button, {
+          key: 0,
+          "class": "mr-1",
+          size: "xs",
+          onClick: function onClick($event) {
+            return $options.roll(action, 'disadvantage');
+          }
+        }, {
+          "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+            return [_hoisted_13];
+          }),
+          _: 2
+          /* DYNAMIC */
+
+        }, 1032
+        /* PROPS, DYNAMIC_SLOTS */
+        , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
+          size: "xs",
+          onClick: function onClick($event) {
+            return $options.roll(action);
+          }
+        }, {
+          "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+            return [_hoisted_14];
+          }),
+          _: 2
+          /* DYNAMIC */
+
+        }, 1032
+        /* PROPS, DYNAMIC_SLOTS */
+        , ["onClick"]), action.attack ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_secondary_button, {
+          key: 1,
+          "class": "ml-1",
+          size: "xs",
+          onClick: function onClick($event) {
+            return $options.roll(action, 'advantage');
+          }
+        }, {
+          "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+            return [_hoisted_15];
+          }),
+          _: 2
+          /* DYNAMIC */
+
+        }, 1032
+        /* PROPS, DYNAMIC_SLOTS */
+        , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), action.notes ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_accordion, {
           key: 0,
           "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["pl-4", action.save && (action.attack || action.auto) ? '-mt-6' : ''])
         }, {
@@ -24708,7 +25025,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               button_width: "w-auto"
             }, {
               title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                return [_hoisted_12];
+                return [_hoisted_16];
               }),
               content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                 return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(action.notes), 1
@@ -24727,7 +25044,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
         }, 1032
         /* PROPS, DYNAMIC_SLOTS */
-        , ["class"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("             <div class=\"pl-4\" v-if=\"action.notes\">\n                {{ action.notes }}\n            </div> ")], 2
+        , ["class"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2
         /* CLASS */
         );
       }), 256
@@ -24745,7 +25062,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           )];
         }),
         content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" name "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" name "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "name",
             value: "Name"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
@@ -24764,7 +25081,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" type  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" type  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "type",
             value: "Type",
             "class": "mt-4 sm:mt-0"
@@ -24783,7 +25100,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" range  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" range  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "range",
             value: "Range",
             "class": "mt-4"
@@ -24803,7 +25120,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             value: "Action Types",
             "class": "mt-4 inline-block"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
@@ -24811,7 +25128,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "ml-2 inline-block"
           }, null, 8
           /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_checkbox, {
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_checkbox, {
             id: "attack",
             checked: $data.form.attack,
             "onUpdate:checked": _cache[4] || (_cache[4] = function ($event) {
@@ -24864,7 +25181,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])])])]), $data.form.attack ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" attack_modifier "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])])])]), $data.form.attack ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" attack_modifier "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "attack_modifier",
             value: "Attack Modifier"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
@@ -24885,7 +25202,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" attack_does_damage "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" attack_does_damage "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "attack_does_damage",
             value: "Does Damage"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_checkbox, {
@@ -24901,7 +25218,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])])]), $data.form.attack_does_damage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" attack_dice "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])])]), $data.form.attack_does_damage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" attack_dice "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "attack_dice",
             value: "Damage",
             "class": "mt-4"
@@ -24918,7 +25235,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.form.save ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" save_type "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.form.save ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" save_type "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "save_type",
             value: "Save Type"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
@@ -24936,7 +25253,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" save_dc "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" save_dc "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "save_dc",
             value: "Save DC"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
@@ -24957,7 +25274,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" save_does_damage "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" save_does_damage "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "save_does_damage",
             value: "Does Damage"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_checkbox, {
@@ -24973,7 +25290,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])])]), $data.form.save_does_damage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" save_dice "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])])]), $data.form.save_does_damage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" save_dice "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "save_dice",
             value: "Damage",
             "class": "mt-4"
@@ -24990,7 +25307,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.form.auto ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" auto_does_damage "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.form.auto ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" auto_does_damage "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "auto_does_damage",
             value: "Does Damage"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_checkbox, {
@@ -25006,7 +25323,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])])]), $data.form.auto_does_damage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" auto_dice "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])])]), $data.form.auto_does_damage ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" auto_dice "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "auto_dice",
             value: "Damage",
             "class": "mt-4"
@@ -25023,20 +25340,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": _ctx.notes,
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "notes",
             value: "Notes"
-          }, null, 8
-          /* PROPS */
-          , ["for"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
-            id: _ctx.notes,
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+            id: "notes",
             "class": "w-full form-input",
             "onUpdate:modelValue": _cache[16] || (_cache[16] = function ($event) {
               return $data.form.notes = $event;
             })
-          }, null, 8
-          /* PROPS */
-          , _hoisted_35), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.notes]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+          }, null, 512
+          /* NEED_PATCH */
+          ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.notes]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
             message: $data.form.errors.notes,
             "class": "mt-2"
           }, null, 8
@@ -25051,7 +25366,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             })
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_36];
+              return [_hoisted_39];
             }),
             _: 1
             /* STABLE */
@@ -25063,7 +25378,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onClick: $options.closeModal
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_37];
+              return [_hoisted_40];
             }),
             _: 1
             /* STABLE */
@@ -25077,7 +25392,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             disabled: $data.form.processing
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_38];
+              return [_hoisted_41];
             }),
             _: 1
             /* STABLE */
@@ -25103,7 +25418,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           )];
         }),
         content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_39];
+          return [_hoisted_42];
         }),
         footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
@@ -25112,7 +25427,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             })
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_40];
+              return [_hoisted_43];
             }),
             _: 1
             /* STABLE */
@@ -25125,7 +25440,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             disabled: $data.form.processing
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_41];
+              return [_hoisted_44];
             }),
             _: 1
             /* STABLE */
@@ -25514,11 +25829,11 @@ var _hoisted_14 = {
 var _hoisted_15 = {
   "class": "col-span-1 mt-4"
 };
-
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" - 20 ");
-
-var _hoisted_17 = {
+var _hoisted_16 = {
   "class": "col-span-1 mt-4"
+};
+var _hoisted_17 = {
+  "class": "px-1 col-span-1 sm:col-span-2 mt-4 pt-2 border-t dark:border-gray-600"
 };
 
 var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete ");
@@ -25825,12 +26140,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             }
           }, null, 8
           /* PROPS */
-          , ["modelValue"]), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
             message: $data.form.errors.damage_dc,
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" damage_save  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" damage_save  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "damage_save",
             value: "Save DC"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
@@ -25865,12 +26180,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "notes",
+            value: "Notes"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+            id: "notes",
+            "class": "w-full form-input",
+            "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
+              return $data.form.notes = $event;
+            })
+          }, null, 512
+          /* NEED_PATCH */
+          ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.notes]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.notes,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])])])];
         }),
         footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [$data.form.editing ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_danger_button, {
             key: 0,
-            onClick: _cache[15] || (_cache[15] = function ($event) {
+            onClick: _cache[16] || (_cache[16] = function ($event) {
               return $data.show_delete_modal = true;
             })
           }, {
@@ -25917,7 +26248,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* PROPS */
       , ["show", "onClose", "onSubmitted"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_confirmation_modal, {
         show: $data.show_delete_modal,
-        onClose: _cache[17] || (_cache[17] = function ($event) {
+        onClose: _cache[18] || (_cache[18] = function ($event) {
           return $data.show_delete_modal = false;
         })
       }, {
@@ -25931,7 +26262,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }),
         footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
-            onClick: _cache[16] || (_cache[16] = function ($event) {
+            onClick: _cache[17] || (_cache[17] = function ($event) {
               return $data.show_delete_modal = false;
             })
           }, {
@@ -27138,24 +27469,18 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "alert-flash flex flex-col items-end"
 };
-var _hoisted_2 = {
-  key: 0
-};
-
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)();
-
-var _hoisted_4 = ["innerHTML"];
+var _hoisted_2 = ["innerHTML"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.messageArray, function (messageObj) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       id: "alert",
-      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["rounded py-3 px-5 my-2 opacity-80", $options.getStatusClasses(messageObj.status)]),
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["rounded py-3 px-5 my-2 opacity-90", $options.getStatusClasses(messageObj.status)]),
       role: "alert"
-    }, [messageObj.status == 'success' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("strong", _hoisted_2, "Success!")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
       innerHTML: messageObj.message
     }, null, 8
     /* PROPS */
-    , _hoisted_4)], 2
+    , _hoisted_2)], 2
     /* CLASS */
     );
   }), 256

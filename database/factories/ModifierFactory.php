@@ -48,6 +48,7 @@ class ModifierFactory extends Factory
             'damage_dc' => null,
             'damage_save' => null,
             'damage_dice' => null,
+            'notes' => null,
         ];
     }
 }

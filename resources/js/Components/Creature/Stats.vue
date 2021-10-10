@@ -125,7 +125,7 @@
                 total += modifier;
                 for(const mod of modifiers) {
                     for(const mod_dice of mod[type + '_dice']) {
-                        message += ' + ' + (mod_dice.count > 0 ? '[' : '');
+                        message += (mod_dice.count > 0 ? ' + [' : '');
                         for(let x=0;x<mod_dice.count;x++) {
                             let result = dice.roll(mod_dice.size);
                             message += (x > 0 ? ', ' : '') + result;
@@ -133,11 +133,10 @@
                         }
                         message += mod_dice.count > 0 ? ']' : '';
                         if(mod_dice.modifier) {
-                            message += ' + ' + (mod_dice.modifier ? ' + ' + mod_dice.modifier : '');
+                            message += (mod_dice.modifier ? ' + ' + mod_dice.modifier : '');
                             total += mod_dice.modifier;
                         }
                         message += ' [' + mod.name + ']';
-                        total += mod_dice.modifier;
                     }
                 }
                 message += ' = ' + (total);

@@ -1956,6 +1956,9 @@ select {
 .opacity-25 {
 	opacity: 0.25;
 }
+.opacity-90 {
+	opacity: 0.9;
+}
 .shadow-sm {
 	--tw-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 	box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);

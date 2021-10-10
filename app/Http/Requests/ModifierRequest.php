@@ -41,6 +41,7 @@ class ModifierRequest extends FormRequest
             'damage_dc'             => 'required_if:damage_as,save|integer|nullable',
             'damage_save'           => 'required_if:damage_as,save|max:255|nullable',
             'damage_dice'           => ['required_unless:damage,false', 'nullable', new DiceArray($this->damage)],
+            'notes'                 => 'nullable',
             'enabled'               => 'boolean',
         ];
     }
