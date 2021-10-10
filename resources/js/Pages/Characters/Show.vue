@@ -16,14 +16,17 @@
 
         <stats :creature="character"/>
 
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-            <spells :creature="character" @updated="updateCharacter" v-if="character.spellcaster"/>
+        <div class="grid sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 grid-rows-2">
 
-            <resources :creature="character" type="Character"/>
+            <actions class="sm:col-span-2 md:col-span-6 row-span-2" :creature="character" type="Character"/>
 
-            <modifiers :creature="character" type="Character"/>
+            <modifiers class="md:col-span-2" :creature="character" type="Character"/>
 
-            <actions class="sm:col-span-2 md:col-span-3" :creature="character" type="Character"/>
+            <notepad class="md:col-span-4" :creature="character" type="Character" @updated="updateCharacter"/>
+
+            <resources class="md:col-span-3" :creature="character" type="Character"/>
+
+            <spells class="md:col-span-3" :creature="character" @updated="updateCharacter" v-if="character.spellcaster"/>
         </div>
 
     </app-layout>
@@ -44,6 +47,7 @@
     import Resources from '@/Components/Creature/Resources'
     import Modifiers from '@/Components/Creature/Modifiers'
     import Actions from '@/Components/Creature/Actions'
+    import Notepad from '@/Components/Creature/Notepad'
 
     export default {
         props: ['character', 'characters'],
@@ -62,6 +66,7 @@
             Resources,
             Modifiers,
             Actions,
+            Notepad,
         },
         methods: {
             updateCharacter() {
@@ -185,6 +190,7 @@
                     spell_list_9: this.character.spell_list_9,
                     spell_prepare_count: this.character.spell_prepare_count,
                     spell_prepared: this.character.spell_prepared,
+                    notes: this.character.notes,
                     // character fields
                     race: this.character.race,
                     class: this.character.class,

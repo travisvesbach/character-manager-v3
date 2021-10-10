@@ -6,8 +6,8 @@
             </jet-secondary-button>
         </template>
 
-        <div class="" :class="index != 0 ? 'my-1 border-t dark:border-gray-600 pt-1' : 'mb-1'" v-for="(action, index) in creature.actions">
-            <div class="flex items-start">
+        <div class="" :class="index != 0 ? 'my-2 border-t dark:border-gray-600 pt-2' : 'mb-2'" v-for="(action, index) in creature.actions">
+            <div class="flex items-center">
                 <div>
                     <button class="btn-text" @click="openModal(action)" title="Edit action">
                         {{ action.name }}
@@ -32,7 +32,7 @@
                     </div>
                     <div v-if="action.save">
                         <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Save DC and saving throw type">
-                            DC {{ action.save_dc }} {{ action.save_type }} save
+                            {{ action.save_dc ? 'DC ' + action.save_dc : '' }} {{ action.save_type }} save
                         </span>
                         <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Save damage" v-if="action.save_does_damage">
                             <span v-for="(dice, index) in action.save_dice">
@@ -41,7 +41,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="ml-auto">
+                <div class="ml-auto flex items-center">
                     <jet-secondary-button class="mr-1" size="xs" @click="roll(action, 'disadvantage')" v-if="action.attack">
                         -
                     </jet-secondary-button>
@@ -542,7 +542,8 @@
                     damage.types[type_index].total += total;
                     damage.types[type_index].output += (!new_index ? ' + ' : '')
                         + (damage_rolls_array.length > 0 ? '[' + damage_rolls_array.join(', ') + ']' : '')
-                        + (damage_rolls_array.length > 0 && dice_obj.modifier && dice_obj.modifier != 0 ? ' + ' + dice_obj.modifier : '')
+                        + (damage_rolls_array.length > 0 && dice_obj.modifier && dice_obj.modifier != 0 ? ' + ' : '')
+                        + (dice_obj.modifier && dice_obj.modifier != 0 ? dice_obj.modifier : '')
                         + (name ? ' [' + name + ']' : '');
                     damage.total += total;
                 });
