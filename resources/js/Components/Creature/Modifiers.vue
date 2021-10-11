@@ -187,8 +187,6 @@
     import GridSection from '@/Components/GridSection'
     import JetCheckbox from '@/Jetstream/Checkbox'
 
-    import { flash } from '@/Mixins/Flash';
-
     export default {
         props: ['creature', 'type'],
         components: {
@@ -206,7 +204,6 @@
             GridSection,
             JetCheckbox,
         },
-        mixins: [flash],
         data() {
             return {
                 show_modal: false,

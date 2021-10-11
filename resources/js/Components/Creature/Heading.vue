@@ -15,6 +15,18 @@
 
                         <template #content>
                             <div>
+                                <jet-dropdown-link @click.native="toggleModifiers">
+                                    {{ creature.show_modifiers ? 'Hide' : 'Show' }} Modifiers
+                                </jet-dropdown-link>
+                                <jet-dropdown-link @click.native="toggleResources">
+                                    {{ creature.show_resources ? 'Hide' : 'Show' }} Resources
+                                </jet-dropdown-link>
+                                <jet-dropdown-link @click.native="toggleNotes">
+                                    {{ creature.show_notes ? 'Hide' : 'Show' }} Notes
+                                </jet-dropdown-link>
+                                <jet-dropdown-link @click.native="toggleDice">
+                                    {{ creature.show_dice ? 'Hide' : 'Show' }} Dice
+                                </jet-dropdown-link>
                                 <jet-dropdown-link :href="route('characters.edit', creature.id)">
                                     Edit Character
                                 </jet-dropdown-link>
@@ -157,6 +169,22 @@
                     this.flash(output.join('<br>'), 'primary');
                     this.updateCreature();
                 }
+            },
+            toggleModifiers() {
+                this.creature.show_modifiers = !this.creature.show_modifiers;
+                this.updateCreature();
+            },
+            toggleResources() {
+                this.creature.show_resources = !this.creature.show_resources;
+                this.updateCreature();
+            },
+            toggleNotes() {
+                this.creature.show_notes = !this.creature.show_notes;
+                this.updateCreature();
+            },
+            toggleDice() {
+                this.creature.show_dice = !this.creature.show_dice;
+                this.updateCreature();
             },
             deleteCreature() {
                 this.form.id = this.creature.id;

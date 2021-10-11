@@ -146,9 +146,10 @@ class CreatureRequest extends FormRequest
             'spell_prepared'                => '',
             'spell_counters'                => '',
             'notes'                         => '',
-            'show_notepad'                  => 'boolean',
             'show_resources'                => 'boolean',
-            'show_spells'                   => 'boolean',
+            'show_modifiers'                => 'boolean',
+            'show_notes'                    => 'boolean',
+            'show_dice'                     => 'boolean',
         ];
     }
 }

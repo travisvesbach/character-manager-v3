@@ -130,9 +130,11 @@ class Creature extends Model
         'spell_prepare_count',
         'spell_prepared',
         'spell_counters',
-        'show_notepad',
-        'show_resources',
         'notes',
+        'show_resources',
+        'show_modifiers',
+        'show_notes',
+        'show_dice',
         'skills_auto_filled',
     ];
 

@@ -16,19 +16,23 @@
 
         <stats :creature="character"/>
 
-        <div class="grid sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 grid-rows-2">
+        <div class="grid md:grid-cols-2">
 
-            <actions class="sm:col-span-2 md:col-span-6 row-span-2" :creature="character" type="Character"/>
+            <actions :creature="character" type="Character"/>
 
-            <modifiers class="md:col-span-2" :creature="character" type="Character"/>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-6">
+                <modifiers class="lg:col-span-2" :creature="character" type="Character" v-if="character.show_modifiers"/>
 
-            <notepad class="md:col-span-4" :creature="character" type="Character" @updated="updateCharacter"/>
+                <resources class="lg:col-span-3" :creature="character" type="Character" v-if="character.show_resources"/>
 
-            <resources class="md:col-span-3" :creature="character" type="Character"/>
+                <dice class="md:col-span-1" :creature="character" v-if="character.show_dice"/>
 
-            <spells class="md:col-span-3" :creature="character" @updated="updateCharacter" v-if="character.spellcaster"/>
+                <spells class="lg:col-span-3" :creature="character" @updated="updateCharacter" v-if="character.spellcaster"/>
+
+                <notepad class="md:col-span-2 lg:col-span-3" :creature="character" type="Character" @updated="updateCharacter" v-if="character.show_notes"/>
+            </div>
+
         </div>
-
     </app-layout>
 </template>
 
@@ -48,6 +52,7 @@
     import Modifiers from '@/Components/Creature/Modifiers'
     import Actions from '@/Components/Creature/Actions'
     import Notepad from '@/Components/Creature/Notepad'
+    import Dice from '@/Components/Creature/Dice'
 
     export default {
         props: ['character', 'characters'],
@@ -67,6 +72,7 @@
             Modifiers,
             Actions,
             Notepad,
+            Dice,
         },
         methods: {
             updateCharacter() {
@@ -191,6 +197,10 @@
                     spell_prepare_count: this.character.spell_prepare_count,
                     spell_prepared: this.character.spell_prepared,
                     notes: this.character.notes,
+                    show_modifiers: this.character.show_modifiers,
+                    show_resources: this.character.show_resources,
+                    show_notes: this.character.show_notes,
+                    show_dice: this.character.show_dice,
                     // character fields
                     race: this.character.race,
                     class: this.character.class,

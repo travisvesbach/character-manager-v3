@@ -135,9 +135,11 @@ class CreateCharactersTable extends Migration
             $table->integer('spell_prepare_count')->nullable()->default(null);
             $table->json('spell_prepared')->nullable();
             $table->json('spell_counters')->nullable();
-            $table->boolean('show_notepad')->default(1);
-            $table->boolean('show_resources')->default(1);
             $table->text('notes')->nullable();
+            $table->boolean('show_resources')->default(1);
+            $table->boolean('show_modifiers')->default(1);
+            $table->boolean('show_notes')->default(1);
+            $table->boolean('show_dice')->default(1);
             $table->boolean('skills_auto_filled')->default(1);
             $table->string('race');
             $table->string('class');
