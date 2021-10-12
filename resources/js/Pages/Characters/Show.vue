@@ -18,18 +18,20 @@
 
         <div class="grid md:grid-cols-2">
 
-            <actions :creature="character" type="Character"/>
+            <div class="flex flex-col">
+                <actions class="flex-grow" :creature="character" type="Character"/>
+
+                <dice :creature="character" v-if="character.show_dice"/>
+            </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-6">
-                <modifiers class="lg:col-span-2" :creature="character" type="Character" v-if="character.show_modifiers"/>
+                <modifiers class="lg:col-span-3" :class="getWidth('modifiers')" :creature="character" type="Character" v-if="character.show_modifiers"/>
 
-                <resources class="lg:col-span-3" :creature="character" type="Character" v-if="character.show_resources"/>
+                <resources class="lg:col-span-3" :class="getWidth('resources')" :creature="character" type="Character" v-if="character.show_resources"/>
 
-                <dice class="md:col-span-1" :creature="character" v-if="character.show_dice"/>
+                <spells class="lg:col-span-3 lg:col-span-3" :class="getWidth('spellcaster')" :creature="character" @updated="updateCharacter" v-if="character.spellcaster"/>
 
-                <spells class="lg:col-span-3" :creature="character" @updated="updateCharacter" v-if="character.spellcaster"/>
-
-                <notepad class="md:col-span-2 lg:col-span-3" :creature="character" type="Character" @updated="updateCharacter" v-if="character.show_notes"/>
+                <notepad class="lg:col-span-3" :class="getWidth('notes')" :creature="character" type="Character" @updated="updateCharacter" v-if="character.show_notes"/>
             </div>
 
         </div>
@@ -75,6 +77,38 @@
             Dice,
         },
         methods: {
+            getWidth(item) {
+                let sections = {
+                    modifiers: this.character.show_modifiers,
+                    resources: this.character.show_resources,
+                    spellcaster: this.character.spellcaster,
+                    notes: this.character.show_notes,
+                };
+
+                let show_count = 0;
+                show_count += sections['modifiers'] ? 1 : 0;
+                show_count += sections['resources'] ? 1 : 0;
+                show_count += sections['spellcaster'] ? 1 : 0;
+                show_count += sections['notes'] ? 1 : 0;
+
+                if(sections[item]) {
+                    switch(show_count) {
+                        case 1:
+                            return 'lg:col-span-6';
+                            break;
+                        case 2:
+                            return 'lg:col-span-3';
+                            break;
+                        case 3:
+                            return item == 'notes' ? 'lg:col-span-6' : 'lg:col-span-3';
+                            break;
+                        case 4:
+                            return 'lg:col-span-3';
+                            break;
+                    }
+                }
+
+            },
             updateCharacter() {
                 let form = this.$inertia.form({
                     id: this.character.id,

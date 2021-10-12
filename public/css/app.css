@@ -2683,6 +2683,10 @@ input[type=number] {
 		grid-column: span 2 / span 2;
 	}
 
+	.sm\:col-span-1 {
+		grid-column: span 1 / span 1;
+	}
+
 	.sm\:mx-0 {
 		margin-left: 0px;
 		margin-right: 0px;
@@ -2957,6 +2961,10 @@ input[type=number] {
 		margin-top: 0px;
 	}
 
+	.md\:flex {
+		display: flex;
+	}
+
 	.md\:grid {
 		display: grid;
 	}
@@ -3013,6 +3021,38 @@ input[type=number] {
 
 	.lg\:col-span-2 {
 		grid-column: span 2 / span 2;
+	}
+
+	.lg\:col-span-1 {
+		grid-column: span 1 / span 1;
+	}
+
+	.lg\:flex {
+		display: flex;
+	}
+
+	.lg\:w-1\/3 {
+		width: 33.333333%;
+	}
+
+	.lg\:w-auto {
+		width: auto;
+	}
+
+	.lg\:w-1\/2 {
+		width: 50%;
+	}
+
+	.lg\:w-1\/6 {
+		width: 16.666667%;
+	}
+
+	.lg\:w-full {
+		width: 100%;
+	}
+
+	.lg\:flex-grow {
+		flex-grow: 1;
 	}
 
 	.lg\:grid-cols-6 {

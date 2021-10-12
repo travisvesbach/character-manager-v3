@@ -1,7 +1,7 @@
 <template>
     <grid-section title="Dice">
-        <div class="flex flex-row md:flex-col flex-wrap">
-            <div class="text-center m-2 md:mx-0" v-for="dice in dice_sizes">
+        <div class="flex flex-row flex-wrap justify-between">
+            <div class="text-center m-2" v-for="dice in dice_sizes">
                 <jet-secondary-button size="sm" @click="roll(dice)">
                     1d{{ dice }}
                 </jet-secondary-button>

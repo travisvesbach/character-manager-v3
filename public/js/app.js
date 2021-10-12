@@ -23764,6 +23764,39 @@ __webpack_require__.r(__webpack_exports__);
     Dice: _Components_Creature_Dice__WEBPACK_IMPORTED_MODULE_15__["default"]
   },
   methods: {
+    getWidth: function getWidth(item) {
+      var sections = {
+        modifiers: this.character.show_modifiers,
+        resources: this.character.show_resources,
+        spellcaster: this.character.spellcaster,
+        notes: this.character.show_notes
+      };
+      var show_count = 0;
+      show_count += sections['modifiers'] ? 1 : 0;
+      show_count += sections['resources'] ? 1 : 0;
+      show_count += sections['spellcaster'] ? 1 : 0;
+      show_count += sections['notes'] ? 1 : 0;
+
+      if (sections[item]) {
+        switch (show_count) {
+          case 1:
+            return 'lg:col-span-6';
+            break;
+
+          case 2:
+            return 'lg:col-span-3';
+            break;
+
+          case 3:
+            return item == 'notes' ? 'lg:col-span-6' : 'lg:col-span-3';
+            break;
+
+          case 4:
+            return 'lg:col-span-3';
+            break;
+        }
+      }
+    },
     updateCharacter: function updateCharacter() {
       var form = this.$inertia.form({
         id: this.character.id,
@@ -25583,10 +25616,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex flex-row md:flex-col flex-wrap"
+  "class": "flex flex-row flex-wrap justify-between"
 };
 var _hoisted_2 = {
-  "class": "text-center m-2 md:mx-0"
+  "class": "text-center m-2"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_secondary_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-secondary-button");
@@ -32978,6 +33011,9 @@ var _hoisted_2 = {
   "class": "grid md:grid-cols-2"
 };
 var _hoisted_3 = {
+  "class": "flex flex-col"
+};
+var _hoisted_4 = {
   "class": "grid sm:grid-cols-2 lg:grid-cols-6"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -32989,11 +33025,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_actions = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("actions");
 
+  var _component_dice = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("dice");
+
   var _component_modifiers = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("modifiers");
 
   var _component_resources = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("resources");
-
-  var _component_dice = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("dice");
 
   var _component_spells = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("spells");
 
@@ -33043,47 +33079,47 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         creature: $props.character
       }, null, 8
       /* PROPS */
-      , ["creature"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_actions, {
+      , ["creature"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_actions, {
+        "class": "flex-grow",
         creature: $props.character,
         type: "Character"
       }, null, 8
       /* PROPS */
-      , ["creature"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [$props.character.show_modifiers ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_modifiers, {
+      , ["creature"]), $props.character.show_dice ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_dice, {
         key: 0,
-        "class": "lg:col-span-2",
-        creature: $props.character,
-        type: "Character"
-      }, null, 8
-      /* PROPS */
-      , ["creature"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.character.show_resources ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_resources, {
-        key: 1,
-        "class": "lg:col-span-3",
-        creature: $props.character,
-        type: "Character"
-      }, null, 8
-      /* PROPS */
-      , ["creature"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.character.show_dice ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_dice, {
-        key: 2,
-        "class": "md:col-span-1",
         creature: $props.character
       }, null, 8
       /* PROPS */
-      , ["creature"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.character.spellcaster ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_spells, {
-        key: 3,
-        "class": "lg:col-span-3",
+      , ["creature"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [$props.character.show_modifiers ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_modifiers, {
+        key: 0,
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["lg:col-span-3", $options.getWidth('modifiers')]),
+        creature: $props.character,
+        type: "Character"
+      }, null, 8
+      /* PROPS */
+      , ["class", "creature"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.character.show_resources ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_resources, {
+        key: 1,
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["lg:col-span-3", $options.getWidth('resources')]),
+        creature: $props.character,
+        type: "Character"
+      }, null, 8
+      /* PROPS */
+      , ["class", "creature"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.character.spellcaster ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_spells, {
+        key: 2,
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["lg:col-span-3 lg:col-span-3", $options.getWidth('spellcaster')]),
         creature: $props.character,
         onUpdated: $options.updateCharacter
       }, null, 8
       /* PROPS */
-      , ["creature", "onUpdated"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.character.show_notes ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_notepad, {
-        key: 4,
-        "class": "md:col-span-2 lg:col-span-3",
+      , ["class", "creature", "onUpdated"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.character.show_notes ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_notepad, {
+        key: 3,
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["lg:col-span-3", $options.getWidth('notes')]),
         creature: $props.character,
         type: "Character",
         onUpdated: $options.updateCharacter
       }, null, 8
       /* PROPS */
-      , ["creature", "onUpdated"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])];
+      , ["class", "creature", "onUpdated"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])];
     }),
     _: 1
     /* STABLE */
