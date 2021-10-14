@@ -27,6 +27,10 @@ class ModifiersController extends Controller
 
         $modifier->update($validated);
 
+        if($request->input('no_alert')) {
+            return redirect($modifier->creature->path());
+        }
+
         return redirect($modifier->creature->path())->with(['flash_message' => $modifier->creature->name . '\'s ' .  $modifier->name . ' updated', 'flash_status' => 'success']);
     }
 

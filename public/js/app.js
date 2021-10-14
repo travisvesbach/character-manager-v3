@@ -21155,6 +21155,7 @@ __webpack_require__.r(__webpack_exports__);
           damage_dice: modifier.damage_dice,
           notes: modifier.notes,
           enabled: modifier.enabled,
+          no_alert: false,
           editing: true
         });
       } else {
@@ -21194,7 +21195,8 @@ __webpack_require__.r(__webpack_exports__);
             type: null
           }],
           notes: null,
-          enabled: false
+          enabled: false,
+          no_alert: false
         });
       }
     },
@@ -21208,6 +21210,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     saveModifier: function saveModifier() {
       var _this = this;
+
+      var no_alert = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
       if (this.form.ability == false && this.form.save == false && this.form.attack == false && this.form.critical_range == false && this.form.damage == false) {
         this.form.errors.types = 'required';
@@ -21233,6 +21237,7 @@ __webpack_require__.r(__webpack_exports__);
     toggleEnabled: function toggleEnabled(modifier) {
       this.setForm(modifier);
       this.form.enabled = modifier.enabled;
+      this.form.no_alert = true;
       this.saveModifier();
     },
     deleteModifier: function deleteModifier() {
@@ -21279,7 +21284,7 @@ __webpack_require__.r(__webpack_exports__);
     update: function update() {
       if (this.notes != this.creature.notes) {
         this.creature.notes = this.notes;
-        this.updateCreature();
+        this.updateCreature(true);
       }
     }
   }
@@ -21365,6 +21370,7 @@ __webpack_require__.r(__webpack_exports__);
           current: resource.current,
           recover: resource.recover,
           dice: JSON.parse(JSON.stringify(resource.dice)),
+          no_alert: false,
           editing: true
         });
       } else {
@@ -21383,7 +21389,8 @@ __webpack_require__.r(__webpack_exports__);
             count: null,
             size: null,
             modifier: null
-          }]
+          }],
+          no_alert: false
         });
       }
     },
@@ -21428,6 +21435,7 @@ __webpack_require__.r(__webpack_exports__);
     updateSlot: function updateSlot(resource, index) {
       resource.slots[index] = !resource.slots[index];
       this.setForm(resource);
+      this.form.no_alert = true;
       this.saveResource();
     },
     rollDice: function rollDice(resource) {
@@ -21599,7 +21607,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateSlot: function updateSlot(level, index) {
       this.creature['spell_slots_' + level][index] = !this.creature['spell_slots_' + level][index];
-      this.updateCreature();
+      this.updateCreature(true);
     },
     usePoints: function usePoints() {
       var cost = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -21862,7 +21870,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     timestamp: function timestamp() {
-      this.flash();
+      if (this.message) {
+        this.flash();
+      }
     }
   },
   methods: {
@@ -23798,6 +23808,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     updateCharacter: function updateCharacter() {
+      var _this$character$no_al;
+
       var form = this.$inertia.form({
         id: this.character.id,
         name: this.character.name,
@@ -23926,11 +23938,12 @@ __webpack_require__.r(__webpack_exports__);
         // character fields
         race: this.character.race,
         "class": this.character["class"],
-        level: this.character.level
+        level: this.character.level,
+        no_alert: (_this$character$no_al = this.character.no_alert) !== null && _this$character$no_al !== void 0 ? _this$character$no_al : false
       });
       form.patch(route('characters.update', form.id), {
-        // preserveState: true,
-        preserveScroll: true
+        preserveState: true // preserveScroll: true,
+
       });
     }
   }
@@ -35631,6 +35644,13 @@ var creatureEmit = {
   emits: ['updated'],
   methods: {
     updateCreature: function updateCreature() {
+      var no_alert = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+      if (no_alert) {
+        console.log('here');
+        this.creature.no_alert = no_alert;
+      }
+
       this.$emit('updated', this.creature);
     }
   }

@@ -234,6 +234,7 @@
                         damage_dice: modifier.damage_dice,
                         notes: modifier.notes,
                         enabled: modifier.enabled,
+                        no_alert: false,
                         editing: true,
                     });
                 } else {
@@ -274,6 +275,7 @@
                         }],
                         notes: null,
                         enabled: false,
+                        no_alert: false,
                     });
                 }
             },
@@ -284,7 +286,7 @@
             closeModal() {
                 this.show_modal = false;
             },
-            saveModifier() {
+            saveModifier(no_alert = false) {
                 if(this.form.ability == false && this.form.save == false && this.form.attack == false && this.form.critical_range == false && this.form.damage == false) {
                     this.form.errors.types = 'required';
                     return;
@@ -309,6 +311,7 @@
             toggleEnabled(modifier) {
                 this.setForm(modifier);
                 this.form.enabled = modifier.enabled;
+                this.form.no_alert = true;
                 this.saveModifier();
             },
             deleteModifier() {

@@ -174,6 +174,7 @@
                         current: resource.current,
                         recover: resource.recover,
                         dice: JSON.parse(JSON.stringify(resource.dice)),
+                        no_alert: false,
                         editing: true,
                     });
                 } else {
@@ -193,6 +194,7 @@
                             size: null,
                             modifier: null,
                         }],
+                        no_alert: false,
                     });
                 }
             },
@@ -231,6 +233,7 @@
             updateSlot(resource, index) {
                 resource.slots[index] = !resource.slots[index];
                 this.setForm(resource);
+                this.form.no_alert = true;
                 this.saveResource();
             },
             rollDice(resource) {

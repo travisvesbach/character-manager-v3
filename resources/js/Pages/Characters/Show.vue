@@ -239,11 +239,12 @@
                     race: this.character.race,
                     class: this.character.class,
                     level: this.character.level,
+                    no_alert: this.character.no_alert ?? false,
                 });
 
                 form.patch(route('characters.update', form.id), {
-                    // preserveState: true,
-                    preserveScroll: true,
+                    preserveState: true,
+                    // preserveScroll: true,
                 });
             }
         }

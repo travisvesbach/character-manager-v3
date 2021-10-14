@@ -27,6 +27,10 @@ class ResourcesController extends Controller
 
         $resource->update($validated);
 
+        if($request->input('no_alert')) {
+            return redirect($resource->creature->path());
+        }
+
         return redirect($resource->creature->path())->with(['flash_message' => $resource->creature->name . '\'s ' .  $resource->name . ' updated', 'flash_status' => 'success']);
     }
 

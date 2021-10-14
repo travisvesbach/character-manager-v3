@@ -26,7 +26,7 @@
             update() {
                 if(this.notes != this.creature.notes) {
                     this.creature.notes = this.notes;
-                    this.updateCreature();
+                    this.updateCreature(true);
                 }
             }
         }

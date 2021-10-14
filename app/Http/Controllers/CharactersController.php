@@ -53,6 +53,10 @@ class CharactersController extends Controller
 
         $character->update($validated);
 
+        if($request->input('no_alert')) {
+            return redirect($character->path());
+        }
+
         return redirect($character->path())->with(['flash_message' => $character->name . ' updated', 'flash_status' => 'success']);
     }
 

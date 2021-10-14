@@ -172,7 +172,7 @@
             },
             updateSlot(level, index) {
                 this.creature['spell_slots_' + level][index] = !this.creature['spell_slots_' + level][index];
-                this.updateCreature();
+                this.updateCreature(true);
             },
             usePoints(cost = null) {
                 if (this.creature.spell_points_current >= cost) {
