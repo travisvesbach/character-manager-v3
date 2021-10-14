@@ -133,12 +133,25 @@ class CharacterSeeder extends Seeder
                 'notes' => 'You are blessed',
             ]);
 
+            $character->modifiers()->create([
+                'name' => 'Sneak Attack',
+                'damage' => 1,
+                'damage_as' => 'attack',
+                'damage_dice' => [[
+                    'size' => 6,
+                    'count' => 4,
+                    'modifier' => 0,
+                    'type' => 'Same as attack',
+                ]],
+            ]);
+
             $character->actions()->create([
                 'name' => 'Dagger',
                 'type' => 'Action',
                 'range' => '5 ft.',
                 'attack' => 1,
                 'attack_modifier' => 5,
+                'attack_does_damage' => 1,
                 'attack_dice' => [[
                     'size' => 4,
                     'count' => 1,
@@ -154,6 +167,7 @@ class CharacterSeeder extends Seeder
                 'save' => 1,
                 'save_dc' => 13,
                 'save_type' => 'WIS',
+                'save_does_damage' => 1,
                 'save_dice' => [[
                     'size' => 6,
                     'count' => 3,

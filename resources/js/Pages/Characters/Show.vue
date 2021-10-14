@@ -16,7 +16,7 @@
 
         <stats :creature="character"/>
 
-        <div class="grid md:grid-cols-2">
+        <div class="grid lg:grid-cols-2">
 
             <div class="flex flex-col">
                 <actions class="flex-grow" :creature="character" type="Character"/>

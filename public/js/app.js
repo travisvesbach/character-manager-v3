@@ -33021,7 +33021,7 @@ var _hoisted_1 = {
   "class": "flex items-center px-10"
 };
 var _hoisted_2 = {
-  "class": "grid md:grid-cols-2"
+  "class": "grid lg:grid-cols-2"
 };
 var _hoisted_3 = {
   "class": "flex flex-col"
