@@ -21,7 +21,9 @@
         },
         watch: {
             timestamp: function() {
-                this.flash();
+                if(this.message) {
+                    this.flash();
+                }
             }
         },
         methods: {
