@@ -94,12 +94,21 @@ class MonstersTest extends TestCase
     }
 
     /** @test **/
-    public function an_authenticated_user_cannot_view_the_monsters_of_others() {
+    public function an_authenticated_user_cannot_view_the_private_monsters_of_others() {
         $this->signIn();
 
-        $monster = Monster::factory()->create();
+        $monster = Monster::factory()->create(['public' => false]);
 
         $this->get($monster->path())->assertStatus(403);
+    }
+
+    /** @test **/
+    public function an_authenticated_user_cannot_view_the_public_monsters_of_others() {
+        $this->signIn();
+
+        $monster = Monster::factory()->create(['public' => true]);
+
+        $this->get($monster->path())->assertStatus(200);
     }
 
     /** @test **/

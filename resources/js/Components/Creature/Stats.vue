@@ -1,41 +1,41 @@
 <template>
     <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
         <grid-section>
-            <button class="block btn-text" @click="roll('Strength', creature.strength_mod, 'ability')">
+            <button class="block btn-text" @click="roll('Strength', creature.strength_mod, 'ability')" :disabled="disabled">
                 <strong>Strength: {{ creature.strength }} ({{ displayStat(creature.strength_mod) }})</strong>
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.strength_save_proficiency)" @click="roll('Strength Save', creature.strength_save, 'save')">
+            <button class="block btn-text" :class="proficiencyClass(creature.strength_save_proficiency)" @click="roll('Strength Save', creature.strength_save, 'save')" :disabled="disabled">
                 Save: {{ displayStat(creature.strength_save) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.athletics_proficiency)" @click="roll('Athletics', creature.athletics, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.athletics_proficiency)" @click="roll('Athletics', creature.athletics, 'ability')" :disabled="disabled">
                 Athletics: {{ displayStat(creature.athletics) }}
             </button>
         </grid-section>
         <grid-section>
-            <button class="block btn-text" @click="roll('Dexterity', creature.dexterity_mod, 'ability')">
+            <button class="block btn-text" @click="roll('Dexterity', creature.dexterity_mod, 'ability')" :disabled="disabled">
                 <strong>Dexterity: {{ creature.dexterity }} ({{ displayStat(creature.dexterity_mod) }})</strong>
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.dexterity_save_proficiency)" @click="roll('Dexterity Save', creature.dexterity_save, 'save')">
+            <button class="block btn-text" :class="proficiencyClass(creature.dexterity_save_proficiency)" @click="roll('Dexterity Save', creature.dexterity_save, 'save')" :disabled="disabled">
                 Save: {{ displayStat(creature.dexterity_save) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.acrobatics_proficiency)" @click="roll('Acrobatics', creature.acrobatics, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.acrobatics_proficiency)" @click="roll('Acrobatics', creature.acrobatics, 'ability')" :disabled="disabled">
                 Acrobatics: {{ displayStat(creature.acrobatics) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.sleight_of_hand_proficiency)" @click="roll('Slight of Hand', creature.sleight_of_hand, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.sleight_of_hand_proficiency)" @click="roll('Slight of Hand', creature.sleight_of_hand, 'ability')" :disabled="disabled">
                 Slight of Hand: {{ displayStat(creature.sleight_of_hand) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.stealth_proficiency)" @click="roll('Stealth', creature.stealth, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.stealth_proficiency)" @click="roll('Stealth', creature.stealth, 'ability')" :disabled="disabled">
                 Stealth: {{ displayStat(creature.stealth) }}
             </button>
         </grid-section>
         <grid-section>
-            <button class="block btn-text" @click="roll('Constitution', creature.constitution_mod, 'ability')">
+            <button class="block btn-text" @click="roll('Constitution', creature.constitution_mod, 'ability')" :disabled="disabled">
                 <strong>Constitution: {{ creature.constitution }} ({{ displayStat(creature.constitution_mod) }})</strong>
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.constitution_save_proficiency)" @click="roll('Constitution Save', creature.constitution_save, 'save')">
+            <button class="block btn-text" :class="proficiencyClass(creature.constitution_save_proficiency)" @click="roll('Constitution Save', creature.constitution_save, 'save')" :disabled="disabled">
                 Save: {{ displayStat(creature.constitution_save) }}
             </button>
-            <div class="border-t dark:border-gray-600 mt-6 pt-1">
+            <div class="border-t dark:border-gray-600 mt-6 pt-1" :class="disabled ? 'hidden' : ''">
                 <p><strong>Rests</strong></p>
                 <jet-secondary-button class="mr-2" size="xs" @click="rest = 'short'">
                     Short Rest
@@ -46,68 +46,68 @@
             </div>
         </grid-section>
         <grid-section>
-            <button class="block btn-text" @click="roll('Intelligence', creature.intelligence_mod, 'ability')">
+            <button class="block btn-text" @click="roll('Intelligence', creature.intelligence_mod, 'ability')" :disabled="disabled">
                 <strong>Intelligence: {{ creature.intelligence }} ({{ displayStat(creature.intelligence_mod) }})</strong>
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.intelligence_save_proficiency)" @click="roll('Intelligence Save', creature.intelligence_save, 'save')">
+            <button class="block btn-text" :class="proficiencyClass(creature.intelligence_save_proficiency)" @click="roll('Intelligence Save', creature.intelligence_save, 'save')" :disabled="disabled">
                 Save: {{ displayStat(creature.intelligence_save) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.arcana_proficiency)" @click="roll('Arcana', creature.arcana, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.arcana_proficiency)" @click="roll('Arcana', creature.arcana, 'ability')" :disabled="disabled">
                 Arcana: {{ displayStat(creature.arcana) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.history_proficiency)" @click="roll('History', creature.history, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.history_proficiency)" @click="roll('History', creature.history, 'ability')" :disabled="disabled">
                 History: {{ displayStat(creature.history) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.investigation_proficiency)" @click="roll('Investigation', creature.investigation, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.investigation_proficiency)" @click="roll('Investigation', creature.investigation, 'ability')" :disabled="disabled">
                 Investigation: {{ displayStat(creature.investigation) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.nature_proficiency)" @click="roll('Nature', creature.nature, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.nature_proficiency)" @click="roll('Nature', creature.nature, 'ability')" :disabled="disabled">
                 Nature: {{ displayStat(creature.nature) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.religion_proficiency)" @click="roll('Religion', creature.religion, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.religion_proficiency)" @click="roll('Religion', creature.religion, 'ability')" :disabled="disabled">
                 Religion: {{ displayStat(creature.religion) }}
             </button>
         </grid-section>
         <grid-section>
-            <button class="block btn-text" @click="roll('Wisdom', creature.wisdom_mod, 'ability')">
+            <button class="block btn-text" @click="roll('Wisdom', creature.wisdom_mod, 'ability')" :disabled="disabled">
                 <strong>Wisdom: {{ creature.wisdom }} ({{ displayStat(creature.wisdom_mod) }})</strong>
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.wisdom_save_proficiency)" @click="roll('Wisdom Save', creature.wisdom_save, 'save')">
+            <button class="block btn-text" :class="proficiencyClass(creature.wisdom_save_proficiency)" @click="roll('Wisdom Save', creature.wisdom_save, 'save')" :disabled="disabled">
                 Save: {{ displayStat(creature.wisdom_save) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.animal_handling_proficiency)" @click="roll('Animal Handling', creature.animal_handling, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.animal_handling_proficiency)" @click="roll('Animal Handling', creature.animal_handling, 'ability')" :disabled="disabled">
                 Animal Handling: {{ displayStat(creature.animal_handling) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.insight_proficiency)" @click="roll('Insight', creature.insight, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.insight_proficiency)" @click="roll('Insight', creature.insight, 'ability')" :disabled="disabled">
                 Insight: {{ displayStat(creature.insight) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.medicine_proficiency)" @click="roll('Medicine', creature.medicine, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.medicine_proficiency)" @click="roll('Medicine', creature.medicine, 'ability')" :disabled="disabled">
                 Medicine: {{ displayStat(creature.medicine) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.perception_proficiency)" @click="roll('Perception', creature.perception, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.perception_proficiency)" @click="roll('Perception', creature.perception, 'ability')" :disabled="disabled">
                 Perception: {{ displayStat(creature.perception) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.survival_proficiency)" @click="roll('Survival', creature.survival, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.survival_proficiency)" @click="roll('Survival', creature.survival, 'ability')" :disabled="disabled">
                 Survival: {{ displayStat(creature.survival) }}
             </button>
         </grid-section>
         <grid-section>
-            <button class="block btn-text" @click="roll('Charisma', creature.charisma_mod, 'ability')">
+            <button class="block btn-text" @click="roll('Charisma', creature.charisma_mod, 'ability')" :disabled="disabled">
                 <strong>Charisma: {{ creature.charisma }} ({{ displayStat(creature.charisma_mod) }})</strong>
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.charisma_save_proficiency)" @click="roll('Charisma Save', creature.charisma_save, 'save')">
+            <button class="block btn-text" :class="proficiencyClass(creature.charisma_save_proficiency)" @click="roll('Charisma Save', creature.charisma_save, 'save')" :disabled="disabled">
                 Save: {{ displayStat(creature.charisma_save) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.deception_proficiency)" @click="roll('Deception', creature.deception, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.deception_proficiency)" @click="roll('Deception', creature.deception, 'ability')" :disabled="disabled">
                 Deception: {{ displayStat(creature.deception) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.intimidation_proficiency)" @click="roll('Intimidation', creature.intimidation, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.intimidation_proficiency)" @click="roll('Intimidation', creature.intimidation, 'ability')" :disabled="disabled">
                 Intimidation: {{ displayStat(creature.intimidation) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.performance_proficiency)" @click="roll('Performance', creature.performance, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.performance_proficiency)" @click="roll('Performance', creature.performance, 'ability')" :disabled="disabled">
                 Performance: {{ displayStat(creature.performance) }}
             </button>
-            <button class="block btn-text" :class="proficiencyClass(creature.persuasion_proficiency)" @click="roll('Persuasion', creature.persuasion, 'ability')">
+            <button class="block btn-text" :class="proficiencyClass(creature.persuasion_proficiency)" @click="roll('Persuasion', creature.persuasion, 'ability')" :disabled="disabled">
                 Persuasion: {{ displayStat(creature.persuasion) }}
             </button>
         </grid-section>
@@ -142,18 +142,17 @@
     import JetDialogModal from '@/Jetstream/DialogModal'
     import GridSection from '@/Components/GridSection';
 
-    import { flash } from '@/Mixins/Flash';
-    import { creatureEmit } from '@/Mixins/Creature/Emit';
+    import { Flash } from '@/Mixins/Flash';
+    import { CreatureComponent } from '@/Mixins/Creature/Component';
 
     export default {
-        props: ['creature'],
         components: {
             JetButton,
             JetSecondaryButton,
             JetDialogModal,
             GridSection,
         },
-        mixins: [flash, creatureEmit],
+        mixins: [Flash, CreatureComponent],
         methods: {
             roll(item, modifier, type) {
                 let modifiers = this.creature.modifiers.filter(value => value.enabled && value[type]);

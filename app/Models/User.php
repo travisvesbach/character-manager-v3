@@ -77,4 +77,8 @@ class User extends Authenticatable
     public function characters() {
         return $this->hasMany(Character::class)->orderBy('name');
     }
+
+    public function monsters() {
+        return $this->hasMany(Monster::class)->orderBy('name');
+    }
 }

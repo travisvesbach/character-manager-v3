@@ -1534,6 +1534,9 @@ select {
 .border-2 {
 	border-width: 2px;
 }
+.border-0 {
+	border-width: 0px;
+}
 .border-b-2 {
 	border-bottom-width: 2px;
 }
@@ -2417,6 +2420,12 @@ input[type=number] {
 .dark .btn-text:hover {
 	--tw-text-opacity: 1;
 	color: rgba(243, 244, 246, var(--tw-text-opacity));
+}
+.btn-text:disabled, .btn-text[disabled] {
+	cursor: default;
+}
+.btn-text:disabled:hover, .btn-text[disabled]:hover {
+	color: currentColor;
 }
 .hover\:border-gray-300:hover {
 	--tw-border-opacity: 1;

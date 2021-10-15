@@ -1,4 +1,4 @@
-export const flash = {
+export const Flash = {
     methods: {
         flash(message, status) {
                 this.$page.props.flash.message = message;

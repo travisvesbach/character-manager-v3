@@ -91,11 +91,10 @@
     import CounterSlot from '@/Components/CounterSlot'
     import GridSection from '@/Components/GridSection'
 
-    import { flash } from '@/Mixins/Flash';
-    import { creatureEmit } from '@/Mixins/Creature/Emit';
+    import { Flash } from '@/Mixins/Flash';
+    import { CreatureComponent } from '@/Mixins/Creature/Component';
 
     export default {
-        props: ['creature'],
         components: {
             JetButton,
             JetSecondaryButton,
@@ -108,7 +107,7 @@
             CounterSlot,
             GridSection,
         },
-        mixins: [flash, creatureEmit],
+        mixins: [Flash, CreatureComponent],
         data() {
             return {
                 accordion_key: 0,

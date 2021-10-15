@@ -6,14 +6,14 @@
 
         <heading :creature="monster" type="Monster" @updated="updateMonster"/>
 
-        <stats :creature="monster" @rest="rest"/>
+        <stats :creature="monster" type="Monster" @rest="rest"/>
 
         <div class="grid lg:grid-cols-2">
 
             <div class="flex flex-col">
                 <actions class="flex-grow" :creature="monster" type="Monster"/>
 
-                <dice :creature="monster" v-if="monster.show_dice"/>
+                <dice :creature="monster" type="Monster" v-if="monster.show_dice"/>
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-6">
@@ -21,7 +21,7 @@
 
                 <resources class="lg:col-span-3" :class="getWidth('resources')" :creature="monster" type="Monster" v-if="monster.show_resources"/>
 
-                <spells class="lg:col-span-3 lg:col-span-3" :class="getWidth('spellcaster')" :creature="monster" @updated="updateMonster" v-if="monster.spellcaster"/>
+                <spells class="lg:col-span-3 lg:col-span-3" :class="getWidth('spellcaster')" :creature="monster" type="Monster" @updated="updateMonster" v-if="monster.spellcaster"/>
 
                 <notepad class="lg:col-span-3" :class="getWidth('notes')" :creature="monster" type="Monster" @updated="updateMonster" v-if="monster.show_notes"/>
             </div>

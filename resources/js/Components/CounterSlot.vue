@@ -1,5 +1,5 @@
 <template>
-    <button>
+    <button class="btn-text">
         {{ slot ? '\u26AB' : "\u26AA" }}
     </button>
 </template>

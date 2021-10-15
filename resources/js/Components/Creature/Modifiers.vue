@@ -1,16 +1,16 @@
 <template>
     <grid-section title="Modifiers">
         <template #button>
-            <jet-secondary-button size="sm" @click="openModal()">
+            <jet-secondary-button size="sm" @click="openModal()" v-if="ownerOrAdmin">
                 Add
             </jet-secondary-button>
         </template>
 
         <div class="flex justify-between" :class="index != 0 ? 'my-1' : 'mb-1'" v-for="(modifier, index) in creature.modifiers">
-            <button class="btn-text" title="Edit modifier" @click="openModal(modifier)">
+            <button class="btn-text" :title="disabled ? '' : 'Edit modifier'" @click="openModal(modifier)" :disabled="!ownerOrAdmin">
                 {{ modifier.name }}
             </button>
-            <jet-checkbox :id="'enable_' + modifier.name" v-model:checked="modifier.enabled" @change.native="toggleEnabled(modifier)"/>
+            <jet-checkbox :id="'enable_' + modifier.name" :class="disabled ? 'hidden' : ''" v-model:checked="modifier.enabled" @change.native="toggleEnabled(modifier)"/>
         </div>
 
         <!-- modifier modal -->
@@ -187,8 +187,9 @@
     import GridSection from '@/Components/GridSection'
     import JetCheckbox from '@/Jetstream/Checkbox'
 
+    import { CreatureComponent } from '@/Mixins/Creature/Component';
+
     export default {
-        props: ['creature', 'type'],
         components: {
             JetButton,
             JetSecondaryButton,
@@ -204,6 +205,7 @@
             GridSection,
             JetCheckbox,
         },
+        mixins: [CreatureComponent],
         data() {
             return {
                 show_modal: false,

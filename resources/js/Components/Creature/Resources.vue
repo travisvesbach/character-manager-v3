@@ -1,20 +1,23 @@
 <template>
     <grid-section title="Resources">
         <template #button>
-            <jet-secondary-button size="sm" @click="openModal()">
+            <jet-secondary-button size="sm" @click="openModal()" v-if="ownerOrAdmin">
                 Add
             </jet-secondary-button>
         </template>
 
         <div :class="index != 0 ? 'my-1' : 'mb-1'" v-for="(resource, index) in creature.resources">
             <div class="flex justify-between">
-                <button class="btn-text" @click="openModal(resource)" title="Edit resource">
+                <button class="btn-text" @click="openModal(resource)" :title="disabled ? '' : 'Edit resource'" :disabled="!ownerOrAdmin">
                     {{ resource.name }}:
                 </button>
-                <span v-if="resource.type == 'counter'">
-                    <counter-slot v-for="(slot, index) in resource.slots" :slot="slot" @click.native="updateSlot(resource, index)"/>
+                <span v-if="resource.type == 'counter' && resource.counter_type == 'slots'">
+                    <counter-slot v-for="(slot, index) in resource.slots" :slot="slot" @click.native="updateSlot(resource, index)" :disabled="disabled"/>
                 </span>
-                <jet-secondary-button size="xs" class="ml-auto inline-block" @click="rollDice(resource)" v-if="resource.type == 'dice'">
+                <span v-if="resource.type == 'counter' && resource.counter_type == 'points'">
+                    <jet-input type="number" class="w-16 p-1" v-model.number="resource.current" @input="updateCreature" v-if="!disabled"/> <span v-if="!disabled">/</span> {{ resource.total }}
+                </span>
+                <jet-secondary-button size="xs" class="ml-auto inline-block" @click="rollDice(resource)" v-if="resource.type == 'dice'" :disabled="disabled">
                     <div v-for="dice in resource.dice">
                         {{ dice.count }}d{{ dice.size }}{{ dice.modifier ? '+' + dice.modifier : '' }}
                     </div>
@@ -133,10 +136,10 @@
     import CounterSlot from '@/Components/CounterSlot'
     import GridSection from '@/Components/GridSection'
 
-    import { flash } from '@/Mixins/Flash';
+    import { Flash } from '@/Mixins/Flash';
+    import { CreatureComponent } from '@/Mixins/Creature/Component';
 
     export default {
-        props: ['creature', 'type'],
         components: {
             JetButton,
             JetSecondaryButton,
@@ -151,7 +154,7 @@
             CounterSlot,
             GridSection,
         },
-        mixins: [flash],
+        mixins: [Flash, CreatureComponent],
         data() {
             return {
                 show_modal: false,

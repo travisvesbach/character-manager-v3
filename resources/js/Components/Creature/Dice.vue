@@ -2,7 +2,7 @@
     <grid-section title="Dice">
         <div class="flex flex-row flex-wrap justify-between">
             <div class="text-center m-2" v-for="dice in dice_sizes">
-                <jet-secondary-button size="sm" @click="roll(dice)">
+                <jet-secondary-button size="sm" @click="roll(dice)" :disabled="disabled">
                     1d{{ dice }}
                 </jet-secondary-button>
             </div>
@@ -14,10 +14,10 @@
     import GridSection from '@/Components/GridSection'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton'
 
-    import { flash } from '@/Mixins/Flash';
+    import { Flash } from '@/Mixins/Flash';
+    import { CreatureComponent } from '@/Mixins/Creature/Component';
 
     export default {
-        props: ['creature', 'type'],
         components: {
             GridSection,
             JetSecondaryButton
@@ -35,7 +35,7 @@
                 ],
             }
         },
-        mixins: [flash],
+        mixins: [Flash, CreatureComponent],
         methods: {
             roll(size) {
                 let result = dice.roll(size);

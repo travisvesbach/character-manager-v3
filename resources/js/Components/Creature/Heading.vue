@@ -15,30 +15,36 @@
 
                         <template #content>
                             <div>
-                                <jet-dropdown-link @click.native="toggleModifiers">
+                                <jet-dropdown-link @click.native="toggleModifiers" v-if="ownerOrAdmin">
                                     {{ creature.show_modifiers ? 'Hide' : 'Show' }} Modifiers
                                 </jet-dropdown-link>
-                                <jet-dropdown-link @click.native="toggleResources">
+                                <jet-dropdown-link @click.native="toggleResources" v-if="ownerOrAdmin">
                                     {{ creature.show_resources ? 'Hide' : 'Show' }} Resources
                                 </jet-dropdown-link>
-                                <jet-dropdown-link @click.native="toggleNotes">
+                                <jet-dropdown-link @click.native="toggleNotes" v-if="ownerOrAdmin">
                                     {{ creature.show_notes ? 'Hide' : 'Show' }} Notes
                                 </jet-dropdown-link>
-                                <jet-dropdown-link @click.native="toggleDice">
+                                <jet-dropdown-link @click.native="toggleDice" v-if="ownerOrAdmin">
                                     {{ creature.show_dice ? 'Hide' : 'Show' }} Dice
                                 </jet-dropdown-link>
-                                <jet-dropdown-link :href="route('characters.edit', creature.id)">
-                                    Edit Character
+                                <jet-dropdown-link :href="route(type.toLowerCase() + 's.edit', creature.id)" v-if="type == 'Monster'">
+                                    Clone {{ type }}
                                 </jet-dropdown-link>
-                                <jet-dropdown-link @click.native="confirmingDeleteCreature = creature" as="button">
-                                    Delete Character
+                                <jet-dropdown-link :href="route(type.toLowerCase() + 's.edit', creature.id)" v-if="ownerOrAdmin">
+                                    Edit {{ type }}
+                                </jet-dropdown-link>
+                                <jet-dropdown-link @click.native="confirmingDeleteCreature = creature" as="button" v-if="ownerOrAdmin">
+                                    Delete {{ type }}
                                 </jet-dropdown-link>
                             </div>
                         </template>
                     </jet-dropdown>
                 </div>
-                <span class="ml-1 text-xs text-secondary-color">
+                <span class="ml-1 text-xs text-secondary-color" v-if="type == 'Character'">
                     Level {{ creature.level }} {{ creature.race }} {{ creature.class }}
+                </span>
+                <span class="ml-1 text-xs text-secondary-color" v-if="type == 'Monster'">
+                    {{ creature.size }} {{ creature.type }}, {{ creature.alignment }} (CR {{ creature.challenge_rating }})
                 </span>
             </div>
 
@@ -47,22 +53,24 @@
                     <p>AC: {{ creature.ac }} <span class="text-xs text-secondary-color">({{ creature.ac_source }})</span></p>
                     <p>Speed: {{ creature.speed }}</p>
                     <div>
-                        <button class="btn-text" @click="roll('Initiative', creature.initiative)">
+                        <button class="btn-text" @click="roll('Initiative', creature.initiative)" :disabled="disabled">
                             Initiative: {{ creature.initiative }}
                         </button>
                     </div>
                 </div>
                 <div class=" my-1 md:my-0">
                     Hit Dice:
-                    <button class="block btn-text" v-for="(hit_dice, index) in creature.hit_dice" @click="rollHitDice(index)">
+                    <button class="block btn-text" v-for="(hit_dice, index) in creature.hit_dice" @click="rollHitDice(index)" :disabled="disabled">
                         {{ hit_dice.current }}/{{ hit_dice.count }}d{{ hit_dice.size }}
                     </button>
                 </div>
                 <div class="text-right my-1 md:my-0">
-                    HP: <jet-input type="number" class="w-16 p-1" v-model.number="creature.hp_current" @input="updateCreature"/> / {{creature.hp_max}}<br>
-                    <span class="text-xs">Calc:</span> <jet-input type="number" class="w-16 p-1 mt-1" @keyup.enter="adjustCurrentHp()" v-model.number="hp_calculator"/> <span class="invisible">/ {{creature.hp_max}}</span>
+                    HP: <jet-input type="number" class="w-16 p-1" v-model.number="creature.hp_current" @input="updateCreature" v-if="!disabled"/> <span v-if="!disabled">/</span> {{creature.hp_max}}
+                    <div v-if="!disabled">
+                        <span class="text-xs">Calc:</span> <jet-input type="number" class="w-16 p-1 mt-1" @keyup.enter="adjustCurrentHp()" v-model.number="hp_calculator"/> <span class="invisible">/ {{creature.hp_max}}</span>
+                    </div>
                 </div>
-                <div class="text-right my-1 md:my-0">
+                <div class="text-right my-1 md:my-0" v-if="!disabled">
                     Temp HP: <jet-input type="number" class="w-16 p-1" v-model.number="creature.hp_temp"/><br>
                     <span class="text-xs">Calc:</span> <jet-input type="number" class="w-16 p-1 mt-1" @keyup.enter="adjustTempHp()" v-model.number="hp_temp_calculator"/>
                 </div>
@@ -99,11 +107,10 @@
     import JetDangerButton from '@/Jetstream/DangerButton'
     import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
 
-    import { flash } from '@/Mixins/Flash';
-    import { creatureEmit } from '@/Mixins/Creature/Emit';
+    import { Flash } from '@/Mixins/Flash';
+    import { CreatureComponent } from '@/Mixins/Creature/Component';
 
     export default {
-        props: ['creature', 'type'],
         components: {
             JetInput,
             JetDropdown,
@@ -122,7 +129,7 @@
                 }),
             }
         },
-        mixins: [flash, creatureEmit],
+        mixins: [Flash, CreatureComponent],
         methods: {
             roll(item, modifier) {
                 let result =  dice.roll();

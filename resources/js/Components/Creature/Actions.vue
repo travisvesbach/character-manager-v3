@@ -1,7 +1,7 @@
 <template>
     <grid-section title="Actions">
         <template #button>
-            <jet-secondary-button size="sm" @click="openModal()">
+            <jet-secondary-button size="sm" @click="openModal()" v-if="ownerOrAdmin">
                 Add
             </jet-secondary-button>
         </template>
@@ -9,7 +9,7 @@
         <div class="" :class="index != 0 ? 'my-2 border-t dark:border-gray-600 pt-2' : 'mb-2'" v-for="(action, index) in creature.actions">
             <div class="flex">
                 <div class="whitespace-nowrap">
-                    <button class="btn-text pr-1" @click="openModal(action)" title="Edit action">
+                    <button class="btn-text pr-1" @click="openModal(action)" :title="disabled ? '' : 'Edit action'" :disabled="!ownerOrAdmin">
                         {{ action.name }}
                     </button>
                     <span class="border-l-2 dark:border-gray-600 px-1" title="Action type">
@@ -41,7 +41,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="ml-auto mt-0.5 flex items-start">
+                <div class="ml-auto mt-0.5 flex items-start" :class="disabled ? 'hidden' : ''">
                     <jet-secondary-button class="mr-1" size="xs" @click="roll(action, 'disadvantage')" v-if="action.attack">
                         -
                     </jet-secondary-button>
@@ -253,10 +253,10 @@
     import Accordion from '@/Components/Accordion'
     import AccordionItem from '@/Components/AccordionItem'
 
-    import { flash } from '@/Mixins/Flash';
+    import { Flash } from '@/Mixins/Flash';
+    import { CreatureComponent } from '@/Mixins/Creature/Component';
 
     export default {
-        props: ['creature', 'type'],
         components: {
             JetButton,
             JetSecondaryButton,
@@ -274,7 +274,7 @@
             Accordion,
             AccordionItem,
         },
-        mixins: [flash],
+        mixins: [Flash, CreatureComponent],
         data() {
             return {
                 show_modal: false,

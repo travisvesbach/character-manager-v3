@@ -386,7 +386,7 @@
     import ProficiencyCheckbox from '@/Components/ProficiencyCheckbox'
     import DiceArrayInput from '@/Components/DiceArrayInput'
 
-    import { creatureEdit } from '@/Mixins/Creature/Edit';
+    import { CreatureEdit } from '@/Mixins/Creature/Edit';
 
     export default {
         props: ['editing'],
@@ -404,7 +404,7 @@
             ProficiencyCheckbox,
             DiceArrayInput,
         },
-        mixins: [creatureEdit],
+        mixins: [CreatureEdit],
         created() {
             if(this.editing) {
                 this.form.race = this.editing.race;

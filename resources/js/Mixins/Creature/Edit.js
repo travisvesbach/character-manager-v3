@@ -1,4 +1,4 @@
-export const creatureEdit = {
+export const CreatureEdit = {
     data() {
         return {
             form: this.$inertia.form({

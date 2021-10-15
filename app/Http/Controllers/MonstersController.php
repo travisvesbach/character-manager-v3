@@ -11,7 +11,7 @@ use App\Http\Requests\MonsterRequest;
 class MonstersController extends Controller
 {
     public function index() {
-        $monsters = auth()->user()->monsters;
+        $monsters = Monster::userOrPublic(auth()->user()->id)->get();
         return Inertia::render('Monsters/Index', compact(['monsters']));
     }
 
@@ -31,7 +31,9 @@ class MonstersController extends Controller
     }
 
     public function show(Monster $monster) {
-        $this->authorize('update', $monster);
+        if(!$monster->public) {
+            $this->authorize('update', $monster);
+        }
 
         $monster->load(['resources', 'modifiers', 'actions']);
 

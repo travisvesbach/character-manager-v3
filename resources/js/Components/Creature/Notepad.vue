@@ -1,6 +1,6 @@
 <template>
     <grid-section title="Notepad">
-        <textarea id="notes" class="w-full h-full p-0 form-input bg-transparent dark:bg-transparent" v-model="notes" @blur="update"></textarea>
+        <textarea id="notes" class="w-full h-full p-0 form-input bg-transparent dark:bg-transparent" style="min-height: 12rem;" v-model="notes" @blur="update" :disabled="!ownerOrAdmin"/>
     </grid-section>
 </template>
 
@@ -8,11 +8,10 @@
     import GridSection from '@/Components/GridSection'
     import JetCheckbox from '@/Jetstream/Checkbox'
 
-    import { flash } from '@/Mixins/Flash';
-    import { creatureEmit } from '@/Mixins/Creature/Emit';
+    import { Flash } from '@/Mixins/Flash';
+    import { CreatureComponent } from '@/Mixins/Creature/Component';
 
     export default {
-        props: ['creature', 'type'],
         components: {
             GridSection
         },
@@ -21,7 +20,7 @@
                 notes: this.creature.notes,
             }
         },
-        mixins: [flash, creatureEmit],
+        mixins: [Flash, CreatureComponent],
         methods: {
             update() {
                 if(this.notes != this.creature.notes) {

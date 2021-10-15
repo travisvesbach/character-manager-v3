@@ -137,3 +137,8 @@ input[type=number] {
     @apply hover:text-gray-700;
     @apply dark:hover:text-gray-100;
 }
+
+.btn-text:disabled, .btn-text[disabled] {
+    @apply cursor-default;
+    @apply hover:text-current;
+}
