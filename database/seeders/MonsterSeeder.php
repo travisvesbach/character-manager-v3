@@ -75,7 +75,7 @@ class MonsterSeeder extends Seeder
             'spellcaster' => 0,
             'notes' => 'Keen Hearing and Smell: The wold has advantage on Wisdom (Perception) checks that rely on hearing or smell.
 
-            Pack Tactics: The wolf has advantage on an attack roll against a creature if at least one of the wolf\'s allies is within 5 feet of the creature and teh ally isn\'t incapacitated.',
+Pack Tactics: The wolf has advantage on an attack roll against a creature if at least one of the wolf\'s allies is within 5 feet of the creature and the ally isn\'t incapacitated.',
             'show_resources' => 1,
             'show_modifiers' => 1,
             'show_notes' => 1,
