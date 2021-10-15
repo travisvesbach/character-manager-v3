@@ -188,4 +188,62 @@ class Creature extends Model
     public function actions() {
         return $this->morphMany(Action::class, 'creature')->orderBy('name');
     }
+
+    public function rest($length) {
+        $output = [];
+        array_push($output, $this->name . ' took a ' . $length . ' rest.');
+
+        if($length == 'long') {
+            $recovered_hp = $this->hp_max - $this->hp_current;
+            $this->hp_current = $this->hp_max;
+            array_push($output, $recovered_hp . ' HP recovered.');
+            $hit_dice_array = $this->hit_dice;
+            foreach($this->hit_dice as $index => $hit_dice) {
+                $half_hd = $hit_dice['count'] == 1 ? $hit_dice['count'] : floor($hit_dice['count'] / 2);
+                $recovered_hd = false;
+                if($hit_dice['count'] - $hit_dice['current'] < $half_hd) {
+                    $recovered_hd = $hit_dice['count'] - $hit_dice['current'];
+                    $hit_dice['current'] = $hit_dice['count'];
+                } else {
+                    $recovered_hd = $half_hd;
+                    $hit_dice['current'] = $hit_dice['current'] + $half_hd;
+                }
+                $hit_dice_array[$index] = $hit_dice;
+                array_push($output, $recovered_hd . ' hit dice recovered.');
+            }
+            $this->hit_dice = $hit_dice_array;
+            if($this->hp_temp != 0) {
+                $this->hp_temp = 0;
+                array_push($output, 'Temp HP removed.');
+            }
+        }
+        if($this->spellcaster) {
+            if(($length == 'short' && $this->spell_recover == 'short') || $length == 'long') {
+                if($this->spell_type == 'slots') {
+                    for($level = 1;$level<=9;$level++) {
+                        var_dump($this->{'spell_slots_' . $level});
+                        $slots = $this->{'spell_slots_' . $level};
+                        foreach($slots as $index => $slot) {
+                            $slots[$index] = false;
+                            var_dump($slot);
+                        }
+                        $this->{'spell_slots_' . $level} = $slots;
+                    }
+                } else {
+                    $this->spell_points_current = $this->spell_points_max;
+                }
+                array_push($output, 'All spell ' . $this->spell_type . ' recovered.');
+            }
+        }
+        $this->save();
+
+        foreach($this->resources as $resource) {
+            $result = $resource->rest($length);
+            if($result) {
+                array_push($output, $result);
+            }
+        }
+
+        return implode('<br>', $output);
+    }
 }

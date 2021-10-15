@@ -14,7 +14,7 @@
 
         <heading :creature="character" type="Character" @updated="updateCharacter"/>
 
-        <stats :creature="character"/>
+        <stats :creature="character" @rest="rest"/>
 
         <div class="grid lg:grid-cols-2">
 
@@ -243,6 +243,17 @@
                 });
 
                 form.patch(route('characters.update', form.id), {
+                    preserveState: true,
+                    // preserveScroll: true,
+                });
+            },
+            rest(length) {
+                let form = this.$inertia.form({
+                    id: this.character.id,
+                    length: length,
+                });
+
+                form.post(route('characters.rest', form.id), {
                     preserveState: true,
                     // preserveScroll: true,
                 });

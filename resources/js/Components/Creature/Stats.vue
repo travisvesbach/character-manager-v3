@@ -35,6 +35,15 @@
             <button class="block btn-text" :class="proficiencyClass(creature.constitution_save_proficiency)" @click="roll('Constitution Save', creature.constitution_save, 'save')">
                 Save: {{ displayStat(creature.constitution_save) }}
             </button>
+            <div class="border-t dark:border-gray-600 mt-6 pt-1">
+                <p><strong>Rests</strong></p>
+                <jet-secondary-button class="mr-2" size="xs" @click="rest = 'short'">
+                    Short Rest
+                </jet-secondary-button>
+                <jet-secondary-button size="xs" @click="rest = 'long'">
+                    Long Rest
+                </jet-secondary-button>
+            </div>
         </grid-section>
         <grid-section>
             <button class="block btn-text" @click="roll('Intelligence', creature.intelligence_mod, 'ability')">
@@ -102,20 +111,49 @@
                 Persuasion: {{ displayStat(creature.persuasion) }}
             </button>
         </grid-section>
+
+        <!-- action modal -->
+        <jet-dialog-modal :show="rest" max-width="xl" @close="rest = null">
+            <template #header>
+                Confirm Rest
+            </template>
+
+            <template #content>
+                Take a {{ rest }} rest?
+            </template>
+
+            <template #footerend>
+                <jet-secondary-button @click="rest = null">
+                    Cancel
+                </jet-secondary-button>
+
+                <jet-button class="ml-2" @click="takeARest">
+                    Rest
+                </jet-button>
+            </template>
+        </jet-dialog-modal>
+
     </div>
 </template>
 
 <script>
+    import JetButton from '@/Jetstream/Button'
+    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+    import JetDialogModal from '@/Jetstream/DialogModal'
     import GridSection from '@/Components/GridSection';
 
     import { flash } from '@/Mixins/Flash';
+    import { creatureEmit } from '@/Mixins/Creature/Emit';
 
     export default {
         props: ['creature'],
         components: {
+            JetButton,
+            JetSecondaryButton,
+            JetDialogModal,
             GridSection,
         },
-        mixins: [flash],
+        mixins: [flash, creatureEmit],
         methods: {
             roll(item, modifier, type) {
                 let modifiers = this.creature.modifiers.filter(value => value.enabled && value[type]);

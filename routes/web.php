@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
 
     Route::resource('characters', CharactersController::class);
+    Route::post('/characters/{character}/rest', [CharactersController::class, 'rest'])->name('characters.rest');
 
     Route::post('/resources', [ResourcesController::class, 'store'])->name('resources.store');
     Route::patch('/resources/{resource}', [ResourcesController::class, 'update'])->name('resources.update');

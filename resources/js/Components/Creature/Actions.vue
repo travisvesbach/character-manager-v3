@@ -7,41 +7,41 @@
         </template>
 
         <div class="" :class="index != 0 ? 'my-2 border-t dark:border-gray-600 pt-2' : 'mb-2'" v-for="(action, index) in creature.actions">
-            <div class="flex items-center">
-                <div>
-                    <button class="btn-text" @click="openModal(action)" title="Edit action">
+            <div class="flex">
+                <div class="whitespace-nowrap">
+                    <button class="btn-text pr-1" @click="openModal(action)" title="Edit action">
                         {{ action.name }}
                     </button>
-                    <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Action type">
+                    <span class="border-l-2 dark:border-gray-600 px-1" title="Action type">
                         {{ action.type }}
                     </span>
-                    <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Range">
+                    <span class="border-l-2 dark:border-gray-600 px-1" title="Range">
                         {{ action.range }}
                     </span>
                 </div>
                 <div>
                     <div v-if="action.attack">
-                        <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Attack modifier">
+                        <span class="border-l-2 dark:border-gray-600 px-1" title="Attack modifier">
                             {{ action.attack_modifier > 0 ? '+' : '' }}{{ action.attack_modifier }}
                         </span>
-                        <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Attack damage" v-if="action.attack_does_damage">
+                        <span class="border-l-2 dark:border-gray-600 px-1" title="Attack damage" v-if="action.attack_does_damage">
                             <span v-for="(dice, index) in action.attack_dice">
                                 {{ index > 0 ? ' &' : '' }} {{ dice.count }}d{{ dice.size }}{{ dice.modifier ? '+' + dice.modifier : '' }} {{ dice.type }}
                             </span>
                         </span>
                     </div>
                     <div v-if="action.save">
-                        <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Save DC and saving throw type">
+                        <span class="border-l-2 dark:border-gray-600 px-1" title="Save DC and saving throw type">
                             {{ action.save_dc ? 'DC ' + action.save_dc : '' }} {{ action.save_type }} save
                         </span>
-                        <span class="border-l-2 dark:border-gray-600 pl-2 ml-2" title="Save damage" v-if="action.save_does_damage">
+                        <span class="border-l-2 dark:border-gray-600 px-1" title="Save damage" v-if="action.save_does_damage">
                             <span v-for="(dice, index) in action.save_dice">
                                 {{ index > 0 ? ' &' : '' }} {{ dice.count }}d{{ dice.size }}{{ dice.modifier ? '+' + dice.modifier : '' }} {{ dice.type }}
                             </span>
                         </span>
                     </div>
                 </div>
-                <div class="ml-auto flex items-center">
+                <div class="ml-auto mt-0.5 flex items-start">
                     <jet-secondary-button class="mr-1" size="xs" @click="roll(action, 'disadvantage')" v-if="action.attack">
                         -
                     </jet-secondary-button>
@@ -296,15 +296,30 @@
                         attack: action.attack,
                         attack_modifier: action.attack_modifier,
                         attack_does_damage: action.attack_does_damage,
-                        attack_dice: JSON.parse(JSON.stringify(action.attack_dice)),
+                        attack_dice: action.attack_dice ? JSON.parse(JSON.stringify(action.attack_dice)) : [{
+                                count: 0,
+                                size: 0,
+                                modifier: 0,
+                                type: null,
+                            }],
                         save: action.save,
                         save_type: action.save_type,
                         save_dc: action.save_dc,
                         save_does_damage: action.save_does_damage,
-                        save_dice: JSON.parse(JSON.stringify(action.save_dice)),
+                        save_dice: action.save_dice ? JSON.parse(JSON.stringify(action.save_dice)) : [{
+                                count: 0,
+                                size: 0,
+                                modifier: 0,
+                                type: null,
+                            }],
                         auto: action.auto,
                         auto_does_damage: action.auto_does_damage,
-                        auto_dice: JSON.parse(JSON.stringify(action.auto_dice)),
+                        auto_dice: action.auto_dice ? JSON.parse(JSON.stringify(action.auto_dice)) : [{
+                                count: 0,
+                                size: 0,
+                                modifier: 0,
+                                type: null,
+                            }],
                         editing: true,
                     });
                 } else {
@@ -559,15 +574,15 @@
                 if(action.save_does_damage) {
                     action.save_dice.forEach(function(dice_obj) {
                         let damage_roll = null
-                        let total = dice_obj.modifier;
                         let damage_rolls_array = [];
+                        let damage_total = dice_obj.modifier;
                         for(let i=0;i<dice_obj.count;i++) {
                             damage_roll = dice.roll(dice_obj.size);
-                            total += damage_roll;
+                            damage_total += damage_roll;
                             damage_rolls_array.push(damage_roll);
                         }
-                        output_array.push(dice_obj.type + ' Damage: [' + damage_rolls_array + '] ' + (dice_obj.modifier ? '+ ' + dice_obj.modifier : '') + ' = ' + total);
-                        total += total;
+                        output_array.push(dice_obj.type + ' Damage: [' + damage_rolls_array + '] ' + (dice_obj.modifier ? '+ ' + dice_obj.modifier : '') + ' = ' + damage_total);
+                        total += damage_total;
                     }, action);
                     if(action.save_dice.length > 1) {
                         output_array.push('Total Save Damage: ' + total);

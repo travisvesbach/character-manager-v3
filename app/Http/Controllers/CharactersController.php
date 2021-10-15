@@ -67,4 +67,12 @@ class CharactersController extends Controller
 
         return redirect(route('characters.index'))->with(['flash_message' => $character->name . ' deleted', 'flash_status' => 'danger']);
     }
+
+    public function rest(Character $character, Request $request) {
+        $this->authorize('update', $character);
+
+        $flash_message = $character->rest($request->input('length'));
+
+        return redirect($character->path())->with(['flash_message' => $flash_message, 'flash_status' => 'success']);
+    }
 }

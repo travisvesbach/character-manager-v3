@@ -138,4 +138,25 @@ class CharactersTest extends TestCase
         $user->delete();
         $this->assertCount(0, Character::all());
     }
+
+    /** @test **/
+    public function a_character_can_take_a_rest() {
+        $character = Character::factory()->create(['hp_max' => 15, 'hp_current' => 15]);
+
+        $this->assertEquals($character->hp_max, $character->hp_current);
+
+        $character->hp_current = 0;
+        $character->save();
+        $this->assertEquals(0, $character->hp_current);
+
+        $this->withoutExceptionHandling();
+
+        $this->actingAs($character->user)
+            ->post(route('characters.rest', ['character' => $character, 'length' => 'long']))
+            ->assertRedirect($character->path());
+
+        $character->refresh();
+
+        $this->assertEquals($character->hp_max, $character->hp_current);
+    }
 }

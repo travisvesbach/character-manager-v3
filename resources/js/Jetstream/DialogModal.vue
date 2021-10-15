@@ -5,7 +5,7 @@
                 <template #header v-if="$slots.header">
                     <slot name="header"></slot>
                 </template>
-                <div class="text-lg mb-2">
+                <div class="text-lg mb-2" v-if="$slots.title">
                     <slot name="title"></slot>
                 </div>
 

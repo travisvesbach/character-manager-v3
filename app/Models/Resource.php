@@ -30,4 +30,21 @@ class Resource extends Model
     public function creature() {
         return $this->morphTo();
     }
+
+    public function rest($length) {
+        if(($length == 'short' && $this->recover == 'short') || ($length == 'long' && $this->recover)) {
+            if($this->counter_type == 'slots') {
+                $slots = $this->slots;
+                foreach($slots as $index => $slot) {
+                    $slots[$index] = false;
+                }
+                $this->slots = $slots;
+            } else {
+                $this->current = $this->total;
+            }
+            $this->save();
+            return 'All ' . $this->name . ' ' . $this->counter_type . ' recovered.';
+        }
+        return false;
+    }
 }

@@ -161,7 +161,7 @@ class CharacterSeeder extends Seeder
             ]);
 
             $character->actions()->create([
-                'name' => 'Dissonant Wispers',
+                'name' => 'Dissonant Whispers',
                 'type' => 'Action',
                 'range' => '30 ft.',
                 'save' => 1,
