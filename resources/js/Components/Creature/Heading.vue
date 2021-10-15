@@ -133,14 +133,14 @@
             adjustCurrentHp() {
                 if (Number.isInteger(this.creature.hp_current) && Number.isInteger(this.hp_calculator)) {
                     this.creature.hp_current += this.hp_calculator;
-                    this.updateCreature();
+                    this.updateCreature(true);
                 }
                 this.hp_calculator = null;
             },
             adjustTempHp() {
                 if (Number.isInteger(this.creature.hp_temp) && Number.isInteger(this.hp_temp_calculator)) {
                     this.creature.hp_temp += this.hp_temp_calculator;
-                    this.updateCreature();
+                    this.updateCreature(true);
                 }
                 this.hp_temp_calculator = null;
             },
@@ -167,7 +167,7 @@
                     }
                     output.push('New Total: ' + this.creature.hp_current + ' HP');
                     this.flash(output.join('<br>'), 'primary');
-                    this.updateCreature();
+                    this.updateCreature(true);
                 }
             },
             toggleModifiers() {

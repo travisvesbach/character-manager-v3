@@ -21016,7 +21016,7 @@ __webpack_require__.r(__webpack_exports__);
     adjustCurrentHp: function adjustCurrentHp() {
       if (Number.isInteger(this.creature.hp_current) && Number.isInteger(this.hp_calculator)) {
         this.creature.hp_current += this.hp_calculator;
-        this.updateCreature();
+        this.updateCreature(true);
       }
 
       this.hp_calculator = null;
@@ -21024,7 +21024,7 @@ __webpack_require__.r(__webpack_exports__);
     adjustTempHp: function adjustTempHp() {
       if (Number.isInteger(this.creature.hp_temp) && Number.isInteger(this.hp_temp_calculator)) {
         this.creature.hp_temp += this.hp_temp_calculator;
-        this.updateCreature();
+        this.updateCreature(true);
       }
 
       this.hp_temp_calculator = null;
@@ -21056,7 +21056,7 @@ __webpack_require__.r(__webpack_exports__);
 
         output.push('New Total: ' + this.creature.hp_current + ' HP');
         this.flash(output.join('<br>'), 'primary');
-        this.updateCreature();
+        this.updateCreature(true);
       }
     },
     toggleModifiers: function toggleModifiers() {
@@ -35788,7 +35788,6 @@ var creatureEmit = {
       var no_alert = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
       if (no_alert) {
-        console.log('here');
         this.creature.no_alert = no_alert;
       }
 
