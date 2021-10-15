@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::post('/characters/{character}/rest', [CharactersController::class, 'rest'])->name('characters.rest');
 
     Route::resource('monsters', MonstersController::class);
+    Route::post('/monsters/{monster}/clone', [MonstersController::class, 'clone'])->name('monsters.clone');
 
     Route::post('/resources', [ResourcesController::class, 'store'])->name('resources.store');
     Route::patch('/resources/{resource}', [ResourcesController::class, 'update'])->name('resources.update');

@@ -11,7 +11,7 @@ use App\Http\Requests\MonsterRequest;
 class MonstersController extends Controller
 {
     public function index() {
-        $monsters = Monster::userOrPublic(auth()->user()->id)->get();
+        $monsters = Monster::userOrPublic(auth()->user()->id)->orderBy('name')->get();
         return Inertia::render('Monsters/Index', compact(['monsters']));
     }
 
@@ -66,5 +66,31 @@ class MonstersController extends Controller
         $monster->delete();
 
         return redirect(route('monsters.index'))->with(['flash_message' => $monster->name . ' deleted', 'flash_status' => 'danger']);
+    }
+
+    public function clone(Request $request, Monster $monster) {
+        $new_monster = $monster->replicate();
+        $new_monster->name = $request->input('name');
+        $new_monster->save();
+
+        foreach($monster->modifiers as $modifier) {
+            $new_modifier = $modifier->replicate();
+            $new_modifier->creature_id = $new_monster->id;
+            $new_modifier->save();
+        }
+
+        foreach($monster->resources as $resource) {
+            $new_resource = $resource->replicate();
+            $new_resource->creature_id = $new_monster->id;
+            $new_resource->save();
+        }
+
+        foreach($monster->actions as $action) {
+            $new_action = $action->replicate();
+            $new_action->creature_id = $new_monster->id;
+            $new_action->save();
+        }
+
+        return redirect($new_monster->path())->with(['flash_message' => $new_monster->name . ' cloned from ' . $monster->name, 'flash_status' => 'success']);
     }
 }

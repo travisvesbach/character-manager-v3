@@ -27,13 +27,13 @@
                                 <jet-dropdown-link @click.native="toggleDice" v-if="ownerOrAdmin">
                                     {{ creature.show_dice ? 'Hide' : 'Show' }} Dice
                                 </jet-dropdown-link>
-                                <jet-dropdown-link :href="route(type.toLowerCase() + 's.edit', creature.id)" v-if="type == 'Monster'">
+                                <jet-dropdown-link @click.native="clone_creature = true" as="button" v-if="type == 'Monster'">
                                     Clone {{ type }}
                                 </jet-dropdown-link>
                                 <jet-dropdown-link :href="route(type.toLowerCase() + 's.edit', creature.id)" v-if="ownerOrAdmin">
                                     Edit {{ type }}
                                 </jet-dropdown-link>
-                                <jet-dropdown-link @click.native="confirmingDeleteCreature = creature" as="button" v-if="ownerOrAdmin">
+                                <jet-dropdown-link @click.native="delete_creature = creature" as="button" v-if="ownerOrAdmin">
                                     Delete {{ type }}
                                 </jet-dropdown-link>
                             </div>
@@ -78,24 +78,47 @@
         </div>
 
         <!-- delete confirmation -->
-        <jet-confirmation-modal :show="confirmingDeleteCreature" @close="confirmingDeleteCreature = false">
+        <jet-confirmation-modal :show="delete_creature" @close="delete_creature = false">
             <template #title>
-                Delete Character
+                Delete {{ type }}
             </template>
 
             <template #content>
-                Are you sure you want to delete this character?
+                Are you sure you want to delete this {{ type.toLowerCase() }}?
             </template>
 
             <template #footer>
-                <jet-secondary-button @click.native="confirmingDeleteCreature = false">
+                <jet-secondary-button @click.native="delete_creature = false">
                     Cancel
                 </jet-secondary-button>
                 <jet-danger-button class="ml-2" @click.native="deleteCreature" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Delete Character
+                    Delete {{ type }}
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>
+
+        <!-- clone -->
+        <jet-dialog-modal type="form" :show="clone_creature" @close="closeClone" @submitted="cloneCreature">
+            <template #header>
+                Clone {{ type }}
+            </template>
+
+            <template #content>
+                <!-- name -->
+                <jet-label for="name" value="Name for Clone"/>
+                <jet-input type="text" id="name" class="mt-1 w-full" v-model="form.name" required/>
+                <jet-input-error :message="form.errors.name" class="mt-2"/>
+            </template>
+
+            <template #footerend>
+                <jet-secondary-button @click.native="closeClone">
+                    Cancel
+                </jet-secondary-button>
+                <jet-button class="ml-2" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Clone {{ type }}
+                </jet-button>
+            </template>
+        </jet-dialog-modal>
     </div>
 </template>
 
@@ -103,9 +126,13 @@
     import JetInput from '@/Jetstream/Input'
     import JetDropdown from '@/Jetstream/Dropdown'
     import JetDropdownLink from '@/Jetstream/DropdownLink'
+    import JetButton from '@/Jetstream/Button'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton'
     import JetDangerButton from '@/Jetstream/DangerButton'
     import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
+    import JetDialogModal from '@/Jetstream/DialogModal'
+    import JetLabel from '@/Jetstream/Label'
+    import JetInputError from '@/Jetstream/InputError'
 
     import { Flash } from '@/Mixins/Flash';
     import { CreatureComponent } from '@/Mixins/Creature/Component';
@@ -115,17 +142,23 @@
             JetInput,
             JetDropdown,
             JetDropdownLink,
+            JetButton,
             JetSecondaryButton,
             JetDangerButton,
+            JetDialogModal,
             JetConfirmationModal,
+            JetLabel,
+            JetInputError,
         },
         data() {
             return {
-                confirmingDeleteCreature: false,
+                delete_creature: false,
+                clone_creature: false,
                 hp_calculator: null,
                 hp_temp_calculator: null,
                 form: this.$inertia.form({
                     id: null,
+                    name: null,
                 }),
             }
         },
@@ -196,6 +229,15 @@
             deleteCreature() {
                 this.form.id = this.creature.id;
                 this.form.delete(route(this.type.toLowerCase() + 's.destroy', this.form.id));
+            },
+            cloneCreature() {
+                this.form.id = this.creature.id;
+                this.form.post(route(this.type.toLowerCase() + 's.clone', this.creature.id));
+                this.closeClone();
+            },
+            closeClone() {
+                this.form.name = null;
+                this.clone_creature = false;
             }
         }
     }

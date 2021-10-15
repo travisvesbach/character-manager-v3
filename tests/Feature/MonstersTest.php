@@ -147,4 +147,17 @@ class MonstersTest extends TestCase
         $user->delete();
         $this->assertCount(0, Monster::all());
     }
+
+    /** @test **/
+    public function a_monster_can_be_cloned() {
+        $this->signIn();
+        $monster = Monster::factory()->create();
+
+        $this->withoutExceptionHandling();
+
+        $this->assertCount(1, Monster::all());
+        $this->post(route('monsters.clone', [$monster->id, 'name' => 'monster-clone']));
+        $this->assertCount(2, Monster::all());
+        $this->assertDatabaseHas('monsters', ['name' => 'monster-clone']);
+    }
 }

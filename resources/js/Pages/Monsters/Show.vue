@@ -248,6 +248,17 @@
                     // preserveScroll: true,
                 });
             },
+            rest(length) {
+                let form = this.$inertia.form({
+                    id: this.character.id,
+                    length: length,
+                });
+
+                form.post(route('monsters.rest', form.id), {
+                    preserveState: true,
+                    // preserveScroll: true,
+                });
+            }
         }
     }
 </script>
