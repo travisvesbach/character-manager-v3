@@ -1,7 +1,7 @@
 <template>
-    <app-layout title="Characters">
+    <app-layout title="monsters">
         <template #header>
-            Characters
+            Monsters
         </template>
 
         <div class="w-full md:w-3/4 xl:w-1/2 mx-auto pb-10 sm:px-6 lg:px-8 m-2">
@@ -11,21 +11,21 @@
                     <svg class="h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
-                    <span class="ml-1">{{ characters.length }} {{ characters.length == 1 ? 'character' : 'characters' }}</span>
+                    <span class="ml-1">{{ monsters.length }} {{ monsters.length == 1 ? 'monster' : 'monsters' }}</span>
                 </div>
 
-                <Link :href="route('characters.create')" class="ml-auto btn btn-primary" :as="'button'">
-                        New Character
+                <Link :href="route('monsters.create')" class="ml-auto btn btn-primary" :as="'button'">
+                        New Monster
                 </Link>
             </div>
 
             <div class="border-b-2 w-full border-color"></div>
-            <div class="border-b-2 w-full border-color" v-for="character in characters">
+            <div class="border-b-2 w-full border-color" v-for="monster in monsters">
                 <div class="pl-1 py-1 flex items-center flex-1 hover-trigger">
                     <div class="inline-block ml-2 flex-1">
                         <div class="mb-1 flex items-center">
-                            <Link :href="character.path" class="text-lg link-color">
-                                {{ character.name }}
+                            <Link :href="monster.path" class="text-lg link-color">
+                                {{ monster.name }}
                             </Link>
                         </div>
                     </div>
@@ -42,11 +42,11 @@
 
                             <template #content>
                                 <div>
-                                    <jet-dropdown-link :href="route('characters.edit', character.id)">
-                                        Edit Character
+                                    <jet-dropdown-link :href="route('monsters.edit', monster.id)">
+                                        Edit Monster
                                     </jet-dropdown-link>
-                                    <jet-dropdown-link @click.native="confirm_delete_character = character" as="button">
-                                        Delete Character
+                                    <jet-dropdown-link @click.native="confim_delete_monster = monster" as="button">
+                                        Delete Monster
                                     </jet-dropdown-link>
                                 </div>
                             </template>
@@ -57,21 +57,21 @@
         </div>
 
         <!-- delete confirmation -->
-        <jet-confirmation-modal :show="confirm_delete_character" @close="confirm_delete_character = false">
+        <jet-confirmation-modal :show="confim_delete_monster" @close="confim_delete_monster = false">
             <template #title>
-                Delete Character
+                Delete Monster
             </template>
 
             <template #content>
-                Are you sure you want to delete this character?
+                Are you sure you want to delete this monster?
             </template>
 
             <template #footer>
-                <jet-secondary-button @click.native="confirm_delete_character = false">
+                <jet-secondary-button @click.native="confim_delete_monster = false">
                     Cancel
                 </jet-secondary-button>
-                <jet-danger-button class="ml-2" @click.native="deleteCharacter" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Delete Character
+                <jet-danger-button class="ml-2" @click.native="deletemonster" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Delete Monster
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>
@@ -91,7 +91,7 @@
     import { Link } from '@inertiajs/inertia-vue3'
 
     export default {
-        props: ['characters'],
+        props: ['monsters'],
 
         components: {
             AppLayout,
@@ -107,7 +107,7 @@
 
         data() {
             return {
-                confirm_delete_character: false,
+                confim_delete_monster: false,
                 form: this.$inertia.form({
                     id: null,
                 }),
@@ -115,10 +115,10 @@
         },
 
         methods: {
-            deleteCharacter() {
-                this.form.id = this.confirm_delete_character.id;
-                this.form.delete(route('characters.destroy', this.form.id));
-                this.confirm_delete_character = false;
+            deletemonster() {
+                this.form.id = this.confim_delete_monster.id;
+                this.form.delete(route('monsters.destroy', this.form.id));
+                this.confim_delete_monster = false;
             }
         }
     }

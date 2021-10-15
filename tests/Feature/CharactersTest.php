@@ -7,7 +7,6 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Character;
 use App\Models\User;
-// use Facades\Tests\Setup\CreatureFactory;
 
 class CharactersTest extends TestCase
 {

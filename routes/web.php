@@ -9,6 +9,7 @@ use App\Http\Controllers\CharactersController;
 use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\ModifiersController;
 use App\Http\Controllers\ActionsController;
+use App\Http\Controllers\MonstersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
 
     Route::resource('characters', CharactersController::class);
     Route::post('/characters/{character}/rest', [CharactersController::class, 'rest'])->name('characters.rest');
+
+    Route::resource('monsters', MonstersController::class);
 
     Route::post('/resources', [ResourcesController::class, 'store'])->name('resources.store');
     Route::patch('/resources/{resource}', [ResourcesController::class, 'update'])->name('resources.update');

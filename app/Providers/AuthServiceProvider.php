@@ -17,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Resource' => 'App\Policies\CreaturePolicy',
         'App\Models\Modifier' => 'App\Policies\CreaturePolicy',
         'App\Models\Action' => 'App\Policies\CreaturePolicy',
+        'App\Models\Monster' => 'App\Policies\CreaturePolicy',
     ];
 
     /**
