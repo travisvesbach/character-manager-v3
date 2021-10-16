@@ -820,7 +820,7 @@
                 }
             },
             proficiencyBonus() {
-                let search = this.form.level ? this.form.level.toString() : this.form.challenge;
+                let search = this.form.level ? this.form.level.toString() : this.form.challenge_rating;
                 let result = 0;
                 switch(search) {
                     case '':

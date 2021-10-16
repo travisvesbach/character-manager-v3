@@ -21370,7 +21370,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     proficiencyBonus: function proficiencyBonus() {
-      var search = this.form.level ? this.form.level.toString() : this.form.challenge;
+      var search = this.form.level ? this.form.level.toString() : this.form.challenge_rating;
       var result = 0;
 
       switch (search) {
