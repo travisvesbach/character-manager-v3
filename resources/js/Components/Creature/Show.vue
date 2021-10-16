@@ -1,9 +1,5 @@
 <template>
-    <app-layout :title="creature.name">
-        <template #header>
-            {{ creature.name }}
-        </template>
-
+    <div>
         <heading :creature="creature" :type="type" @updated="updateCreature"/>
 
         <stats :creature="creature" :type="type"/>
@@ -11,6 +7,8 @@
         <div class="grid lg:grid-cols-2">
 
             <div class="flex flex-col">
+                <additional-stats :creature="creature" :type="type" v-if="creature.show_additional_stats"/>
+
                 <actions class="flex-grow" :creature="creature" :type="type"/>
 
                 <dice :creature="creature" :type="type" v-if="creature.show_dice"/>
@@ -26,18 +24,10 @@
                 <notepad class="lg:col-span-3" :class="getWidth('notes')" :creature="creature" :type="type" @updated="updateCreature" v-if="creature.show_notes"/>
             </div>
         </div>
-    </app-layout>
+    </div>
 </template>
 
 <script>
-    import AppLayout from '@/Layouts/AppLayout'
-    import JetDropdown from '@/Jetstream/Dropdown'
-    import JetDropdownLink from '@/Jetstream/DropdownLink'
-    import JetButton from '@/Jetstream/Button'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
-    import JetDangerButton from '@/Jetstream/DangerButton'
-    import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
-    import JetNavLink from '@/Jetstream/NavLink.vue'
     import Heading from '@/Components/Creature/Heading'
     import Stats from '@/Components/Creature/Stats'
     import Spells from '@/Components/Creature/Spells'
@@ -46,19 +36,12 @@
     import Actions from '@/Components/Creature/Actions'
     import Notepad from '@/Components/Creature/Notepad'
     import Dice from '@/Components/Creature/Dice'
+    import AdditionalStats from '@/Components/Creature/AdditionalStats'
 
     import { CreatureComponent } from '@/Mixins/Creature/Component';
 
     export default {
         components: {
-            AppLayout,
-            JetDropdown,
-            JetDropdownLink,
-            JetButton,
-            JetSecondaryButton,
-            JetDangerButton,
-            JetConfirmationModal,
-            JetNavLink,
             Heading,
             Stats,
             Spells,
@@ -67,6 +50,7 @@
             Actions,
             Notepad,
             Dice,
+            AdditionalStats,
         },
         mixins: [CreatureComponent],
         methods: {
@@ -227,12 +211,13 @@
                     show_resources:                 this.creature.show_resources,
                     show_notes:                     this.creature.show_notes,
                     show_dice:                      this.creature.show_dice,
+                    show_additional_stats:          this.creature.show_additional_stats,
                     damage_vulnerabilities:         this.creature.damage_vulnerabilities,
                     damage_resistances:             this.creature.damage_resistances,
                     damage_immunities:              this.creature.damage_immunities,
                     condition_immunities:           this.creature.condition_immunities,
-                    senses:                         this.creature.senses,
                     languages:                      this.creature.languages,
+                    senses:                         this.creature.senses,
                     no_alert:                       this.creature.no_alert ?? false,
 
 

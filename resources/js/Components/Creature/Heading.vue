@@ -27,6 +27,9 @@
                                 <jet-dropdown-link @click.native="toggleDice" v-if="ownerOrAdmin">
                                     {{ creature.show_dice ? 'Hide' : 'Show' }} Dice
                                 </jet-dropdown-link>
+                                <jet-dropdown-link @click.native="toggleAdditionalStats" v-if="ownerOrAdmin">
+                                    {{ creature.show_additional_stats ? 'Hide' : 'Show' }} Additional Stats
+                                </jet-dropdown-link>
                                 <jet-dropdown-link @click.native="clone_creature = true" as="button" v-if="type == 'Monster'">
                                     Clone {{ type }}
                                 </jet-dropdown-link>
@@ -224,6 +227,10 @@
             },
             toggleDice() {
                 this.creature.show_dice = !this.creature.show_dice;
+                this.updateCreature();
+            },
+            toggleAdditionalStats() {
+                this.creature.show_additional_stats = !this.creature.show_additional_stats;
                 this.updateCreature();
             },
             deleteCreature() {

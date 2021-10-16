@@ -146,8 +146,8 @@ class CreateCharactersTable extends Migration
             $table->string('damage_resistances')->nullable();
             $table->string('damage_immunities')->nullable();
             $table->string('condition_immunities')->nullable();
-            $table->string('senses')->nullable();
             $table->string('languages')->nullable();
+            $table->string('senses')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 

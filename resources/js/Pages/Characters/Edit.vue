@@ -69,6 +69,42 @@
                         <jet-input type="text" id="ac_source" class="mt-1 w-full" v-model="form.ac_source" required/>
                         <jet-input-error :message="form.errors.ac_source" class="mt-2"/>
                     </div>
+                    <div class="col-span-1 px-1">
+                        <!-- damage_vulnerabilities -->
+                        <jet-label for="damage_vulnerabilities" value="Damage Vulnerabilities" class="mt-4"/>
+                        <jet-input type="text" id="damage_vulnerabilities" class="mt-1 w-full" v-model="form.damage_vulnerabilities"/>
+                        <jet-input-error :message="form.errors.damage_vulnerabilities" class="mt-2"/>
+                    </div>
+                    <div class="col-span-1 px-1">
+                        <!-- damage_resistances -->
+                        <jet-label for="damage_resistances" value="Damage Resistances" class="mt-4"/>
+                        <jet-input type="text" id="damage_resistances" class="mt-1 w-full" v-model="form.damage_resistances"/>
+                        <jet-input-error :message="form.errors.damage_resistances" class="mt-2"/>
+                    </div>
+                    <div class="col-span-1 px-1">
+                        <!-- damage_immunities -->
+                        <jet-label for="damage_immunities" value="Damage Immunities" class="mt-4"/>
+                        <jet-input type="text" id="damage_immunities" class="mt-1 w-full" v-model="form.damage_immunities"/>
+                        <jet-input-error :message="form.errors.damage_immunities" class="mt-2"/>
+                    </div>
+                    <div class="col-span-1 px-1">
+                        <!-- condition_immunities -->
+                        <jet-label for="condition_immunities" value="Condition Immunities" class="mt-4"/>
+                        <jet-input type="text" id="condition_immunities" class="mt-1 w-full" v-model="form.condition_immunities"/>
+                        <jet-input-error :message="form.errors.condition_immunities" class="mt-2"/>
+                    </div>
+                    <div class="col-span-1 px-1">
+                        <!-- languages -->
+                        <jet-label for="languages" value="Languages" class="mt-4"/>
+                        <jet-input type="text" id="languages" class="mt-1 w-full" v-model="form.languages"/>
+                        <jet-input-error :message="form.errors.languages" class="mt-2"/>
+                    </div>
+                    <div class="col-span-1 px-1">
+                        <!-- senses -->
+                        <jet-label for="senses" value="Senses" class="mt-4"/>
+                        <jet-input type="text" id="senses" class="mt-1 w-full" v-model="form.senses"/>
+                        <jet-input-error :message="form.errors.senses" class="mt-2"/>
+                    </div>
                 </div>
             </div>
 
@@ -405,13 +441,6 @@
             DiceArrayInput,
         },
         mixins: [CreatureEdit],
-        created() {
-            if(this.editing) {
-                this.form.race = this.editing.race;
-                this.form.class = this.editing.class;
-                this.form.level = this.editing.level;
-            }
-        },
         methods: {
             submit() {
                 this.prepareSpellData();

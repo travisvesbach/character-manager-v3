@@ -155,8 +155,8 @@ class CreatureRequest extends FormRequest
             'damage_resistances'            => 'max:255',
             'damage_immunities'             => 'max:255',
             'condition_immunities'          => 'max:255',
-            'senses'                        => 'max:255',
             'languages'                     => 'max:255',
+            'senses'                        => 'max:255',
         ];
     }
 }

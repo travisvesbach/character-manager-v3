@@ -105,6 +105,7 @@ class CharacterSeeder extends Seeder
             'level' => 3,
             'is_archived' => 0,
             'languages' => 'Common',
+            'senses' => 'darkvision: 60 ft., blindsight: 10 ft., passive Perception: 16',
             ])
             ->create();
 

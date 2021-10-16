@@ -141,8 +141,8 @@ class Creature extends Model
         'damage_resistances',
         'damage_immunities',
         'condition_immunities',
-        'senses',
         'languages',
+        'senses',
     ];
 
     protected $casts = [
