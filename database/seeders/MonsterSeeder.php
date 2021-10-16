@@ -80,6 +80,7 @@ Pack Tactics: The wolf has advantage on an attack roll against a creature if at 
             'show_modifiers' => 1,
             'show_notes' => 1,
             'show_dice' => 0,
+            'show_additional_stats' => 1,
             'size' => 'medium',
             'type' => 'beast',
             'alignment' => 'unaligned',

@@ -99,10 +99,12 @@ class CharacterSeeder extends Seeder
             'show_modifiers' => 1,
             'show_notes' => 1,
             'show_dice' => 1,
+            'show_additional_stats' => 1,
             'race' => 'human',
             'class' => 'bard',
             'level' => 3,
             'is_archived' => 0,
+            'languages' => 'Common',
             ])
             ->create();
 

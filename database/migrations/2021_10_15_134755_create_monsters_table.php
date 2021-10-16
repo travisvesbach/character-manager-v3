@@ -140,24 +140,25 @@ class CreateMonstersTable extends Migration
             $table->boolean('show_modifiers')->default(1);
             $table->boolean('show_notes')->default(1);
             $table->boolean('show_dice')->default(1);
+            $table->boolean('show_additional_stats')->default(1);
             $table->boolean('skills_auto_filled')->default(1);
-
-
-            $table->string('size');
-            $table->string('type');
-            $table->string('alignment');
             $table->string('damage_vulnerabilities')->nullable();
             $table->string('damage_resistances')->nullable();
             $table->string('damage_immunities')->nullable();
             $table->string('condition_immunities')->nullable();
             $table->string('senses')->nullable();
             $table->string('languages')->nullable();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            // monster specific
+            $table->string('size');
+            $table->string('type');
+            $table->string('alignment');
             $table->string('challenge_rating');
             $table->integer('experience')->nullable();
             $table->string('source')->nullable();
             $table->boolean('public')->default(1);
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

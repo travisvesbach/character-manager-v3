@@ -37,10 +37,10 @@
             </button>
             <div class="border-t dark:border-gray-600 mt-6 pt-1" :class="disabled ? 'hidden' : ''">
                 <p><strong>Rests</strong></p>
-                <jet-secondary-button class="mr-2" size="xs" @click="rest = 'short'">
+                <jet-secondary-button class="mr-2" size="xs" @click="rest_length = 'short'">
                     Short Rest
                 </jet-secondary-button>
-                <jet-secondary-button size="xs" @click="rest = 'long'">
+                <jet-secondary-button size="xs" @click="rest_length = 'long'">
                     Long Rest
                 </jet-secondary-button>
             </div>
@@ -113,21 +113,21 @@
         </grid-section>
 
         <!-- action modal -->
-        <jet-dialog-modal :show="rest" max-width="xl" @close="rest = null">
+        <jet-dialog-modal :show="rest_length" max-width="xl" @close="rest_length = null">
             <template #header>
                 Confirm Rest
             </template>
 
             <template #content>
-                Take a {{ rest }} rest?
+                Take a {{ rest_length }} rest?
             </template>
 
             <template #footerend>
-                <jet-secondary-button @click="rest = null">
+                <jet-secondary-button @click="rest_length = null">
                     Cancel
                 </jet-secondary-button>
 
-                <jet-button class="ml-2" @click="takeARest">
+                <jet-button class="ml-2" @click="rest">
                     Rest
                 </jet-button>
             </template>
@@ -153,6 +153,11 @@
             GridSection,
         },
         mixins: [Flash, CreatureComponent],
+        data() {
+            return {
+                rest_length: null,
+            }
+        },
         methods: {
             roll(item, modifier, type) {
                 let modifiers = this.creature.modifiers.filter(value => value.enabled && value[type]);
@@ -184,6 +189,19 @@
             },
             proficiencyClass(proficient) {
                 return proficient ? 'italic' : '';
+            },
+            rest() {
+                let form = this.$inertia.form({
+                    id: this.creature.id,
+                    length: this.rest_length,
+                });
+
+                form.post(route(this.type.toLowerCase() + 's.rest', form.id), {
+                    preserveState: true,
+                    // preserveScroll: true,
+                });
+
+                this.rest_length = null;
             }
         }
     }

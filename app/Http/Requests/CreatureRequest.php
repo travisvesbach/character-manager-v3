@@ -150,6 +150,13 @@ class CreatureRequest extends FormRequest
             'show_modifiers'                => 'boolean',
             'show_notes'                    => 'boolean',
             'show_dice'                     => 'boolean',
+            'show_additional_stats'         => 'boolean',
+            'damage_vulnerabilities'        => 'max:255',
+            'damage_resistances'            => 'max:255',
+            'damage_immunities'             => 'max:255',
+            'condition_immunities'          => 'max:255',
+            'senses'                        => 'max:255',
+            'languages'                     => 'max:255',
         ];
     }
 }

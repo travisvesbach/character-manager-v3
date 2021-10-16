@@ -1,11 +1,6 @@
 export const CreatureComponent = {
     props: ['creature', 'type'],
-    data() {
-        return {
-            rest: null,
-        }
-    },
-    emits: ['updated', 'rest'],
+    emits: ['updated'],
     computed: {
         ownerOrAdmin() {
             if(this.$page.props.user.id == this.creature.user_id || this.$page.props.user.admin) {
@@ -26,10 +21,6 @@ export const CreatureComponent = {
                 this.creature.no_alert = no_alert;
             }
             this.$emit('updated', this.creature);
-        },
-        takeARest() {
-            this.$emit('rest', this.rest);
-            this.rest = null;
         }
     }
 }

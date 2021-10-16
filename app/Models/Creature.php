@@ -135,7 +135,14 @@ class Creature extends Model
         'show_modifiers',
         'show_notes',
         'show_dice',
+        'show_additional_stats',
         'skills_auto_filled',
+        'damage_vulnerabilities',
+        'damage_resistances',
+        'damage_immunities',
+        'condition_immunities',
+        'senses',
+        'languages',
     ];
 
     protected $casts = [
@@ -221,13 +228,13 @@ class Creature extends Model
             if(($length == 'short' && $this->spell_recover == 'short') || $length == 'long') {
                 if($this->spell_type == 'slots') {
                     for($level = 1;$level<=9;$level++) {
-                        var_dump($this->{'spell_slots_' . $level});
                         $slots = $this->{'spell_slots_' . $level};
-                        foreach($slots as $index => $slot) {
-                            $slots[$index] = false;
-                            var_dump($slot);
+                        if(is_array($slots)) {
+                            foreach($slots as $index => $slot) {
+                                $slots[$index] = false;
+                            }
+                            $this->{'spell_slots_' . $level} = $slots;
                         }
-                        $this->{'spell_slots_' . $level} = $slots;
                     }
                 } else {
                     $this->spell_points_current = $this->spell_points_max;

@@ -77,6 +77,7 @@ class CharacterFactory extends Factory
             'show_modifiers' => 1,
             'show_notes' => 1,
             'show_dice' => 1,
+
             'race' => 'Human',
             'class' => 'Wizard',
             'level' => $this->faker->numberBetween(1, 20),

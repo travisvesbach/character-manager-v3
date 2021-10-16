@@ -140,14 +140,23 @@ class CreateCharactersTable extends Migration
             $table->boolean('show_modifiers')->default(1);
             $table->boolean('show_notes')->default(1);
             $table->boolean('show_dice')->default(1);
+            $table->boolean('show_additional_stats')->default(1);
             $table->boolean('skills_auto_filled')->default(1);
+            $table->string('damage_vulnerabilities')->nullable();
+            $table->string('damage_resistances')->nullable();
+            $table->string('damage_immunities')->nullable();
+            $table->string('condition_immunities')->nullable();
+            $table->string('senses')->nullable();
+            $table->string('languages')->nullable();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            // character specific
             $table->string('race');
             $table->string('class');
             $table->integer('level')->default(0);
             $table->boolean('is_archived')->default(0);
             $table->date('archive_date')->nullable()->default(null);
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
