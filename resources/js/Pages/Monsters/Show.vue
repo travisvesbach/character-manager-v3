@@ -4,7 +4,7 @@
             {{ monster.name }}
         </template>
 
-        <show :creature="monster" :type="'Monster'"/>
+        <show :creature="monster" type="Monster"/>
     </app-layout>
 </template>
 

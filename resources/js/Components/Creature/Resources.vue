@@ -137,7 +137,7 @@
     import GridSection from '@/Components/GridSection'
 
     import { Flash } from '@/Mixins/Flash';
-    import { CreatureComponent } from '@/Mixins/Creature/Component';
+    import { CreatureComponent } from '@/Mixins/CreatureComponent';
 
     export default {
         components: {

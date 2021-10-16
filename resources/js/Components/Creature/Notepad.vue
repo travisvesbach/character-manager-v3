@@ -9,7 +9,7 @@
     import JetCheckbox from '@/Jetstream/Checkbox'
 
     import { Flash } from '@/Mixins/Flash';
-    import { CreatureComponent } from '@/Mixins/Creature/Component';
+    import { CreatureComponent } from '@/Mixins/CreatureComponent';
 
     export default {
         components: {

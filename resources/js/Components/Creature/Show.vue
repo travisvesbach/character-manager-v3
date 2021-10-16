@@ -38,7 +38,7 @@
     import Dice from '@/Components/Creature/Dice'
     import AdditionalStats from '@/Components/Creature/AdditionalStats'
 
-    import { CreatureComponent } from '@/Mixins/Creature/Component';
+    import { CreatureComponent } from '@/Mixins/CreatureComponent';
 
     export default {
         components: {

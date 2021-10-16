@@ -1,5 +1,5 @@
 <template>
-    <edit :creature="editing" type="Character"/>
+    <edit :creature="editing" type="Monster"/>
 </template>
 
 <script>

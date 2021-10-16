@@ -12,7 +12,7 @@
             </div>
         </template>
 
-        <show :creature="character" :type="'Character'"/>
+        <show :creature="character" type="Character"/>
     </app-layout>
 </template>
 

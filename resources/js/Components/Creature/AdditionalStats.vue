@@ -32,7 +32,7 @@
 <script>
     import GridSection from '@/Components/GridSection'
 
-    import { CreatureComponent } from '@/Mixins/Creature/Component';
+    import { CreatureComponent } from '@/Mixins/CreatureComponent';
 
     export default {
         components: {

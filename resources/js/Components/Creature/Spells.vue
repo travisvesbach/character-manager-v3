@@ -1,7 +1,7 @@
 <template>
     <grid-section title="Spells">
         <template #button>
-            <jet-secondary-button size="sm" @click="openModal" v-if="creature.spell_list_type == 'prepared'">
+            <jet-secondary-button size="sm" @click="openModal" v-if="ownerOrAdmin && creature.spell_list_type == 'prepared'">
                 Prepare
             </jet-secondary-button>
         </template>
@@ -12,7 +12,7 @@
             <div v-for="level in 9">
                 <span v-if="creature['spell_slots_' + level] && creature['spell_slots_' + level].length > 0">
                     {{ level }}:
-                    <counter-slot v-for="(slot, index) in creature['spell_slots_' + level]" :slot="slot" @click.native="updateSlot(level, index)"/>
+                    <counter-slot v-for="(slot, index) in creature['spell_slots_' + level]" :slot="slot" @click.native="updateSlot(level, index)" :disabled="disabled"/>
                 </span>
             </div>
         </div>
@@ -20,11 +20,11 @@
         <div v-if="creature.spell_type == 'points'">
             <div>
                 Points:
-                <jet-input type="number" class="w-14" v-model.number="creature.spell_points_current" @change="usePoints();"/>
-                / {{creature.spell_points_max}}
+                <jet-input type="number" class="w-14" :class="disabled ? 'hidden' : ''" v-model.number="creature.spell_points_current" @change="usePoints();"/>
+                <span :class="disabled ? 'hidden' : ''">/</span> {{creature.spell_points_max}}
             </div>
             <div v-for="(cost, level) in spell_point_costs">
-                <button v-if="level != 0 && level <= creature.spell_level" @click="usePoints(cost)">
+                <button class="btn-text" v-if="level != 0 && level <= creature.spell_level" @click="usePoints(cost)" :disabled="disabled">
                     {{level}}: {{cost}} points
                 </button>
             </div>
@@ -92,7 +92,7 @@
     import GridSection from '@/Components/GridSection'
 
     import { Flash } from '@/Mixins/Flash';
-    import { CreatureComponent } from '@/Mixins/Creature/Component';
+    import { CreatureComponent } from '@/Mixins/CreatureComponent';
 
     export default {
         components: {

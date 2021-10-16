@@ -20492,7 +20492,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Accordion__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Components/Accordion */ "./resources/js/Components/Accordion.vue");
 /* harmony import */ var _Components_AccordionItem__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/Components/AccordionItem */ "./resources/js/Components/AccordionItem.vue");
 /* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @/Mixins/Creature/Component */ "./resources/js/Mixins/Creature/Component.js");
+/* harmony import */ var _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @/Mixins/CreatureComponent */ "./resources/js/Mixins/CreatureComponent.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -20534,7 +20534,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     Accordion: _Components_Accordion__WEBPACK_IMPORTED_MODULE_13__["default"],
     AccordionItem: _Components_AccordionItem__WEBPACK_IMPORTED_MODULE_14__["default"]
   },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_15__.Flash, _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_16__.CreatureComponent],
+  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_15__.Flash, _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_16__.CreatureComponent],
   data: function data() {
     return {
       show_modal: false,
@@ -20933,14 +20933,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
-/* harmony import */ var _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Mixins/Creature/Component */ "./resources/js/Mixins/Creature/Component.js");
+/* harmony import */ var _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Mixins/CreatureComponent */ "./resources/js/Mixins/CreatureComponent.js");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  mixins: [_Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_1__.CreatureComponent]
+  mixins: [_Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_1__.CreatureComponent]
 });
 
 /***/ }),
@@ -20959,7 +20959,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
 /* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
 /* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Mixins/Creature/Component */ "./resources/js/Mixins/Creature/Component.js");
+/* harmony import */ var _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Mixins/CreatureComponent */ "./resources/js/Mixins/CreatureComponent.js");
 
 
 
@@ -20974,11 +20974,757 @@ __webpack_require__.r(__webpack_exports__);
       dice_sizes: [4, 6, 8, 10, 12, 20, 100]
     };
   },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_2__.Flash, _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_3__.CreatureComponent],
+  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_2__.Flash, _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_3__.CreatureComponent],
   methods: {
     roll: function roll(size) {
       var result = dice.roll(size);
       this.flash(this.creature.name + ' rolled 1d' + size + ': ' + result, 'primary');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/Edit.vue?vue&type=script&lang=js":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/Edit.vue?vue&type=script&lang=js ***!
+  \*******************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Jetstream_ActionMessage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/ActionMessage */ "./resources/js/Jetstream/ActionMessage.vue");
+/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
+/* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
+/* harmony import */ var _Components_CenteredForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Components/CenteredForm */ "./resources/js/Components/CenteredForm.vue");
+/* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
+/* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
+/* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
+/* harmony import */ var _Components_SelectInput__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/SelectInput */ "./resources/js/Components/SelectInput.vue");
+/* harmony import */ var _Components_ProficiencyCheckbox__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Components/ProficiencyCheckbox */ "./resources/js/Components/ProficiencyCheckbox.vue");
+/* harmony import */ var _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Components/DiceArrayInput */ "./resources/js/Components/DiceArrayInput.vue");
+
+
+
+
+
+
+
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['creature', 'type'],
+  components: {
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
+    JetActionMessage: _Jetstream_ActionMessage__WEBPACK_IMPORTED_MODULE_1__["default"],
+    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_2__["default"],
+    JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_3__["default"],
+    CenteredForm: _Components_CenteredForm__WEBPACK_IMPORTED_MODULE_4__["default"],
+    JetInput: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_5__["default"],
+    JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_6__["default"],
+    JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_7__["default"],
+    SelectInput: _Components_SelectInput__WEBPACK_IMPORTED_MODULE_8__["default"],
+    ProficiencyCheckbox: _Components_ProficiencyCheckbox__WEBPACK_IMPORTED_MODULE_9__["default"],
+    DiceArrayInput: _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_10__["default"]
+  },
+  data: function data() {
+    return {
+      form: this.$inertia.form({
+        id: null,
+        name: null,
+        speed: '',
+        hp_max: 0,
+        hp_current: 0,
+        hit_dice: [{
+          count: 0,
+          size: 0,
+          current: 0
+        }],
+        ac: 0,
+        ac_source: '',
+        initiative: 0,
+        strength: 0,
+        strength_save: 0,
+        strength_mod: 0,
+        strength_save_proficiency: false,
+        athletics: 0,
+        athletics_proficiency: false,
+        athletics_expertise: false,
+        dexterity: 0,
+        dexterity_save: 0,
+        dexterity_mod: 0,
+        dexterity_save_proficiency: false,
+        acrobatics: 0,
+        acrobatics_proficiency: false,
+        acrobatics_expertise: false,
+        sleight_of_hand: 0,
+        sleight_of_hand_proficiency: false,
+        sleight_of_hand_expertise: false,
+        stealth: 0,
+        stealth_proficiency: false,
+        stealth_expertise: false,
+        constitution: 0,
+        constitution_save: 0,
+        constitution_mod: 0,
+        constitution_save_proficiency: false,
+        intelligence: 0,
+        intelligence_save: 0,
+        intelligence_mod: 0,
+        intelligence_save_proficiency: false,
+        arcana: 0,
+        arcana_proficiency: false,
+        arcana_expertise: false,
+        history: 0,
+        history_proficiency: false,
+        history_expertise: false,
+        investigation: 0,
+        investigation_proficiency: false,
+        investigation_expertise: false,
+        nature: 0,
+        nature_proficiency: false,
+        nature_expertise: false,
+        religion: 0,
+        religion_proficiency: false,
+        religion_expertise: false,
+        wisdom: 0,
+        wisdom_save: 0,
+        wisdom_mod: 0,
+        wisdom_save_proficiency: false,
+        animal_handling: 0,
+        animal_handling_proficiency: false,
+        animal_handling_expertise: false,
+        insight: 0,
+        insight_proficiency: false,
+        insight_expertise: false,
+        medicine: 0,
+        medicine_proficiency: false,
+        medicine_expertise: false,
+        perception: 0,
+        perception_proficiency: false,
+        perception_expertise: false,
+        survival: 0,
+        survival_proficiency: false,
+        survival_expertise: false,
+        charisma: 0,
+        charisma_save: 0,
+        charisma_mod: 0,
+        charisma_save_proficiency: false,
+        deception: 0,
+        deception_proficiency: false,
+        deception_expertise: false,
+        intimidation: 0,
+        intimidation_proficiency: false,
+        intimidation_expertise: false,
+        performance: 0,
+        performance_proficiency: false,
+        performance_expertise: false,
+        persuasion: 0,
+        persuasion_proficiency: false,
+        persuasion_expertise: false,
+        skills_auto_filled: true,
+        special_skill_modifiers: [],
+        spellcaster: false,
+        spell_type: 'slots',
+        spell_dc: null,
+        spell_level: null,
+        spell_points_max: null,
+        spell_points_current: null,
+        spell_recover: 'long',
+        spell_list_type: 'known',
+        spell_slots_1: [],
+        spell_slots_2: [],
+        spell_slots_3: [],
+        spell_slots_4: [],
+        spell_slots_5: [],
+        spell_slots_6: [],
+        spell_slots_7: [],
+        spell_slots_8: [],
+        spell_slots_9: [],
+        spell_list_0: [],
+        spell_list_1: [],
+        spell_list_2: [],
+        spell_list_3: [],
+        spell_list_4: [],
+        spell_list_5: [],
+        spell_list_6: [],
+        spell_list_7: [],
+        spell_list_8: [],
+        spell_list_9: [],
+        spell_prepare_count: null,
+        spell_prepared: null,
+        damage_vulnerabilities: null,
+        damage_resistances: null,
+        damage_immunities: null,
+        condition_immunities: null,
+        languages: null,
+        senses: null,
+        // character fields
+        race: null,
+        "class": null,
+        level: 0,
+        //monster fields
+        size: null,
+        type: null,
+        alignment: null,
+        challenge_rating: null,
+        experience: null,
+        source: null,
+        "public": null
+      })
+    };
+  },
+  created: function created() {
+    if (this.creature) {
+      this.form = this.$inertia.form({
+        id: this.creature.id,
+        name: this.creature.name,
+        speed: this.creature.speed,
+        hp_max: this.creature.hp_max,
+        hp_current: this.creature.hp_current,
+        hit_dice: this.creature.hit_dice,
+        ac: this.creature.ac,
+        ac_source: this.creature.ac_source,
+        initiative: this.creature.initiative,
+        strength: this.creature.strength,
+        strength_save: this.creature.strength_save,
+        strength_mod: this.creature.strength_mod,
+        strength_save_proficiency: this.creature.strength_save_proficiency,
+        athletics: this.creature.athletics,
+        athletics_proficiency: this.creature.athletics_proficiency,
+        athletics_expertise: this.creature.athletics_expertise,
+        dexterity: this.creature.dexterity,
+        dexterity_save: this.creature.dexterity_save,
+        dexterity_mod: this.creature.dexterity_mod,
+        dexterity_save_proficiency: this.creature.dexterity_save_proficiency,
+        acrobatics: this.creature.acrobatics,
+        acrobatics_proficiency: this.creature.acrobatics_proficiency,
+        acrobatics_expertise: this.creature.acrobatics_expertise,
+        sleight_of_hand: this.creature.sleight_of_hand,
+        sleight_of_hand_proficiency: this.creature.sleight_of_hand_proficiency,
+        sleight_of_hand_expertise: this.creature.sleight_of_hand_expertise,
+        stealth: this.creature.stealth,
+        stealth_proficiency: this.creature.stealth_proficiency,
+        stealth_expertise: this.creature.stealth_expertise,
+        constitution: this.creature.constitution,
+        constitution_save: this.creature.constitution_save,
+        constitution_mod: this.creature.constitution_mod,
+        constitution_save_proficiency: this.creature.constitution_save_proficiency,
+        intelligence: this.creature.intelligence,
+        intelligence_save: this.creature.intelligence_save,
+        intelligence_mod: this.creature.intelligence_mod,
+        intelligence_save_proficiency: this.creature.intelligence_save_proficiency,
+        arcana: this.creature.arcana,
+        arcana_proficiency: this.creature.arcana_proficiency,
+        arcana_expertise: this.creature.arcana_expertise,
+        history: this.creature.history,
+        history_proficiency: this.creature.history_proficiency,
+        history_expertise: this.creature.history_expertise,
+        investigation: this.creature.investigation,
+        investigation_proficiency: this.creature.investigation_proficiency,
+        investigation_expertise: this.creature.investigation_expertise,
+        nature: this.creature.nature,
+        nature_proficiency: this.creature.nature_proficiency,
+        nature_expertise: this.creature.nature_expertise,
+        religion: this.creature.religion,
+        religion_proficiency: this.creature.religion_proficiency,
+        religion_expertise: this.creature.religion_expertise,
+        wisdom: this.creature.wisdom,
+        wisdom_save: this.creature.wisdom_save,
+        wisdom_mod: this.creature.wisdom_mod,
+        wisdom_save_proficiency: this.creature.wisdom_save_proficiency,
+        animal_handling: this.creature.animal_handling,
+        animal_handling_proficiency: this.creature.animal_handling_proficiency,
+        animal_handling_expertise: this.creature.animal_handling_expertise,
+        insight: this.creature.insight,
+        insight_proficiency: this.creature.insight_proficiency,
+        insight_expertise: this.creature.insight_expertise,
+        medicine: this.creature.medicine,
+        medicine_proficiency: this.creature.medicine_proficiency,
+        medicine_expertise: this.creature.medicine_expertise,
+        perception: this.creature.perception,
+        perception_proficiency: this.creature.perception_proficiency,
+        perception_expertise: this.creature.perception_expertise,
+        survival: this.creature.survival,
+        survival_proficiency: this.creature.survival_proficiency,
+        survival_expertise: this.creature.survival_expertise,
+        charisma: this.creature.charisma,
+        charisma_save: this.creature.charisma_save,
+        charisma_mod: this.creature.charisma_mod,
+        charisma_save_proficiency: this.creature.charisma_save_proficiency,
+        deception: this.creature.deception,
+        deception_proficiency: this.creature.deception_proficiency,
+        deception_expertise: this.creature.deception_expertise,
+        intimidation: this.creature.intimidation,
+        intimidation_proficiency: this.creature.intimidation_proficiency,
+        intimidation_expertise: this.creature.intimidation_expertise,
+        performance: this.creature.performance,
+        performance_proficiency: this.creature.performance_proficiency,
+        performance_expertise: this.creature.performance_expertise,
+        persuasion: this.creature.persuasion,
+        persuasion_proficiency: this.creature.persuasion_proficiency,
+        persuasion_expertise: this.creature.persuasion_expertise,
+        skills_auto_filled: this.creature.skills_auto_filled,
+        special_skill_modifiers: this.creature.special_skill_modifiers,
+        spellcaster: this.creature.spellcaster,
+        spell_type: this.creature.spell_type,
+        spell_dc: this.creature.spell_dc,
+        spell_level: this.creature.spell_level,
+        spell_points_max: this.creature.spell_points_max,
+        spell_points_current: this.creature.spell_points_current,
+        spell_recover: this.creature.spell_recover,
+        spell_list_type: this.creature.spell_list_type,
+        spell_slots_1: this.creature.spell_slots_1,
+        spell_slots_2: this.creature.spell_slots_2,
+        spell_slots_3: this.creature.spell_slots_3,
+        spell_slots_4: this.creature.spell_slots_4,
+        spell_slots_5: this.creature.spell_slots_5,
+        spell_slots_6: this.creature.spell_slots_6,
+        spell_slots_7: this.creature.spell_slots_7,
+        spell_slots_8: this.creature.spell_slots_8,
+        spell_slots_9: this.creature.spell_slots_9,
+        spell_slots_int_1: this.getSlotCount(this.creature.spell_slots_1),
+        spell_slots_int_2: this.getSlotCount(this.creature.spell_slots_2),
+        spell_slots_int_3: this.getSlotCount(this.creature.spell_slots_3),
+        spell_slots_int_4: this.getSlotCount(this.creature.spell_slots_4),
+        spell_slots_int_5: this.getSlotCount(this.creature.spell_slots_5),
+        spell_slots_int_6: this.getSlotCount(this.creature.spell_slots_6),
+        spell_slots_int_7: this.getSlotCount(this.creature.spell_slots_7),
+        spell_slots_int_8: this.getSlotCount(this.creature.spell_slots_8),
+        spell_slots_int_9: this.getSlotCount(this.creature.spell_slots_9),
+        spell_list_0: this.creature.spell_list_0,
+        spell_list_1: this.creature.spell_list_1,
+        spell_list_2: this.creature.spell_list_2,
+        spell_list_3: this.creature.spell_list_3,
+        spell_list_4: this.creature.spell_list_4,
+        spell_list_5: this.creature.spell_list_5,
+        spell_list_6: this.creature.spell_list_6,
+        spell_list_7: this.creature.spell_list_7,
+        spell_list_8: this.creature.spell_list_8,
+        spell_list_9: this.creature.spell_list_9,
+        spell_list_string_0: this.joinList(this.creature.spell_list_0),
+        spell_list_string_1: this.joinList(this.creature.spell_list_1),
+        spell_list_string_2: this.joinList(this.creature.spell_list_2),
+        spell_list_string_3: this.joinList(this.creature.spell_list_3),
+        spell_list_string_4: this.joinList(this.creature.spell_list_4),
+        spell_list_string_5: this.joinList(this.creature.spell_list_5),
+        spell_list_string_6: this.joinList(this.creature.spell_list_6),
+        spell_list_string_7: this.joinList(this.creature.spell_list_7),
+        spell_list_string_8: this.joinList(this.creature.spell_list_8),
+        spell_list_string_9: this.joinList(this.creature.spell_list_9),
+        spell_prepare_count: this.creature.spell_prepare_count,
+        spell_prepared: this.creature.spell_prepared,
+        damage_vulnerabilities: this.creature.damage_vulnerabilities,
+        damage_resistances: this.creature.damage_resistances,
+        damage_immunities: this.creature.damage_immunities,
+        condition_immunities: this.creature.condition_immunities,
+        languages: this.creature.languages,
+        senses: this.creature.senses,
+        // character fields
+        race: this.creature.race,
+        "class": this.creature["class"],
+        level: this.creature.level,
+        // monster fields
+        size: this.creature.size,
+        type: this.creature.type,
+        alignment: this.creature.alignment,
+        challenge_rating: this.creature.challenge_rating,
+        experience: this.creature.experience,
+        source: this.creature.source,
+        "public": this.creature["public"]
+      });
+    }
+  },
+  computed: {
+    skillsButtonText: function skillsButtonText() {
+      if (this.form.skills_auto_filled) {
+        return 'Swtich to Manual Skills';
+      } else {
+        return 'Swtich to Automatic Skills';
+      }
+    },
+    skillsText: function skillsText() {
+      if (this.form.skills_auto_filled) {
+        return 'Skills are automatically calculated based on stats and proficencies.  If there are other factors affecting skills, click the button to switch to manual skills.';
+      } else {
+        return 'Enter in all of the skill modifiers. Changing stats and proficiencies in the section above will not change the skill modifiers while in manual skills mode.';
+      }
+    },
+    spellcasterButtonText: function spellcasterButtonText() {
+      if (this.form.spellcaster) {
+        return 'Disable';
+      } else {
+        return 'Enable';
+      }
+    },
+    spellListExplanation: function spellListExplanation() {
+      if (this.form.spell_list_type == 'known') {
+        return "List all of your known spells below.  Spells should be separated by a comma (ex: Firebolt, Minor Illusion).";
+      } else {
+        return "List all of the spells in your spellbook or class's spell list below.  You will have the option later to select which spells from your list you have prepared and then only show the prepared spells.  Spells should be separated by a comma (ex: Firebolt, Minor Illusion).";
+      }
+    },
+    proficiencyBonus: function proficiencyBonus() {
+      var search = this.form.level ? this.form.level.toString() : this.form.challenge;
+      var result = 0;
+
+      switch (search) {
+        case '':
+        case '0':
+        case '1/8':
+        case '1/4':
+        case '1/2':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+          result = 2;
+          break;
+
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+          result = 3;
+          break;
+
+        case '9':
+        case '10':
+        case '11':
+        case '12':
+          result = 4;
+          break;
+
+        case '13':
+        case '14':
+        case '15':
+        case '16':
+          result = 5;
+          break;
+
+        case '17':
+        case '18':
+        case '19':
+        case '20':
+          result = 6;
+          break;
+
+        case '21':
+        case '22':
+        case '23':
+        case '24':
+          result = 7;
+          break;
+
+        case '25':
+        case '26':
+        case '27':
+        case '28':
+          result = 8;
+          break;
+
+        case '29':
+        case '30':
+          result = 9;
+          break;
+
+        default:
+          result = 0;
+          break;
+      }
+
+      return result;
+    },
+    baseStrengthMod: function baseStrengthMod() {
+      return this.getStatModifier(this.form.strength);
+    },
+    baseDexterityMod: function baseDexterityMod() {
+      return this.getStatModifier(this.form.dexterity);
+    },
+    baseConstitutionMod: function baseConstitutionMod() {
+      return this.getStatModifier(this.form.constitution);
+    },
+    baseIntelligenceMod: function baseIntelligenceMod() {
+      return this.getStatModifier(this.form.intelligence);
+    },
+    baseWisdomMod: function baseWisdomMod() {
+      return this.getStatModifier(this.form.wisdom);
+    },
+    baseCharismaMod: function baseCharismaMod() {
+      return this.getStatModifier(this.form.charisma);
+    }
+  },
+  methods: {
+    ordinalSuffix: function ordinalSuffix(num) {
+      var j = num % 10;
+      var k = num % 100;
+
+      if (j == 1 && k != 11) {
+        return num + "st";
+      }
+
+      if (j == 2 && k != 12) {
+        return num + "nd";
+      }
+
+      if (j == 3 && k != 13) {
+        return num + "rd";
+      }
+
+      return num + "th";
+    },
+    getStatModifier: function getStatModifier(stat) {
+      var result = -99;
+
+      switch (stat) {
+        case 1:
+          result = -5;
+          break;
+
+        case 2:
+        case 3:
+          result = -4;
+          break;
+
+        case 4:
+        case 5:
+          result = -3;
+          break;
+
+        case 6:
+        case 7:
+          result = -2;
+          break;
+
+        case 8:
+        case 9:
+          result = -1;
+          break;
+
+        case 10:
+        case 11:
+          result = 0;
+          break;
+
+        case 12:
+        case 13:
+          result = 1;
+          break;
+
+        case 14:
+        case 15:
+          result = 2;
+          break;
+
+        case 16:
+        case 17:
+          result = 3;
+          break;
+
+        case 18:
+        case 19:
+          result = 4;
+          break;
+
+        case 20:
+        case 21:
+          result = 5;
+          break;
+
+        case 22:
+        case 23:
+          result = 6;
+          break;
+
+        case 24:
+        case 25:
+          result = 7;
+          break;
+
+        case 26:
+        case 27:
+          result = 8;
+          break;
+
+        case 28:
+        case 29:
+          result = 9;
+          break;
+
+        case 30:
+          result = 10;
+          break;
+      }
+
+      return result;
+    },
+    setSkills: function setSkills() {
+      var stat = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'all';
+
+      if (this.form.skills_auto_filled) {
+        if (stat == 'strength' || stat == 'all') {
+          this.setSkill('strength_mod', this.baseStrengthMod);
+          this.setSkill('strength_save', this.baseStrengthMod);
+          this.setSkill('athletics', this.baseStrengthMod);
+        }
+
+        if (stat == 'dexterity' || stat == 'all') {
+          this.setSkill('dexterity_mod', this.baseDexterityMod);
+          this.setSkill('dexterity_save', this.baseDexterityMod);
+          this.setSkill('acrobatics', this.baseDexterityMod);
+          this.setSkill('sleight_of_hand', this.baseDexterityMod);
+          this.setSkill('stealth', this.baseDexterityMod);
+        }
+
+        if (stat == 'constitution' || stat == 'all') {
+          this.setSkill('constitution_mod', this.baseConstitutionMod);
+          this.setSkill('constitution_save', this.baseConstitutionMod);
+        }
+
+        if (stat == 'intelligence' || stat == 'all') {
+          this.setSkill('intelligence_mod', this.baseIntelligenceMod);
+          this.setSkill('intelligence_save', this.baseIntelligenceMod);
+          this.setSkill('arcana', this.baseIntelligenceMod);
+          this.setSkill('history', this.baseIntelligenceMod);
+          this.setSkill('investigation', this.baseIntelligenceMod);
+          this.setSkill('nature', this.baseIntelligenceMod);
+          this.setSkill('religion', this.baseIntelligenceMod);
+        }
+
+        if (stat == 'wisdom' || stat == 'all') {
+          this.setSkill('wisdom_mod', this.baseWisdomMod);
+          this.setSkill('wisdom_save', this.baseWisdomMod);
+          this.setSkill('animal_handling', this.baseWisdomMod);
+          this.setSkill('insight', this.baseWisdomMod);
+          this.setSkill('medicine', this.baseWisdomMod);
+          this.setSkill('perception', this.baseWisdomMod);
+          this.setSkill('survival', this.baseWisdomMod);
+        }
+
+        if (stat == 'charisma' || stat == 'all') {
+          this.setSkill('charisma_mod', this.baseCharismaMod);
+          this.setSkill('charisma_save', this.baseCharismaMod);
+          this.setSkill('deception', this.baseCharismaMod);
+          this.setSkill('intimidation', this.baseCharismaMod);
+          this.setSkill('performance', this.baseCharismaMod);
+          this.setSkill('persuasion', this.baseCharismaMod);
+        } // if(this.special_skill_modifiers.includes('cloakOfProtection')) {
+        //     this.strength_save = this.strength_save + 1;
+        //     this.dexterity_save = this.dexterity_save + 1;
+        //     this.constitution_save = this.constitution_save + 1;
+        //     this.intelligence_save = this.intelligence_save + 1;
+        //     this.wisdom_save = this.wisdom_save + 1;
+        //     this.charisma_save = this.charisma_save + 1;
+        // }
+        // if(this.special_skill_modifiers.includes('ringOfProtection')) {
+        //     this.strength_save = this.strength_save + 1;
+        //     this.dexterity_save = this.dexterity_save + 1;
+        //     this.constitution_save = this.constitution_save + 1;
+        //     this.intelligence_save = this.intelligence_save + 1;
+        //     this.wisdom_save = this.wisdom_save + 1;
+        //     this.charisma_save = this.charisma_save + 1;
+        // }
+
+      }
+    },
+    setSkill: function setSkill(skill, stat_modifier) {
+      this.form[skill] = stat_modifier;
+
+      if (this.form[skill + '_proficiency']) {
+        this.form[skill] += (this.form[skill + '_expertise'] ? 2 : 1) * this.proficiencyBonus;
+      }
+    },
+    toggleAutoSkills: function toggleAutoSkills() {
+      this.form.skills_auto_filled = !this.form.skills_auto_filled;
+
+      if (this.form.skills_auto_filled) {
+        this.setSkills();
+      }
+    },
+    joinList: function joinList(list) {
+      if (list != null) {
+        return list.join(', ');
+      } else {
+        return '';
+      }
+    },
+    splitList: function splitList(list) {
+      if (list && list != '') {
+        return list.split(', ').sort();
+      } else {
+        return null;
+      }
+    },
+    getSlotCount: function getSlotCount(slots) {
+      if (slots && Array.isArray(slots)) {
+        return slots.length;
+      }
+
+      return null;
+    },
+    getSlotArray: function getSlotArray(level, count) {
+      var output = [];
+
+      if (this.spells && this.spells['slots_' + level] && Array.isArray(this.spells['slots_' + level])) {
+        output = this.spells['slots_' + level];
+      }
+
+      if (count > output.length) {
+        for (var j = output.length; j < count; j++) {
+          output.push(false);
+        }
+      } else if (count < output.length) {
+        for (var _j = output.length; _j > count; _j--) {
+          output.pop();
+        }
+      }
+
+      return output;
+    },
+    prepareSpellData: function prepareSpellData() {
+      for (var i = 0; i < 10; i++) {
+        this.form['spell_list_' + i] = this.splitList(this.form['spell_list_string_' + i]);
+
+        if (i != 0) {
+          this.form['spell_slots_' + i] = this.getSlotArray(i, this.form['spell_slots_int_' + i]);
+        }
+      }
+
+      if (this.form.spell_list_type == 'known') {
+        this.form.spell_prepare_count = null;
+        this.form.spell_prepared = null;
+      }
+
+      if (this.form.spell_type == 'points') {
+        this.form.spell_points_current = this.form.spell_points_max;
+        this.form.spell_slots_1 = [];
+        this.form.spell_slots_2 = [];
+        this.form.spell_slots_3 = [];
+        this.form.spell_slots_4 = [];
+        this.form.spell_slots_5 = [];
+        this.form.spell_slots_6 = [];
+        this.form.spell_slots_7 = [];
+        this.form.spell_slots_8 = [];
+        this.form.spell_slots_9 = [];
+      } else if (this.form.spell_type == 'slots') {
+        this.form.spell_points_current = null;
+        this.form.spell_points_max = null;
+        this.form.spell_level = null;
+      }
+    },
+    submit: function submit() {
+      this.prepareSpellData();
+
+      if (this.creature) {
+        this.form.patch(route(this.type.toLowerCase() + 's.update', this.form.id));
+      } else {
+        this.form.post(route(this.type.toLowerCase() + 's.store'));
+      }
     }
   }
 });
@@ -21007,7 +21753,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
 /* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Mixins/Creature/Component */ "./resources/js/Mixins/Creature/Component.js");
+/* harmony import */ var _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Mixins/CreatureComponent */ "./resources/js/Mixins/CreatureComponent.js");
 
 
 
@@ -21045,7 +21791,7 @@ __webpack_require__.r(__webpack_exports__);
       })
     };
   },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_10__.Flash, _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_11__.CreatureComponent],
+  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_10__.Flash, _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_11__.CreatureComponent],
   methods: {
     roll: function roll(item, modifier) {
       var result = dice.roll();
@@ -21160,7 +21906,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Components/CounterSlot */ "./resources/js/Components/CounterSlot.vue");
 /* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
 /* harmony import */ var _Jetstream_Checkbox__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Jetstream/Checkbox */ "./resources/js/Jetstream/Checkbox.vue");
-/* harmony import */ var _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Mixins/Creature/Component */ "./resources/js/Mixins/Creature/Component.js");
+/* harmony import */ var _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Mixins/CreatureComponent */ "./resources/js/Mixins/CreatureComponent.js");
 
 
 
@@ -21191,7 +21937,7 @@ __webpack_require__.r(__webpack_exports__);
     GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_11__["default"],
     JetCheckbox: _Jetstream_Checkbox__WEBPACK_IMPORTED_MODULE_12__["default"]
   },
-  mixins: [_Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_13__.CreatureComponent],
+  mixins: [_Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_13__.CreatureComponent],
   data: function data() {
     return {
       show_modal: false,
@@ -21333,7 +22079,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
 /* harmony import */ var _Jetstream_Checkbox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Checkbox */ "./resources/js/Jetstream/Checkbox.vue");
 /* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Mixins/Creature/Component */ "./resources/js/Mixins/Creature/Component.js");
+/* harmony import */ var _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Mixins/CreatureComponent */ "./resources/js/Mixins/CreatureComponent.js");
 
 
 
@@ -21347,7 +22093,7 @@ __webpack_require__.r(__webpack_exports__);
       notes: this.creature.notes
     };
   },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_2__.Flash, _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_3__.CreatureComponent],
+  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_2__.Flash, _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_3__.CreatureComponent],
   methods: {
     update: function update() {
       if (this.notes != this.creature.notes) {
@@ -21384,7 +22130,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Components/CounterSlot */ "./resources/js/Components/CounterSlot.vue");
 /* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
 /* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Mixins/Creature/Component */ "./resources/js/Mixins/Creature/Component.js");
+/* harmony import */ var _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Mixins/CreatureComponent */ "./resources/js/Mixins/CreatureComponent.js");
 
 
 
@@ -21414,7 +22160,7 @@ __webpack_require__.r(__webpack_exports__);
     CounterSlot: _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_10__["default"],
     GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_11__["default"]
   },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_12__.Flash, _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_13__.CreatureComponent],
+  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_12__.Flash, _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_13__.CreatureComponent],
   data: function data() {
     return {
       show_modal: false,
@@ -21570,7 +22316,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Creature_Notepad__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Components/Creature/Notepad */ "./resources/js/Components/Creature/Notepad.vue");
 /* harmony import */ var _Components_Creature_Dice__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Components/Creature/Dice */ "./resources/js/Components/Creature/Dice.vue");
 /* harmony import */ var _Components_Creature_AdditionalStats__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/Creature/AdditionalStats */ "./resources/js/Components/Creature/AdditionalStats.vue");
-/* harmony import */ var _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Mixins/Creature/Component */ "./resources/js/Mixins/Creature/Component.js");
+/* harmony import */ var _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Mixins/CreatureComponent */ "./resources/js/Mixins/CreatureComponent.js");
 
 
 
@@ -21593,7 +22339,7 @@ __webpack_require__.r(__webpack_exports__);
     Dice: _Components_Creature_Dice__WEBPACK_IMPORTED_MODULE_7__["default"],
     AdditionalStats: _Components_Creature_AdditionalStats__WEBPACK_IMPORTED_MODULE_8__["default"]
   },
-  mixins: [_Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_9__.CreatureComponent],
+  mixins: [_Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_9__.CreatureComponent],
   methods: {
     getWidth: function getWidth(item) {
       var sections = {
@@ -21809,7 +22555,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/CounterSlot */ "./resources/js/Components/CounterSlot.vue");
 /* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
 /* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Mixins/Creature/Component */ "./resources/js/Mixins/Creature/Component.js");
+/* harmony import */ var _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Mixins/CreatureComponent */ "./resources/js/Mixins/CreatureComponent.js");
 
 
 
@@ -21835,7 +22581,7 @@ __webpack_require__.r(__webpack_exports__);
     CounterSlot: _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_8__["default"],
     GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_10__.Flash, _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_11__.CreatureComponent],
+  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_10__.Flash, _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_11__.CreatureComponent],
   data: function data() {
     return {
       accordion_key: 0,
@@ -21946,7 +22692,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/DialogModal */ "./resources/js/Jetstream/DialogModal.vue");
 /* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
 /* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Mixins/Creature/Component */ "./resources/js/Mixins/Creature/Component.js");
+/* harmony import */ var _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Mixins/CreatureComponent */ "./resources/js/Mixins/CreatureComponent.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -21966,7 +22712,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     JetDialogModal: _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_2__["default"],
     GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_4__.Flash, _Mixins_Creature_Component__WEBPACK_IMPORTED_MODULE_5__.CreatureComponent],
+  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_4__.Flash, _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_5__.CreatureComponent],
   data: function data() {
     return {
       rest_length: null
@@ -23918,56 +24664,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
-/* harmony import */ var _Jetstream_ActionMessage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/ActionMessage */ "./resources/js/Jetstream/ActionMessage.vue");
-/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
-/* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
-/* harmony import */ var _Components_CenteredForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Components/CenteredForm */ "./resources/js/Components/CenteredForm.vue");
-/* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
-/* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
-/* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
-/* harmony import */ var _Components_SelectInput__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/SelectInput */ "./resources/js/Components/SelectInput.vue");
-/* harmony import */ var _Components_ProficiencyCheckbox__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Components/ProficiencyCheckbox */ "./resources/js/Components/ProficiencyCheckbox.vue");
-/* harmony import */ var _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Components/DiceArrayInput */ "./resources/js/Components/DiceArrayInput.vue");
-/* harmony import */ var _Mixins_Creature_Edit__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Mixins/Creature/Edit */ "./resources/js/Mixins/Creature/Edit.js");
-
-
-
-
-
-
-
-
-
-
-
+/* harmony import */ var _Components_Creature_Edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/Creature/Edit */ "./resources/js/Components/Creature/Edit.vue");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['editing'],
   components: {
-    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
-    JetActionMessage: _Jetstream_ActionMessage__WEBPACK_IMPORTED_MODULE_1__["default"],
-    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_2__["default"],
-    JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_3__["default"],
-    CenteredForm: _Components_CenteredForm__WEBPACK_IMPORTED_MODULE_4__["default"],
-    JetInput: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_5__["default"],
-    JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_6__["default"],
-    JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_7__["default"],
-    SelectInput: _Components_SelectInput__WEBPACK_IMPORTED_MODULE_8__["default"],
-    ProficiencyCheckbox: _Components_ProficiencyCheckbox__WEBPACK_IMPORTED_MODULE_9__["default"],
-    DiceArrayInput: _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_10__["default"]
-  },
-  mixins: [_Mixins_Creature_Edit__WEBPACK_IMPORTED_MODULE_11__.CreatureEdit],
-  methods: {
-    submit: function submit() {
-      this.prepareSpellData();
-
-      if (this.editing) {
-        this.form.patch(route('characters.update', this.form.id));
-      } else {
-        this.form.post(route('characters.store'));
-      }
-    }
+    Edit: _Components_Creature_Edit__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -24085,6 +24787,28 @@ __webpack_require__.r(__webpack_exports__);
     Welcome: _Jetstream_Welcome_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 }));
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Monsters/Edit.vue?vue&type=script&lang=js":
+/*!**************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Monsters/Edit.vue?vue&type=script&lang=js ***!
+  \**************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Components_Creature_Edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/Creature/Edit */ "./resources/js/Components/Creature/Edit.vue");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['editing'],
+  components: {
+    Edit: _Components_Creature_Edit__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
 
 /***/ }),
 
@@ -25993,6 +26717,2067 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/Edit.vue?vue&type=template&id=661208bf":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/Edit.vue?vue&type=template&id=661208bf ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "text-2xl font-bold inline-block heading-color"
+}, "Basic Info", -1
+/* HOISTED */
+);
+
+var _hoisted_2 = {
+  "class": "grid sm:grid-cols-2"
+};
+var _hoisted_3 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_4 = {
+  key: 0,
+  "class": "col-span-1 px-1"
+};
+var _hoisted_5 = {
+  key: 1,
+  "class": "col-span-1 px-1"
+};
+var _hoisted_6 = {
+  key: 2,
+  "class": "col-span-1 px-1"
+};
+var _hoisted_7 = {
+  key: 3,
+  "class": "col-span-1 px-1"
+};
+var _hoisted_8 = {
+  key: 4,
+  "class": "col-span-1 px-1"
+};
+var _hoisted_9 = {
+  key: 5,
+  "class": "col-span-1 px-1"
+};
+var _hoisted_10 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_11 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_12 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_13 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_14 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_15 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_16 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_17 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_18 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_19 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_20 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_21 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_22 = {
+  key: 6,
+  "class": "col-span-1 px-1"
+};
+var _hoisted_23 = {
+  key: 7,
+  "class": "col-span-1 px-1"
+};
+var _hoisted_24 = {
+  key: 8,
+  "class": "col-span-1 px-1"
+};
+var _hoisted_25 = {
+  key: 9,
+  "class": "col-span-1 px-1"
+};
+var _hoisted_26 = {
+  "class": "border-t dark:border-gray-600 mt-10 pt-2"
+};
+
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "text-2xl font-bold inline-block heading-color"
+}, "Stats and Proficiencies", -1
+/* HOISTED */
+);
+
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " Enter stats and mark skill proficiencies and/or expertise. The first checkbox of each skill is proficiency and the second is expertise. ", -1
+/* HOISTED */
+);
+
+var _hoisted_29 = {
+  "class": "grid sm:grid-cols-2 md:grid-cols-3"
+};
+var _hoisted_30 = {
+  "class": "border-t dark:border-gray-600 pt-2"
+};
+var _hoisted_31 = {
+  "class": "flex items-center"
+};
+
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "text-2xl font-bold inline-block heading-color"
+}, "Skill Modifiers", -1
+/* HOISTED */
+);
+
+var _hoisted_33 = {
+  key: 0
+};
+var _hoisted_34 = {
+  "class": "grid sm:grid-cols-2 md:grid-cols-3"
+};
+var _hoisted_35 = {
+  "class": "col-span-1 mb-10 px-1"
+};
+var _hoisted_36 = {
+  "class": "col-span-1 mb-10 px-1"
+};
+var _hoisted_37 = {
+  "class": "col-span-1 mb-10 px-1"
+};
+var _hoisted_38 = {
+  "class": "col-span-1 mb-10 px-1"
+};
+var _hoisted_39 = {
+  "class": "col-span-1 mb-10 px-1"
+};
+var _hoisted_40 = {
+  "class": "col-span-1 mb-10 px-1"
+};
+var _hoisted_41 = {
+  "class": "border-t dark:border-gray-600 pt-2 mt-10"
+};
+var _hoisted_42 = {
+  "class": "flex items-center"
+};
+
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "text-2xl font-bold inline-block heading-color"
+}, "Spells", -1
+/* HOISTED */
+);
+
+var _hoisted_44 = {
+  key: 0
+};
+var _hoisted_45 = {
+  "class": "grid grid-cols-1 sm:grid-cols-2"
+};
+var _hoisted_46 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_47 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_48 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_49 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_50 = {
+  key: 0,
+  "class": "col-span-1 px-1"
+};
+var _hoisted_51 = {
+  key: 0,
+  "class": "border-t dark:border-gray-600 mt-10 pt-2"
+};
+
+var _hoisted_52 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "text-xl heading-color"
+}, "Spell Points", -1
+/* HOISTED */
+);
+
+var _hoisted_53 = {
+  "class": "grid grid-cols-1 sm:grid-cols-2"
+};
+var _hoisted_54 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_55 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_56 = {
+  key: 1,
+  "class": "border-t dark:border-gray-600 mt-10 pt-2"
+};
+
+var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "text-xl heading-color"
+}, "Spell Slots", -1
+/* HOISTED */
+);
+
+var _hoisted_58 = {
+  "class": "grid grid-cols-2 sm:grid-cols-3"
+};
+var _hoisted_59 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_60 = {
+  "class": "border-t dark:border-gray-600 mt-10 pt-2"
+};
+
+var _hoisted_61 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "text-xl heading-color"
+}, "Spell List", -1
+/* HOISTED */
+);
+
+var _hoisted_62 = {
+  "class": "my-2"
+};
+var _hoisted_63 = {
+  "class": "grid grid-cols-1 sm:grid-cols-2"
+};
+var _hoisted_64 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_65 = ["id", "onUpdate:modelValue"];
+
+var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Saved. ");
+
+var _hoisted_67 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Save ");
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_jet_label = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-label");
+
+  var _component_jet_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-input");
+
+  var _component_jet_input_error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-input-error");
+
+  var _component_dice_array_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("dice-array-input");
+
+  var _component_select_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("select-input");
+
+  var _component_proficiency_checkbox = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("proficiency-checkbox");
+
+  var _component_jet_secondary_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-secondary-button");
+
+  var _component_jet_action_message = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-action-message");
+
+  var _component_jet_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-button");
+
+  var _component_centered_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("centered-form");
+
+  var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, {
+    title: $props.creature && $props.creature.name ? 'Edit ' + $props.creature.name : 'Create ' + $props.type
+  }, {
+    header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.creature && $props.creature.name ? 'Edit ' + $props.creature.name : 'Create ' + $props.type), 1
+      /* TEXT */
+      )];
+    }),
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_centered_form, {
+        onSubmitted: $options.submit,
+        width: "full"
+      }, {
+        actions: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_action_message, {
+            on: $data.form.recentlySuccessful,
+            "class": "mr-3"
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [_hoisted_66];
+            }),
+            _: 1
+            /* STABLE */
+
+          }, 8
+          /* PROPS */
+          , ["on"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+              'opacity-25': $data.form.processing
+            }),
+            disabled: $data.form.processing
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [_hoisted_67];
+            }),
+            _: 1
+            /* STABLE */
+
+          }, 8
+          /* PROPS */
+          , ["class", "disabled"])];
+        }),
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Name "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "name",
+            value: "Name",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "name",
+            "class": "mt-1 w-full",
+            modelValue: $data.form.name,
+            "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+              return $data.form.name = $event;
+            }),
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.name,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), $props.type == 'Character' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Race "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "race",
+            value: "Race",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "race",
+            "class": "mt-1 w-full",
+            placeholder: "Human",
+            modelValue: $data.form.race,
+            "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+              return $data.form.race = $event;
+            }),
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.race,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.type == 'Character' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Class "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "class",
+            value: "Class",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "class",
+            "class": "mt-1 w-full",
+            placeholder: "Fighter",
+            modelValue: $data.form["class"],
+            "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+              return $data.form["class"] = $event;
+            }),
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors["class"],
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.type == 'Character' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" level "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "level",
+            value: "Level",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "level",
+            "class": "mt-1 w-full",
+            modelValue: $data.form.level,
+            "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+              return $data.form.level = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            onInput: _cache[4] || (_cache[4] = function ($event) {
+              return $options.setSkills();
+            }),
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.level,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.type == 'Monster' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" size "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "race",
+            value: "Size",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "size",
+            "class": "mt-1 w-full",
+            placeholder: "Large",
+            modelValue: $data.form.size,
+            "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+              return $data.form.size = $event;
+            }),
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.size,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.type == 'Monster' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" type "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "type",
+            value: "Type",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "type",
+            "class": "mt-1 w-full",
+            placeholder: "Beast",
+            modelValue: $data.form.type,
+            "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+              return $data.form.type = $event;
+            }),
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.type,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.type == 'Monster' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" alignment "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "alignment",
+            value: "Alignment",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "alignment",
+            "class": "mt-1 w-full",
+            placeholder: "unaligned",
+            modelValue: $data.form.alignment,
+            "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+              return $data.form.alignment = $event;
+            }),
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.alignment,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" speed "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "speed",
+            value: "Speed",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "speed",
+            "class": "mt-1 w-full",
+            placeholder: "30 ft.",
+            modelValue: $data.form.speed,
+            "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+              return $data.form.speed = $event;
+            }),
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.speed,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" initiative "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "initiative",
+            value: "Initiative",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "initiative",
+            "class": "mt-1 w-full",
+            modelValue: $data.form.initiative,
+            "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
+              return $data.form.initiative = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.initiative,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" hp_max "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "hp_max",
+            value: "Max HP",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "hp_max",
+            "class": "mt-1 w-full",
+            modelValue: $data.form.hp_max,
+            "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
+              return $data.form.hp_max = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            onInput: _cache[11] || (_cache[11] = function ($event) {
+              return $data.form.hp_current = $event.target.value;
+            }),
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.hp_max,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" hit_dice "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "hit_dice",
+            value: "Hit Dice",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_dice_array_input, {
+            modelValue: $data.form.hit_dice,
+            "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
+              return $data.form.hit_dice = $event;
+            }),
+            current: true,
+            multiple: true
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.hit_dice,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ac "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "ac",
+            value: "AC",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "ac",
+            "class": "mt-1 w-full",
+            modelValue: $data.form.ac,
+            "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
+              return $data.form.ac = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.ac,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ac_source "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "ac_source",
+            value: "AC Source",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "ac_source",
+            "class": "mt-1 w-full",
+            placeholder: "leather armor",
+            modelValue: $data.form.ac_source,
+            "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
+              return $data.form.ac_source = $event;
+            }),
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.ac_source,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" damage_vulnerabilities "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "damage_vulnerabilities",
+            value: "Damage Vulnerabilities",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "damage_vulnerabilities",
+            "class": "mt-1 w-full",
+            placeholder: "fire",
+            modelValue: $data.form.damage_vulnerabilities,
+            "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
+              return $data.form.damage_vulnerabilities = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.damage_vulnerabilities,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" damage_resistances "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "damage_resistances",
+            value: "Damage Resistances",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "damage_resistances",
+            "class": "mt-1 w-full",
+            placeholder: "fire",
+            modelValue: $data.form.damage_resistances,
+            "onUpdate:modelValue": _cache[16] || (_cache[16] = function ($event) {
+              return $data.form.damage_resistances = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.damage_resistances,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" damage_immunities "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "damage_immunities",
+            value: "Damage Immunities",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "damage_immunities",
+            "class": "mt-1 w-full",
+            placeholder: "fire",
+            modelValue: $data.form.damage_immunities,
+            "onUpdate:modelValue": _cache[17] || (_cache[17] = function ($event) {
+              return $data.form.damage_immunities = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.damage_immunities,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" condition_immunities "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "condition_immunities",
+            value: "Condition Immunities",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "condition_immunities",
+            "class": "mt-1 w-full",
+            placeholder: "poisoned",
+            modelValue: $data.form.condition_immunities,
+            "onUpdate:modelValue": _cache[18] || (_cache[18] = function ($event) {
+              return $data.form.condition_immunities = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.condition_immunities,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" languages "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "languages",
+            value: "Languages",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "languages",
+            "class": "mt-1 w-full",
+            placeholder: "Common",
+            modelValue: $data.form.languages,
+            "onUpdate:modelValue": _cache[19] || (_cache[19] = function ($event) {
+              return $data.form.languages = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.languages,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" senses "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "senses",
+            value: "Senses",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "senses",
+            "class": "mt-1 w-full",
+            placeholder: "Darkvision: 60 ft.",
+            modelValue: $data.form.senses,
+            "onUpdate:modelValue": _cache[20] || (_cache[20] = function ($event) {
+              return $data.form.senses = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.senses,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), $props.type == 'Monster' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" challenge_rating "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "challenge_rating",
+            value: "Challenge Rating",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "challenge_rating",
+            "class": "mt-1 w-full",
+            placeholder: "1/2",
+            modelValue: $data.form.challenge_rating,
+            "onUpdate:modelValue": _cache[21] || (_cache[21] = function ($event) {
+              return $data.form.challenge_rating = $event;
+            }),
+            onInput: _cache[22] || (_cache[22] = function ($event) {
+              return $options.setSkills();
+            }),
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.alignment,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.type == 'Monster' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" experience "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "experience",
+            value: "Experience",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "experience",
+            "class": "mt-1 w-full",
+            placeholder: "50",
+            modelValue: $data.form.experience,
+            "onUpdate:modelValue": _cache[23] || (_cache[23] = function ($event) {
+              return $data.form.experience = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.alignment,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.type == 'Monster' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" source "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "source",
+            value: "Source",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "text",
+            id: "source",
+            "class": "mt-1 w-full",
+            placeholder: "Monster Manual p. 341",
+            modelValue: $data.form.source,
+            "onUpdate:modelValue": _cache[24] || (_cache[24] = function ($event) {
+              return $data.form.source = $event;
+            }),
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.alignment,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.type == 'Monster' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" public "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "public",
+            value: "Visibility",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
+            id: "public",
+            "class": "mt-1 w-full",
+            modelValue: $data.form["public"],
+            "onUpdate:modelValue": _cache[25] || (_cache[25] = function ($event) {
+              return $data.form["public"] = $event;
+            }),
+            options: [[1, 'Public'], [0, 'Private']]
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors["public"],
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [_hoisted_27, _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+            "class": "col-span-1 mb-10 px-1",
+            onChange: _cache[30] || (_cache[30] = function ($event) {
+              return $options.setSkills('strength');
+            })
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" strength "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "strength",
+            value: "Strength Score",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "strength",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.strength,
+            "onUpdate:modelValue": _cache[26] || (_cache[26] = function ($event) {
+              return $data.form.strength = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.strength,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Save",
+            slug: "strength_save",
+            proficiency: $data.form.strength_save_proficiency,
+            "onUpdate:proficiency": _cache[27] || (_cache[27] = function ($event) {
+              return $data.form.strength_save_proficiency = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Athletics",
+            proficiency: $data.form.athletics_proficiency,
+            "onUpdate:proficiency": _cache[28] || (_cache[28] = function ($event) {
+              return $data.form.athletics_proficiency = $event;
+            }),
+            expertise: $data.form.athletics_expertise,
+            "onUpdate:expertise": _cache[29] || (_cache[29] = function ($event) {
+              return $data.form.athletics_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"])], 32
+          /* HYDRATE_EVENTS */
+          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+            "class": "col-span-1 mb-10 px-1",
+            onChange: _cache[39] || (_cache[39] = function ($event) {
+              return $options.setSkills('dexterity');
+            })
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" dexterity "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "dexterity",
+            value: "Dexterity Score",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "dexterity",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.dexterity,
+            "onUpdate:modelValue": _cache[31] || (_cache[31] = function ($event) {
+              return $data.form.dexterity = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.dexterity,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Save",
+            slug: "dexterity_save",
+            proficiency: $data.form.dexterity_save_proficiency,
+            "onUpdate:proficiency": _cache[32] || (_cache[32] = function ($event) {
+              return $data.form.dexterity_save_proficiency = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Acrobatics",
+            proficiency: $data.form.acrobatics_proficiency,
+            "onUpdate:proficiency": _cache[33] || (_cache[33] = function ($event) {
+              return $data.form.acrobatics_proficiency = $event;
+            }),
+            expertise: $data.form.acrobatics_expertise,
+            "onUpdate:expertise": _cache[34] || (_cache[34] = function ($event) {
+              return $data.form.acrobatics_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Sleightof Hand",
+            proficiency: $data.form.sleight_of_hand_proficiency,
+            "onUpdate:proficiency": _cache[35] || (_cache[35] = function ($event) {
+              return $data.form.sleight_of_hand_proficiency = $event;
+            }),
+            expertise: $data.form.sleight_of_hand_expertise,
+            "onUpdate:expertise": _cache[36] || (_cache[36] = function ($event) {
+              return $data.form.sleight_of_hand_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Stealth",
+            proficiency: $data.form.stealth_proficiency,
+            "onUpdate:proficiency": _cache[37] || (_cache[37] = function ($event) {
+              return $data.form.stealth_proficiency = $event;
+            }),
+            expertise: $data.form.stealth_expertise,
+            "onUpdate:expertise": _cache[38] || (_cache[38] = function ($event) {
+              return $data.form.stealth_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"])], 32
+          /* HYDRATE_EVENTS */
+          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+            "class": "col-span-1 mb-10 px-1",
+            onChange: _cache[42] || (_cache[42] = function ($event) {
+              return $options.setSkills('constitution');
+            })
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" constitution "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "constitution",
+            value: "Constitution Score",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "constitution",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.constitution,
+            "onUpdate:modelValue": _cache[40] || (_cache[40] = function ($event) {
+              return $data.form.constitution = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.constitution,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Save",
+            slug: "constitution_save",
+            proficiency: $data.form.constitution_save_proficiency,
+            "onUpdate:proficiency": _cache[41] || (_cache[41] = function ($event) {
+              return $data.form.constitution_save_proficiency = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency"])], 32
+          /* HYDRATE_EVENTS */
+          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+            "class": "col-span-1 mb-10 px-1",
+            onChange: _cache[55] || (_cache[55] = function ($event) {
+              return $options.setSkills('intelligence');
+            })
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" intelligence "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "intelligence",
+            value: "Intelligence Score",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "intelligence",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.intelligence,
+            "onUpdate:modelValue": _cache[43] || (_cache[43] = function ($event) {
+              return $data.form.intelligence = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.intelligence,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Save",
+            slug: "intelligence_save",
+            proficiency: $data.form.intelligence_save_proficiency,
+            "onUpdate:proficiency": _cache[44] || (_cache[44] = function ($event) {
+              return $data.form.intelligence_save_proficiency = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Arcana",
+            proficiency: $data.form.arcana_proficiency,
+            "onUpdate:proficiency": _cache[45] || (_cache[45] = function ($event) {
+              return $data.form.arcana_proficiency = $event;
+            }),
+            expertise: $data.form.arcana_expertise,
+            "onUpdate:expertise": _cache[46] || (_cache[46] = function ($event) {
+              return $data.form.arcana_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "History",
+            proficiency: $data.form.history_proficiency,
+            "onUpdate:proficiency": _cache[47] || (_cache[47] = function ($event) {
+              return $data.form.history_proficiency = $event;
+            }),
+            expertise: $data.form.history_expertise,
+            "onUpdate:expertise": _cache[48] || (_cache[48] = function ($event) {
+              return $data.form.history_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Investigation",
+            proficiency: $data.form.investigation_proficiency,
+            "onUpdate:proficiency": _cache[49] || (_cache[49] = function ($event) {
+              return $data.form.investigation_proficiency = $event;
+            }),
+            expertise: $data.form.investigation_expertise,
+            "onUpdate:expertise": _cache[50] || (_cache[50] = function ($event) {
+              return $data.form.investigation_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Nature",
+            proficiency: $data.form.nature_proficiency,
+            "onUpdate:proficiency": _cache[51] || (_cache[51] = function ($event) {
+              return $data.form.nature_proficiency = $event;
+            }),
+            expertise: $data.form.nature_expertise,
+            "onUpdate:expertise": _cache[52] || (_cache[52] = function ($event) {
+              return $data.form.nature_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Religion",
+            proficiency: $data.form.religion_proficiency,
+            "onUpdate:proficiency": _cache[53] || (_cache[53] = function ($event) {
+              return $data.form.religion_proficiency = $event;
+            }),
+            expertise: $data.form.religion_expertise,
+            "onUpdate:expertise": _cache[54] || (_cache[54] = function ($event) {
+              return $data.form.religion_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"])], 32
+          /* HYDRATE_EVENTS */
+          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+            "class": "col-span-1 mb-10 px-1",
+            onChange: _cache[68] || (_cache[68] = function ($event) {
+              return $options.setSkills('wisdom');
+            })
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" wisdom "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "wisdom",
+            value: "Wisdom Score",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "wisdom",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.wisdom,
+            "onUpdate:modelValue": _cache[56] || (_cache[56] = function ($event) {
+              return $data.form.wisdom = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.wisdom,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Save",
+            slug: "wisdom_save",
+            proficiency: $data.form.wisdom_save_proficiency,
+            "onUpdate:proficiency": _cache[57] || (_cache[57] = function ($event) {
+              return $data.form.wisdom_save_proficiency = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Animal Handling",
+            proficiency: $data.form.animal_handling_proficiency,
+            "onUpdate:proficiency": _cache[58] || (_cache[58] = function ($event) {
+              return $data.form.animal_handling_proficiency = $event;
+            }),
+            expertise: $data.form.animal_handling_expertise,
+            "onUpdate:expertise": _cache[59] || (_cache[59] = function ($event) {
+              return $data.form.animal_handling_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Insight",
+            proficiency: $data.form.insight_proficiency,
+            "onUpdate:proficiency": _cache[60] || (_cache[60] = function ($event) {
+              return $data.form.insight_proficiency = $event;
+            }),
+            expertise: $data.form.insight_expertise,
+            "onUpdate:expertise": _cache[61] || (_cache[61] = function ($event) {
+              return $data.form.insight_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Medicine",
+            proficiency: $data.form.medicine_proficiency,
+            "onUpdate:proficiency": _cache[62] || (_cache[62] = function ($event) {
+              return $data.form.medicine_proficiency = $event;
+            }),
+            expertise: $data.form.medicine_expertise,
+            "onUpdate:expertise": _cache[63] || (_cache[63] = function ($event) {
+              return $data.form.medicine_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Perception",
+            proficiency: $data.form.perception_proficiency,
+            "onUpdate:proficiency": _cache[64] || (_cache[64] = function ($event) {
+              return $data.form.perception_proficiency = $event;
+            }),
+            expertise: $data.form.perception_expertise,
+            "onUpdate:expertise": _cache[65] || (_cache[65] = function ($event) {
+              return $data.form.perception_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Survival",
+            proficiency: $data.form.survival_proficiency,
+            "onUpdate:proficiency": _cache[66] || (_cache[66] = function ($event) {
+              return $data.form.survival_proficiency = $event;
+            }),
+            expertise: $data.form.survival_expertise,
+            "onUpdate:expertise": _cache[67] || (_cache[67] = function ($event) {
+              return $data.form.survival_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"])], 32
+          /* HYDRATE_EVENTS */
+          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+            "class": "col-span-1 mb-10 px-1",
+            onChange: _cache[79] || (_cache[79] = function ($event) {
+              return $options.setSkills('charisma');
+            })
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" charisma "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "charisma",
+            value: "Charisma Score",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "charisma",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.charisma,
+            "onUpdate:modelValue": _cache[69] || (_cache[69] = function ($event) {
+              return $data.form.charisma = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.charisma,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Save",
+            slug: "charisma_save",
+            proficiency: $data.form.charisma_save_proficiency,
+            "onUpdate:proficiency": _cache[70] || (_cache[70] = function ($event) {
+              return $data.form.charisma_save_proficiency = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Deception",
+            proficiency: $data.form.deception_proficiency,
+            "onUpdate:proficiency": _cache[71] || (_cache[71] = function ($event) {
+              return $data.form.deception_proficiency = $event;
+            }),
+            expertise: $data.form.deception_expertise,
+            "onUpdate:expertise": _cache[72] || (_cache[72] = function ($event) {
+              return $data.form.deception_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Intimidation",
+            proficiency: $data.form.intimidation_proficiency,
+            "onUpdate:proficiency": _cache[73] || (_cache[73] = function ($event) {
+              return $data.form.intimidation_proficiency = $event;
+            }),
+            expertise: $data.form.intimidation_expertise,
+            "onUpdate:expertise": _cache[74] || (_cache[74] = function ($event) {
+              return $data.form.intimidation_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Performance",
+            proficiency: $data.form.performance_proficiency,
+            "onUpdate:proficiency": _cache[75] || (_cache[75] = function ($event) {
+              return $data.form.performance_proficiency = $event;
+            }),
+            expertise: $data.form.performance_expertise,
+            "onUpdate:expertise": _cache[76] || (_cache[76] = function ($event) {
+              return $data.form.performance_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
+            label: "Persuasion",
+            proficiency: $data.form.persuasion_proficiency,
+            "onUpdate:proficiency": _cache[77] || (_cache[77] = function ($event) {
+              return $data.form.persuasion_proficiency = $event;
+            }),
+            expertise: $data.form.persuasion_expertise,
+            "onUpdate:expertise": _cache[78] || (_cache[78] = function ($event) {
+              return $data.form.persuasion_expertise = $event;
+            })
+          }, null, 8
+          /* PROPS */
+          , ["proficiency", "expertise"])], 32
+          /* HYDRATE_EVENTS */
+          )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
+            type: "button",
+            "class": "ml-5",
+            onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.toggleAutoSkills, ["prevent"])
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.skillsButtonText), 1
+              /* TEXT */
+              )];
+            }),
+            _: 1
+            /* STABLE */
+
+          }, 8
+          /* PROPS */
+          , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.skillsText), 1
+          /* TEXT */
+          ), !$data.form.skills_auto_filled ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" strength "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "strength_save",
+            value: "Strength Save",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "strength_save",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.strength_save,
+            "onUpdate:modelValue": _cache[80] || (_cache[80] = function ($event) {
+              return $data.form.strength_save = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.strength_save,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "athletics",
+            value: "Athletics"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "athletics",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.athletics,
+            "onUpdate:modelValue": _cache[81] || (_cache[81] = function ($event) {
+              return $data.form.athletics = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.athletics,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" dexterity "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "dexterity_save",
+            value: "Dexterity Save",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "dexterity_save",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.dexterity_save,
+            "onUpdate:modelValue": _cache[82] || (_cache[82] = function ($event) {
+              return $data.form.dexterity_save = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.dexterity_save,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "acrobatics",
+            value: "Acrobatics",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "acrobatics",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.acrobatics,
+            "onUpdate:modelValue": _cache[83] || (_cache[83] = function ($event) {
+              return $data.form.acrobatics = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.acrobatics,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "sleight_of_hand",
+            value: "Sleight of Hand",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "sleight_of_hand",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.sleight_of_hand,
+            "onUpdate:modelValue": _cache[84] || (_cache[84] = function ($event) {
+              return $data.form.sleight_of_hand = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.sleight_of_hand,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "stealth",
+            value: "Stealth",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "stealth",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.stealth,
+            "onUpdate:modelValue": _cache[85] || (_cache[85] = function ($event) {
+              return $data.form.stealth = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.stealth,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" constitution "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "constitution_save",
+            value: "Constitution Save",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "constitution_save",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.constitution_save,
+            "onUpdate:modelValue": _cache[86] || (_cache[86] = function ($event) {
+              return $data.form.constitution_save = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.constitution_save,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" intelligence "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "intelligence_save",
+            value: "Intelligence Save",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "intelligence_save",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.intelligence_save,
+            "onUpdate:modelValue": _cache[87] || (_cache[87] = function ($event) {
+              return $data.form.intelligence_save = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.intelligence_save,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "arcana",
+            value: "Arcana",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "arcana",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.arcana,
+            "onUpdate:modelValue": _cache[88] || (_cache[88] = function ($event) {
+              return $data.form.arcana = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.arcana,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "history",
+            value: "History",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "history",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.history,
+            "onUpdate:modelValue": _cache[89] || (_cache[89] = function ($event) {
+              return $data.form.history = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.history,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "investigation",
+            value: "Investigation",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "investigation",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.investigation,
+            "onUpdate:modelValue": _cache[90] || (_cache[90] = function ($event) {
+              return $data.form.investigation = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.investigation,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "nature",
+            value: "Nature",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "nature",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.nature,
+            "onUpdate:modelValue": _cache[91] || (_cache[91] = function ($event) {
+              return $data.form.nature = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.nature,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "religion",
+            value: "Religion",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "religion",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.religion,
+            "onUpdate:modelValue": _cache[92] || (_cache[92] = function ($event) {
+              return $data.form.religion = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.religion,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" wisdom "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "wisdom_save",
+            value: "Wisdom Save",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "wisdom_save",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.wisdom_save,
+            "onUpdate:modelValue": _cache[93] || (_cache[93] = function ($event) {
+              return $data.form.wisdom_save = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.wisdom_save,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "animal_handling",
+            value: "Animal Handling",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "animal_handling",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.animal_handling,
+            "onUpdate:modelValue": _cache[94] || (_cache[94] = function ($event) {
+              return $data.form.animal_handling = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.animal_handling,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "insight",
+            value: "Insight",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "insight",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.insight,
+            "onUpdate:modelValue": _cache[95] || (_cache[95] = function ($event) {
+              return $data.form.insight = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.insight,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "medicine",
+            value: "Medicine",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "medicine",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.medicine,
+            "onUpdate:modelValue": _cache[96] || (_cache[96] = function ($event) {
+              return $data.form.medicine = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.medicine,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "perception",
+            value: "Perception",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "perception",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.perception,
+            "onUpdate:modelValue": _cache[97] || (_cache[97] = function ($event) {
+              return $data.form.perception = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.perception,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "survival",
+            value: "Survival",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "survival",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.survival,
+            "onUpdate:modelValue": _cache[98] || (_cache[98] = function ($event) {
+              return $data.form.survival = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.survival,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" charisma "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "charisma_save",
+            value: "Charisma Save",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "charisma_save",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.charisma_save,
+            "onUpdate:modelValue": _cache[99] || (_cache[99] = function ($event) {
+              return $data.form.charisma_save = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.charisma_save,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "deception",
+            value: "Deception",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "deception",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.deception,
+            "onUpdate:modelValue": _cache[100] || (_cache[100] = function ($event) {
+              return $data.form.deception = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.deception,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "intimidation",
+            value: "Intimidation",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "intimidation",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.intimidation,
+            "onUpdate:modelValue": _cache[101] || (_cache[101] = function ($event) {
+              return $data.form.intimidation = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.intimidation,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "performance",
+            value: "Performance",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "performance",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.performance,
+            "onUpdate:modelValue": _cache[102] || (_cache[102] = function ($event) {
+              return $data.form.performance = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.performance,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "persuasion",
+            value: "Persuasion",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "persuasion",
+            "class": "mt-1 block w-full",
+            modelValue: $data.form.persuasion,
+            "onUpdate:modelValue": _cache[103] || (_cache[103] = function ($event) {
+              return $data.form.persuasion = $event;
+            }),
+            modelModifiers: {
+              number: true
+            },
+            required: ""
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.persuasion,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [_hoisted_43, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
+            type: "button",
+            "class": "ml-5",
+            onClick: _cache[104] || (_cache[104] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+              return $data.form.spellcaster = !$data.form.spellcaster;
+            }, ["prevent"]))
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.form.spellcaster ? 'Disable' : 'Enable'), 1
+              /* TEXT */
+              )];
+            }),
+            _: 1
+            /* STABLE */
+
+          })]), $data.form.spellcaster ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_type "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "spell_type",
+            value: "Type",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
+            id: "spell_type",
+            "class": "mt-1 w-full",
+            modelValue: $data.form.spell_type,
+            "onUpdate:modelValue": _cache[105] || (_cache[105] = function ($event) {
+              return $data.form.spell_type = $event;
+            }),
+            options: [['points', 'Points (DMG variant)'], ['slots', 'Slots']]
+          }, null, 8
+          /* PROPS */
+          , ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.spell_type,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_dc "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "spell_dc",
+            value: "Spell DC",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "spell_dc",
+            "class": "mt-1 w-full",
+            modelValue: $data.form.spell_dc,
+            "onUpdate:modelValue": _cache[106] || (_cache[106] = function ($event) {
+              return $data.form.spell_dc = $event;
+            }),
+            modelModifiers: {
+              number: true
+            }
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.spell_dc,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_recover "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "spell_recover",
+            value: "Recovery",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
+            id: "spell_recover",
+            "class": "mt-1 w-full",
+            modelValue: $data.form.spell_recover,
+            "onUpdate:modelValue": _cache[107] || (_cache[107] = function ($event) {
+              return $data.form.spell_recover = $event;
+            }),
+            options: [['short', 'Short Rest'], ['long', 'Long Rest']]
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.spell_recover,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_list_type "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "spell_list_type",
+            value: "Spellcaster Type",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
+            id: "spell_list_type",
+            "class": "mt-1 w-full",
+            modelValue: $data.form.spell_list_type,
+            "onUpdate:modelValue": _cache[108] || (_cache[108] = function ($event) {
+              return $data.form.spell_list_type = $event;
+            }),
+            options: [['known', 'Known (learn on level up)'], ['prepared', 'Prepared (spellbook or full spell list)']]
+          }, null, 8
+          /* PROPS */
+          , ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.spell_list_type,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), $data.form.spell_list_type == 'prepared' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_prepare_count "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "spell_prepare_count",
+            value: "Number of spells that can be prepared (include always prepared race/class/feat spells to total)",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "spell_prepare_count",
+            "class": "mt-1 w-full",
+            modelValue: $data.form.spell_prepare_count,
+            "onUpdate:modelValue": _cache[109] || (_cache[109] = function ($event) {
+              return $data.form.spell_prepare_count = $event;
+            }),
+            modelModifiers: {
+              number: true
+            }
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.spell_prepare_count,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), $data.form.spell_type == 'points' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_51, [_hoisted_52, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_53, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_54, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_level "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "spell_level",
+            value: "Max Spell Level",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "spell_level",
+            "class": "mt-1 w-full",
+            modelValue: $data.form.spell_level,
+            "onUpdate:modelValue": _cache[110] || (_cache[110] = function ($event) {
+              return $data.form.spell_level = $event;
+            }),
+            modelModifiers: {
+              number: true
+            }
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.spell_level,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_points_max "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "spell_points_max",
+            value: "Total Spell Points",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+            type: "number",
+            id: "spell_points_max",
+            "class": "mt-1 w-full",
+            modelValue: $data.form.spell_points_max,
+            "onUpdate:modelValue": _cache[111] || (_cache[111] = function ($event) {
+              return $data.form.spell_points_max = $event;
+            }),
+            modelModifiers: {
+              number: true
+            }
+          }, null, 8
+          /* PROPS */
+          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.spell_points_max,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.form.spell_type == 'slots' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_56, [_hoisted_57, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_58, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_slots "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(9, function (num) {
+            return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_59, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+              "for": 'spell_slots_int_' + num,
+              value: $options.ordinalSuffix(num) + ' Level',
+              "class": "mt-4"
+            }, null, 8
+            /* PROPS */
+            , ["for", "value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+              type: "number",
+              id: 'spell_slots_int_' + num,
+              "class": "mt-1 w-full",
+              placeholder: "0",
+              modelValue: $data.form['spell_slots_int_' + num],
+              "onUpdate:modelValue": function onUpdateModelValue($event) {
+                return $data.form['spell_slots_int_' + num] = $event;
+              },
+              modelModifiers: {
+                number: true
+              }
+            }, null, 8
+            /* PROPS */
+            , ["id", "modelValue", "onUpdate:modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+              message: $data.form.errors['spell_slots' + num],
+              "class": "mt-2"
+            }, null, 8
+            /* PROPS */
+            , ["message"])]);
+          }), 64
+          /* STABLE_FRAGMENT */
+          ))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_60, [_hoisted_61, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_62, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.spellListExplanation), 1
+          /* TEXT */
+          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_63, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_list "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(10, function (num, index) {
+            return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_64, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+              "for": 'spell_list_string_' + index,
+              value: index == 0 ? 'Cantrips' : $options.ordinalSuffix(index) + ' Level',
+              "class": "mt-4"
+            }, null, 8
+            /* PROPS */
+            , ["for", "value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+              id: 'spell_list_string_' + index,
+              "class": "w-full form-input",
+              "onUpdate:modelValue": function onUpdateModelValue($event) {
+                return $data.form['spell_list_string_' + index] = $event;
+              }
+            }, null, 8
+            /* PROPS */
+            , _hoisted_65), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form['spell_list_string_' + index]]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+              message: $data.form.errors['spell_list_' + index],
+              "class": "mt-2"
+            }, null, 8
+            /* PROPS */
+            , ["message"])]);
+          }), 64
+          /* STABLE_FRAGMENT */
+          ))])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["onSubmitted"])];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["title"]);
+}
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/Heading.vue?vue&type=template&id=7c151d46":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/Heading.vue?vue&type=template&id=7c151d46 ***!
@@ -27622,7 +30407,7 @@ var _hoisted_4 = {
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Points: ");
 
-var _hoisted_6 = ["onClick"];
+var _hoisted_6 = ["onClick", "disabled"];
 var _hoisted_7 = {
   "class": "ml-2"
 };
@@ -27666,7 +30451,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     title: "Spells"
   }, {
     button: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_ctx.creature.spell_list_type == 'prepared' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_secondary_button, {
+      return [_ctx.ownerOrAdmin && _ctx.creature.spell_list_type == 'prepared' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_secondary_button, {
         key: 0,
         size: "sm",
         onClick: $options.openModal
@@ -27692,10 +30477,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             slot: slot,
             onClick: function onClick($event) {
               return $options.updateSlot(level, index);
-            }
+            },
+            disabled: _ctx.disabled
           }, null, 8
           /* PROPS */
-          , ["slot", "onClick"]);
+          , ["slot", "onClick", "disabled"]);
         }), 256
         /* UNKEYED_FRAGMENT */
         ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
@@ -27703,7 +30489,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* STABLE_FRAGMENT */
       ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.creature.spell_type == 'points' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         type: "number",
-        "class": "w-14",
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["w-14", _ctx.disabled ? 'hidden' : '']),
         modelValue: _ctx.creature.spell_points_current,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return _ctx.creature.spell_points_current = $event;
@@ -27716,14 +30502,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 8
       /* PROPS */
-      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" / " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.spell_points_max), 1
+      , ["class", "modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(_ctx.disabled ? 'hidden' : '')
+      }, "/", 2
+      /* CLASS */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.spell_points_max), 1
       /* TEXT */
       )]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.spell_point_costs, function (cost, level) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [level != 0 && level <= _ctx.creature.spell_level ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
           key: 0,
+          "class": "btn-text",
           onClick: function onClick($event) {
             return $options.usePoints(cost);
-          }
+          },
+          disabled: _ctx.disabled
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(level) + ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(cost) + " points ", 9
         /* TEXT, PROPS */
         , _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
@@ -31809,1858 +34601,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
-  "class": "text-2xl font-bold inline-block heading-color"
-}, "Basic Info", -1
-/* HOISTED */
-);
-
-var _hoisted_2 = {
-  "class": "grid sm:grid-cols-2"
-};
-var _hoisted_3 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_4 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_5 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_6 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_7 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_8 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_9 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_10 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_11 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_12 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_13 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_14 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_15 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_16 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_17 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_18 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_19 = {
-  "class": "border-t dark:border-gray-600 mt-10 pt-2"
-};
-
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
-  "class": "text-2xl font-bold inline-block heading-color"
-}, "Stats and Proficiencies", -1
-/* HOISTED */
-);
-
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " Enter stats and mark skill proficiencies and/or expertise. The first checkbox of each skill is proficiency and the second is expertise. ", -1
-/* HOISTED */
-);
-
-var _hoisted_22 = {
-  "class": "grid sm:grid-cols-2 md:grid-cols-3"
-};
-var _hoisted_23 = {
-  "class": "border-t dark:border-gray-600 pt-2"
-};
-var _hoisted_24 = {
-  "class": "flex items-center"
-};
-
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
-  "class": "text-2xl font-bold inline-block heading-color"
-}, "Skill Modifiers", -1
-/* HOISTED */
-);
-
-var _hoisted_26 = {
-  key: 0
-};
-var _hoisted_27 = {
-  "class": "grid sm:grid-cols-2 md:grid-cols-3"
-};
-var _hoisted_28 = {
-  "class": "col-span-1 mb-10 px-1"
-};
-var _hoisted_29 = {
-  "class": "col-span-1 mb-10 px-1"
-};
-var _hoisted_30 = {
-  "class": "col-span-1 mb-10 px-1"
-};
-var _hoisted_31 = {
-  "class": "col-span-1 mb-10 px-1"
-};
-var _hoisted_32 = {
-  "class": "col-span-1 mb-10 px-1"
-};
-var _hoisted_33 = {
-  "class": "col-span-1 mb-10 px-1"
-};
-var _hoisted_34 = {
-  "class": "border-t dark:border-gray-600 pt-2 mt-10"
-};
-var _hoisted_35 = {
-  "class": "flex items-center"
-};
-
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
-  "class": "text-2xl font-bold inline-block heading-color"
-}, "Spells", -1
-/* HOISTED */
-);
-
-var _hoisted_37 = {
-  key: 0
-};
-var _hoisted_38 = {
-  "class": "grid grid-cols-1 sm:grid-cols-2"
-};
-var _hoisted_39 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_40 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_41 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_42 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_43 = {
-  key: 0,
-  "class": "col-span-1 px-1"
-};
-var _hoisted_44 = {
-  key: 0,
-  "class": "border-t dark:border-gray-600 mt-10 pt-2"
-};
-
-var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "text-xl heading-color"
-}, "Spell Points", -1
-/* HOISTED */
-);
-
-var _hoisted_46 = {
-  "class": "grid grid-cols-1 sm:grid-cols-2"
-};
-var _hoisted_47 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_48 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_49 = {
-  key: 1,
-  "class": "border-t dark:border-gray-600 mt-10 pt-2"
-};
-
-var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "text-xl heading-color"
-}, "Spell Slots", -1
-/* HOISTED */
-);
-
-var _hoisted_51 = {
-  "class": "grid grid-cols-2 sm:grid-cols-3"
-};
-var _hoisted_52 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_53 = {
-  "class": "border-t dark:border-gray-600 mt-10 pt-2"
-};
-
-var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "text-xl heading-color"
-}, "Spell List", -1
-/* HOISTED */
-);
-
-var _hoisted_55 = {
-  "class": "my-2"
-};
-var _hoisted_56 = {
-  "class": "grid grid-cols-1 sm:grid-cols-2"
-};
-var _hoisted_57 = {
-  "class": "col-span-1 px-1"
-};
-var _hoisted_58 = ["id", "onUpdate:modelValue"];
-
-var _hoisted_59 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Saved. ");
-
-var _hoisted_60 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Save ");
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_jet_label = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-label");
+  var _component_edit = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("edit", true);
 
-  var _component_jet_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-input");
-
-  var _component_jet_input_error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-input-error");
-
-  var _component_dice_array_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("dice-array-input");
-
-  var _component_proficiency_checkbox = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("proficiency-checkbox");
-
-  var _component_jet_secondary_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-secondary-button");
-
-  var _component_select_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("select-input");
-
-  var _component_jet_action_message = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-action-message");
-
-  var _component_jet_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-button");
-
-  var _component_centered_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("centered-form");
-
-  var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
-
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, {
-    title: $props.editing && $props.editing.name ? 'Edit ' + $props.editing.name : 'Create Character'
-  }, {
-    header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.editing && $props.editing.name ? 'Edit ' + $props.editing.name : 'Create Character'), 1
-      /* TEXT */
-      )];
-    }),
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_centered_form, {
-        onSubmitted: $options.submit,
-        width: "full"
-      }, {
-        actions: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_action_message, {
-            on: _ctx.form.recentlySuccessful,
-            "class": "mr-3"
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_59];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["on"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-              'opacity-25': _ctx.form.processing
-            }),
-            disabled: _ctx.form.processing
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_60];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["class", "disabled"])];
-        }),
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Name "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "name",
-            value: "Name",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "text",
-            id: "name",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.name,
-            "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-              return _ctx.form.name = $event;
-            }),
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.name,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Race "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "race",
-            value: "Race",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "text",
-            id: "race",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.race,
-            "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-              return _ctx.form.race = $event;
-            }),
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.race,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Class "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "class",
-            value: "Class",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "text",
-            id: "class",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form["class"],
-            "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-              return _ctx.form["class"] = $event;
-            }),
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors["class"],
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" level "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "level",
-            value: "Level",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "level",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.level,
-            "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-              return _ctx.form.level = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            onInput: _cache[4] || (_cache[4] = function ($event) {
-              return _ctx.setSkills();
-            }),
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.level,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" speed "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "speed",
-            value: "Speed",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "text",
-            id: "speed",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.speed,
-            "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-              return _ctx.form.speed = $event;
-            }),
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.speed,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" initiative "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "initiative",
-            value: "Initiative",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "initiative",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.initiative,
-            "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
-              return _ctx.form.initiative = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.initiative,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" hp_max "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "hp_max",
-            value: "Max HP",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "hp_max",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.hp_max,
-            "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
-              return _ctx.form.hp_max = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            onInput: _cache[8] || (_cache[8] = function ($event) {
-              return _ctx.form.hp_current = $event.target.value;
-            }),
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.hp_max,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" hit_dice "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "hit_dice",
-            value: "Hit Dice",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_dice_array_input, {
-            modelValue: _ctx.form.hit_dice,
-            "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
-              return _ctx.form.hit_dice = $event;
-            }),
-            current: true,
-            multiple: true
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.hit_dice,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ac "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "ac",
-            value: "AC",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "ac",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.ac,
-            "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
-              return _ctx.form.ac = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.ac,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ac_source "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "ac_source",
-            value: "AC Source",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "text",
-            id: "ac_source",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.ac_source,
-            "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
-              return _ctx.form.ac_source = $event;
-            }),
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.ac_source,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" damage_vulnerabilities "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "damage_vulnerabilities",
-            value: "Damage Vulnerabilities",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "text",
-            id: "damage_vulnerabilities",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.damage_vulnerabilities,
-            "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
-              return _ctx.form.damage_vulnerabilities = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.damage_vulnerabilities,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" damage_resistances "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "damage_resistances",
-            value: "Damage Resistances",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "text",
-            id: "damage_resistances",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.damage_resistances,
-            "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
-              return _ctx.form.damage_resistances = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.damage_resistances,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" damage_immunities "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "damage_immunities",
-            value: "Damage Immunities",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "text",
-            id: "damage_immunities",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.damage_immunities,
-            "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
-              return _ctx.form.damage_immunities = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.damage_immunities,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" condition_immunities "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "condition_immunities",
-            value: "Condition Immunities",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "text",
-            id: "condition_immunities",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.condition_immunities,
-            "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
-              return _ctx.form.condition_immunities = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.condition_immunities,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" languages "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "languages",
-            value: "Languages",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "text",
-            id: "languages",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.languages,
-            "onUpdate:modelValue": _cache[16] || (_cache[16] = function ($event) {
-              return _ctx.form.languages = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.languages,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" senses "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "senses",
-            value: "Senses",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "text",
-            id: "senses",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.senses,
-            "onUpdate:modelValue": _cache[17] || (_cache[17] = function ($event) {
-              return _ctx.form.senses = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.senses,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-            "class": "col-span-1 mb-10 px-1",
-            onChange: _cache[22] || (_cache[22] = function ($event) {
-              return _ctx.setSkills('strength');
-            })
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" strength "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "strength",
-            value: "Strength Score",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "strength",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.strength,
-            "onUpdate:modelValue": _cache[18] || (_cache[18] = function ($event) {
-              return _ctx.form.strength = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.strength,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Save",
-            slug: "strength_save",
-            proficiency: _ctx.form.strength_save_proficiency,
-            "onUpdate:proficiency": _cache[19] || (_cache[19] = function ($event) {
-              return _ctx.form.strength_save_proficiency = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Athletics",
-            proficiency: _ctx.form.athletics_proficiency,
-            "onUpdate:proficiency": _cache[20] || (_cache[20] = function ($event) {
-              return _ctx.form.athletics_proficiency = $event;
-            }),
-            expertise: _ctx.form.athletics_expertise,
-            "onUpdate:expertise": _cache[21] || (_cache[21] = function ($event) {
-              return _ctx.form.athletics_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"])], 32
-          /* HYDRATE_EVENTS */
-          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-            "class": "col-span-1 mb-10 px-1",
-            onChange: _cache[31] || (_cache[31] = function ($event) {
-              return _ctx.setSkills('dexterity');
-            })
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" dexterity "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "dexterity",
-            value: "Dexterity Score",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "dexterity",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.dexterity,
-            "onUpdate:modelValue": _cache[23] || (_cache[23] = function ($event) {
-              return _ctx.form.dexterity = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.dexterity,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Save",
-            slug: "dexterity_save",
-            proficiency: _ctx.form.dexterity_save_proficiency,
-            "onUpdate:proficiency": _cache[24] || (_cache[24] = function ($event) {
-              return _ctx.form.dexterity_save_proficiency = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Acrobatics",
-            proficiency: _ctx.form.acrobatics_proficiency,
-            "onUpdate:proficiency": _cache[25] || (_cache[25] = function ($event) {
-              return _ctx.form.acrobatics_proficiency = $event;
-            }),
-            expertise: _ctx.form.acrobatics_expertise,
-            "onUpdate:expertise": _cache[26] || (_cache[26] = function ($event) {
-              return _ctx.form.acrobatics_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Sleightof Hand",
-            proficiency: _ctx.form.sleight_of_hand_proficiency,
-            "onUpdate:proficiency": _cache[27] || (_cache[27] = function ($event) {
-              return _ctx.form.sleight_of_hand_proficiency = $event;
-            }),
-            expertise: _ctx.form.sleight_of_hand_expertise,
-            "onUpdate:expertise": _cache[28] || (_cache[28] = function ($event) {
-              return _ctx.form.sleight_of_hand_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Stealth",
-            proficiency: _ctx.form.stealth_proficiency,
-            "onUpdate:proficiency": _cache[29] || (_cache[29] = function ($event) {
-              return _ctx.form.stealth_proficiency = $event;
-            }),
-            expertise: _ctx.form.stealth_expertise,
-            "onUpdate:expertise": _cache[30] || (_cache[30] = function ($event) {
-              return _ctx.form.stealth_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"])], 32
-          /* HYDRATE_EVENTS */
-          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-            "class": "col-span-1 mb-10 px-1",
-            onChange: _cache[34] || (_cache[34] = function ($event) {
-              return _ctx.setSkills('constitution');
-            })
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" constitution "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "constitution",
-            value: "Constitution Score",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "constitution",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.constitution,
-            "onUpdate:modelValue": _cache[32] || (_cache[32] = function ($event) {
-              return _ctx.form.constitution = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.constitution,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Save",
-            slug: "constitution_save",
-            proficiency: _ctx.form.constitution_save_proficiency,
-            "onUpdate:proficiency": _cache[33] || (_cache[33] = function ($event) {
-              return _ctx.form.constitution_save_proficiency = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency"])], 32
-          /* HYDRATE_EVENTS */
-          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-            "class": "col-span-1 mb-10 px-1",
-            onChange: _cache[47] || (_cache[47] = function ($event) {
-              return _ctx.setSkills('intelligence');
-            })
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" intelligence "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "intelligence",
-            value: "Intelligence Score",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "intelligence",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.intelligence,
-            "onUpdate:modelValue": _cache[35] || (_cache[35] = function ($event) {
-              return _ctx.form.intelligence = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.intelligence,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Save",
-            slug: "intelligence_save",
-            proficiency: _ctx.form.intelligence_save_proficiency,
-            "onUpdate:proficiency": _cache[36] || (_cache[36] = function ($event) {
-              return _ctx.form.intelligence_save_proficiency = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Arcana",
-            proficiency: _ctx.form.arcana_proficiency,
-            "onUpdate:proficiency": _cache[37] || (_cache[37] = function ($event) {
-              return _ctx.form.arcana_proficiency = $event;
-            }),
-            expertise: _ctx.form.arcana_expertise,
-            "onUpdate:expertise": _cache[38] || (_cache[38] = function ($event) {
-              return _ctx.form.arcana_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "History",
-            proficiency: _ctx.form.history_proficiency,
-            "onUpdate:proficiency": _cache[39] || (_cache[39] = function ($event) {
-              return _ctx.form.history_proficiency = $event;
-            }),
-            expertise: _ctx.form.history_expertise,
-            "onUpdate:expertise": _cache[40] || (_cache[40] = function ($event) {
-              return _ctx.form.history_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Investigation",
-            proficiency: _ctx.form.investigation_proficiency,
-            "onUpdate:proficiency": _cache[41] || (_cache[41] = function ($event) {
-              return _ctx.form.investigation_proficiency = $event;
-            }),
-            expertise: _ctx.form.investigation_expertise,
-            "onUpdate:expertise": _cache[42] || (_cache[42] = function ($event) {
-              return _ctx.form.investigation_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Nature",
-            proficiency: _ctx.form.nature_proficiency,
-            "onUpdate:proficiency": _cache[43] || (_cache[43] = function ($event) {
-              return _ctx.form.nature_proficiency = $event;
-            }),
-            expertise: _ctx.form.nature_expertise,
-            "onUpdate:expertise": _cache[44] || (_cache[44] = function ($event) {
-              return _ctx.form.nature_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Religion",
-            proficiency: _ctx.form.religion_proficiency,
-            "onUpdate:proficiency": _cache[45] || (_cache[45] = function ($event) {
-              return _ctx.form.religion_proficiency = $event;
-            }),
-            expertise: _ctx.form.religion_expertise,
-            "onUpdate:expertise": _cache[46] || (_cache[46] = function ($event) {
-              return _ctx.form.religion_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"])], 32
-          /* HYDRATE_EVENTS */
-          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-            "class": "col-span-1 mb-10 px-1",
-            onChange: _cache[60] || (_cache[60] = function ($event) {
-              return _ctx.setSkills('wisdom');
-            })
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" wisdom "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "wisdom",
-            value: "Wisdom Score",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "wisdom",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.wisdom,
-            "onUpdate:modelValue": _cache[48] || (_cache[48] = function ($event) {
-              return _ctx.form.wisdom = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.wisdom,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Save",
-            slug: "wisdom_save",
-            proficiency: _ctx.form.wisdom_save_proficiency,
-            "onUpdate:proficiency": _cache[49] || (_cache[49] = function ($event) {
-              return _ctx.form.wisdom_save_proficiency = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Animal Handling",
-            proficiency: _ctx.form.animal_handling_proficiency,
-            "onUpdate:proficiency": _cache[50] || (_cache[50] = function ($event) {
-              return _ctx.form.animal_handling_proficiency = $event;
-            }),
-            expertise: _ctx.form.animal_handling_expertise,
-            "onUpdate:expertise": _cache[51] || (_cache[51] = function ($event) {
-              return _ctx.form.animal_handling_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Insight",
-            proficiency: _ctx.form.insight_proficiency,
-            "onUpdate:proficiency": _cache[52] || (_cache[52] = function ($event) {
-              return _ctx.form.insight_proficiency = $event;
-            }),
-            expertise: _ctx.form.insight_expertise,
-            "onUpdate:expertise": _cache[53] || (_cache[53] = function ($event) {
-              return _ctx.form.insight_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Medicine",
-            proficiency: _ctx.form.medicine_proficiency,
-            "onUpdate:proficiency": _cache[54] || (_cache[54] = function ($event) {
-              return _ctx.form.medicine_proficiency = $event;
-            }),
-            expertise: _ctx.form.medicine_expertise,
-            "onUpdate:expertise": _cache[55] || (_cache[55] = function ($event) {
-              return _ctx.form.medicine_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Perception",
-            proficiency: _ctx.form.perception_proficiency,
-            "onUpdate:proficiency": _cache[56] || (_cache[56] = function ($event) {
-              return _ctx.form.perception_proficiency = $event;
-            }),
-            expertise: _ctx.form.perception_expertise,
-            "onUpdate:expertise": _cache[57] || (_cache[57] = function ($event) {
-              return _ctx.form.perception_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Survival",
-            proficiency: _ctx.form.survival_proficiency,
-            "onUpdate:proficiency": _cache[58] || (_cache[58] = function ($event) {
-              return _ctx.form.survival_proficiency = $event;
-            }),
-            expertise: _ctx.form.survival_expertise,
-            "onUpdate:expertise": _cache[59] || (_cache[59] = function ($event) {
-              return _ctx.form.survival_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"])], 32
-          /* HYDRATE_EVENTS */
-          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-            "class": "col-span-1 mb-10 px-1",
-            onChange: _cache[71] || (_cache[71] = function ($event) {
-              return _ctx.setSkills('charisma');
-            })
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" charisma "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "charisma",
-            value: "Charisma Score",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "charisma",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.charisma,
-            "onUpdate:modelValue": _cache[61] || (_cache[61] = function ($event) {
-              return _ctx.form.charisma = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.charisma,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Save",
-            slug: "charisma_save",
-            proficiency: _ctx.form.charisma_save_proficiency,
-            "onUpdate:proficiency": _cache[62] || (_cache[62] = function ($event) {
-              return _ctx.form.charisma_save_proficiency = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Deception",
-            proficiency: _ctx.form.deception_proficiency,
-            "onUpdate:proficiency": _cache[63] || (_cache[63] = function ($event) {
-              return _ctx.form.deception_proficiency = $event;
-            }),
-            expertise: _ctx.form.deception_expertise,
-            "onUpdate:expertise": _cache[64] || (_cache[64] = function ($event) {
-              return _ctx.form.deception_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Intimidation",
-            proficiency: _ctx.form.intimidation_proficiency,
-            "onUpdate:proficiency": _cache[65] || (_cache[65] = function ($event) {
-              return _ctx.form.intimidation_proficiency = $event;
-            }),
-            expertise: _ctx.form.intimidation_expertise,
-            "onUpdate:expertise": _cache[66] || (_cache[66] = function ($event) {
-              return _ctx.form.intimidation_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Performance",
-            proficiency: _ctx.form.performance_proficiency,
-            "onUpdate:proficiency": _cache[67] || (_cache[67] = function ($event) {
-              return _ctx.form.performance_proficiency = $event;
-            }),
-            expertise: _ctx.form.performance_expertise,
-            "onUpdate:expertise": _cache[68] || (_cache[68] = function ($event) {
-              return _ctx.form.performance_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_proficiency_checkbox, {
-            label: "Persuasion",
-            proficiency: _ctx.form.persuasion_proficiency,
-            "onUpdate:proficiency": _cache[69] || (_cache[69] = function ($event) {
-              return _ctx.form.persuasion_proficiency = $event;
-            }),
-            expertise: _ctx.form.persuasion_expertise,
-            "onUpdate:expertise": _cache[70] || (_cache[70] = function ($event) {
-              return _ctx.form.persuasion_expertise = $event;
-            })
-          }, null, 8
-          /* PROPS */
-          , ["proficiency", "expertise"])], 32
-          /* HYDRATE_EVENTS */
-          )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
-            type: "button",
-            "class": "ml-5",
-            onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(_ctx.toggleAutoSkills, ["prevent"])
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.skillsButtonText), 1
-              /* TEXT */
-              )];
-            }),
-            _: 1
-            /* STABLE */
-
-          }, 8
-          /* PROPS */
-          , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.skillsText), 1
-          /* TEXT */
-          ), !_ctx.form.skills_auto_filled ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" strength "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "strength_save",
-            value: "Strength Save",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "strength_save",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.strength_save,
-            "onUpdate:modelValue": _cache[72] || (_cache[72] = function ($event) {
-              return _ctx.form.strength_save = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.strength_save,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "athletics",
-            value: "Athletics"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "athletics",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.athletics,
-            "onUpdate:modelValue": _cache[73] || (_cache[73] = function ($event) {
-              return _ctx.form.athletics = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.athletics,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" dexterity "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "dexterity_save",
-            value: "Dexterity Save",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "dexterity_save",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.dexterity_save,
-            "onUpdate:modelValue": _cache[74] || (_cache[74] = function ($event) {
-              return _ctx.form.dexterity_save = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.dexterity_save,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "acrobatics",
-            value: "Acrobatics",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "acrobatics",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.acrobatics,
-            "onUpdate:modelValue": _cache[75] || (_cache[75] = function ($event) {
-              return _ctx.form.acrobatics = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.acrobatics,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "sleight_of_hand",
-            value: "Sleight of Hand",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "sleight_of_hand",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.sleight_of_hand,
-            "onUpdate:modelValue": _cache[76] || (_cache[76] = function ($event) {
-              return _ctx.form.sleight_of_hand = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.sleight_of_hand,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "stealth",
-            value: "Stealth",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "stealth",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.stealth,
-            "onUpdate:modelValue": _cache[77] || (_cache[77] = function ($event) {
-              return _ctx.form.stealth = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.stealth,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" constitution "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "constitution_save",
-            value: "Constitution Save",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "constitution_save",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.constitution_save,
-            "onUpdate:modelValue": _cache[78] || (_cache[78] = function ($event) {
-              return _ctx.form.constitution_save = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.constitution_save,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" intelligence "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "intelligence_save",
-            value: "Intelligence Save",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "intelligence_save",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.intelligence_save,
-            "onUpdate:modelValue": _cache[79] || (_cache[79] = function ($event) {
-              return _ctx.form.intelligence_save = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.intelligence_save,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "arcana",
-            value: "Arcana",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "arcana",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.arcana,
-            "onUpdate:modelValue": _cache[80] || (_cache[80] = function ($event) {
-              return _ctx.form.arcana = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.arcana,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "history",
-            value: "History",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "history",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.history,
-            "onUpdate:modelValue": _cache[81] || (_cache[81] = function ($event) {
-              return _ctx.form.history = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.history,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "investigation",
-            value: "Investigation",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "investigation",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.investigation,
-            "onUpdate:modelValue": _cache[82] || (_cache[82] = function ($event) {
-              return _ctx.form.investigation = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.investigation,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "nature",
-            value: "Nature",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "nature",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.nature,
-            "onUpdate:modelValue": _cache[83] || (_cache[83] = function ($event) {
-              return _ctx.form.nature = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.nature,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "religion",
-            value: "Religion",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "religion",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.religion,
-            "onUpdate:modelValue": _cache[84] || (_cache[84] = function ($event) {
-              return _ctx.form.religion = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.religion,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" wisdom "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "wisdom_save",
-            value: "Wisdom Save",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "wisdom_save",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.wisdom_save,
-            "onUpdate:modelValue": _cache[85] || (_cache[85] = function ($event) {
-              return _ctx.form.wisdom_save = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.wisdom_save,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "animal_handling",
-            value: "Animal Handling",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "animal_handling",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.animal_handling,
-            "onUpdate:modelValue": _cache[86] || (_cache[86] = function ($event) {
-              return _ctx.form.animal_handling = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.animal_handling,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "insight",
-            value: "Insight",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "insight",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.insight,
-            "onUpdate:modelValue": _cache[87] || (_cache[87] = function ($event) {
-              return _ctx.form.insight = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.insight,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "medicine",
-            value: "Medicine",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "medicine",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.medicine,
-            "onUpdate:modelValue": _cache[88] || (_cache[88] = function ($event) {
-              return _ctx.form.medicine = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.medicine,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "perception",
-            value: "Perception",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "perception",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.perception,
-            "onUpdate:modelValue": _cache[89] || (_cache[89] = function ($event) {
-              return _ctx.form.perception = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.perception,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "survival",
-            value: "Survival",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "survival",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.survival,
-            "onUpdate:modelValue": _cache[90] || (_cache[90] = function ($event) {
-              return _ctx.form.survival = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.survival,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" charisma "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "charisma_save",
-            value: "Charisma Save",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "charisma_save",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.charisma_save,
-            "onUpdate:modelValue": _cache[91] || (_cache[91] = function ($event) {
-              return _ctx.form.charisma_save = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.charisma_save,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "deception",
-            value: "Deception",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "deception",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.deception,
-            "onUpdate:modelValue": _cache[92] || (_cache[92] = function ($event) {
-              return _ctx.form.deception = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.deception,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "intimidation",
-            value: "Intimidation",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "intimidation",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.intimidation,
-            "onUpdate:modelValue": _cache[93] || (_cache[93] = function ($event) {
-              return _ctx.form.intimidation = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.intimidation,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "performance",
-            value: "Performance",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "performance",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.performance,
-            "onUpdate:modelValue": _cache[94] || (_cache[94] = function ($event) {
-              return _ctx.form.performance = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.performance,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "persuasion",
-            value: "Persuasion",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "persuasion",
-            "class": "mt-1 block w-full",
-            modelValue: _ctx.form.persuasion,
-            "onUpdate:modelValue": _cache[95] || (_cache[95] = function ($event) {
-              return _ctx.form.persuasion = $event;
-            }),
-            modelModifiers: {
-              number: true
-            },
-            required: ""
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.persuasion,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [_hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
-            type: "button",
-            "class": "ml-5",
-            onClick: _cache[96] || (_cache[96] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-              return _ctx.form.spellcaster = !_ctx.form.spellcaster;
-            }, ["prevent"]))
-          }, {
-            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.form.spellcaster ? 'Disable' : 'Enable'), 1
-              /* TEXT */
-              )];
-            }),
-            _: 1
-            /* STABLE */
-
-          })]), _ctx.form.spellcaster ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_type "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "spell_type",
-            value: "Type",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
-            id: "spell_type",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.spell_type,
-            "onUpdate:modelValue": _cache[97] || (_cache[97] = function ($event) {
-              return _ctx.form.spell_type = $event;
-            }),
-            options: [['points', 'Points (DMG variant)'], ['slots', 'Slots']]
-          }, null, 8
-          /* PROPS */
-          , ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.spell_type,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_dc "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "spell_dc",
-            value: "Spell DC",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "spell_dc",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.spell_dc,
-            "onUpdate:modelValue": _cache[98] || (_cache[98] = function ($event) {
-              return _ctx.form.spell_dc = $event;
-            }),
-            modelModifiers: {
-              number: true
-            }
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.spell_dc,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_recover "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "spell_recover",
-            value: "Recovery",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
-            id: "spell_recover",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.spell_recover,
-            "onUpdate:modelValue": _cache[99] || (_cache[99] = function ($event) {
-              return _ctx.form.spell_recover = $event;
-            }),
-            options: [['short', 'Short Rest'], ['long', 'Long Rest']]
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.spell_recover,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_list_type "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "spell_list_type",
-            value: "Spellcaster Type",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
-            id: "spell_list_type",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.spell_list_type,
-            "onUpdate:modelValue": _cache[100] || (_cache[100] = function ($event) {
-              return _ctx.form.spell_list_type = $event;
-            }),
-            options: [['known', 'Known (learn on level up)'], ['prepared', 'Prepared (spellbook or full spell list)']]
-          }, null, 8
-          /* PROPS */
-          , ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.spell_list_type,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), _ctx.form.spell_list_type == 'prepared' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_prepare_count "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "spell_prepare_count",
-            value: "Number of spells that can be prepared (include always prepared race/class/feat spells to total)",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "spell_prepare_count",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.spell_prepare_count,
-            "onUpdate:modelValue": _cache[101] || (_cache[101] = function ($event) {
-              return _ctx.form.spell_prepare_count = $event;
-            }),
-            modelModifiers: {
-              number: true
-            }
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.spell_prepare_count,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _ctx.form.spell_type == 'points' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_44, [_hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_level "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "spell_level",
-            value: "Max Spell Level",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "spell_level",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.spell_level,
-            "onUpdate:modelValue": _cache[102] || (_cache[102] = function ($event) {
-              return _ctx.form.spell_level = $event;
-            }),
-            modelModifiers: {
-              number: true
-            }
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.spell_level,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_points_max "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-            "for": "spell_points_max",
-            value: "Total Spell Points",
-            "class": "mt-4"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-            type: "number",
-            id: "spell_points_max",
-            "class": "mt-1 w-full",
-            modelValue: _ctx.form.spell_points_max,
-            "onUpdate:modelValue": _cache[103] || (_cache[103] = function ($event) {
-              return _ctx.form.spell_points_max = $event;
-            }),
-            modelModifiers: {
-              number: true
-            }
-          }, null, 8
-          /* PROPS */
-          , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-            message: _ctx.form.errors.spell_points_max,
-            "class": "mt-2"
-          }, null, 8
-          /* PROPS */
-          , ["message"])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.form.spell_type == 'slots' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_49, [_hoisted_50, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_slots "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(9, function (num) {
-            return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_52, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-              "for": 'spell_slots_int_' + num,
-              value: _ctx.ordinalSuffix(num) + ' Level',
-              "class": "mt-4"
-            }, null, 8
-            /* PROPS */
-            , ["for", "value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
-              type: "number",
-              id: 'spell_slots_int_' + num,
-              "class": "mt-1 w-full",
-              placeholder: "0",
-              modelValue: _ctx.form['spell_slots_int_' + num],
-              "onUpdate:modelValue": function onUpdateModelValue($event) {
-                return _ctx.form['spell_slots_int_' + num] = $event;
-              },
-              modelModifiers: {
-                number: true
-              }
-            }, null, 8
-            /* PROPS */
-            , ["id", "modelValue", "onUpdate:modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-              message: _ctx.form.errors['spell_slots' + num],
-              "class": "mt-2"
-            }, null, 8
-            /* PROPS */
-            , ["message"])]);
-          }), 64
-          /* STABLE_FRAGMENT */
-          ))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_53, [_hoisted_54, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_55, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.spellListExplanation), 1
-          /* TEXT */
-          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" spell_list "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(10, function (num, index) {
-            return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
-              "for": 'spell_list_string_' + index,
-              value: index == 0 ? 'Cantrips' : _ctx.ordinalSuffix(index) + ' Level',
-              "class": "mt-4"
-            }, null, 8
-            /* PROPS */
-            , ["for", "value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
-              id: 'spell_list_string_' + index,
-              "class": "w-full form-input",
-              "onUpdate:modelValue": function onUpdateModelValue($event) {
-                return _ctx.form['spell_list_string_' + index] = $event;
-              }
-            }, null, 8
-            /* PROPS */
-            , _hoisted_58), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.form['spell_list_string_' + index]]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-              message: _ctx.form.errors['spell_list_' + index],
-              "class": "mt-2"
-            }, null, 8
-            /* PROPS */
-            , ["message"])]);
-          }), 64
-          /* STABLE_FRAGMENT */
-          ))])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
-        }),
-        _: 1
-        /* STABLE */
-
-      }, 8
-      /* PROPS */
-      , ["onSubmitted"])];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_edit, {
+    creature: $props.editing,
+    type: "Character"
+  }, null, 8
   /* PROPS */
-  , ["title"]);
+  , ["creature"]);
 }
 
 /***/ }),
@@ -33969,7 +34918,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_show, {
         creature: $props.character,
-        type: 'Character'
+        type: "Character"
       }, null, 8
       /* PROPS */
       , ["creature"])];
@@ -34027,6 +34976,32 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   });
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Monsters/Edit.vue?vue&type=template&id=0b79a072":
+/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Monsters/Edit.vue?vue&type=template&id=0b79a072 ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_edit = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("edit", true);
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_edit, {
+    creature: $props.editing,
+    type: "Monster"
+  }, null, 8
+  /* PROPS */
+  , ["creature"]);
 }
 
 /***/ }),
@@ -34307,7 +35282,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_show, {
         creature: $props.monster,
-        type: 'Monster'
+        type: "Monster"
       }, null, 8
       /* PROPS */
       , ["creature"])];
@@ -36082,10 +37057,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
-/***/ "./resources/js/Mixins/Creature/Component.js":
-/*!***************************************************!*\
-  !*** ./resources/js/Mixins/Creature/Component.js ***!
-  \***************************************************/
+/***/ "./resources/js/Mixins/CreatureComponent.js":
+/*!**************************************************!*\
+  !*** ./resources/js/Mixins/CreatureComponent.js ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -36121,696 +37096,6 @@ var CreatureComponent = {
       }
 
       this.$emit('updated', this.creature);
-    }
-  }
-};
-
-/***/ }),
-
-/***/ "./resources/js/Mixins/Creature/Edit.js":
-/*!**********************************************!*\
-  !*** ./resources/js/Mixins/Creature/Edit.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CreatureEdit": () => (/* binding */ CreatureEdit)
-/* harmony export */ });
-var CreatureEdit = {
-  data: function data() {
-    return {
-      form: this.$inertia.form({
-        id: null,
-        name: null,
-        speed: '',
-        hp_max: 0,
-        hp_current: 0,
-        hit_dice: [{
-          count: 0,
-          size: 0,
-          current: 0
-        }],
-        ac: 0,
-        ac_source: '',
-        initiative: 0,
-        strength: 0,
-        strength_save: 0,
-        strength_mod: 0,
-        strength_save_proficiency: false,
-        athletics: 0,
-        athletics_proficiency: false,
-        athletics_expertise: false,
-        dexterity: 0,
-        dexterity_save: 0,
-        dexterity_mod: 0,
-        dexterity_save_proficiency: false,
-        acrobatics: 0,
-        acrobatics_proficiency: false,
-        acrobatics_expertise: false,
-        sleight_of_hand: 0,
-        sleight_of_hand_proficiency: false,
-        sleight_of_hand_expertise: false,
-        stealth: 0,
-        stealth_proficiency: false,
-        stealth_expertise: false,
-        constitution: 0,
-        constitution_save: 0,
-        constitution_mod: 0,
-        constitution_save_proficiency: false,
-        intelligence: 0,
-        intelligence_save: 0,
-        intelligence_mod: 0,
-        intelligence_save_proficiency: false,
-        arcana: 0,
-        arcana_proficiency: false,
-        arcana_expertise: false,
-        history: 0,
-        history_proficiency: false,
-        history_expertise: false,
-        investigation: 0,
-        investigation_proficiency: false,
-        investigation_expertise: false,
-        nature: 0,
-        nature_proficiency: false,
-        nature_expertise: false,
-        religion: 0,
-        religion_proficiency: false,
-        religion_expertise: false,
-        wisdom: 0,
-        wisdom_save: 0,
-        wisdom_mod: 0,
-        wisdom_save_proficiency: false,
-        animal_handling: 0,
-        animal_handling_proficiency: false,
-        animal_handling_expertise: false,
-        insight: 0,
-        insight_proficiency: false,
-        insight_expertise: false,
-        medicine: 0,
-        medicine_proficiency: false,
-        medicine_expertise: false,
-        perception: 0,
-        perception_proficiency: false,
-        perception_expertise: false,
-        survival: 0,
-        survival_proficiency: false,
-        survival_expertise: false,
-        charisma: 0,
-        charisma_save: 0,
-        charisma_mod: 0,
-        charisma_save_proficiency: false,
-        deception: 0,
-        deception_proficiency: false,
-        deception_expertise: false,
-        intimidation: 0,
-        intimidation_proficiency: false,
-        intimidation_expertise: false,
-        performance: 0,
-        performance_proficiency: false,
-        performance_expertise: false,
-        persuasion: 0,
-        persuasion_proficiency: false,
-        persuasion_expertise: false,
-        skills_auto_filled: true,
-        special_skill_modifiers: [],
-        spellcaster: false,
-        spell_type: 'slots',
-        spell_dc: null,
-        spell_level: null,
-        spell_points_max: null,
-        spell_points_current: null,
-        spell_recover: 'long',
-        spell_list_type: 'known',
-        spell_slots_1: [],
-        spell_slots_2: [],
-        spell_slots_3: [],
-        spell_slots_4: [],
-        spell_slots_5: [],
-        spell_slots_6: [],
-        spell_slots_7: [],
-        spell_slots_8: [],
-        spell_slots_9: [],
-        spell_list_0: [],
-        spell_list_1: [],
-        spell_list_2: [],
-        spell_list_3: [],
-        spell_list_4: [],
-        spell_list_5: [],
-        spell_list_6: [],
-        spell_list_7: [],
-        spell_list_8: [],
-        spell_list_9: [],
-        spell_prepare_count: null,
-        spell_prepared: null,
-        damage_vulnerabilities: null,
-        damage_resistances: null,
-        damage_immunities: null,
-        condition_immunities: null,
-        senses: null,
-        languages: null,
-        // character fields
-        race: null,
-        "class": null,
-        level: 0
-      })
-    };
-  },
-  created: function created() {
-    if (this.editing) {
-      this.form = this.$inertia.form({
-        id: this.editing.id,
-        name: this.editing.name,
-        speed: this.editing.speed,
-        hp_max: this.editing.hp_max,
-        hp_current: this.editing.hp_current,
-        hit_dice: this.editing.hit_dice,
-        ac: this.editing.ac,
-        ac_source: this.editing.ac_source,
-        initiative: this.editing.initiative,
-        strength: this.editing.strength,
-        strength_save: this.editing.strength_save,
-        strength_mod: this.editing.strength_mod,
-        strength_save_proficiency: this.editing.strength_save_proficiency,
-        athletics: this.editing.athletics,
-        athletics_proficiency: this.editing.athletics_proficiency,
-        athletics_expertise: this.editing.athletics_expertise,
-        dexterity: this.editing.dexterity,
-        dexterity_save: this.editing.dexterity_save,
-        dexterity_mod: this.editing.dexterity_mod,
-        dexterity_save_proficiency: this.editing.dexterity_save_proficiency,
-        acrobatics: this.editing.acrobatics,
-        acrobatics_proficiency: this.editing.acrobatics_proficiency,
-        acrobatics_expertise: this.editing.acrobatics_expertise,
-        sleight_of_hand: this.editing.sleight_of_hand,
-        sleight_of_hand_proficiency: this.editing.sleight_of_hand_proficiency,
-        sleight_of_hand_expertise: this.editing.sleight_of_hand_expertise,
-        stealth: this.editing.stealth,
-        stealth_proficiency: this.editing.stealth_proficiency,
-        stealth_expertise: this.editing.stealth_expertise,
-        constitution: this.editing.constitution,
-        constitution_save: this.editing.constitution_save,
-        constitution_mod: this.editing.constitution_mod,
-        constitution_save_proficiency: this.editing.constitution_save_proficiency,
-        intelligence: this.editing.intelligence,
-        intelligence_save: this.editing.intelligence_save,
-        intelligence_mod: this.editing.intelligence_mod,
-        intelligence_save_proficiency: this.editing.intelligence_save_proficiency,
-        arcana: this.editing.arcana,
-        arcana_proficiency: this.editing.arcana_proficiency,
-        arcana_expertise: this.editing.arcana_expertise,
-        history: this.editing.history,
-        history_proficiency: this.editing.history_proficiency,
-        history_expertise: this.editing.history_expertise,
-        investigation: this.editing.investigation,
-        investigation_proficiency: this.editing.investigation_proficiency,
-        investigation_expertise: this.editing.investigation_expertise,
-        nature: this.editing.nature,
-        nature_proficiency: this.editing.nature_proficiency,
-        nature_expertise: this.editing.nature_expertise,
-        religion: this.editing.religion,
-        religion_proficiency: this.editing.religion_proficiency,
-        religion_expertise: this.editing.religion_expertise,
-        wisdom: this.editing.wisdom,
-        wisdom_save: this.editing.wisdom_save,
-        wisdom_mod: this.editing.wisdom_mod,
-        wisdom_save_proficiency: this.editing.wisdom_save_proficiency,
-        animal_handling: this.editing.animal_handling,
-        animal_handling_proficiency: this.editing.animal_handling_proficiency,
-        animal_handling_expertise: this.editing.animal_handling_expertise,
-        insight: this.editing.insight,
-        insight_proficiency: this.editing.insight_proficiency,
-        insight_expertise: this.editing.insight_expertise,
-        medicine: this.editing.medicine,
-        medicine_proficiency: this.editing.medicine_proficiency,
-        medicine_expertise: this.editing.medicine_expertise,
-        perception: this.editing.perception,
-        perception_proficiency: this.editing.perception_proficiency,
-        perception_expertise: this.editing.perception_expertise,
-        survival: this.editing.survival,
-        survival_proficiency: this.editing.survival_proficiency,
-        survival_expertise: this.editing.survival_expertise,
-        charisma: this.editing.charisma,
-        charisma_save: this.editing.charisma_save,
-        charisma_mod: this.editing.charisma_mod,
-        charisma_save_proficiency: this.editing.charisma_save_proficiency,
-        deception: this.editing.deception,
-        deception_proficiency: this.editing.deception_proficiency,
-        deception_expertise: this.editing.deception_expertise,
-        intimidation: this.editing.intimidation,
-        intimidation_proficiency: this.editing.intimidation_proficiency,
-        intimidation_expertise: this.editing.intimidation_expertise,
-        performance: this.editing.performance,
-        performance_proficiency: this.editing.performance_proficiency,
-        performance_expertise: this.editing.performance_expertise,
-        persuasion: this.editing.persuasion,
-        persuasion_proficiency: this.editing.persuasion_proficiency,
-        persuasion_expertise: this.editing.persuasion_expertise,
-        skills_auto_filled: this.editing.skills_auto_filled,
-        special_skill_modifiers: this.editing.special_skill_modifiers,
-        spellcaster: this.editing.spellcaster,
-        spell_type: this.editing.spell_type,
-        spell_dc: this.editing.spell_dc,
-        spell_level: this.editing.spell_level,
-        spell_points_max: this.editing.spell_points_max,
-        spell_points_current: this.editing.spell_points_current,
-        spell_recover: this.editing.spell_recover,
-        spell_list_type: this.editing.spell_list_type,
-        spell_slots_1: this.editing.spell_slots_1,
-        spell_slots_2: this.editing.spell_slots_2,
-        spell_slots_3: this.editing.spell_slots_3,
-        spell_slots_4: this.editing.spell_slots_4,
-        spell_slots_5: this.editing.spell_slots_5,
-        spell_slots_6: this.editing.spell_slots_6,
-        spell_slots_7: this.editing.spell_slots_7,
-        spell_slots_8: this.editing.spell_slots_8,
-        spell_slots_9: this.editing.spell_slots_9,
-        spell_slots_int_1: this.getSlotCount(this.editing.spell_slots_1),
-        spell_slots_int_2: this.getSlotCount(this.editing.spell_slots_2),
-        spell_slots_int_3: this.getSlotCount(this.editing.spell_slots_3),
-        spell_slots_int_4: this.getSlotCount(this.editing.spell_slots_4),
-        spell_slots_int_5: this.getSlotCount(this.editing.spell_slots_5),
-        spell_slots_int_6: this.getSlotCount(this.editing.spell_slots_6),
-        spell_slots_int_7: this.getSlotCount(this.editing.spell_slots_7),
-        spell_slots_int_8: this.getSlotCount(this.editing.spell_slots_8),
-        spell_slots_int_9: this.getSlotCount(this.editing.spell_slots_9),
-        spell_list_0: this.editing.spell_list_0,
-        spell_list_1: this.editing.spell_list_1,
-        spell_list_2: this.editing.spell_list_2,
-        spell_list_3: this.editing.spell_list_3,
-        spell_list_4: this.editing.spell_list_4,
-        spell_list_5: this.editing.spell_list_5,
-        spell_list_6: this.editing.spell_list_6,
-        spell_list_7: this.editing.spell_list_7,
-        spell_list_8: this.editing.spell_list_8,
-        spell_list_9: this.editing.spell_list_9,
-        spell_list_string_0: this.joinList(this.editing.spell_list_0),
-        spell_list_string_1: this.joinList(this.editing.spell_list_1),
-        spell_list_string_2: this.joinList(this.editing.spell_list_2),
-        spell_list_string_3: this.joinList(this.editing.spell_list_3),
-        spell_list_string_4: this.joinList(this.editing.spell_list_4),
-        spell_list_string_5: this.joinList(this.editing.spell_list_5),
-        spell_list_string_6: this.joinList(this.editing.spell_list_6),
-        spell_list_string_7: this.joinList(this.editing.spell_list_7),
-        spell_list_string_8: this.joinList(this.editing.spell_list_8),
-        spell_list_string_9: this.joinList(this.editing.spell_list_9),
-        spell_prepare_count: this.editing.spell_prepare_count,
-        spell_prepared: this.editing.spell_prepared,
-        damage_vulnerabilities: this.editing.damage_vulnerabilities,
-        damage_resistances: this.editing.damage_resistances,
-        damage_immunities: this.editing.damage_immunities,
-        condition_immunities: this.editing.condition_immunities,
-        languages: this.editing.languages,
-        senses: this.editing.senses,
-        // character fields
-        race: this.editing.race,
-        "class": this.editing["class"],
-        level: this.editing.level
-      }); // for(let i=0;i<10;i++) {
-      //     this.form['spell_list_' + i] = this.joinList(this.form['spell_list_' + i]);
-      //     if(i != 0) {
-      //         this.form['spell_slots_' + i] = this.getSlotCount(this.form['spell_slots_' + i]);
-      //     }
-      // }
-    }
-  },
-  computed: {
-    skillsButtonText: function skillsButtonText() {
-      if (this.form.skills_auto_filled) {
-        return 'Swtich to Manual Skills';
-      } else {
-        return 'Swtich to Automatic Skills';
-      }
-    },
-    skillsText: function skillsText() {
-      if (this.form.skills_auto_filled) {
-        return 'Skills are automatically calculated based on stats and proficencies.  If there are other factors affecting skills, click the button to switch to manual skills.';
-      } else {
-        return 'Enter in all of the skill modifiers. Changing stats and proficiencies in the section above will not change the skill modifiers while in manual skills mode.';
-      }
-    },
-    spellcasterButtonText: function spellcasterButtonText() {
-      if (this.form.spellcaster) {
-        return 'Disable';
-      } else {
-        return 'Enable';
-      }
-    },
-    spellListExplanation: function spellListExplanation() {
-      if (this.form.spell_list_type == 'known') {
-        return "List all of your known spells below.  Spells should be separated by a comma (ex: Firebolt, Minor Illusion).";
-      } else {
-        return "List all of the spells in your spellbook or class's spell list below.  You will have the option later to select which spells from your list you have prepared and then only show the prepared spells.  Spells should be separated by a comma (ex: Firebolt, Minor Illusion).";
-      }
-    },
-    proficiencyBonus: function proficiencyBonus() {
-      var search = this.form.level ? this.form.level.toString() : this.form.challenge;
-      var result = 0;
-
-      switch (search) {
-        case '':
-        case '0':
-        case '1/8':
-        case '1/4':
-        case '1/2':
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-          result = 2;
-          break;
-
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-          result = 3;
-          break;
-
-        case '9':
-        case '10':
-        case '11':
-        case '12':
-          result = 4;
-          break;
-
-        case '13':
-        case '14':
-        case '15':
-        case '16':
-          result = 5;
-          break;
-
-        case '17':
-        case '18':
-        case '19':
-        case '20':
-          result = 6;
-          break;
-
-        case '21':
-        case '22':
-        case '23':
-        case '24':
-          result = 7;
-          break;
-
-        case '25':
-        case '26':
-        case '27':
-        case '28':
-          result = 8;
-          break;
-
-        case '29':
-        case '30':
-          result = 9;
-          break;
-
-        default:
-          result = 9;
-          break;
-      }
-
-      return result;
-    },
-    baseStrengthMod: function baseStrengthMod() {
-      return this.getStatModifier(this.form.strength);
-    },
-    baseDexterityMod: function baseDexterityMod() {
-      return this.getStatModifier(this.form.dexterity);
-    },
-    baseConstitutionMod: function baseConstitutionMod() {
-      return this.getStatModifier(this.form.constitution);
-    },
-    baseIntelligenceMod: function baseIntelligenceMod() {
-      return this.getStatModifier(this.form.intelligence);
-    },
-    baseWisdomMod: function baseWisdomMod() {
-      return this.getStatModifier(this.form.wisdom);
-    },
-    baseCharismaMod: function baseCharismaMod() {
-      return this.getStatModifier(this.form.charisma);
-    }
-  },
-  methods: {
-    ordinalSuffix: function ordinalSuffix(num) {
-      var j = num % 10;
-      var k = num % 100;
-
-      if (j == 1 && k != 11) {
-        return num + "st";
-      }
-
-      if (j == 2 && k != 12) {
-        return num + "nd";
-      }
-
-      if (j == 3 && k != 13) {
-        return num + "rd";
-      }
-
-      return num + "th";
-    },
-    getStatModifier: function getStatModifier(stat) {
-      var result = -99;
-
-      switch (stat) {
-        case 1:
-          result = -5;
-          break;
-
-        case 2:
-        case 3:
-          result = -4;
-          break;
-
-        case 4:
-        case 5:
-          result = -3;
-          break;
-
-        case 6:
-        case 7:
-          result = -2;
-          break;
-
-        case 8:
-        case 9:
-          result = -1;
-          break;
-
-        case 10:
-        case 11:
-          result = 0;
-          break;
-
-        case 12:
-        case 13:
-          result = 1;
-          break;
-
-        case 14:
-        case 15:
-          result = 2;
-          break;
-
-        case 16:
-        case 17:
-          result = 3;
-          break;
-
-        case 18:
-        case 19:
-          result = 4;
-          break;
-
-        case 20:
-        case 21:
-          result = 5;
-          break;
-
-        case 22:
-        case 23:
-          result = 6;
-          break;
-
-        case 24:
-        case 25:
-          result = 7;
-          break;
-
-        case 26:
-        case 27:
-          result = 8;
-          break;
-
-        case 28:
-        case 29:
-          result = 9;
-          break;
-
-        case 30:
-          result = 10;
-          break;
-      }
-
-      return result;
-    },
-    setSkills: function setSkills() {
-      var stat = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'all';
-
-      if (this.form.skills_auto_filled) {
-        if (stat == 'strength' || stat == 'all') {
-          this.setSkill('strength_mod', this.baseStrengthMod);
-          this.setSkill('strength_save', this.baseStrengthMod);
-          this.setSkill('athletics', this.baseStrengthMod);
-        }
-
-        if (stat == 'dexterity' || stat == 'all') {
-          this.setSkill('dexterity_mod', this.baseDexterityMod);
-          this.setSkill('dexterity_save', this.baseDexterityMod);
-          this.setSkill('acrobatics', this.baseDexterityMod);
-          this.setSkill('sleight_of_hand', this.baseDexterityMod);
-          this.setSkill('stealth', this.baseDexterityMod);
-        }
-
-        if (stat == 'constitution' || stat == 'all') {
-          this.setSkill('constitution_mod', this.baseConstitutionMod);
-          this.setSkill('constitution_save', this.baseConstitutionMod);
-        }
-
-        if (stat == 'intelligence' || stat == 'all') {
-          this.setSkill('intelligence_mod', this.baseIntelligenceMod);
-          this.setSkill('intelligence_save', this.baseIntelligenceMod);
-          this.setSkill('arcana', this.baseIntelligenceMod);
-          this.setSkill('history', this.baseIntelligenceMod);
-          this.setSkill('investigation', this.baseIntelligenceMod);
-          this.setSkill('nature', this.baseIntelligenceMod);
-          this.setSkill('religion', this.baseIntelligenceMod);
-        }
-
-        if (stat == 'wisdom' || stat == 'all') {
-          this.setSkill('wisdom_mod', this.baseWisdomMod);
-          this.setSkill('wisdom_save', this.baseWisdomMod);
-          this.setSkill('animal_handling', this.baseWisdomMod);
-          this.setSkill('insight', this.baseWisdomMod);
-          this.setSkill('medicine', this.baseWisdomMod);
-          this.setSkill('perception', this.baseWisdomMod);
-          this.setSkill('survival', this.baseWisdomMod);
-        }
-
-        if (stat == 'charisma' || stat == 'all') {
-          this.setSkill('charisma_mod', this.baseCharismaMod);
-          this.setSkill('charisma_save', this.baseCharismaMod);
-          this.setSkill('deception', this.baseCharismaMod);
-          this.setSkill('intimidation', this.baseCharismaMod);
-          this.setSkill('performance', this.baseCharismaMod);
-          this.setSkill('persuasion', this.baseCharismaMod);
-        } // if(this.special_skill_modifiers.includes('cloakOfProtection')) {
-        //     this.strength_save = this.strength_save + 1;
-        //     this.dexterity_save = this.dexterity_save + 1;
-        //     this.constitution_save = this.constitution_save + 1;
-        //     this.intelligence_save = this.intelligence_save + 1;
-        //     this.wisdom_save = this.wisdom_save + 1;
-        //     this.charisma_save = this.charisma_save + 1;
-        // }
-        // if(this.special_skill_modifiers.includes('ringOfProtection')) {
-        //     this.strength_save = this.strength_save + 1;
-        //     this.dexterity_save = this.dexterity_save + 1;
-        //     this.constitution_save = this.constitution_save + 1;
-        //     this.intelligence_save = this.intelligence_save + 1;
-        //     this.wisdom_save = this.wisdom_save + 1;
-        //     this.charisma_save = this.charisma_save + 1;
-        // }
-
-      }
-    },
-    setSkill: function setSkill(skill, stat_modifier) {
-      this.form[skill] = stat_modifier;
-
-      if (this.form[skill + '_proficiency']) {
-        this.form[skill] += (this.form[skill + '_expertise'] ? 2 : 1) * this.proficiencyBonus;
-      }
-    },
-    toggleAutoSkills: function toggleAutoSkills() {
-      this.form.skills_auto_filled = !this.form.skills_auto_filled;
-
-      if (this.form.skills_auto_filled) {
-        this.setSkills();
-      }
-    },
-    joinList: function joinList(list) {
-      if (list != null) {
-        return list.join(', ');
-      } else {
-        return '';
-      }
-    },
-    splitList: function splitList(list) {
-      if (list && list != '') {
-        return list.split(', ').sort();
-      } else {
-        return null;
-      }
-    },
-    getSlotCount: function getSlotCount(slots) {
-      if (slots && Array.isArray(slots)) {
-        return slots.length;
-      }
-
-      return null;
-    },
-    getSlotArray: function getSlotArray(level, count) {
-      var output = [];
-
-      if (this.spells && this.spells['slots_' + level] && Array.isArray(this.spells['slots_' + level])) {
-        output = this.spells['slots_' + level];
-      }
-
-      if (count > output.length) {
-        for (var j = output.length; j < count; j++) {
-          output.push(false);
-        }
-      } else if (count < output.length) {
-        for (var _j = output.length; _j > count; _j--) {
-          output.pop();
-        }
-      }
-
-      return output;
-    },
-    prepareSpellData: function prepareSpellData() {
-      for (var i = 0; i < 10; i++) {
-        this.form['spell_list_' + i] = this.splitList(this.form['spell_list_string_' + i]);
-
-        if (i != 0) {
-          this.form['spell_slots_' + i] = this.getSlotArray(i, this.form['spell_slots_int_' + i]);
-        }
-      }
-
-      if (this.form.spell_list_type == 'known') {
-        this.form.spell_prepare_count = null;
-        this.form.spell_prepared = null;
-      }
-
-      if (this.form.spell_type == 'points') {
-        this.form.spell_points_current = this.form.spell_points_max;
-        this.form.spell_slots_1 = [];
-        this.form.spell_slots_2 = [];
-        this.form.spell_slots_3 = [];
-        this.form.spell_slots_4 = [];
-        this.form.spell_slots_5 = [];
-        this.form.spell_slots_6 = [];
-        this.form.spell_slots_7 = [];
-        this.form.spell_slots_8 = [];
-        this.form.spell_slots_9 = [];
-      } else if (this.form.spell_type == 'slots') {
-        this.form.spell_points_current = null;
-        this.form.spell_points_max = null;
-        this.form.spell_level = null;
-      }
     }
   }
 };
@@ -60560,6 +60845,32 @@ _Dice_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].__file
 
 /***/ }),
 
+/***/ "./resources/js/Components/Creature/Edit.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/Components/Creature/Edit.vue ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Edit_vue_vue_type_template_id_661208bf__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Edit.vue?vue&type=template&id=661208bf */ "./resources/js/Components/Creature/Edit.vue?vue&type=template&id=661208bf");
+/* harmony import */ var _Edit_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Edit.vue?vue&type=script&lang=js */ "./resources/js/Components/Creature/Edit.vue?vue&type=script&lang=js");
+
+
+
+_Edit_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].render = _Edit_vue_vue_type_template_id_661208bf__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_Edit_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].__file = "resources/js/Components/Creature/Edit.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_Edit_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+/***/ }),
+
 /***/ "./resources/js/Components/Creature/Heading.vue":
 /*!******************************************************!*\
   !*** ./resources/js/Components/Creature/Heading.vue ***!
@@ -62061,6 +62372,32 @@ _Dashboard_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"]._
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Monsters/Edit.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/Pages/Monsters/Edit.vue ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Edit_vue_vue_type_template_id_0b79a072__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Edit.vue?vue&type=template&id=0b79a072 */ "./resources/js/Pages/Monsters/Edit.vue?vue&type=template&id=0b79a072");
+/* harmony import */ var _Edit_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Edit.vue?vue&type=script&lang=js */ "./resources/js/Pages/Monsters/Edit.vue?vue&type=script&lang=js");
+
+
+
+_Edit_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].render = _Edit_vue_vue_type_template_id_0b79a072__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_Edit_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].__file = "resources/js/Pages/Monsters/Edit.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_Edit_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Monsters/Index.vue":
 /*!***********************************************!*\
   !*** ./resources/js/Pages/Monsters/Index.vue ***!
@@ -62543,6 +62880,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Dice_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Dice_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Dice.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/Dice.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/Components/Creature/Edit.vue?vue&type=script&lang=js":
+/*!***************************************************************************!*\
+  !*** ./resources/js/Components/Creature/Edit.vue?vue&type=script&lang=js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Edit_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Edit_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Edit.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/Edit.vue?vue&type=script&lang=js");
  
 
 /***/ }),
@@ -63363,6 +63716,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Monsters/Edit.vue?vue&type=script&lang=js":
+/*!**********************************************************************!*\
+  !*** ./resources/js/Pages/Monsters/Edit.vue?vue&type=script&lang=js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Edit_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Edit_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Edit.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Monsters/Edit.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Monsters/Index.vue?vue&type=script&lang=js":
 /*!***********************************************************************!*\
   !*** ./resources/js/Pages/Monsters/Index.vue?vue&type=script&lang=js ***!
@@ -63711,6 +64080,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Dice_vue_vue_type_template_id_08c0e048__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Dice_vue_vue_type_template_id_08c0e048__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Dice.vue?vue&type=template&id=08c0e048 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/Dice.vue?vue&type=template&id=08c0e048");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/Creature/Edit.vue?vue&type=template&id=661208bf":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/Components/Creature/Edit.vue?vue&type=template&id=661208bf ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Edit_vue_vue_type_template_id_661208bf__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Edit_vue_vue_type_template_id_661208bf__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Edit.vue?vue&type=template&id=661208bf */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/Edit.vue?vue&type=template&id=661208bf");
 
 
 /***/ }),
@@ -64643,6 +65028,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Monsters/Edit.vue?vue&type=template&id=0b79a072":
+/*!****************************************************************************!*\
+  !*** ./resources/js/Pages/Monsters/Edit.vue?vue&type=template&id=0b79a072 ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Edit_vue_vue_type_template_id_0b79a072__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Edit_vue_vue_type_template_id_0b79a072__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Edit.vue?vue&type=template&id=0b79a072 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Monsters/Edit.vue?vue&type=template&id=0b79a072");
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Monsters/Index.vue?vue&type=template&id=e04afa36":
 /*!*****************************************************************************!*\
   !*** ./resources/js/Pages/Monsters/Index.vue?vue&type=template&id=e04afa36 ***!
@@ -65137,6 +65538,7 @@ var map = {
 	"./Characters/Index.vue": "./resources/js/Pages/Characters/Index.vue",
 	"./Characters/Show.vue": "./resources/js/Pages/Characters/Show.vue",
 	"./Dashboard.vue": "./resources/js/Pages/Dashboard.vue",
+	"./Monsters/Edit.vue": "./resources/js/Pages/Monsters/Edit.vue",
 	"./Monsters/Index.vue": "./resources/js/Pages/Monsters/Index.vue",
 	"./Monsters/Show.vue": "./resources/js/Pages/Monsters/Show.vue",
 	"./PrivacyPolicy.vue": "./resources/js/Pages/PrivacyPolicy.vue",

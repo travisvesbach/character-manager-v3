@@ -254,7 +254,7 @@
     import AccordionItem from '@/Components/AccordionItem'
 
     import { Flash } from '@/Mixins/Flash';
-    import { CreatureComponent } from '@/Mixins/Creature/Component';
+    import { CreatureComponent } from '@/Mixins/CreatureComponent';
 
     export default {
         components: {

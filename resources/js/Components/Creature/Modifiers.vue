@@ -187,7 +187,7 @@
     import GridSection from '@/Components/GridSection'
     import JetCheckbox from '@/Jetstream/Checkbox'
 
-    import { CreatureComponent } from '@/Mixins/Creature/Component';
+    import { CreatureComponent } from '@/Mixins/CreatureComponent';
 
     export default {
         components: {
