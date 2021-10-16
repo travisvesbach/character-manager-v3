@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         //Create the default admin user
         $user = User::factory()
             ->state([
-                'name' => config('app.admin_user.email'),
+                'name' => config('app.admin_user.name'),
                 'email' => config('app.admin_user.email'),
                 'password' => Hash::make(config('app.admin_user.password')),
                 'admin' => true,

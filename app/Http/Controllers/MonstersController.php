@@ -12,6 +12,7 @@ class MonstersController extends Controller
 {
     public function index() {
         $monsters = Monster::userOrPublic(auth()->user()->id)->orderBy('name')->get();
+        $monsters->load(['user']);
         return Inertia::render('Monsters/Index', compact(['monsters']));
     }
 

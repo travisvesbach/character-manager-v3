@@ -81,8 +81,8 @@ Pack Tactics: The wolf has advantage on an attack roll against a creature if at 
             'show_notes' => 1,
             'show_dice' => 0,
             'show_additional_stats' => 1,
-            'size' => 'medium',
-            'type' => 'beast',
+            'size' => 'Medium',
+            'type' => 'Beast',
             'alignment' => 'unaligned',
             'damage_vulnerabilities' => '',
             'damage_resistances' => '',
@@ -92,7 +92,7 @@ Pack Tactics: The wolf has advantage on an attack roll against a creature if at 
             'languages' => '',
             'challenge_rating' => '1/4',
             'experience' => '50',
-            'source' => 'Monster Manual p. 341',
+            'source' => 'Monster Manual p341',
             'public' => 1,
             ])
             ->create();

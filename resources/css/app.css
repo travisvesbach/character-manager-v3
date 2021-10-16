@@ -142,3 +142,8 @@ input[type=number] {
     @apply cursor-default;
     @apply hover:text-current;
 }
+
+.highlight {
+    @apply bg-blue-400;
+    @apply dark:bg-yellow-900;
+}
