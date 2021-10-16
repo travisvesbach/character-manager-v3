@@ -10,6 +10,7 @@ use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\ModifiersController;
 use App\Http\Controllers\ActionsController;
 use App\Http\Controllers\MonstersController;
+use App\Http\Controllers\EncountersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,4 +67,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::post('/actions', [ActionsController::class, 'store'])->name('actions.store');
     Route::patch('/actions/{action}', [ActionsController::class, 'update'])->name('actions.update');
     Route::delete('/actions/{action}', [ActionsController::class, 'destroy'])->name('actions.destroy');
+
+    Route::resource('encounters', EncountersController::class);
 });

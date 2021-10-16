@@ -1,7 +1,7 @@
 <template>
-    <app-layout title="characters">
+    <app-layout title="encounters">
         <template #header>
-            Characters
+            Encounters
         </template>
 
         <div class="w-full md:w-3/4 xl:w-1/2 mx-auto pb-10 sm:px-6 lg:px-8 m-2">
@@ -11,18 +11,13 @@
                     <svg class="h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
-                    <span class="ml-1">{{ characters.length }} {{ characters.length == 1 ? 'character' : 'characters' }}</span>
+                    <span class="ml-1">{{ encounters.length }} {{ encounters.length == 1 ? 'encounter' : 'encounters' }}</span>
                 </div>
 
-                <div class="ml-auto">
-                    <jet-checkbox id="show_archived" v-model:checked="show_archived"/>
-                    <jet-label class="inline-block ml-1" for="show_archived" value="Show Archived"/>
-                </div>
+                <jet-input class="ml-auto mr-2 p-1" type="text" v-model="search" placeholder="search"/>
 
-                <jet-input class="mx-2 p-1" type="text" v-model="search" placeholder="search"/>
-
-                <Link :href="route('characters.create')" class="btn btn-primary" :as="'button'">
-                        New Character
+                <Link :href="route('encounters.create')" class="btn btn-primary" :as="'button'">
+                        New Encounter
                 </Link>
             </div>
 
@@ -31,26 +26,14 @@
                 <thead>
                     <tr class="border-b-2 border-color">
                         <th class="p-1 text-left">Name</th>
-                        <th class="p-1 text-left">Class</th>
-                        <th class="p-1 text-left">Race</th>
-                        <th class="p-1 text-left">Level</th>
-                        <th class="p-1 text-left">Archive Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b-2 border-color hover-trigger" v-for="character in filteredData">
+                    <tr class="border-b-2 border-color hover-trigger" v-for="encounter in filteredData">
                         <td class="py-2 px-1">
-                            <Link :href="character.path" class="text-lg link-color" v-html="highlight(character.name)"/>
+                            <Link :href="encounter.path" class="text-lg link-color" v-html="highlight(encounter.name)"/>
                         </td>
-                        <td class="py-2 px-1" v-html="highlight(character.class)"/>
-                        <td class="py-2 px-1" v-html="highlight(character.race)"/>
-                        <td class="py-2 px-1">
-                            {{ character.level }}
-                        </td>
-                        <td class="py-2 px-1">
-                            {{ character.archive_date ?? '' }}
-                        </td>
-                        <td class="py-2 px-1" v-if="ownerOrAdmin(character)">
+                        <td class="py-2 px-1" v-if="ownerOrAdmin(encounter)">
                             <!-- dropdown -->
                             <jet-dropdown align="right" width="48" class="hover-target">
                                 <template #trigger>
@@ -63,14 +46,11 @@
 
                                 <template #content>
                                     <div>
-                                        <jet-dropdown-link @click.native="toggleArchive(character)" as="button">
-                                            Archive Character
+                                        <jet-dropdown-link :href="route('encounters.edit', encounter.id)">
+                                            Edit Encounter
                                         </jet-dropdown-link>
-                                        <jet-dropdown-link :href="route('characters.edit', character.id)">
-                                            Edit Character
-                                        </jet-dropdown-link>
-                                        <jet-dropdown-link @click.native="confim_delete_character = character" as="button">
-                                            Delete Character
+                                        <jet-dropdown-link @click.native="confim_delete_encounter = encounter" as="button">
+                                            Delete Encounter
                                         </jet-dropdown-link>
                                     </div>
                                 </template>
@@ -82,21 +62,21 @@
         </div>
 
         <!-- delete confirmation -->
-        <jet-confirmation-modal :show="confim_delete_character" @close="confim_delete_character = false">
+        <jet-confirmation-modal :show="confim_delete_encounter" @close="confim_delete_encounter = false">
             <template #title>
-                Delete Character
+                Delete Encounter
             </template>
 
             <template #content>
-                Are you sure you want to delete this character?
+                Are you sure you want to delete this encounter?
             </template>
 
             <template #footer>
-                <jet-secondary-button @click.native="confim_delete_character = false">
+                <jet-secondary-button @click.native="confim_delete_encounter = false">
                     Cancel
                 </jet-secondary-button>
-                <jet-danger-button class="ml-2" @click.native="deletecharacter" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Delete Character
+                <jet-danger-button class="ml-2" @click.native="deleteencounter" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Delete Encounter
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>
@@ -119,7 +99,7 @@
     import { Link } from '@inertiajs/inertia-vue3'
 
     export default {
-        props: ['characters'],
+        props: ['encounters'],
 
         components: {
             AppLayout,
@@ -138,8 +118,7 @@
         data() {
             return {
                 search: null,
-                show_archived: false,
-                confim_delete_character: false,
+                confim_delete_encounter: false,
                 form: this.$inertia.form({
                     id: null,
                 }),
@@ -147,18 +126,12 @@
         },
         computed: {
             filteredData() {
-                let result = this.characters.filter(function(character) {
-                    if(!this.show_archived && character.archive_date) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }, this);
+                let result = this.encounters;
                 if(this.search) {
                     let searching = this.search.toLowerCase();
                     console.log('here');
-                    result = result.filter(function(character) {
-                        if (character.name.toLowerCase().includes(searching) || character.class.toLowerCase().includes(searching) || character.race.toLowerCase().includes(searching)) {
+                    result = result.filter(function(encounter) {
+                        if (encounter.name.toLowerCase().includes(searching)) {
                             return true;
                         } else {
                             return false;
@@ -169,8 +142,8 @@
             },
         },
         methods: {
-            ownerOrAdmin(character) {
-                if(this.$page.props.user.id == character.user_id || this.$page.props.user.admin) {
+            ownerOrAdmin(encounter) {
+                if(this.$page.props.user.id == encounter.user_id || this.$page.props.user.admin) {
                     return true;
                 }
                 return false;
@@ -183,18 +156,18 @@
                     return '<span class="highlight">' + match + '</span>';
                 });
             },
-            deleteCharacter() {
-                this.form.id = this.confim_delete_character.id;
-                this.form.delete(route('characters.destroy', this.form.id));
-                this.confim_delete_character = false;
+            deleteEncounter() {
+                this.form.id = this.confim_delete_encounter.id;
+                this.form.delete(route('encounters.destroy', this.form.id));
+                this.confim_delete_encounter = false;
                 this.form.id = null;
             },
-            toggleArchive(character) {
-                this.form.id = character.id;
-                if(!character.archive_date) {
-                    this.form.patch(route('characters.archive', character.id));
+            toggleArchive(encounter) {
+                this.form.id = encounter.id;
+                if(!encounter.archive_date) {
+                    this.form.patch(route('encounters.archive', encounter.id));
                 } else {
-                    this.form.patch(route('characters.unarchive', character.id));
+                    this.form.patch(route('encounters.unarchive', encounter.id));
                 }
                 this.form.id = null;
             }

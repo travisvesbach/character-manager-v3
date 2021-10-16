@@ -10,6 +10,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Character;
+use App\Models\Monster;
+use App\Models\Encounter;
 
 class User extends Authenticatable
 {
@@ -80,5 +82,9 @@ class User extends Authenticatable
 
     public function monsters() {
         return $this->hasMany(Monster::class)->orderBy('name');
+    }
+
+    public function encounters() {
+        return $this->hasMany(Encounter::class)->orderBy('name');
     }
 }

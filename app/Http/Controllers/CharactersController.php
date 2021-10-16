@@ -36,7 +36,7 @@ class CharactersController extends Controller
 
         $character->load(['resources', 'modifiers', 'actions']);
 
-        $characters = auth()->user()->characters()->select(['id', 'name', 'level', 'race', 'class'])->orderBy('name')->get();
+        $characters = auth()->user()->characters()->whereNull('archive_date')->select(['id', 'name', 'level', 'race', 'class'])->orderBy('name')->get();
 
         return Inertia::render('Characters/Show', compact(['character', 'characters']));
     }
