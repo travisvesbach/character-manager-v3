@@ -142,7 +142,7 @@
                 if(this.search) {
                     let searching = this.search.toLowerCase();
                     result = result.filter(function(monster) {
-                        if (monster.name.toLowerCase().includes(searching) || monster.type.toLowerCase().includes(searching)) {
+                        if (monster.name.toLowerCase().includes(searching) || monster.type.toLowerCase().includes(searching) || monster.size.toLowerCase().includes(searching)) {
                             return true;
                         } else {
                             return false;
