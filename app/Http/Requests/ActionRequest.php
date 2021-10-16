@@ -34,15 +34,15 @@ class ActionRequest extends FormRequest
             'attack'                => 'boolean',
             'attack_modifier'       => 'required_if:attack,true|integer|nullable',
             'attack_does_damage'    => 'required_if:attack,true|boolean|nullable',
-            'attack_dice'           => ['required_if:attack_does_damage,true', 'nullable', new DiceArray($this->attack)],
+            'attack_dice'           => ['required_if:attack_does_damage,true', 'nullable', new DiceArray($this->attack_does_damage)],
             'save'                  => 'boolean',
             'save_type'             => 'required_if:save,true|max:255|nullable',
             'save_dc'               => 'required_if:save,true|integer|nullable',
             'save_does_damage'      => 'required_if:save,true|boolean|nullable',
-            'save_dice'             => ['required_if:save_does_damage,true', 'nullable', new DiceArray($this->save)],
+            'save_dice'             => ['required_if:save_does_damage,true', 'nullable', new DiceArray($this->save_does_damage)],
             'auto'                  => 'boolean',
             'auto_does_damage'      => 'required_if:auto,true|boolean|nullable',
-            'auto_dice'             => ['required_if:auto_does_damage,true', 'nullable', new DiceArray($this->auto)],
+            'auto_dice'             => ['required_if:auto_does_damage,true', 'nullable', new DiceArray($this->auto_does_damage)],
         ];
     }
 }
