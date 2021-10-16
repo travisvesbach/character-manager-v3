@@ -103,7 +103,7 @@ class CharacterSeeder extends Seeder
             'race' => 'human',
             'class' => 'bard',
             'level' => 3,
-            'is_archived' => 0,
+            'archive_date' => null,
             'languages' => 'Common',
             'senses' => 'darkvision: 60 ft., blindsight: 10 ft., passive Perception: 16',
             ])

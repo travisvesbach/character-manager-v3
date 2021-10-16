@@ -81,7 +81,6 @@ class CharacterFactory extends Factory
             'race' => 'Human',
             'class' => 'Wizard',
             'level' => $this->faker->numberBetween(1, 20),
-            'is_archived' => 0,
             'archive_date' => null,
         ];
     }

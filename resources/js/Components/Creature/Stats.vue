@@ -196,7 +196,7 @@
                     length: this.rest_length,
                 });
 
-                form.post(route(this.type.toLowerCase() + 's.rest', form.id), {
+                form.patch(route(this.type.toLowerCase() + 's.rest', form.id), {
                     preserveState: true,
                     // preserveScroll: true,
                 });

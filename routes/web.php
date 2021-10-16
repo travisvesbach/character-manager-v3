@@ -48,7 +48,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
 
     Route::resource('characters', CharactersController::class);
-    Route::post('/characters/{character}/rest', [CharactersController::class, 'rest'])->name('characters.rest');
+    Route::patch('/characters/{character}/rest', [CharactersController::class, 'rest'])->name('characters.rest');
+    Route::patch('/characters/{character}/archive', [CharactersController::class, 'archive'])->name('characters.archive');
+    Route::patch('/characters/{character}/unarchive', [CharactersController::class, 'unarchive'])->name('characters.unarchive');
 
     Route::resource('monsters', MonstersController::class);
     Route::post('/monsters/{monster}/clone', [MonstersController::class, 'clone'])->name('monsters.clone');

@@ -19,7 +19,6 @@ class Character extends Creature
             'class',
             'level',
             'temp_hp',
-            'is_archived',
             'archive_date',
         ]);
     }

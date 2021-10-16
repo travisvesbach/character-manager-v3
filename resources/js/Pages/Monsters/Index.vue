@@ -91,7 +91,7 @@
                 <jet-secondary-button @click.native="confim_delete_monster = false">
                     Cancel
                 </jet-secondary-button>
-                <jet-danger-button class="ml-2" @click.native="deletemonster" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <jet-danger-button class="ml-2" @click.native="deleteMonster" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Delete Monster
                 </jet-danger-button>
             </template>
@@ -167,7 +167,7 @@
                     return '<span class="highlight">' + match + '</span>';
                 });
             },
-            deletemonster() {
+            deleteMonster() {
                 this.form.id = this.confim_delete_monster.id;
                 this.form.delete(route('monsters.destroy', this.form.id));
                 this.confim_delete_monster = false;

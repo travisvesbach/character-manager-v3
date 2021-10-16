@@ -151,11 +151,53 @@ class CharactersTest extends TestCase
         $this->withoutExceptionHandling();
 
         $this->actingAs($character->user)
-            ->post(route('characters.rest', ['character' => $character, 'length' => 'long']))
+            ->patch(route('characters.rest', ['character' => $character, 'length' => 'long']))
             ->assertRedirect($character->path());
 
         $character->refresh();
 
         $this->assertEquals($character->hp_max, $character->hp_current);
+    }
+
+    /** @test **/
+    public function a_character_can_be_archived() {
+        $character = Character::factory()->create();
+
+        $this->assertNull($character->archive_date);
+
+        $this->withoutExceptionHandling();
+
+        $this->actingAs($character->user)
+            ->patch(route('characters.archive', ['character' => $character]))
+            ->assertRedirect(route('characters.index'));
+
+        $character->refresh();
+
+        $this->assertNotNull($character->archive_date);
+    }
+
+    /** @test **/
+    public function a_character_can_be_unarchived() {
+        $character = Character::factory()->create();
+
+        $this->assertNull($character->archive_date);
+
+        $this->withoutExceptionHandling();
+
+        $this->actingAs($character->user)
+            ->patch(route('characters.archive', ['character' => $character]))
+            ->assertRedirect(route('characters.index'));
+
+        $character->refresh();
+
+        $this->assertNotNull($character->archive_date);
+
+        $this->actingAs($character->user)
+            ->patch(route('characters.unarchive', ['character' => $character]))
+            ->assertRedirect($character->path());
+
+        $character->refresh();
+
+        $this->assertNull($character->archive_date);
     }
 }

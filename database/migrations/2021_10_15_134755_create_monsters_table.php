@@ -107,10 +107,10 @@ class CreateMonstersTable extends Migration
             $table->boolean('persuasion_expertise')->default(0);
             $table->boolean('spellcaster')->default(0);
             $table->string('spell_type')->default('slots');
-            $table->integer('spell_dc')->nullable()->default(null);
-            $table->integer('spell_level')->nullable()->default(null);
-            $table->integer('spell_points_max')->nullable()->default(null);
-            $table->integer('spell_points_current')->nullable()->default(null);
+            $table->integer('spell_dc')->nullable();
+            $table->integer('spell_level')->nullable();
+            $table->integer('spell_points_max')->nullable();
+            $table->integer('spell_points_current')->nullable();
             $table->string('spell_recover')->default('long');
             $table->string('spell_list_type')->default('known');
             $table->json('spell_slots_1')->nullable();
@@ -132,7 +132,7 @@ class CreateMonstersTable extends Migration
             $table->json('spell_list_7')->nullable();
             $table->json('spell_list_8')->nullable();
             $table->json('spell_list_9')->nullable();
-            $table->integer('spell_prepare_count')->nullable()->default(null);
+            $table->integer('spell_prepare_count')->nullable();
             $table->json('spell_prepared')->nullable();
             $table->json('spell_counters')->nullable();
             $table->text('notes')->nullable();
