@@ -3,7 +3,7 @@
         <div class="grid sm:grid-cols-2 md:grid-cols-4">
             <div class="col-span-1">
                 <div class="hover-trigger flex items-center">
-                    <h2 class="text-4xl heading-color">{{ creatureName }}</h2>
+                    <h2 class="text-4xl heading-color">{{ creature.display_name }}</h2>
                     <jet-dropdown align="left" width="48" class="hover-target ml-1">
                         <template #trigger>
                             <button class="flex link link-color">
@@ -31,13 +31,13 @@
                                     {{ creature.show_additional_stats ? 'Hide' : 'Show' }} Additional Stats
                                 </jet-dropdown-link>
                                 <jet-dropdown-link @click.native="clone_creature = true" as="button" v-if="type == 'Monster'">
-                                    Clone {{ creatureName }}
+                                    Clone {{ creature.display_name }}
                                 </jet-dropdown-link>
                                 <jet-dropdown-link :href="getRoute('edit')" v-if="ownerOrAdmin">
-                                    Edit {{ creatureName }}
+                                    Edit {{ creature.display_name }}
                                 </jet-dropdown-link>
                                 <jet-dropdown-link @click.native="delete_creature = true" as="button" v-if="ownerOrAdmin">
-                                    Delete {{ creatureName }}
+                                    Delete {{ creature.display_name }}
                                 </jet-dropdown-link>
                             </div>
                         </template>
@@ -83,11 +83,11 @@
         <!-- delete confirmation -->
         <jet-confirmation-modal :show="delete_creature" @close="delete_creature = false">
             <template #title>
-                Delete {{ creatureName }}
+                Delete {{ creature.display_name }}
             </template>
 
             <template #content>
-                Are you sure you want to delete {{ creatureName }}?
+                Are you sure you want to delete {{ creature.display_name }}?
             </template>
 
             <template #footer>
@@ -95,7 +95,7 @@
                     Cancel
                 </jet-secondary-button>
                 <jet-danger-button class="ml-2" @click.native="deleteCreature" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Delete {{ creatureName }}
+                    Delete {{ creature.display_name }}
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>
@@ -103,7 +103,7 @@
         <!-- clone -->
         <jet-dialog-modal type="form" :show="clone_creature" @close="closeClone" @submitted="cloneCreature">
             <template #header>
-                Clone {{ creatureName }}
+                Clone {{ creature.display_name }}
             </template>
 
             <template #content>
@@ -118,7 +118,7 @@
                     Cancel
                 </jet-secondary-button>
                 <jet-button class="ml-2" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Clone {{ creatureName }}
+                    Clone {{ creature.display_name }}
                 </jet-button>
             </template>
         </jet-dialog-modal>
@@ -169,7 +169,7 @@
         methods: {
             roll(item, modifier) {
                 let result =  dice.roll();
-                let message = this.creatureName + ':<br>' +
+                let message = this.creature.display_name + ':<br>' +
                     item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
                 this.flash(message, 'primary');
             },
@@ -197,7 +197,7 @@
                     let output = [];
                     let result = dice.roll(this.creature.hit_dice[dice_index].size);
                     let total = result + this.creature.constitution_mod;
-                    output.push(this.creatureName + ' rolled a hit dice:');
+                    output.push(this.creature.display_name + ' rolled a hit dice:');
                     if(this.creature.hp_current < 0) {
                         output.push('HP is less than 0; setting HP to 0.');
                         this.creature.hp_current = 0;

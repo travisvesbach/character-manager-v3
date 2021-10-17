@@ -21,11 +21,11 @@ class Character extends Creature
             'temp_hp',
             'archive_date',
         ]);
-    }
 
-    protected $appends = [
-        'path',
-    ];
+        $this->append([
+            'path',
+        ]);
+    }
 
     public function path() {
         return route('characters.show', $this->id);

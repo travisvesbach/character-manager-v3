@@ -13,9 +13,6 @@ export const CreatureComponent = {
                 return true;
             }
             return false;
-        },
-        creatureName() {
-            return this.creature.display_name ?? this.creature.name;
         }
     },
     methods: {

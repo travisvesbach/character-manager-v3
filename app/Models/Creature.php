@@ -170,6 +170,11 @@ class Creature extends Model
         'spell_counters'            => 'array',
     ];
 
+
+    protected $appends = [
+        'display_name',
+    ];
+
     protected static function boot() {
         parent::boot();
 
@@ -196,9 +201,17 @@ class Creature extends Model
         return $this->morphMany(Action::class, 'creature')->orderBy('name');
     }
 
+    public function displayName() {
+        return $this->name . ($this->name_number ? ' ' . $this->name_number : '');
+    }
+
+    public function getDisplayNameAttribute() {
+        return $this->displayName();
+    }
+
     public function rest($length) {
         $output = [];
-        array_push($output, $this->name . ' took a ' . $length . ' rest.');
+        array_push($output, $this->display_name . ' took a ' . $length . ' rest.');
 
         if($length == 'long') {
             $recovered_hp = $this->hp_max - $this->hp_current;

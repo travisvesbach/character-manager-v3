@@ -20664,7 +20664,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var advantage = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var critical = null;
       var output_array = [];
-      output_array.push(this.creatureName + ':<br>' + action.name + (advantage ? ' with ' + advantage : '') + ':'); // get attack roll(s)
+      output_array.push(this.creature.display_name + ':<br>' + action.name + (advantage ? ' with ' + advantage : '') + ':'); // get attack roll(s)
 
       if (action.attack) {
         var attack_rolls = [];
@@ -21757,7 +21757,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     roll: function roll(item, modifier) {
       var result = dice.roll();
-      var message = this.creatureName + ':<br>' + item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
+      var message = this.creature.display_name + ':<br>' + item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
       this.flash(message, 'primary');
     },
     adjustCurrentHp: function adjustCurrentHp() {
@@ -21786,7 +21786,7 @@ __webpack_require__.r(__webpack_exports__);
         var output = [];
         var result = dice.roll(this.creature.hit_dice[dice_index].size);
         var total = result + this.creature.constitution_mod;
-        output.push(this.creatureName + ' rolled a hit dice:');
+        output.push(this.creature.display_name + ' rolled a hit dice:');
 
         if (this.creature.hp_current < 0) {
           output.push('HP is less than 0; setting HP to 0.');
@@ -22215,7 +22215,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     rollDice: function rollDice(resource) {
       var total = 0;
-      var message = this.creatureName + ':<br>';
+      var message = this.creature.display_name + ':<br>';
       message += resource.name + ':<br>';
       var loop_total = 0;
 
@@ -22388,7 +22388,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     roll: function roll(item, modifier) {
       var result = dice.roll();
-      var message = this.creatureName + ':<br>' + item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
+      var message = this.creature.display_name + ':<br>' + item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
       this.flash(message, 'primary');
     },
     adjustHp: function adjustHp() {
@@ -22447,7 +22447,7 @@ __webpack_require__.r(__webpack_exports__);
         var output = [];
         var result = dice.roll(this.creature.hit_dice[dice_index].size);
         var total = result + this.creature.constitution_mod;
-        output.push(this.creatureName + ' rolled a hit dice:');
+        output.push(this.creature.display_name + ' rolled a hit dice:');
 
         if (this.creature.hp_current < 0) {
           output.push('HP is less than 0; setting HP to 0.');
@@ -22729,7 +22729,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         return value.enabled && value[type];
       });
       var total = dice.roll();
-      var message = this.creatureName + ':<br>' + item + ': [' + total + ']' + (modifier ? ' + ' + modifier : '');
+      var message = this.creature.display_name + ':<br>' + item + ': [' + total + ']' + (modifier ? ' + ' + modifier : '');
       total += modifier;
 
       var _iterator = _createForOfIteratorHelper(modifiers),
@@ -27452,10 +27452,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, {
-    title: _ctx.creature && _ctx.creatureName ? 'Edit ' + _ctx.creatureName : 'Create ' + _ctx.type
+    title: _ctx.creature && _ctx.creature.display_name ? 'Edit ' + _ctx.creature.display_name : 'Create ' + _ctx.type
   }, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature && _ctx.creatureName ? 'Edit ' + _ctx.creatureName : 'Create ' + _ctx.type), 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature && _ctx.creature.display_name ? 'Edit ' + _ctx.creature.display_name : 'Create ' + _ctx.type), 1
       /* TEXT */
       )];
     }),
@@ -29376,7 +29376,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_jet_dialog_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-dialog-modal");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.display_name), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_dropdown, {
     align: "left",
@@ -29465,7 +29465,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         as: "button"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Clone " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Clone " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.display_name), 1
           /* TEXT */
           )];
         }),
@@ -29477,7 +29477,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         href: _ctx.getRoute('edit')
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Edit " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Edit " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.display_name), 1
           /* TEXT */
           )];
         }),
@@ -29494,7 +29494,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         as: "button"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.display_name), 1
           /* TEXT */
           )];
         }),
@@ -29604,12 +29604,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, {
     title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.display_name), 1
       /* TEXT */
       )];
     }),
     content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName) + "? ", 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.display_name) + "? ", 1
       /* TEXT */
       )];
     }),
@@ -29633,7 +29633,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         disabled: $data.form.processing
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.display_name), 1
           /* TEXT */
           )];
         }),
@@ -29656,7 +29656,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onSubmitted: $options.cloneCreature
   }, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Clone " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Clone " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.display_name), 1
       /* TEXT */
       )];
     }),
@@ -29701,7 +29701,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         disabled: $data.form.processing
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Clone " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Clone " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.display_name), 1
           /* TEXT */
           )];
         }),
@@ -30908,7 +30908,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     title: "Show"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.display_name), 1
       /* TEXT */
       )];
     }),
@@ -30972,12 +30972,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, {
     title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.display_name), 1
       /* TEXT */
       )];
     }),
     content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName) + "? ", 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.display_name) + "? ", 1
       /* TEXT */
       )];
     }),
@@ -30998,7 +30998,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $options.deleteCreature
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.display_name), 1
           /* TEXT */
           )];
         }),
@@ -38826,11 +38826,6 @@ var CreatureComponent = {
       }
 
       return false;
-    },
-    creatureName: function creatureName() {
-      var _this$creature$displa;
-
-      return (_this$creature$displa = this.creature.display_name) !== null && _this$creature$displa !== void 0 ? _this$creature$displa : this.creature.name;
     }
   },
   methods: {

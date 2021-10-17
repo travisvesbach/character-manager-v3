@@ -23,11 +23,11 @@ class Monster extends Creature
             'source',
             'public',
         ]);
-    }
 
-    protected $appends = [
-        'path',
-    ];
+        $this->append([
+            'path',
+        ]);
+    }
 
     public function path() {
         return route('monsters.show', $this->id);

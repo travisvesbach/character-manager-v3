@@ -162,7 +162,7 @@
             roll(item, modifier, type) {
                 let modifiers = this.creature.modifiers.filter(value => value.enabled && value[type]);
                 let total = dice.roll();
-                let message = this.creatureName + ':<br>' + item + ': [' + total + ']' + (modifier ? ' + ' + modifier : '');
+                let message = this.creature.display_name + ':<br>' + item + ': [' + total + ']' + (modifier ? ' + ' + modifier : '');
 
                 total += modifier;
                 for(const mod of modifiers) {

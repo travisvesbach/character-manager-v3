@@ -1,7 +1,7 @@
 <template>
-    <app-layout :title="creature && creatureName ? 'Edit ' + creatureName : 'Create ' + type">
+    <app-layout :title="creature && creature.display_name ? 'Edit ' + creature.display_name : 'Create ' + type">
         <template #header>
-            {{ creature && creatureName ? 'Edit ' + creatureName : 'Create ' + type }}
+            {{ creature && creature.display_name ? 'Edit ' + creature.display_name : 'Create ' + type }}
         </template>
 
         <centered-form @submitted="submit" width="full">

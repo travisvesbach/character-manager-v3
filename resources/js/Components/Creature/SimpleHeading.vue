@@ -3,7 +3,7 @@
         <div>
             <div class="flex items-baseline">
                 <Link :href="creature.path" class="text-2xl font-bold" title="Show">
-                    {{ creatureName }}
+                    {{ creature.display_name }}
                 </Link>
                 <span class="text-xs ml-2" :title="creature.ac_source">AC: {{ creature.ac }}</span>
                 <button class="ml-auto btn-text" @click="delete_creature = true">
@@ -30,11 +30,11 @@
         <!-- delete confirmation -->
         <jet-confirmation-modal :show="delete_creature" @close="delete_creature = false">
             <template #title>
-                Delete {{ creatureName }}
+                Delete {{ creature.display_name }}
             </template>
 
             <template #content>
-                Are you sure you want to delete {{ creatureName }}?
+                Are you sure you want to delete {{ creature.display_name }}?
             </template>
 
             <template #footer>
@@ -42,7 +42,7 @@
                     Cancel
                 </jet-secondary-button>
                 <jet-danger-button class="ml-2" @click.native="deleteCreature">
-                    Delete {{ creatureName }}
+                    Delete {{ creature.display_name }}
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>
@@ -81,7 +81,7 @@
         methods: {
             roll(item, modifier) {
                 let result =  dice.roll();
-                let message = this.creatureName + ':<br>' +
+                let message = this.creature.display_name + ':<br>' +
                     item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
                 this.flash(message, 'primary');
             },
@@ -133,7 +133,7 @@
                     let output = [];
                     let result = dice.roll(this.creature.hit_dice[dice_index].size);
                     let total = result + this.creature.constitution_mod;
-                    output.push(this.creatureName + ' rolled a hit dice:');
+                    output.push(this.creature.display_name + ' rolled a hit dice:');
                     if(this.creature.hp_current < 0) {
                         output.push('HP is less than 0; setting HP to 0.');
                         this.creature.hp_current = 0;
