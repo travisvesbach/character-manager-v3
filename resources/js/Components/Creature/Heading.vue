@@ -36,7 +36,7 @@
                                 <jet-dropdown-link :href="route(type.toLowerCase() + 's.edit', creature.id)" v-if="ownerOrAdmin">
                                     Edit {{ type }}
                                 </jet-dropdown-link>
-                                <jet-dropdown-link @click.native="delete_creature = creature" as="button" v-if="ownerOrAdmin">
+                                <jet-dropdown-link @click.native="delete_creature = true" as="button" v-if="ownerOrAdmin">
                                     Delete {{ type }}
                                 </jet-dropdown-link>
                             </div>
@@ -160,7 +160,7 @@
                 hp_calculator: null,
                 hp_temp_calculator: null,
                 form: this.$inertia.form({
-                    id: null,
+                    id: this.creature.id,
                     name: null,
                 }),
             }
@@ -234,11 +234,9 @@
                 this.updateCreature();
             },
             deleteCreature() {
-                this.form.id = this.creature.id;
                 this.form.delete(route(this.type.toLowerCase() + 's.destroy', this.form.id));
             },
             cloneCreature() {
-                this.form.id = this.creature.id;
                 this.form.post(route(this.type.toLowerCase() + 's.clone', this.creature.id));
                 this.closeClone();
             },

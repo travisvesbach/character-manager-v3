@@ -1120,11 +1120,14 @@ select {
 .col-span-3 {
 	grid-column: span 3 / span 3;
 }
-.col-span-2 {
-	grid-column: span 2 / span 2;
-}
 .m-2 {
 	margin: 0.5rem;
+}
+.m-1 {
+	margin: 0.25rem;
+}
+.m-auto {
+	margin: auto;
 }
 .mx-auto {
 	margin-left: auto;
@@ -1353,6 +1356,9 @@ select {
 .w-14 {
 	width: 3.5rem;
 }
+.w-1\/2 {
+	width: 50%;
+}
 .min-w-0 {
 	min-width: 0px;
 }
@@ -1367,6 +1373,9 @@ select {
 }
 .max-w-6xl {
 	max-width: 72rem;
+}
+.max-w-full {
+	max-width: 100%;
 }
 .flex-1 {
 	flex: 1 1 0%;
@@ -1431,12 +1440,6 @@ select {
 }
 .grid-cols-2 {
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-.grid-cols-8 {
-	grid-template-columns: repeat(8, minmax(0, 1fr));
-}
-.grid-cols-12 {
-	grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 .flex-row {
 	flex-direction: row;
@@ -1689,6 +1692,9 @@ select {
 .p-0 {
 	padding: 0px;
 }
+.p-0\.5 {
+	padding: 0.125rem;
+}
 .px-4 {
 	padding-left: 1rem;
 	padding-right: 1rem;
@@ -1752,14 +1758,6 @@ select {
 .px-10 {
 	padding-left: 2.5rem;
 	padding-right: 2.5rem;
-}
-.py-0\.5 {
-	padding-top: 0.125rem;
-	padding-bottom: 0.125rem;
-}
-.py-0 {
-	padding-top: 0px;
-	padding-bottom: 0px;
 }
 .pt-6 {
 	padding-top: 1.5rem;
@@ -2973,6 +2971,14 @@ input[type=number] {
 		width: 75%;
 	}
 
+	.md\:w-full {
+		width: 100%;
+	}
+
+	.md\:w-1\/2 {
+		width: 50%;
+	}
+
 	.md\:grid-cols-3 {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
@@ -3028,10 +3034,6 @@ input[type=number] {
 
 	.xl\:w-1\/2 {
 		width: 50%;
-	}
-
-	.xl\:w-3\/4 {
-		width: 75%;
 	}
 }
 

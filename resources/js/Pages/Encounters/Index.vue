@@ -49,7 +49,7 @@
                                         <jet-dropdown-link :href="route('encounters.edit', encounter.id)">
                                             Edit Encounter
                                         </jet-dropdown-link>
-                                        <jet-dropdown-link @click.native="confim_delete_encounter = encounter" as="button">
+                                        <jet-dropdown-link @click.native="delete_encounter = encounter" as="button">
                                             Delete Encounter
                                         </jet-dropdown-link>
                                     </div>
@@ -62,7 +62,7 @@
         </div>
 
         <!-- delete confirmation -->
-        <jet-confirmation-modal :show="confim_delete_encounter" @close="confim_delete_encounter = false">
+        <jet-confirmation-modal :show="delete_encounter" @close="delete_encounter = false">
             <template #title>
                 Delete Encounter
             </template>
@@ -72,10 +72,10 @@
             </template>
 
             <template #footer>
-                <jet-secondary-button @click.native="confim_delete_encounter = false">
+                <jet-secondary-button @click.native="delete_encounter = false">
                     Cancel
                 </jet-secondary-button>
-                <jet-danger-button class="ml-2" @click.native="deleteencounter" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <jet-danger-button class="ml-2" @click.native="deleteEncounter">
                     Delete Encounter
                 </jet-danger-button>
             </template>
@@ -118,10 +118,7 @@
         data() {
             return {
                 search: null,
-                confim_delete_encounter: false,
-                form: this.$inertia.form({
-                    id: null,
-                }),
+                delete_encounter: false,
             }
         },
         computed: {
@@ -157,20 +154,11 @@
                 });
             },
             deleteEncounter() {
-                this.form.id = this.confim_delete_encounter.id;
-                this.form.delete(route('encounters.destroy', this.form.id));
-                this.confim_delete_encounter = false;
-                this.form.id = null;
+                let form = this.$inertia.form({
+                    id: this.delete_encounter.id,
+                });
+                form.delete(route('encounters.destroy', form.id));
             },
-            toggleArchive(encounter) {
-                this.form.id = encounter.id;
-                if(!encounter.archive_date) {
-                    this.form.patch(route('encounters.archive', encounter.id));
-                } else {
-                    this.form.patch(route('encounters.unarchive', encounter.id));
-                }
-                this.form.id = null;
-            }
         }
     }
 </script>

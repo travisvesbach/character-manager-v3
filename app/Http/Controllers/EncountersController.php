@@ -32,7 +32,7 @@ class EncountersController extends Controller
     public function show(Encounter $encounter) {
         $this->authorize('update', $encounter);
 
-        $encounters = auth()->user()->encounters()->select(['id', 'name', 'level', 'race', 'class'])->orderBy('name')->get();
+        $encounters = auth()->user()->encounters()->select(['id', 'name'])->orderBy('name')->get();
 
         return Inertia::render('Encounters/Show', compact(['encounter', 'encounters']));
     }

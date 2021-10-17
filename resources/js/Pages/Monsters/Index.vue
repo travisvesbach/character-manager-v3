@@ -65,7 +65,7 @@
                                         <jet-dropdown-link :href="route('monsters.edit', monster.id)">
                                             Edit Monster
                                         </jet-dropdown-link>
-                                        <jet-dropdown-link @click.native="confim_delete_monster = monster" as="button">
+                                        <jet-dropdown-link @click.native="delete_monster = monster" as="button">
                                             Delete Monster
                                         </jet-dropdown-link>
                                     </div>
@@ -78,7 +78,7 @@
         </div>
 
         <!-- delete confirmation -->
-        <jet-confirmation-modal :show="confim_delete_monster" @close="confim_delete_monster = false">
+        <jet-confirmation-modal :show="delete_monster" @close="delete_monster = false">
             <template #title>
                 Delete Monster
             </template>
@@ -88,10 +88,10 @@
             </template>
 
             <template #footer>
-                <jet-secondary-button @click.native="confim_delete_monster = false">
+                <jet-secondary-button @click.native="delete_monster = false">
                     Cancel
                 </jet-secondary-button>
-                <jet-danger-button class="ml-2" @click.native="deleteMonster" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <jet-danger-button class="ml-2" @click.native="deleteMonster">
                     Delete Monster
                 </jet-danger-button>
             </template>
@@ -130,10 +130,7 @@
         data() {
             return {
                 search: null,
-                confim_delete_monster: false,
-                form: this.$inertia.form({
-                    id: null,
-                }),
+                delete_monster: false,
             }
         },
         computed: {
@@ -168,9 +165,11 @@
                 });
             },
             deleteMonster() {
-                this.form.id = this.confim_delete_monster.id;
-                this.form.delete(route('monsters.destroy', this.form.id));
-                this.confim_delete_monster = false;
+                let form = this.$inertia.form({
+                    id: this.delete_monster.id,
+                });
+                form.delete(route('monsters.destroy', form.id));
+                this.delete_monster = false;
             },
         }
     }

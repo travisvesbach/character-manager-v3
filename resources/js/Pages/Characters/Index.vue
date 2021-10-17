@@ -69,7 +69,7 @@
                                         <jet-dropdown-link :href="route('characters.edit', character.id)">
                                             Edit Character
                                         </jet-dropdown-link>
-                                        <jet-dropdown-link @click.native="confim_delete_character = character" as="button">
+                                        <jet-dropdown-link @click.native="delete_character = character" as="button">
                                             Delete Character
                                         </jet-dropdown-link>
                                     </div>
@@ -82,7 +82,7 @@
         </div>
 
         <!-- delete confirmation -->
-        <jet-confirmation-modal :show="confim_delete_character" @close="confim_delete_character = false">
+        <jet-confirmation-modal :show="delete_character" @close="delete_character = false">
             <template #title>
                 Delete Character
             </template>
@@ -92,10 +92,10 @@
             </template>
 
             <template #footer>
-                <jet-secondary-button @click.native="confim_delete_character = false">
+                <jet-secondary-button @click.native="delete_character = false">
                     Cancel
                 </jet-secondary-button>
-                <jet-danger-button class="ml-2" @click.native="deletecharacter" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <jet-danger-button class="ml-2" @click.native="deletecharacter">
                     Delete Character
                 </jet-danger-button>
             </template>
@@ -139,10 +139,7 @@
             return {
                 search: null,
                 show_archived: false,
-                confim_delete_character: false,
-                form: this.$inertia.form({
-                    id: null,
-                }),
+                delete_character: false,
             }
         },
         computed: {
@@ -184,19 +181,21 @@
                 });
             },
             deleteCharacter() {
-                this.form.id = this.confim_delete_character.id;
-                this.form.delete(route('characters.destroy', this.form.id));
-                this.confim_delete_character = false;
-                this.form.id = null;
+                let form = this.$inertia.form({
+                    id: this.delete_character.id,
+                });
+                form.delete(route('characters.destroy', form.id));
+                this.delete_character = false;
             },
             toggleArchive(character) {
-                this.form.id = character.id;
+                let form = this.$inertia.form({
+                    id: character.id,
+                });
                 if(!character.archive_date) {
-                    this.form.patch(route('characters.archive', character.id));
+                    form.patch(route('characters.archive', character.id));
                 } else {
-                    this.form.patch(route('characters.unarchive', character.id));
+                    form.patch(route('characters.unarchive', character.id));
                 }
-                this.form.id = null;
             }
         }
     }

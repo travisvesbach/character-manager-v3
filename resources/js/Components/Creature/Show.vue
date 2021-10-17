@@ -11,7 +11,7 @@
 
                 <actions class="flex-grow" :creature="creature" :type="type"/>
 
-                <dice :creature="creature" :type="type" v-if="creature.show_dice"/>
+                <dice :creature="creature" :disabled="disabled" v-if="creature.show_dice"/>
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-6">
@@ -35,7 +35,7 @@
     import Modifiers from '@/Components/Creature/Modifiers'
     import Actions from '@/Components/Creature/Actions'
     import Notepad from '@/Components/Creature/Notepad'
-    import Dice from '@/Components/Creature/Dice'
+    import Dice from '@/Components/Dice'
     import AdditionalStats from '@/Components/Creature/AdditionalStats'
 
     import { CreatureComponent } from '@/Mixins/CreatureComponent';
