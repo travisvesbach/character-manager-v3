@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             CharacterSeeder::class,
             MonsterSeeder::class,
             EncounterSeeder::class,
+            EncounterMonsterSeeder::class,
         ]);
     }
 }

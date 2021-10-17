@@ -87,4 +87,8 @@ class User extends Authenticatable
     public function encounters() {
         return $this->hasMany(Encounter::class)->orderBy('name');
     }
+
+    public function encounterMonsters() {
+        return $this->hasMany(EncounterMonsters::class)->orderBy('name');
+    }
 }

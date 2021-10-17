@@ -36,6 +36,8 @@ class EncountersController extends Controller
         $encounters = auth()->user()->encounters()->select(['id', 'name'])->orderBy('name')->get();
         $monsters = Monster::userOrPublic(auth()->user()->id)->orderBy('name')->select(['id', 'name', 'user_id', 'type', 'size', 'challenge_rating', 'public'])->get()->load(['user']);
 
+        $encounter->load(['monsters']);
+
         return Inertia::render('Encounters/Show', compact(['encounter', 'encounters', 'monsters']));
     }
 

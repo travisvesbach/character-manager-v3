@@ -11,6 +11,7 @@ use App\Http\Controllers\ModifiersController;
 use App\Http\Controllers\ActionsController;
 use App\Http\Controllers\MonstersController;
 use App\Http\Controllers\EncountersController;
+use App\Http\Controllers\EncounterMonstersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,4 +70,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::delete('/actions/{action}', [ActionsController::class, 'destroy'])->name('actions.destroy');
 
     Route::resource('encounters', EncountersController::class);
+
+    Route::post('/encounters/{encounter}', [EncounterMonstersController::class, 'store'])->name('encounter_monsters.store');
+    Route::get('/encounters/{encounter}/monster/{encounter_monster}', [EncounterMonstersController::class, 'show'])->name('encounter_monsters.show');
+    Route::patch('/encounters/{encounter}/monster/{encounter_monster}', [EncounterMonstersController::class, 'update'])->name('encounter_monsters.update');
+    Route::delete('/encounters/{encounter}/monster/{encounter_monster}', [EncounterMonstersController::class, 'destroy'])->name('encounter_monsters.destroy');
 });

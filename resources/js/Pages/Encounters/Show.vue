@@ -43,6 +43,11 @@
 
             <grid-section class="col-span-3">
                 encounter monsters here
+
+                <div v-for="monster in encounter.monsters">
+                    {{ monster.name }}
+                </div>
+
             </grid-section>
 
             <div class="col-span-1">

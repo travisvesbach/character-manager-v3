@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\EncounterMonster;
 
 class Encounter extends Model
 {
@@ -29,5 +30,18 @@ class Encounter extends Model
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function monsters() {
+        return $this->hasMany(EncounterMonster::class);
+    }
+
+    public function nextAvailableWeight() {
+        $monster = $this->monsters()->orderBy('weight', 'desc')->first();
+        if($monster && $monster->weight) {
+            return $monster->weight + 1;
+        } else {
+            return 1;
+        }
     }
 }
