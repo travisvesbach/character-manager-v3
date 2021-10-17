@@ -3,7 +3,7 @@
         <div class="grid sm:grid-cols-2 md:grid-cols-4">
             <div class="col-span-1">
                 <div class="hover-trigger flex items-center">
-                    <h2 class="text-4xl heading-color">{{ creature.name }}</h2>
+                    <h2 class="text-4xl heading-color">{{ creatureName }}</h2>
                     <jet-dropdown align="left" width="48" class="hover-target ml-1">
                         <template #trigger>
                             <button class="flex link link-color">
@@ -31,13 +31,13 @@
                                     {{ creature.show_additional_stats ? 'Hide' : 'Show' }} Additional Stats
                                 </jet-dropdown-link>
                                 <jet-dropdown-link @click.native="clone_creature = true" as="button" v-if="type == 'Monster'">
-                                    Clone {{ type }}
+                                    Clone {{ creatureName }}
                                 </jet-dropdown-link>
-                                <jet-dropdown-link :href="route(type.toLowerCase() + 's.edit', creature.id)" v-if="ownerOrAdmin">
-                                    Edit {{ type }}
+                                <jet-dropdown-link :href="getRoute('edit')" v-if="ownerOrAdmin">
+                                    Edit {{ creatureName }}
                                 </jet-dropdown-link>
                                 <jet-dropdown-link @click.native="delete_creature = true" as="button" v-if="ownerOrAdmin">
-                                    Delete {{ type }}
+                                    Delete {{ creatureName }}
                                 </jet-dropdown-link>
                             </div>
                         </template>
@@ -46,7 +46,7 @@
                 <span class="ml-1 text-xs text-secondary-color" v-if="type == 'Character'">
                     Level {{ creature.level }} {{ creature.race }} {{ creature.class }}
                 </span>
-                <span class="ml-1 text-xs text-secondary-color" v-if="type == 'Monster'">
+                <span class="ml-1 text-xs text-secondary-color" v-if="type == 'Monster' || type == 'Encounter Monster'">
                     {{ creature.size }} {{ creature.type }}, {{ creature.alignment }} (CR {{ creature.challenge_rating }})
                 </span>
             </div>
@@ -83,11 +83,11 @@
         <!-- delete confirmation -->
         <jet-confirmation-modal :show="delete_creature" @close="delete_creature = false">
             <template #title>
-                Delete {{ type }}
+                Delete {{ creatureName }}
             </template>
 
             <template #content>
-                Are you sure you want to delete this {{ type.toLowerCase() }}?
+                Are you sure you want to delete {{ creatureName }}?
             </template>
 
             <template #footer>
@@ -95,7 +95,7 @@
                     Cancel
                 </jet-secondary-button>
                 <jet-danger-button class="ml-2" @click.native="deleteCreature" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Delete {{ type }}
+                    Delete {{ creatureName }}
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>
@@ -103,7 +103,7 @@
         <!-- clone -->
         <jet-dialog-modal type="form" :show="clone_creature" @close="closeClone" @submitted="cloneCreature">
             <template #header>
-                Clone {{ type }}
+                Clone {{ creatureName }}
             </template>
 
             <template #content>
@@ -118,7 +118,7 @@
                     Cancel
                 </jet-secondary-button>
                 <jet-button class="ml-2" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Clone {{ type }}
+                    Clone {{ creatureName }}
                 </jet-button>
             </template>
         </jet-dialog-modal>
@@ -169,7 +169,7 @@
         methods: {
             roll(item, modifier) {
                 let result =  dice.roll();
-                let message = this.creature.name + ':<br>' +
+                let message = this.creatureName + ':<br>' +
                     item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
                 this.flash(message, 'primary');
             },
@@ -197,7 +197,7 @@
                     let output = [];
                     let result = dice.roll(this.creature.hit_dice[dice_index].size);
                     let total = result + this.creature.constitution_mod;
-                    output.push(this.creature.name + ' rolled a hit dice:');
+                    output.push(this.creatureName + ' rolled a hit dice:');
                     if(this.creature.hp_current < 0) {
                         output.push('HP is less than 0; setting HP to 0.');
                         this.creature.hp_current = 0;
@@ -234,10 +234,10 @@
                 this.updateCreature();
             },
             deleteCreature() {
-                this.form.delete(route(this.type.toLowerCase() + 's.destroy', this.form.id));
+                this.form.delete(this.getRoute('destroy'));
             },
             cloneCreature() {
-                this.form.post(route(this.type.toLowerCase() + 's.clone', this.creature.id));
+                this.form.post(this.getRoute('clone'));
                 this.closeClone();
             },
             closeClone() {

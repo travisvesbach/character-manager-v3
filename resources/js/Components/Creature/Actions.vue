@@ -398,7 +398,7 @@
             roll(action, advantage = null) {
                 let critical = null;
                 let output_array = [];
-                output_array.push(this.creature.name + ':<br>' + action.name + (advantage ? ' with ' + advantage : '') + ':');
+                output_array.push(this.creatureName + ':<br>' + action.name + (advantage ? ' with ' + advantage : '') + ':');
 
                 // get attack roll(s)
                 if(action.attack) {

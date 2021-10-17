@@ -45,7 +45,7 @@
                 encounter monsters here
 
                 <div v-for="monster in encounter.monsters">
-                    {{ monster.display_name }}
+                    <simple-show :creature="monster" type="Encounter Monster"/>
                 </div>
 
             </grid-section>
@@ -98,6 +98,7 @@
     import GridSection from '@/Components/GridSection';
     import Dice from '@/Components/Dice';
     import AddMonsters from '@/Components/Encounter/AddMonsters';
+    import SimpleShow from '@/Components/Creature/SimpleShow';
 
     export default {
         props: ['encounter', 'encounters', 'monsters'],
@@ -115,6 +116,7 @@
             GridSection,
             Dice,
             AddMonsters,
+            SimpleShow,
         },
         data() {
             return {

@@ -20664,7 +20664,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var advantage = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var critical = null;
       var output_array = [];
-      output_array.push(this.creature.name + ':<br>' + action.name + (advantage ? ' with ' + advantage : '') + ':'); // get attack roll(s)
+      output_array.push(this.creatureName + ':<br>' + action.name + (advantage ? ' with ' + advantage : '') + ':'); // get attack roll(s)
 
       if (action.attack) {
         var attack_rolls = [];
@@ -21755,7 +21755,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     roll: function roll(item, modifier) {
       var result = dice.roll();
-      var message = this.creature.name + ':<br>' + item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
+      var message = this.creatureName + ':<br>' + item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
       this.flash(message, 'primary');
     },
     adjustCurrentHp: function adjustCurrentHp() {
@@ -21784,7 +21784,7 @@ __webpack_require__.r(__webpack_exports__);
         var output = [];
         var result = dice.roll(this.creature.hit_dice[dice_index].size);
         var total = result + this.creature.constitution_mod;
-        output.push(this.creature.name + ' rolled a hit dice:');
+        output.push(this.creatureName + ' rolled a hit dice:');
 
         if (this.creature.hp_current < 0) {
           output.push('HP is less than 0; setting HP to 0.');
@@ -21825,10 +21825,10 @@ __webpack_require__.r(__webpack_exports__);
       this.updateCreature();
     },
     deleteCreature: function deleteCreature() {
-      this.form["delete"](route(this.type.toLowerCase() + 's.destroy', this.form.id));
+      this.form["delete"](this.getRoute('destroy'));
     },
     cloneCreature: function cloneCreature() {
-      this.form.post(route(this.type.toLowerCase() + 's.clone', this.creature.id));
+      this.form.post(this.getRoute('clone'));
       this.closeClone();
     },
     closeClone: function closeClone() {
@@ -22213,7 +22213,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     rollDice: function rollDice(resource) {
       var total = 0;
-      var message = this.creature.name + ':<br>';
+      var message = this.creatureName + ':<br>';
       message += resource.name + ':<br>';
       var loop_total = 0;
 
@@ -22331,162 +22331,193 @@ __webpack_require__.r(__webpack_exports__);
             break;
         }
       }
-    },
-    updateCreature: function updateCreature() {
-      var _this$creature$no_ale;
-
-      var form = this.$inertia.form({
-        id: this.creature.id,
-        name: this.creature.name,
-        speed: this.creature.speed,
-        hp_max: this.creature.hp_max,
-        hp_current: this.creature.hp_current,
-        hp_temp: this.creature.hp_temp,
-        hit_dice: this.creature.hit_dice,
-        ac: this.creature.ac,
-        ac_source: this.creature.ac_source,
-        initiative: this.creature.initiative,
-        strength: this.creature.strength,
-        strength_save: this.creature.strength_save,
-        strength_mod: this.creature.strength_mod,
-        strength_save_proficiency: this.creature.strength_save_proficiency,
-        athletics: this.creature.athletics,
-        athletics_proficiency: this.creature.athletics_proficiency,
-        athletics_expertise: this.creature.athletics_expertise,
-        dexterity: this.creature.dexterity,
-        dexterity_save: this.creature.dexterity_save,
-        dexterity_mod: this.creature.dexterity_mod,
-        dexterity_save_proficiency: this.creature.dexterity_save_proficiency,
-        acrobatics: this.creature.acrobatics,
-        acrobatics_proficiency: this.creature.acrobatics_proficiency,
-        acrobatics_expertise: this.creature.acrobatics_expertise,
-        sleight_of_hand: this.creature.sleight_of_hand,
-        sleight_of_hand_proficiency: this.creature.sleight_of_hand_proficiency,
-        sleight_of_hand_expertise: this.creature.sleight_of_hand_expertise,
-        stealth: this.creature.stealth,
-        stealth_proficiency: this.creature.stealth_proficiency,
-        stealth_expertise: this.creature.stealth_expertise,
-        constitution: this.creature.constitution,
-        constitution_save: this.creature.constitution_save,
-        constitution_mod: this.creature.constitution_mod,
-        constitution_save_proficiency: this.creature.constitution_save_proficiency,
-        intelligence: this.creature.intelligence,
-        intelligence_save: this.creature.intelligence_save,
-        intelligence_mod: this.creature.intelligence_mod,
-        intelligence_save_proficiency: this.creature.intelligence_save_proficiency,
-        arcana: this.creature.arcana,
-        arcana_proficiency: this.creature.arcana_proficiency,
-        arcana_expertise: this.creature.arcana_expertise,
-        history: this.creature.history,
-        history_proficiency: this.creature.history_proficiency,
-        history_expertise: this.creature.history_expertise,
-        investigation: this.creature.investigation,
-        investigation_proficiency: this.creature.investigation_proficiency,
-        investigation_expertise: this.creature.investigation_expertise,
-        nature: this.creature.nature,
-        nature_proficiency: this.creature.nature_proficiency,
-        nature_expertise: this.creature.nature_expertise,
-        religion: this.creature.religion,
-        religion_proficiency: this.creature.religion_proficiency,
-        religion_expertise: this.creature.religion_expertise,
-        wisdom: this.creature.wisdom,
-        wisdom_save: this.creature.wisdom_save,
-        wisdom_mod: this.creature.wisdom_mod,
-        wisdom_save_proficiency: this.creature.wisdom_save_proficiency,
-        animal_handling: this.creature.animal_handling,
-        animal_handling_proficiency: this.creature.animal_handling_proficiency,
-        animal_handling_expertise: this.creature.animal_handling_expertise,
-        insight: this.creature.insight,
-        insight_proficiency: this.creature.insight_proficiency,
-        insight_expertise: this.creature.insight_expertise,
-        medicine: this.creature.medicine,
-        medicine_proficiency: this.creature.medicine_proficiency,
-        medicine_expertise: this.creature.medicine_expertise,
-        perception: this.creature.perception,
-        perception_proficiency: this.creature.perception_proficiency,
-        perception_expertise: this.creature.perception_expertise,
-        survival: this.creature.survival,
-        survival_proficiency: this.creature.survival_proficiency,
-        survival_expertise: this.creature.survival_expertise,
-        charisma: this.creature.charisma,
-        charisma_save: this.creature.charisma_save,
-        charisma_mod: this.creature.charisma_mod,
-        charisma_save_proficiency: this.creature.charisma_save_proficiency,
-        deception: this.creature.deception,
-        deception_proficiency: this.creature.deception_proficiency,
-        deception_expertise: this.creature.deception_expertise,
-        intimidation: this.creature.intimidation,
-        intimidation_proficiency: this.creature.intimidation_proficiency,
-        intimidation_expertise: this.creature.intimidation_expertise,
-        performance: this.creature.performance,
-        performance_proficiency: this.creature.performance_proficiency,
-        performance_expertise: this.creature.performance_expertise,
-        persuasion: this.creature.persuasion,
-        persuasion_proficiency: this.creature.persuasion_proficiency,
-        persuasion_expertise: this.creature.persuasion_expertise,
-        skills_auto_filled: this.creature.skills_auto_filled,
-        special_skill_modifiers: this.creature.special_skill_modifiers,
-        spellcaster: this.creature.spellcaster,
-        spell_type: this.creature.spell_type,
-        spell_dc: this.creature.spell_dc,
-        spell_level: this.creature.spell_level,
-        spell_points_max: this.creature.spell_points_max,
-        spell_points_current: this.creature.spell_points_current,
-        spell_recover: this.creature.spell_recover,
-        spell_list_type: this.creature.spell_list_type,
-        spell_slots_1: this.creature.spell_slots_1,
-        spell_slots_2: this.creature.spell_slots_2,
-        spell_slots_3: this.creature.spell_slots_3,
-        spell_slots_4: this.creature.spell_slots_4,
-        spell_slots_5: this.creature.spell_slots_5,
-        spell_slots_6: this.creature.spell_slots_6,
-        spell_slots_7: this.creature.spell_slots_7,
-        spell_slots_8: this.creature.spell_slots_8,
-        spell_slots_9: this.creature.spell_slots_9,
-        spell_list_0: this.creature.spell_list_0,
-        spell_list_1: this.creature.spell_list_1,
-        spell_list_2: this.creature.spell_list_2,
-        spell_list_3: this.creature.spell_list_3,
-        spell_list_4: this.creature.spell_list_4,
-        spell_list_5: this.creature.spell_list_5,
-        spell_list_6: this.creature.spell_list_6,
-        spell_list_7: this.creature.spell_list_7,
-        spell_list_8: this.creature.spell_list_8,
-        spell_list_9: this.creature.spell_list_9,
-        spell_prepare_count: this.creature.spell_prepare_count,
-        spell_prepared: this.creature.spell_prepared,
-        notes: this.creature.notes,
-        show_modifiers: this.creature.show_modifiers,
-        show_resources: this.creature.show_resources,
-        show_notes: this.creature.show_notes,
-        show_dice: this.creature.show_dice,
-        show_additional_stats: this.creature.show_additional_stats,
-        damage_vulnerabilities: this.creature.damage_vulnerabilities,
-        damage_resistances: this.creature.damage_resistances,
-        damage_immunities: this.creature.damage_immunities,
-        condition_immunities: this.creature.condition_immunities,
-        languages: this.creature.languages,
-        senses: this.creature.senses,
-        no_alert: (_this$creature$no_ale = this.creature.no_alert) !== null && _this$creature$no_ale !== void 0 ? _this$creature$no_ale : false,
-        // character fields
-        race: this.type == 'Character' ? this.creature.race : null,
-        "class": this.type == 'Character' ? this.creature["class"] : null,
-        level: this.type == 'Character' ? this.creature.level : null,
-        // monster fields
-        size: this.type == 'Monster' ? this.creature.size : null,
-        type: this.type == 'Monster' ? this.creature.type : null,
-        alignment: this.type == 'Monster' ? this.creature.alignment : null,
-        challenge_rating: this.type == 'Monster' ? this.creature.challenge_rating : null,
-        experience: this.type == 'Monster' ? this.creature.experience : null,
-        source: this.type == 'Monster' ? this.creature.source : null,
-        "public": this.type == 'Monster' ? this.creature["public"] : null
-      });
-      form.patch(route(this.type.toLowerCase() + 's.update', form.id), {
-        preserveState: true // preserveScroll: true,
-
-      });
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleHeading.vue?vue&type=script&lang=js":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleHeading.vue?vue&type=script&lang=js ***!
+  \****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
+/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
+/* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
+/* harmony import */ var _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/DangerButton */ "./resources/js/Jetstream/DangerButton.vue");
+/* harmony import */ var _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/ConfirmationModal */ "./resources/js/Jetstream/ConfirmationModal.vue");
+/* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
+/* harmony import */ var _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Mixins/CreatureComponent */ "./resources/js/Mixins/CreatureComponent.js");
+
+
+
+
+
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    JetInput: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_0__["default"],
+    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_1__["default"],
+    JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_2__["default"],
+    JetDangerButton: _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_3__["default"],
+    JetConfirmationModal: _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__["default"],
+    JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_5__["default"],
+    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_6__.Link
+  },
+  data: function data() {
+    return {
+      delete_creature: false,
+      hp_calculator: null
+    };
+  },
+  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_7__.Flash, _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_8__.CreatureComponent],
+  methods: {
+    roll: function roll(item, modifier) {
+      var result = dice.roll();
+      var message = this.creatureName + ':<br>' + item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
+      this.flash(message, 'primary');
+    },
+    adjustHp: function adjustHp() {
+      var calc_amount = this.hp_calculator;
+      var update = false;
+
+      if (Number.isInteger(calc_amount) && calc_amount > 0) {
+        if (Number.isInteger(this.creature.hp_current) && Number.isInteger(calc_amount)) {
+          this.creature.hp_current += calc_amount;
+
+          if (this.creature.hp_current > this.creature.hp_max) {
+            calc_amount = this.creature.hp_current - this.creature.hp_max;
+            this.creature.hp_current = this.creature.hp_max;
+          } else {
+            calc_amount = 0;
+          }
+        }
+
+        if (calc_amount > 0) {
+          this.creature.hp_temp += calc_amount;
+        }
+
+        update = true;
+      } else if (Number.isInteger(calc_amount) && calc_amount < 0) {
+        if (Number.isInteger(this.creature.hp_temp) && this.creature.hp_temp != 0 && Number.isInteger(this.hp_calculator)) {
+          this.creature.hp_temp += calc_amount;
+
+          if (this.creature.hp_temp < 0) {
+            calc_amount = this.creature.hp_temp;
+            this.creature.hp_temp = 0;
+          } else {
+            calc_amount = 0;
+          }
+        }
+
+        if (Number.isInteger(this.creature.hp_current) && Number.isInteger(calc_amount)) {
+          this.creature.hp_current += calc_amount;
+        }
+
+        update = true;
+      }
+
+      if (update) {
+        this.updateCreature(true);
+      }
+
+      this.hp_calculator = null;
+    },
+    rollHitDice: function rollHitDice(dice_index) {
+      if (this.creature.hp_current >= this.creature.hp_max) {
+        this.flash('Already at full HP', 'danger');
+      } else if (this.creature.hit_dice[dice_index].current == 0) {
+        this.flash('Out of Hit Dice', 'danger');
+      } else {
+        this.creature.hit_dice[dice_index].current--;
+        var output = [];
+        var result = dice.roll(this.creature.hit_dice[dice_index].size);
+        var total = result + this.creature.constitution_mod;
+        output.push(this.creatureName + ' rolled a hit dice:');
+
+        if (this.creature.hp_current < 0) {
+          output.push('HP is less than 0; setting HP to 0.');
+          this.creature.hp_current = 0;
+        }
+
+        output.push('Previous: ' + this.creature.hp_current + ' HP');
+        output.push('Recovered: [' + result + '] + ' + this.creature.constitution_mod + ' = ' + total + ' HP');
+        this.creature.hp_current = this.creature.hp_current + total;
+
+        if (this.creature.hp_current > this.creature.hp_max) {
+          this.creature.hp_current = this.creature.hp_max;
+        }
+
+        output.push('New Total: ' + this.creature.hp_current + ' HP');
+        this.flash(output.join('<br>'), 'primary');
+        this.updateCreature(true);
+      }
+    },
+    deleteCreature: function deleteCreature() {
+      this.form["delete"](route(this.type.toLowerCase() + 's.destroy', this.form.id));
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleShow.vue?vue&type=script&lang=js":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleShow.vue?vue&type=script&lang=js ***!
+  \*************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Components_Creature_SimpleHeading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/Creature/SimpleHeading */ "./resources/js/Components/Creature/SimpleHeading.vue");
+/* harmony import */ var _Components_Creature_Stats__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/Creature/Stats */ "./resources/js/Components/Creature/Stats.vue");
+/* harmony import */ var _Components_Creature_Spells__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/Creature/Spells */ "./resources/js/Components/Creature/Spells.vue");
+/* harmony import */ var _Components_Creature_Resources__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/Creature/Resources */ "./resources/js/Components/Creature/Resources.vue");
+/* harmony import */ var _Components_Creature_Modifiers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Components/Creature/Modifiers */ "./resources/js/Components/Creature/Modifiers.vue");
+/* harmony import */ var _Components_Creature_Actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Components/Creature/Actions */ "./resources/js/Components/Creature/Actions.vue");
+/* harmony import */ var _Components_Creature_Notepad__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Components/Creature/Notepad */ "./resources/js/Components/Creature/Notepad.vue");
+/* harmony import */ var _Components_Dice__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Components/Dice */ "./resources/js/Components/Dice.vue");
+/* harmony import */ var _Components_Creature_AdditionalStats__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/Creature/AdditionalStats */ "./resources/js/Components/Creature/AdditionalStats.vue");
+/* harmony import */ var _Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Mixins/CreatureComponent */ "./resources/js/Mixins/CreatureComponent.js");
+
+
+
+
+
+
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    SimpleHeading: _Components_Creature_SimpleHeading__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Stats: _Components_Creature_Stats__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Spells: _Components_Creature_Spells__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Resources: _Components_Creature_Resources__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Modifiers: _Components_Creature_Modifiers__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Actions: _Components_Creature_Actions__WEBPACK_IMPORTED_MODULE_5__["default"],
+    Notepad: _Components_Creature_Notepad__WEBPACK_IMPORTED_MODULE_6__["default"],
+    Dice: _Components_Dice__WEBPACK_IMPORTED_MODULE_7__["default"],
+    AdditionalStats: _Components_Creature_AdditionalStats__WEBPACK_IMPORTED_MODULE_8__["default"]
+  },
+  mixins: [_Mixins_CreatureComponent__WEBPACK_IMPORTED_MODULE_9__.CreatureComponent],
+  methods: {}
 });
 
 /***/ }),
@@ -22682,7 +22713,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         return value.enabled && value[type];
       });
       var total = dice.roll();
-      var message = this.creature.name + ':<br>' + item + ': [' + total + ']' + (modifier ? ' + ' + modifier : '');
+      var message = this.creatureName + ':<br>' + item + ': [' + total + ']' + (modifier ? ' + ' + modifier : '');
       total += modifier;
 
       var _iterator = _createForOfIteratorHelper(modifiers),
@@ -24937,6 +24968,31 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/EncounterMonsters/Show.vue?vue&type=script&lang=js":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/EncounterMonsters/Show.vue?vue&type=script&lang=js ***!
+  \***********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Components_Creature_Show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/Creature/Show */ "./resources/js/Components/Creature/Show.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['encounter_monster'],
+  components: {
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Show: _Components_Creature_Show__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Encounters/Edit.vue?vue&type=script&lang=js":
 /*!****************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Encounters/Edit.vue?vue&type=script&lang=js ***!
@@ -25132,6 +25188,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
 /* harmony import */ var _Components_Dice__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Components/Dice */ "./resources/js/Components/Dice.vue");
 /* harmony import */ var _Components_Encounter_AddMonsters__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/Components/Encounter/AddMonsters */ "./resources/js/Components/Encounter/AddMonsters.vue");
+/* harmony import */ var _Components_Creature_SimpleShow__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @/Components/Creature/SimpleShow */ "./resources/js/Components/Creature/SimpleShow.vue");
+
 
 
 
@@ -25162,7 +25220,8 @@ __webpack_require__.r(__webpack_exports__);
     JetConfirmationModal: _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_8__["default"],
     GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_12__["default"],
     Dice: _Components_Dice__WEBPACK_IMPORTED_MODULE_13__["default"],
-    AddMonsters: _Components_Encounter_AddMonsters__WEBPACK_IMPORTED_MODULE_14__["default"]
+    AddMonsters: _Components_Encounter_AddMonsters__WEBPACK_IMPORTED_MODULE_14__["default"],
+    SimpleShow: _Components_Creature_SimpleShow__WEBPACK_IMPORTED_MODULE_15__["default"]
   },
   data: function data() {
     return {
@@ -29301,7 +29360,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_jet_dialog_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-dialog-modal");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.name), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_dropdown, {
     align: "left",
@@ -29390,7 +29449,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         as: "button"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Clone " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.type), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Clone " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
           /* TEXT */
           )];
         }),
@@ -29399,10 +29458,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.ownerOrAdmin ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_dropdown_link, {
         key: 6,
-        href: _ctx.route(_ctx.type.toLowerCase() + 's.edit', _ctx.creature.id)
+        href: _ctx.getRoute('edit')
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Edit " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.type), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Edit " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
           /* TEXT */
           )];
         }),
@@ -29419,7 +29478,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         as: "button"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.type), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
           /* TEXT */
           )];
         }),
@@ -29433,7 +29492,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   })]), _ctx.type == 'Character' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_7, " Level " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.level) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.race) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature["class"]), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.type == 'Monster' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.size) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.type) + ", " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.alignment) + " (CR " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.challenge_rating) + ") ", 1
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.type == 'Monster' || _ctx.type == 'Encounter Monster' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.size) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.type) + ", " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.alignment) + " (CR " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.challenge_rating) + ") ", 1
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("AC: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.ac) + " ", 1
   /* TEXT */
@@ -29528,12 +29587,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, {
     title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.type), 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
       /* TEXT */
       )];
     }),
     content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to delete this " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.type.toLowerCase()) + "? ", 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName) + "? ", 1
       /* TEXT */
       )];
     }),
@@ -29557,7 +29616,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         disabled: $data.form.processing
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.type), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
           /* TEXT */
           )];
         }),
@@ -29580,7 +29639,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onSubmitted: $options.cloneCreature
   }, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Clone " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.type), 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Clone " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
       /* TEXT */
       )];
     }),
@@ -29625,7 +29684,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         disabled: $data.form.processing
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Clone " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.type), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Clone " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
           /* TEXT */
           )];
         }),
@@ -30700,11 +30759,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_heading, {
     creature: _ctx.creature,
-    type: _ctx.type,
-    onUpdated: $options.updateCreature
+    type: _ctx.type
   }, null, 8
   /* PROPS */
-  , ["creature", "type", "onUpdated"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_stats, {
+  , ["creature", "type"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_stats, {
     creature: _ctx.creature,
     type: _ctx.type
   }, null, 8
@@ -30745,19 +30803,211 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 2,
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["lg:col-span-3 lg:col-span-3", $options.getWidth('spellcaster')]),
     creature: _ctx.creature,
-    type: _ctx.type,
-    onUpdated: $options.updateCreature
+    type: _ctx.type
   }, null, 8
   /* PROPS */
-  , ["class", "creature", "type", "onUpdated"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.creature.show_notes ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_notepad, {
+  , ["class", "creature", "type"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.creature.show_notes ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_notepad, {
     key: 3,
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["lg:col-span-3", $options.getWidth('notes')]),
     creature: _ctx.creature,
-    type: _ctx.type,
-    onUpdated: $options.updateCreature
+    type: _ctx.type
   }, null, 8
   /* PROPS */
-  , ["class", "creature", "type", "onUpdated"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]);
+  , ["class", "creature", "type"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleHeading.vue?vue&type=template&id=4fbcb3ea":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleHeading.vue?vue&type=template&id=4fbcb3ea ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "px-5 py-2"
+};
+var _hoisted_2 = ["title"];
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Initiative ");
+
+var _hoisted_4 = {
+  "class": "mx-2"
+};
+var _hoisted_5 = {
+  "class": "inline-block ml-auto"
+};
+var _hoisted_6 = ["title"];
+var _hoisted_7 = {
+  key: 0
+};
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
+
+  var _component_jet_secondary_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-secondary-button");
+
+  var _component_jet_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-input");
+
+  var _component_jet_danger_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-danger-button");
+
+  var _component_jet_confirmation_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-confirmation-modal");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+    href: _ctx.creature.path,
+    "class": "text-xl link-color",
+    title: "Show"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creatureName), 1
+      /* TEXT */
+      )];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    "class": "text-xs ml-2",
+    title: _ctx.creature.ac_source
+  }, "AC: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.ac), 9
+  /* TEXT, PROPS */
+  , _hoisted_2)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $options.roll('Initiative', _ctx.creature.initiative);
+    }),
+    size: "xs",
+    disabled: _ctx.disabled
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_3];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["disabled"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_4, "Speed: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.speed), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    title: 'Max HP: ' + _ctx.creature.hp_max + (_ctx.creature.hp_temp > 0 ? ' Temp HP: ' + _ctx.creature.hp_temp : '')
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.hp_current + _ctx.creature.hp_temp) + " HP ", 1
+  /* TEXT */
+  ), _ctx.creature.hp_temp > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_7, "(T)")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8
+  /* PROPS */
+  , _hoisted_6), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+    type: "number",
+    "class": "w-10 text-sm p-1 ml-1",
+    onKeyup: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+      return $options.adjustHp();
+    }, ["enter"])),
+    modelValue: $data.hp_calculator,
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.hp_calculator = $event;
+    }),
+    modelModifiers: {
+      number: true
+    }
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" delete confirmation "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_confirmation_modal, {
+    show: $data.delete_creature,
+    onClose: _cache[4] || (_cache[4] = function ($event) {
+      return $data.delete_creature = false;
+    })
+  }, {
+    title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.type), 1
+      /* TEXT */
+      )];
+    }),
+    content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to delete this " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.type.toLowerCase()) + "? ", 1
+      /* TEXT */
+      )];
+    }),
+    footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
+        onClick: _cache[3] || (_cache[3] = function ($event) {
+          return $data.delete_creature = false;
+        })
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_8];
+        }),
+        _: 1
+        /* STABLE */
+
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_danger_button, {
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["ml-2", {
+          'opacity-25': _ctx.form.processing
+        }]),
+        onClick: $options.deleteCreature,
+        disabled: _ctx.form.processing
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.type), 1
+          /* TEXT */
+          )];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["onClick", "class", "disabled"])];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["show"])]);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleShow.vue?vue&type=template&id=702c7e44":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleShow.vue?vue&type=template&id=702c7e44 ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "grid lg:grid-cols-2"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "flex flex-col"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <additional-stats :creature=\"creature\" :type=\"type\" v-if=\"creature.show_additional_stats\"/>\n\n                <actions class=\"flex-grow\" :creature=\"creature\" :type=\"type\"/>\n\n                <dice :creature=\"creature\" :disabled=\"disabled\" v-if=\"creature.show_dice\"/> ")])], -1
+/* HOISTED */
+);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_simple_heading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("simple-heading");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_simple_heading, {
+    creature: _ctx.creature,
+    type: _ctx.type
+  }, null, 8
+  /* PROPS */
+  , ["creature", "type"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <stats :creature=\"creature\" :type=\"type\"/> "), _hoisted_1]);
 }
 
 /***/ }),
@@ -35698,6 +35948,54 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/EncounterMonsters/Show.vue?vue&type=template&id=3cb14209":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/EncounterMonsters/Show.vue?vue&type=template&id=3cb14209 ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _$props$encounter_mon;
+
+  var _component_show = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("show", true);
+
+  var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, {
+    title: (_$props$encounter_mon = $props.encounter_monster.display_name) !== null && _$props$encounter_mon !== void 0 ? _$props$encounter_mon : $props.encounter_monster.name
+  }, {
+    header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      var _$props$encounter_mon2;
+
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$props$encounter_mon2 = $props.encounter_monster.display_name) !== null && _$props$encounter_mon2 !== void 0 ? _$props$encounter_mon2 : $props.encounter_monster.name), 1
+      /* TEXT */
+      )];
+    }),
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_show, {
+        creature: $props.encounter_monster,
+        type: "Encounter Monster"
+      }, null, 8
+      /* PROPS */
+      , ["creature"])];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["title"]);
+}
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Encounters/Edit.vue?vue&type=template&id=b00c63c0":
 /*!********************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Encounters/Edit.vue?vue&type=template&id=b00c63c0 ***!
@@ -36141,6 +36439,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_add_monsters = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("add-monsters");
 
+  var _component_simple_show = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("simple-show");
+
   var _component_grid_section = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("grid-section");
 
   var _component_dice = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("dice");
@@ -36236,9 +36536,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_9, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.encounter.monsters, function (monster) {
-            return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(monster.display_name), 1
-            /* TEXT */
-            );
+            return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_simple_show, {
+              creature: monster,
+              type: "Encounter Monster"
+            }, null, 8
+            /* PROPS */
+            , ["creature"])]);
           }), 256
           /* UNKEYED_FRAGMENT */
           ))];
@@ -38474,17 +38777,182 @@ var CreatureComponent = {
       }
 
       return false;
+    },
+    creatureName: function creatureName() {
+      var _this$creature$displa;
+
+      return (_this$creature$displa = this.creature.display_name) !== null && _this$creature$displa !== void 0 ? _this$creature$displa : this.creature.name;
     }
   },
   methods: {
-    updateCreature: function updateCreature() {
-      var no_alert = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    getRoute: function getRoute(method) {
+      var $attributes = [];
 
-      if (no_alert) {
-        this.creature.no_alert = no_alert;
+      if (this.type == 'Encounter Monster') {
+        $attributes = [this.creature.encounter_id, this.creature.id];
+      } else {
+        $attributes = [this.creature.id];
       }
 
-      this.$emit('updated', this.creature);
+      return this.route(this.type.toLowerCase().replace(/ /g, "_") + 's.' + method, $attributes);
+    },
+    updateCreature: function updateCreature() {
+      var no_alert = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var form = this.$inertia.form({
+        id: this.creature.id,
+        name: this.creature.name,
+        speed: this.creature.speed,
+        hp_max: this.creature.hp_max,
+        hp_current: this.creature.hp_current,
+        hp_temp: this.creature.hp_temp,
+        hit_dice: this.creature.hit_dice,
+        ac: this.creature.ac,
+        ac_source: this.creature.ac_source,
+        initiative: this.creature.initiative,
+        strength: this.creature.strength,
+        strength_save: this.creature.strength_save,
+        strength_mod: this.creature.strength_mod,
+        strength_save_proficiency: this.creature.strength_save_proficiency,
+        athletics: this.creature.athletics,
+        athletics_proficiency: this.creature.athletics_proficiency,
+        athletics_expertise: this.creature.athletics_expertise,
+        dexterity: this.creature.dexterity,
+        dexterity_save: this.creature.dexterity_save,
+        dexterity_mod: this.creature.dexterity_mod,
+        dexterity_save_proficiency: this.creature.dexterity_save_proficiency,
+        acrobatics: this.creature.acrobatics,
+        acrobatics_proficiency: this.creature.acrobatics_proficiency,
+        acrobatics_expertise: this.creature.acrobatics_expertise,
+        sleight_of_hand: this.creature.sleight_of_hand,
+        sleight_of_hand_proficiency: this.creature.sleight_of_hand_proficiency,
+        sleight_of_hand_expertise: this.creature.sleight_of_hand_expertise,
+        stealth: this.creature.stealth,
+        stealth_proficiency: this.creature.stealth_proficiency,
+        stealth_expertise: this.creature.stealth_expertise,
+        constitution: this.creature.constitution,
+        constitution_save: this.creature.constitution_save,
+        constitution_mod: this.creature.constitution_mod,
+        constitution_save_proficiency: this.creature.constitution_save_proficiency,
+        intelligence: this.creature.intelligence,
+        intelligence_save: this.creature.intelligence_save,
+        intelligence_mod: this.creature.intelligence_mod,
+        intelligence_save_proficiency: this.creature.intelligence_save_proficiency,
+        arcana: this.creature.arcana,
+        arcana_proficiency: this.creature.arcana_proficiency,
+        arcana_expertise: this.creature.arcana_expertise,
+        history: this.creature.history,
+        history_proficiency: this.creature.history_proficiency,
+        history_expertise: this.creature.history_expertise,
+        investigation: this.creature.investigation,
+        investigation_proficiency: this.creature.investigation_proficiency,
+        investigation_expertise: this.creature.investigation_expertise,
+        nature: this.creature.nature,
+        nature_proficiency: this.creature.nature_proficiency,
+        nature_expertise: this.creature.nature_expertise,
+        religion: this.creature.religion,
+        religion_proficiency: this.creature.religion_proficiency,
+        religion_expertise: this.creature.religion_expertise,
+        wisdom: this.creature.wisdom,
+        wisdom_save: this.creature.wisdom_save,
+        wisdom_mod: this.creature.wisdom_mod,
+        wisdom_save_proficiency: this.creature.wisdom_save_proficiency,
+        animal_handling: this.creature.animal_handling,
+        animal_handling_proficiency: this.creature.animal_handling_proficiency,
+        animal_handling_expertise: this.creature.animal_handling_expertise,
+        insight: this.creature.insight,
+        insight_proficiency: this.creature.insight_proficiency,
+        insight_expertise: this.creature.insight_expertise,
+        medicine: this.creature.medicine,
+        medicine_proficiency: this.creature.medicine_proficiency,
+        medicine_expertise: this.creature.medicine_expertise,
+        perception: this.creature.perception,
+        perception_proficiency: this.creature.perception_proficiency,
+        perception_expertise: this.creature.perception_expertise,
+        survival: this.creature.survival,
+        survival_proficiency: this.creature.survival_proficiency,
+        survival_expertise: this.creature.survival_expertise,
+        charisma: this.creature.charisma,
+        charisma_save: this.creature.charisma_save,
+        charisma_mod: this.creature.charisma_mod,
+        charisma_save_proficiency: this.creature.charisma_save_proficiency,
+        deception: this.creature.deception,
+        deception_proficiency: this.creature.deception_proficiency,
+        deception_expertise: this.creature.deception_expertise,
+        intimidation: this.creature.intimidation,
+        intimidation_proficiency: this.creature.intimidation_proficiency,
+        intimidation_expertise: this.creature.intimidation_expertise,
+        performance: this.creature.performance,
+        performance_proficiency: this.creature.performance_proficiency,
+        performance_expertise: this.creature.performance_expertise,
+        persuasion: this.creature.persuasion,
+        persuasion_proficiency: this.creature.persuasion_proficiency,
+        persuasion_expertise: this.creature.persuasion_expertise,
+        skills_auto_filled: this.creature.skills_auto_filled,
+        special_skill_modifiers: this.creature.special_skill_modifiers,
+        spellcaster: this.creature.spellcaster,
+        spell_type: this.creature.spell_type,
+        spell_dc: this.creature.spell_dc,
+        spell_level: this.creature.spell_level,
+        spell_points_max: this.creature.spell_points_max,
+        spell_points_current: this.creature.spell_points_current,
+        spell_recover: this.creature.spell_recover,
+        spell_list_type: this.creature.spell_list_type,
+        spell_slots_1: this.creature.spell_slots_1,
+        spell_slots_2: this.creature.spell_slots_2,
+        spell_slots_3: this.creature.spell_slots_3,
+        spell_slots_4: this.creature.spell_slots_4,
+        spell_slots_5: this.creature.spell_slots_5,
+        spell_slots_6: this.creature.spell_slots_6,
+        spell_slots_7: this.creature.spell_slots_7,
+        spell_slots_8: this.creature.spell_slots_8,
+        spell_slots_9: this.creature.spell_slots_9,
+        spell_list_0: this.creature.spell_list_0,
+        spell_list_1: this.creature.spell_list_1,
+        spell_list_2: this.creature.spell_list_2,
+        spell_list_3: this.creature.spell_list_3,
+        spell_list_4: this.creature.spell_list_4,
+        spell_list_5: this.creature.spell_list_5,
+        spell_list_6: this.creature.spell_list_6,
+        spell_list_7: this.creature.spell_list_7,
+        spell_list_8: this.creature.spell_list_8,
+        spell_list_9: this.creature.spell_list_9,
+        spell_prepare_count: this.creature.spell_prepare_count,
+        spell_prepared: this.creature.spell_prepared,
+        notes: this.creature.notes,
+        show_modifiers: this.creature.show_modifiers,
+        show_resources: this.creature.show_resources,
+        show_notes: this.creature.show_notes,
+        show_dice: this.creature.show_dice,
+        show_additional_stats: this.creature.show_additional_stats,
+        damage_vulnerabilities: this.creature.damage_vulnerabilities,
+        damage_resistances: this.creature.damage_resistances,
+        damage_immunities: this.creature.damage_immunities,
+        condition_immunities: this.creature.condition_immunities,
+        languages: this.creature.languages,
+        senses: this.creature.senses,
+        no_alert: no_alert !== null && no_alert !== void 0 ? no_alert : false,
+        // character fields
+        race: this.type == 'Character' ? this.creature.race : null,
+        "class": this.type == 'Character' ? this.creature["class"] : null,
+        level: this.type == 'Character' ? this.creature.level : null,
+        // monster fields
+        "public": this.type == 'Monster' ? this.creature["public"] : null,
+        // monster and encounter monster fields
+        size: this.type == 'Monster' || this.type == 'Encounter Monster' ? this.creature.size : null,
+        type: this.type == 'Monster' || this.type == 'Encounter Monster' ? this.creature.type : null,
+        alignment: this.type == 'Monster' || this.type == 'Encounter Monster' ? this.creature.alignment : null,
+        challenge_rating: this.type == 'Monster' || this.type == 'Encounter Monster' ? this.creature.challenge_rating : null,
+        experience: this.type == 'Monster' || this.type == 'Encounter Monster' ? this.creature.experience : null,
+        source: this.type == 'Monster' || this.type == 'Encounter Monster' ? this.creature.source : null,
+        // encounter monster fields
+        encounter_id: this.type == 'Encounter Monster' ? this.creature.encounter_id : null,
+        weight: this.type == 'Encounter Monster' ? this.creature.weight : null,
+        name_number: this.type == 'Encounter Monster' ? this.creature.name_number : null
+      });
+      form.patch(this.getRoute('update'), {
+        preserveState: true // preserveScroll: true,
+
+      });
     }
   }
 };
@@ -62364,6 +62832,58 @@ _Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].__file
 
 /***/ }),
 
+/***/ "./resources/js/Components/Creature/SimpleHeading.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/Components/Creature/SimpleHeading.vue ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SimpleHeading_vue_vue_type_template_id_4fbcb3ea__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SimpleHeading.vue?vue&type=template&id=4fbcb3ea */ "./resources/js/Components/Creature/SimpleHeading.vue?vue&type=template&id=4fbcb3ea");
+/* harmony import */ var _SimpleHeading_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SimpleHeading.vue?vue&type=script&lang=js */ "./resources/js/Components/Creature/SimpleHeading.vue?vue&type=script&lang=js");
+
+
+
+_SimpleHeading_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].render = _SimpleHeading_vue_vue_type_template_id_4fbcb3ea__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_SimpleHeading_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].__file = "resources/js/Components/Creature/SimpleHeading.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_SimpleHeading_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+/***/ }),
+
+/***/ "./resources/js/Components/Creature/SimpleShow.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/Components/Creature/SimpleShow.vue ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SimpleShow_vue_vue_type_template_id_702c7e44__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SimpleShow.vue?vue&type=template&id=702c7e44 */ "./resources/js/Components/Creature/SimpleShow.vue?vue&type=template&id=702c7e44");
+/* harmony import */ var _SimpleShow_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SimpleShow.vue?vue&type=script&lang=js */ "./resources/js/Components/Creature/SimpleShow.vue?vue&type=script&lang=js");
+
+
+
+_SimpleShow_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].render = _SimpleShow_vue_vue_type_template_id_702c7e44__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_SimpleShow_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].__file = "resources/js/Components/Creature/SimpleShow.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_SimpleShow_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+/***/ }),
+
 /***/ "./resources/js/Components/Creature/Spells.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/Components/Creature/Spells.vue ***!
@@ -63787,6 +64307,32 @@ _Dashboard_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"]._
 
 /***/ }),
 
+/***/ "./resources/js/Pages/EncounterMonsters/Show.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/Pages/EncounterMonsters/Show.vue ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Show_vue_vue_type_template_id_3cb14209__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Show.vue?vue&type=template&id=3cb14209 */ "./resources/js/Pages/EncounterMonsters/Show.vue?vue&type=template&id=3cb14209");
+/* harmony import */ var _Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Show.vue?vue&type=script&lang=js */ "./resources/js/Pages/EncounterMonsters/Show.vue?vue&type=script&lang=js");
+
+
+
+_Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].render = _Show_vue_vue_type_template_id_3cb14209__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].__file = "resources/js/Pages/EncounterMonsters/Show.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Encounters/Edit.vue":
 /*!************************************************!*\
   !*** ./resources/js/Pages/Encounters/Edit.vue ***!
@@ -64453,6 +64999,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Show.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/Show.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/Components/Creature/SimpleHeading.vue?vue&type=script&lang=js":
+/*!************************************************************************************!*\
+  !*** ./resources/js/Components/Creature/SimpleHeading.vue?vue&type=script&lang=js ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SimpleHeading_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SimpleHeading_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./SimpleHeading.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleHeading.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/Components/Creature/SimpleShow.vue?vue&type=script&lang=js":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/Components/Creature/SimpleShow.vue?vue&type=script&lang=js ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SimpleShow_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SimpleShow_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./SimpleShow.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleShow.vue?vue&type=script&lang=js");
  
 
 /***/ }),
@@ -65225,6 +65803,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/EncounterMonsters/Show.vue?vue&type=script&lang=js":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/Pages/EncounterMonsters/Show.vue?vue&type=script&lang=js ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Show_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Show.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/EncounterMonsters/Show.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Encounters/Edit.vue?vue&type=script&lang=js":
 /*!************************************************************************!*\
   !*** ./resources/js/Pages/Encounters/Edit.vue?vue&type=script&lang=js ***!
@@ -65717,6 +66311,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Show_vue_vue_type_template_id_1b3a779c__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Show_vue_vue_type_template_id_1b3a779c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Show.vue?vue&type=template&id=1b3a779c */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/Show.vue?vue&type=template&id=1b3a779c");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/Creature/SimpleHeading.vue?vue&type=template&id=4fbcb3ea":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/Components/Creature/SimpleHeading.vue?vue&type=template&id=4fbcb3ea ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SimpleHeading_vue_vue_type_template_id_4fbcb3ea__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SimpleHeading_vue_vue_type_template_id_4fbcb3ea__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./SimpleHeading.vue?vue&type=template&id=4fbcb3ea */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleHeading.vue?vue&type=template&id=4fbcb3ea");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/Creature/SimpleShow.vue?vue&type=template&id=702c7e44":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/Components/Creature/SimpleShow.vue?vue&type=template&id=702c7e44 ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SimpleShow_vue_vue_type_template_id_702c7e44__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SimpleShow_vue_vue_type_template_id_702c7e44__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./SimpleShow.vue?vue&type=template&id=702c7e44 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleShow.vue?vue&type=template&id=702c7e44");
 
 
 /***/ }),
@@ -66601,6 +67227,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/EncounterMonsters/Show.vue?vue&type=template&id=3cb14209":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/Pages/EncounterMonsters/Show.vue?vue&type=template&id=3cb14209 ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Show_vue_vue_type_template_id_3cb14209__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Show_vue_vue_type_template_id_3cb14209__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Show.vue?vue&type=template&id=3cb14209 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/EncounterMonsters/Show.vue?vue&type=template&id=3cb14209");
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Encounters/Edit.vue?vue&type=template&id=b00c63c0":
 /*!******************************************************************************!*\
   !*** ./resources/js/Pages/Encounters/Edit.vue?vue&type=template&id=b00c63c0 ***!
@@ -67159,6 +67801,7 @@ var map = {
 	"./Characters/Index.vue": "./resources/js/Pages/Characters/Index.vue",
 	"./Characters/Show.vue": "./resources/js/Pages/Characters/Show.vue",
 	"./Dashboard.vue": "./resources/js/Pages/Dashboard.vue",
+	"./EncounterMonsters/Show.vue": "./resources/js/Pages/EncounterMonsters/Show.vue",
 	"./Encounters/Edit.vue": "./resources/js/Pages/Encounters/Edit.vue",
 	"./Encounters/Index.vue": "./resources/js/Pages/Encounters/Index.vue",
 	"./Encounters/Show.vue": "./resources/js/Pages/Encounters/Show.vue",

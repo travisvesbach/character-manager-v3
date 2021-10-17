@@ -241,7 +241,7 @@
             },
             rollDice(resource) {
                 let total = 0;
-                let message = this.creature.name + ':<br>';
+                let message = this.creatureName + ':<br>';
                 message += resource.name + ':<br>';
                 let loop_total = 0;
                 for(let i=0;i<resource.dice.length;i++) {
