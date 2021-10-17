@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Encounter;
+use App\Models\Monster;
 use Inertia\Inertia;
 use App\Http\Requests\EncounterRequest;
 
@@ -33,8 +34,9 @@ class EncountersController extends Controller
         $this->authorize('update', $encounter);
 
         $encounters = auth()->user()->encounters()->select(['id', 'name'])->orderBy('name')->get();
+        $monsters = Monster::userOrPublic(auth()->user()->id)->orderBy('name')->select(['id', 'name', 'user_id', 'type', 'size', 'challenge_rating', 'public'])->get()->load(['user']);
 
-        return Inertia::render('Encounters/Show', compact(['encounter', 'encounters']));
+        return Inertia::render('Encounters/Show', compact(['encounter', 'encounters', 'monsters']));
     }
 
     public function edit(Encounter $encounter) {

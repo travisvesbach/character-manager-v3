@@ -36,9 +36,7 @@
                     </template>
                 </jet-dropdown>
             </div>
-            <jet-secondary-button class="ml-auto" size="sm">
-                Add Monsters
-            </jet-secondary-button>
+            <add-monsters class="ml-auto" :monsters="monsters"/>
         </div>
 
         <div class="grid md:grid-cols-4">
@@ -55,9 +53,6 @@
             </div>
 
         </div>
-
-
-
 
 
         <!-- delete confirmation -->
@@ -97,9 +92,10 @@
     import JetInputError from '@/Jetstream/InputError'
     import GridSection from '@/Components/GridSection';
     import Dice from '@/Components/Dice';
+    import AddMonsters from '@/Components/Encounter/AddMonsters';
 
     export default {
-        props: ['encounter', 'encounters'],
+        props: ['encounter', 'encounters', 'monsters'],
         components: {
             AppLayout,
             JetNavLink,
@@ -113,6 +109,7 @@
             JetConfirmationModal,
             GridSection,
             Dice,
+            AddMonsters,
         },
         data() {
             return {

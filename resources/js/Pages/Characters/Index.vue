@@ -38,7 +38,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b-2 border-color hover-trigger" v-for="character in filteredData">
+                    <tr class="border-b-2 border-color hover-trigger" v-for="character in filtered">
                         <td class="py-2 px-1">
                             <Link :href="character.path" class="text-lg link-color" v-html="highlight(character.name)"/>
                         </td>
@@ -106,7 +106,6 @@
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
-    import Badge from '@/Components/Badge'
     import JetDropdown from '@/Jetstream/Dropdown'
     import JetDropdownLink from '@/Jetstream/DropdownLink'
     import JetButton from '@/Jetstream/Button'
@@ -123,7 +122,6 @@
 
         components: {
             AppLayout,
-            Badge,
             JetDropdown,
             JetDropdownLink,
             JetButton,
@@ -143,7 +141,7 @@
             }
         },
         computed: {
-            filteredData() {
+            filtered() {
                 let result = this.characters.filter(function(character) {
                     if(!this.show_archived && character.archive_date) {
                         return false;

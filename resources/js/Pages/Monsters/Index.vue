@@ -34,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b-2 border-color hover-trigger" v-for="monster in filteredData">
+                    <tr class="border-b-2 border-color hover-trigger" v-for="monster in filtered">
                         <td class="py-2 px-1">
                             <Link :href="monster.path" class="text-lg link-color" v-html="highlight(monster.name)"/>
                         </td>
@@ -102,7 +102,6 @@
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
-    import Badge from '@/Components/Badge'
     import JetDropdown from '@/Jetstream/Dropdown'
     import JetDropdownLink from '@/Jetstream/DropdownLink'
     import JetButton from '@/Jetstream/Button'
@@ -117,7 +116,6 @@
 
         components: {
             AppLayout,
-            Badge,
             JetDropdown,
             JetDropdownLink,
             JetButton,
@@ -134,7 +132,7 @@
             }
         },
         computed: {
-            filteredData() {
+            filtered() {
                 let result = this.monsters;
                 if(this.search) {
                     let searching = this.search.toLowerCase();
