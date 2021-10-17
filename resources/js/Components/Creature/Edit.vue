@@ -1,7 +1,7 @@
 <template>
-    <app-layout :title="creature && creature.name ? 'Edit ' + creature.name : 'Create ' + type">
+    <app-layout :title="creature && creatureName ? 'Edit ' + creatureName : 'Create ' + type">
         <template #header>
-            {{ creature && creature.name ? 'Edit ' + creature.name : 'Create ' + type }}
+            {{ creature && creatureName ? 'Edit ' + creatureName : 'Create ' + type }}
         </template>
 
         <centered-form @submitted="submit" width="full">
@@ -463,8 +463,9 @@
     import ProficiencyCheckbox from '@/Components/ProficiencyCheckbox'
     import DiceArrayInput from '@/Components/DiceArrayInput'
 
+    import { CreatureComponent } from '@/Mixins/CreatureComponent';
+
     export default {
-        props: ['creature', 'type'],
         components: {
             AppLayout,
             JetActionMessage,
@@ -478,6 +479,7 @@
             ProficiencyCheckbox,
             DiceArrayInput,
         },
+        mixins: [CreatureComponent],
         data() {
             return {
                 form: this.$inertia.form({
@@ -1126,9 +1128,9 @@
             submit() {
                 this.prepareSpellData();
                 if(this.creature) {
-                    this.form.patch(route(this.type.toLowerCase() + 's.update', this.form.id));
+                    this.form.patch(this.getRoute('update'));
                 } else {
-                    this.form.post(route(this.type.toLowerCase() + 's.store'));
+                    this.form.post(this.getRoute('store'));
                 }
             },
         },

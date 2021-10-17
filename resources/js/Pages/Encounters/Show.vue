@@ -42,10 +42,10 @@
         <div class="grid md:grid-cols-4">
 
             <grid-section class="col-span-3">
-                encounter monsters here
-
-                <div v-for="monster in encounter.monsters">
-                    <simple-show :creature="monster" type="Encounter Monster"/>
+                <div class="grid md:grid-cols-2 xl:grid-cols-3">
+                    <div class="col-span-1" v-for="monster in encounter.monsters">
+                        <simple-show :creature="monster" type="Encounter Monster"/>
+                    </div>
                 </div>
 
             </grid-section>

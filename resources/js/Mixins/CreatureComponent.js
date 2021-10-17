@@ -21,15 +21,11 @@ export const CreatureComponent = {
     methods: {
         getRoute(method) {
             let $attributes = [];
-            if(this.type == 'Encounter Monster') {
-                $attributes = [
-                    this.creature.encounter_id,
-                    this.creature.id,
-                ];
-            } else {
-                $attributes = [
-                    this.creature.id,
-                ];
+            if(this.creature) {
+                if(this.type == 'Encounter Monster') {
+                    $attributes.push(this.creature.encounter_id);
+                }
+                $attributes.push(this.creature.id);
             }
 
             return this.route(this.type.toLowerCase().replace(/ /g, "_") + 's.' + method, $attributes);

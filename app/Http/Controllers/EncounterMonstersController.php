@@ -9,6 +9,7 @@ use App\Models\Encounter;
 use App\Models\User;
 use Inertia\Inertia;
 use App\Http\Requests\EncounterMonsterRequest;
+use Illuminate\Support\Str;
 
 class EncounterMonstersController extends Controller
 {
@@ -63,14 +64,17 @@ class EncounterMonstersController extends Controller
         $this->authorize('update', $encounter_monster);
 
         $validated = $request->validated();
-
         $encounter_monster->update($validated);
 
-        if($request->input('no_alert')) {
-            return redirect($encounter_monster->path());
+        $flash = null;
+        if(!$request->input('no_alert')) {
+            $flash = ['flash_message' => $encounter_monster->name . ' updated', 'flash_status' => 'success'];
         }
 
-        return redirect($encounter_monster->path())->with(['flash_message' => $encounter_monster->name . ' updated', 'flash_status' => 'success']);
+        if(Str::contains(request()->headers->get('referer'), $encounter_monster->path() . '/edit')) {
+            return redirect($encounter_monster->path())->with($flash);
+        }
+        return back()->with($flash);
     }
 
     public function destroy(Encounter $encounter, EncounterMonster $encounter_monster) {
@@ -79,5 +83,13 @@ class EncounterMonstersController extends Controller
         $encounter_monster->delete();
 
         return redirect($encounter_monster->encounter->path())->with(['flash_message' => $encounter_monster->name . ' deleted', 'flash_status' => 'danger']);
+    }
+
+    public function rest(Encounter $encounter, EncounterMonster $encounter_monster, Request $request) {
+        $this->authorize('update', $encounter_monster);
+
+        $flash_message = $encounter_monster->rest($request->input('length'));
+
+        return redirect($encounter_monster->path())->with(['flash_message' => $flash_message, 'flash_status' => 'success']);
     }
 }

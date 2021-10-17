@@ -1,19 +1,23 @@
 <template>
-    <div class="px-5 py-2">
-        <div >
-            <div>
-                <Link :href="creature.path" class="text-xl link-color" title="Show">
+    <div class="p-1">
+        <div>
+            <div class="flex items-baseline">
+                <Link :href="creature.path" class="text-2xl font-bold" title="Show">
                     {{ creatureName }}
                 </Link>
                 <span class="text-xs ml-2" :title="creature.ac_source">AC: {{ creature.ac }}</span>
-
+                <button class="ml-auto btn-text" @click="delete_creature = true">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
-            <div>
+            <div class="flex items-baseline">
                 <jet-secondary-button @click="roll('Initiative', creature.initiative)" size="xs" :disabled="disabled">
                     Initiative
                 </jet-secondary-button>
                 <span class="mx-2">Speed: {{ creature.speed }}</span>
-                <div class="inline-block ml-auto">
+                <div class="ml-auto">
                     <span :title="'Max HP: ' + creature.hp_max + (creature.hp_temp > 0 ? ' Temp HP: ' + creature.hp_temp : '')">
                         {{ creature.hp_current + creature.hp_temp }} HP
                         <span v-if="creature.hp_temp > 0">(T)</span>
@@ -26,19 +30,19 @@
         <!-- delete confirmation -->
         <jet-confirmation-modal :show="delete_creature" @close="delete_creature = false">
             <template #title>
-                Delete {{ type }}
+                Delete {{ creatureName }}
             </template>
 
             <template #content>
-                Are you sure you want to delete this {{ type.toLowerCase() }}?
+                Are you sure you want to delete {{ creatureName }}?
             </template>
 
             <template #footer>
                 <jet-secondary-button @click.native="delete_creature = false">
                     Cancel
                 </jet-secondary-button>
-                <jet-danger-button class="ml-2" @click.native="deleteCreature" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Delete {{ type }}
+                <jet-danger-button class="ml-2" @click.native="deleteCreature">
+                    Delete {{ creatureName }}
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>
@@ -146,7 +150,10 @@
                 }
             },
             deleteCreature() {
-                this.form.delete(route(this.type.toLowerCase() + 's.destroy', this.form.id));
+                let form = this.$inertia.form({
+                    id: this.creature.id,
+                });
+                form.delete(this.getRoute('destroy'));
             }
         }
     }

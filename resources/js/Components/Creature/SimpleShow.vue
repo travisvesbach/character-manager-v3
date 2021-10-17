@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="rounded-md m-2 overflow-hidden" :class="hpColor">
         <simple-heading :creature="creature" :type="type"/>
 
         <!-- <stats :creature="creature" :type="type"/> -->
@@ -45,6 +45,17 @@
             AdditionalStats,
         },
         mixins: [CreatureComponent],
+        computed: {
+            hpColor() {
+                if(this.creature.hp_current <= 0) {
+                    return 'bg-red-200 dark:bg-red-900';
+                } else if(this.creature.hp_current <= this.creature.hp_max/2) {
+                    return 'bg-yellow-200 dark:bg-yellow-900';
+                } else {
+                    return 'bg-green-200 dark:bg-green-900';
+                }
+            },
+        },
         methods: {
         }
     }

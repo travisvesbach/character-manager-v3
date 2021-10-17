@@ -76,4 +76,5 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/encounters/{encounter}/monsters/{encounter_monster}/edit', [EncounterMonstersController::class, 'edit'])->name('encounter_monsters.edit');
     Route::patch('/encounters/{encounter}/monsters/{encounter_monster}', [EncounterMonstersController::class, 'update'])->name('encounter_monsters.update');
     Route::delete('/encounters/{encounter}/monsters/{encounter_monster}', [EncounterMonstersController::class, 'destroy'])->name('encounter_monsters.destroy');
+    Route::patch('/encounters/{encounter}/monsters/{encounter_monster}/rest', [EncounterMonstersController::class, 'rest'])->name('encounter_monsters.rest');
 });

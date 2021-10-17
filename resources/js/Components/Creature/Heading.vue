@@ -68,13 +68,13 @@
                     </button>
                 </div>
                 <div class="text-right my-1 md:my-0">
-                    HP: <jet-input type="number" class="w-16 p-1" v-model.number="creature.hp_current" @input="updateCreature" v-if="!disabled"/> <span v-if="!disabled">/</span> {{creature.hp_max}}
+                    HP: <jet-input type="number" class="w-16 p-1" v-model.number="creature.hp_current" @blur="updateCreature" v-if="!disabled"/> <span v-if="!disabled">/</span> {{creature.hp_max}}
                     <div v-if="!disabled">
                         <span class="text-xs">Calc:</span> <jet-input type="number" class="w-16 p-1 mt-1" @keyup.enter="adjustCurrentHp()" v-model.number="hp_calculator"/> <span class="invisible">/ {{creature.hp_max}}</span>
                     </div>
                 </div>
                 <div class="text-right my-1 md:my-0" v-if="!disabled">
-                    Temp HP: <jet-input type="number" class="w-16 p-1" v-model.number="creature.hp_temp"/><br>
+                    Temp HP: <jet-input type="number" class="w-16 p-1" v-model.number="creature.hp_temp" @blur="updateCreature"/><br>
                     <span class="text-xs">Calc:</span> <jet-input type="number" class="w-16 p-1 mt-1" @keyup.enter="adjustTempHp()" v-model.number="hp_temp_calculator"/>
                 </div>
             </div>
