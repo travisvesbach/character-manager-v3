@@ -42,11 +42,15 @@
         <div class="grid md:grid-cols-4">
 
             <grid-section class="col-span-3">
-                <div class="grid md:grid-cols-2 xl:grid-cols-3">
-                    <div class="col-span-1" v-for="monster in encounter.monsters">
-                        <simple-show :creature="monster" type="Encounter Monster"/>
-                    </div>
-                </div>
+                <!-- <div class="grid md:grid-cols-2 xl:grid-cols-3"> -->
+                    <!-- <div class="col-span-1" v-for="monster in encounter.monsters"> -->
+                        <draggable class="grid md:grid-cols-2 xl:grid-cols-3" v-model="encounter_monsters" @change="updateMonsterWeights" @start="drag=true" @end="drag=false" handle=".drag-handle" item-key="id">
+                            <template #item="element">
+                                <simple-show class="col-span-1" :creature="element.element" type="Encounter Monster"/>
+                            </template>
+                        </draggable>
+                    <!-- </div> -->
+                <!-- </div> -->
 
             </grid-section>
 
@@ -83,6 +87,8 @@
 </template>
 
 <script>
+    import draggable from 'vuedraggable'
+
     import AppLayout from '@/Layouts/AppLayout'
     import JetNavLink from '@/Jetstream/NavLink.vue'
     import JetInput from '@/Jetstream/Input'
@@ -103,6 +109,7 @@
     export default {
         props: ['encounter', 'encounters', 'monsters'],
         components: {
+            draggable,
             AppLayout,
             JetNavLink,
             JetInput,
@@ -121,6 +128,8 @@
         data() {
             return {
                 delete_encounter: false,
+                drag: false,
+                encounter_monsters: JSON.parse(JSON.stringify(this.encounter.monsters))
             }
         },
         methods: {
@@ -144,6 +153,28 @@
                     id: this.encounter.id,
                 });
                 form.delete(route('encounters.destroy', form.id));
+            },
+            updateMonsterWeights() {
+                this.encounter_monsters.map((monster, index) => {
+                    monster.weight = index + 1;
+                });
+
+                let form = this.$inertia.form({
+                    id: this.encounter.id,
+                    encounter_monsters: this.encounter_monsters.map(function (monster) {
+                        return {
+                            id: monster.id,
+                            weight: monster.weight,
+                        };
+                    }),
+                    no_alert: true,
+                });
+
+                form.patch(route('encounters.update_monster_weights', form.id), {
+                    preserveState: true,
+                    // preserveScroll: true,
+                });
+
             }
         }
     }

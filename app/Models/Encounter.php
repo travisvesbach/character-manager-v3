@@ -33,7 +33,7 @@ class Encounter extends Model
     }
 
     public function monsters() {
-        return $this->hasMany(EncounterMonster::class);
+        return $this->hasMany(EncounterMonster::class)->orderBy('weight');
     }
 
     public function nextAvailableWeight() {

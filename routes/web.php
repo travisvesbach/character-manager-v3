@@ -70,6 +70,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::delete('/actions/{action}', [ActionsController::class, 'destroy'])->name('actions.destroy');
 
     Route::resource('encounters', EncountersController::class);
+    Route::patch('/encounters/{encounter}/update_monster_weights', [EncountersController::class, 'updateMonsterWeights'])->name('encounters.update_monster_weights');
 
     Route::post('/encounters/{encounter}/monsters', [EncounterMonstersController::class, 'store'])->name('encounter_monsters.store');
     Route::get('/encounters/{encounter}/monsters/{encounter_monster}', [EncounterMonstersController::class, 'show'])->name('encounter_monsters.show');

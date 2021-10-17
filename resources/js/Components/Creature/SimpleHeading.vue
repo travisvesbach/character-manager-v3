@@ -2,13 +2,16 @@
     <div class="p-1">
         <div>
             <div class="flex items-baseline">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 drag-handle" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+                </svg>
                 <Link :href="creature.path" class="text-2xl font-bold" title="Show">
                     {{ creature.display_name }}
                 </Link>
                 <span class="text-xs ml-2" :title="creature.ac_source">AC: {{ creature.ac }}</span>
                 <button class="ml-auto btn-text" @click="delete_creature = true">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>

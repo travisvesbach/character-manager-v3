@@ -68,4 +68,23 @@ class EncountersController extends Controller
 
         return redirect(route('encounters.index'))->with(['flash_message' => $encounter->name . ' deleted', 'flash_status' => 'danger']);
     }
+
+    public function updateMonsterWeights(Request $request, Encounter $encounter) {
+        $validated = $request->validate([
+            'encounter_monsters.*.id' => 'required|numeric',
+            'encounter_monsters.*.weight' => 'required|numeric',
+        ]);
+
+        foreach($validated['encounter_monsters'] as $input) {
+            $encounter_monster = $encounter->monsters->where('id', $input['id'])->first();
+            $encounter_monster->weight = $input['weight'];
+            $encounter_monster->save();
+        }
+
+        if($request->input('no_alert')) {
+            return redirect($encounter->path());
+        }
+
+        return redirect($encounter->path())->with(['flash_message' => $encounter->name . ' monster order updated', 'flash_status' => 'success']);
+    }
 }
