@@ -42,7 +42,6 @@ class EncounterMonstersTest extends TestCase
 
     /** @test **/
     public function a_user_can_update_their_encounter_monster() {
-$this->withoutExceptionHandling();
         $attributes = EncounterMonster::factory()->raw();
         $encounter_monster = EncounterMonster::factory()->create($attributes);
 
@@ -123,6 +122,29 @@ $this->withoutExceptionHandling();
         $this->assertCount(1, EncounterMonster::all());
         $encounter->delete();
         $this->assertCount(0, EncounterMonster::all());
+    }
+
+    /** @test **/
+    public function name_number_is_set_to_the_next_available_number_when_an_encounter_has_monsters_with_the_same_name() {
+        $this->signIn();
+
+        $encounter = Encounter::factory()->create(['user_id' => auth()->user()->id]);
+        $monster = Monster::factory()->create(['user_id' => auth()->user()->id]);
+
+        $attributes = [
+            'monster_id' => $monster->id,
+        ];
+
+        $response = $this->post(route('encounter_monsters.store', $encounter->id), $attributes);
+        $this->assertCount(1, EncounterMonster::all());
+        $encounter_monster = EncounterMonster::where('encounter_id', $encounter->id)->first();
+        $this->assertDatabaseHas('encounter_monsters', ['name' => $encounter_monster->name]);
+        $this->assertEquals(0, $encounter_monster->name_number);
+
+        $response = $this->post(route('encounter_monsters.store', $encounter->id), $attributes);
+        $this->assertCount(2, EncounterMonster::all());
+        $encounter_monster = EncounterMonster::find(2);
+        $this->assertEquals(1, $encounter_monster->name_number);
     }
 
 }

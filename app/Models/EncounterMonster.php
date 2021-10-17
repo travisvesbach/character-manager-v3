@@ -24,11 +24,13 @@ class EncounterMonster extends Creature
             'source',
             'weight',
             'encounter_id',
+            'name_number',
         ]);
     }
 
     protected $appends = [
         'path',
+        'display_name',
     ];
 
     public function path() {
@@ -37,6 +39,14 @@ class EncounterMonster extends Creature
 
     public function getPathAttribute() {
         return $this->path();
+    }
+
+    public function displayName() {
+        return $this->name . ($this->name_number ? ' ' . $this->name_number : '');
+    }
+
+    public function getDisplayNameAttribute() {
+        return $this->displayName();
     }
 
     public function user() {

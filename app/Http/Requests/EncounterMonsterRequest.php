@@ -33,6 +33,7 @@ class EncounterMonsterRequest extends CreatureRequest
             'source'                => 'max:255',
             'encounter_id'          => 'required|integer',
             'weight'                => 'required|integer',
+            'name_number'           => 'integer',
         ]);
     }
 }

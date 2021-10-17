@@ -22958,7 +22958,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['monsters'],
+  props: ['encounter', 'monsters'],
   components: {
     JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__["default"],
     JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -22999,7 +22999,12 @@ __webpack_require__.r(__webpack_exports__);
         return '<span class="highlight">' + match + '</span>';
       });
     },
-    addMonster: function addMonster(monster) {}
+    addMonster: function addMonster(monster) {
+      var form = this.$inertia.form({
+        monster_id: monster.id
+      });
+      form.post(route('encounter_monsters.store', this.encounter.id));
+    }
   }
 });
 
@@ -36222,15 +36227,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_monsters, {
         "class": "ml-auto",
+        encounter: $props.encounter,
         monsters: $props.monsters
       }, null, 8
       /* PROPS */
-      , ["monsters"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_grid_section, {
+      , ["encounter", "monsters"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_grid_section, {
         "class": "col-span-3"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_9, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.encounter.monsters, function (monster) {
-            return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(monster.name), 1
+            return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(monster.display_name), 1
             /* TEXT */
             );
           }), 256

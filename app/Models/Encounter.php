@@ -44,4 +44,12 @@ class Encounter extends Model
             return 1;
         }
     }
+
+    public function nextNameNumber($name) {
+        $monster = $this->monsters()->where('name', $name)->orderBy('name_number', 'desc')->first();
+        if($monster && ($monster->name_number != null || $monster->name_number == 0)) {
+            return $monster->name_number + 1;
+        }
+        return 0;
+    }
 }

@@ -36,7 +36,7 @@
                     </template>
                 </jet-dropdown>
             </div>
-            <add-monsters class="ml-auto" :monsters="monsters"/>
+            <add-monsters class="ml-auto" :encounter="encounter" :monsters="monsters"/>
         </div>
 
         <div class="grid md:grid-cols-4">
@@ -45,7 +45,7 @@
                 encounter monsters here
 
                 <div v-for="monster in encounter.monsters">
-                    {{ monster.name }}
+                    {{ monster.display_name }}
                 </div>
 
             </grid-section>

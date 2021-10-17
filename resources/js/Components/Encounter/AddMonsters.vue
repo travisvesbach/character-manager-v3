@@ -66,7 +66,7 @@
     import JetInput from '@/Jetstream/Input'
 
     export default {
-        props: ['monsters'],
+        props: ['encounter', 'monsters'],
 
         components: {
             JetButton,
@@ -106,7 +106,10 @@
                 });
             },
             addMonster(monster) {
-
+                let form = this.$inertia.form({
+                    monster_id: monster.id,
+                });
+                form.post(route('encounter_monsters.store', this.encounter.id));
             }
         }
     }

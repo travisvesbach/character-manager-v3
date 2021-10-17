@@ -24,6 +24,7 @@ class EncounterMonstersController extends Controller
         $encounter_monster->user_id = $encounter->user_id;
         $encounter_monster->encounter_id = $encounter->id;
         $encounter_monster->weight = $encounter->nextAvailableWeight();
+        $encounter_monster->name_number = $encounter->nextNameNumber($monster->name);
         $encounter_monster->save();
 
         $encounter_monster = EncounterMonster::find($encounter_monster->id);
@@ -39,7 +40,7 @@ class EncounterMonstersController extends Controller
             }
         }
 
-        return redirect($encounter_monster->encounter->path())->with(['flash_message' => $encounter_monster->name . ' added to ' . $encounter_monster->encounter->name, 'flash_status' => 'success']);
+        return redirect($encounter_monster->encounter->path())->with(['flash_message' => $encounter_monster->display_name . ' added to ' . $encounter_monster->encounter->name, 'flash_status' => 'success']);
     }
 
     public function show(Encounter $encounter, EncounterMonster $encounter_monster) {

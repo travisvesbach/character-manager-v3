@@ -162,6 +162,7 @@ class CreateEncounterMonstersTable extends Migration
             // encounter monster specific
             $table->foreignId('encounter_id');
             $table->integer('weight');
+            $table->integer('name_number')->nullable()->default(0);
 
             $table->foreign('encounter_id')->references('id')->on('encounters')->onDelete('cascade');
         });
