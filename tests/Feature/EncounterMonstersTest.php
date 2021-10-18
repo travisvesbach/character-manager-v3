@@ -147,4 +147,25 @@ class EncounterMonstersTest extends TestCase
         $this->assertEquals(1, $encounter_monster->name_number);
     }
 
+    /** @test **/
+    public function a_monster_can_take_a_rest() {
+        $encounter = Encounter::factory()->create();
+        $encounter_monster = EncounterMonster::factory()->create(['user_id' => $encounter->user_id, 'encounter_id' => $encounter->id, 'hp_max' => 15, 'hp_current' => 15]);
+
+        $this->assertEquals($encounter_monster->hp_max, $encounter_monster->hp_current);
+
+        $encounter_monster->hp_current = 0;
+        $encounter_monster->save();
+        $this->assertEquals(0, $encounter_monster->hp_current);
+
+        $this->withoutExceptionHandling();
+
+        $this->actingAs($encounter_monster->user)
+            ->patch(route('encounter_monsters.rest', ['encounter' => $encounter, 'encounter_monster' => $encounter_monster, 'length' => 'long']))
+            ->assertRedirect($encounter_monster->path());
+
+        $encounter_monster->refresh();
+
+        $this->assertEquals($encounter_monster->hp_max, $encounter_monster->hp_current);
+    }
 }

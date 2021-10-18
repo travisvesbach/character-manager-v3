@@ -14,6 +14,12 @@
                         <jet-input type="text" id="name" class="mt-1 w-full" v-model="form.name" required/>
                         <jet-input-error :message="form.errors.name" class="mt-2"/>
                     </div>
+                    <div class="col-span-1 px-1" v-if="type == 'Encounter Monster'">
+                        <!-- name_number -->
+                        <jet-label for="name_number" value="Name Number" class="mt-4 inline-block"/>
+                        <jet-input type="number" id="name_number" class="mt-1 w-full" v-model.number="form.name_number" required/>
+                        <jet-input-error :message="form.errors.name_number" class="mt-2"/>
+                    </div>
                     <div class="col-span-1 px-1" v-if="type == 'Character'">
                         <!-- Race -->
                         <jet-label for="race" value="Race" class="mt-4"/>
@@ -32,19 +38,19 @@
                         <jet-input type="number" id="level" class="mt-1 w-full" v-model.number="form.level" @input="setSkills()" required/>
                         <jet-input-error :message="form.errors.level" class="mt-2"/>
                     </div>
-                    <div class="col-span-1 px-1" v-if="type == 'Monster'">
+                    <div class="col-span-1 px-1" v-if="type == 'Monster' || type == 'Encounter Monster'">
                         <!-- size -->
-                        <jet-label for="race" value="Size" class="mt-4"/>
+                        <jet-label for="size" value="Size" class="mt-4"/>
                         <jet-input type="text" id="size" class="mt-1 w-full" placeholder="Large" v-model="form.size" required/>
                         <jet-input-error :message="form.errors.size" class="mt-2"/>
                     </div>
-                    <div class="col-span-1 px-1" v-if="type == 'Monster'">
+                    <div class="col-span-1 px-1" v-if="type == 'Monster' || type == 'Encounter Monster'">
                         <!-- type -->
                         <jet-label for="type" value="Type" class="mt-4"/>
                         <jet-input type="text" id="type" class="mt-1 w-full" placeholder="Beast" v-model="form.type" required/>
                         <jet-input-error :message="form.errors.type" class="mt-2"/>
                     </div>
-                    <div class="col-span-1 px-1" v-if="type == 'Monster'">
+                    <div class="col-span-1 px-1" v-if="type == 'Monster' || type == 'Encounter Monster'">
                         <!-- alignment -->
                         <jet-label for="alignment" value="Alignment" class="mt-4"/>
                         <jet-input type="text" id="alignment" class="mt-1 w-full" placeholder="unaligned" v-model="form.alignment" required/>
@@ -122,19 +128,19 @@
                         <jet-input type="text" id="senses" class="mt-1 w-full" placeholder="Darkvision: 60 ft." v-model="form.senses"/>
                         <jet-input-error :message="form.errors.senses" class="mt-2"/>
                     </div>
-                    <div class="col-span-1 px-1" v-if="type == 'Monster'">
+                    <div class="col-span-1 px-1" v-if="type == 'Monster' || type == 'Encounter Monster'">
                         <!-- challenge_rating -->
                         <jet-label for="challenge_rating" value="Challenge Rating" class="mt-4"/>
                         <jet-input type="text" id="challenge_rating" class="mt-1 w-full" placeholder="1/2" v-model="form.challenge_rating" @input="setSkills()" required/>
                         <jet-input-error :message="form.errors.alignment" class="mt-2"/>
                     </div>
-                    <div class="col-span-1 px-1" v-if="type == 'Monster'">
+                    <div class="col-span-1 px-1" v-if="type == 'Monster' || type == 'Encounter Monster'">
                         <!-- experience -->
                         <jet-label for="experience" value="Experience" class="mt-4"/>
                         <jet-input type="number" id="experience" class="mt-1 w-full" placeholder="50" v-model.number="form.experience" required/>
                         <jet-input-error :message="form.errors.alignment" class="mt-2"/>
                     </div>
-                    <div class="col-span-1 px-1" v-if="type == 'Monster'">
+                    <div class="col-span-1 px-1" v-if="type == 'Monster' || type == 'Encounter Monster'">
                         <!-- source -->
                         <jet-label for="source" value="Source" class="mt-4"/>
                         <jet-input type="text" id="source" class="mt-1 w-full" placeholder="Monster Manual p341" v-model="form.source" required/>
@@ -625,6 +631,11 @@
                     experience: null,
                     source: null,
                     public: null,
+
+                    // encounter monster fields
+                    encounter_id: null,
+                    weight: null,
+                    name_number: null,
                 }),
             }
         },
@@ -788,6 +799,11 @@
                     experience: this.creature.experience,
                     source: this.creature.source,
                     public: this.creature.public,
+
+                    // encounter monster fields
+                    encounter_id: this.creature.encounter_id,
+                    weight: this.creature.weight,
+                    name_number: this.creature.name_number,
                 });
 
             }
