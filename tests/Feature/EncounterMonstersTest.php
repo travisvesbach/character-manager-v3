@@ -48,8 +48,7 @@ class EncounterMonstersTest extends TestCase
         $attributes['name'] = 'changed';
 
         $this->actingAs($encounter_monster->user)
-            ->patch($encounter_monster->path(), $attributes)
-            ->assertRedirect($encounter_monster->path());
+            ->patch($encounter_monster->path(), $attributes);
 
         $this->assertDatabaseHas('encounter_monsters', ['name' => 'changed']);
     }

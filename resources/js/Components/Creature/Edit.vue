@@ -168,7 +168,10 @@
                         <jet-input-error :message="form.errors.strength" class="mt-2"/>
 
                         <proficiency-checkbox label="Save" slug="strength_save" v-model:proficiency="form.strength_save_proficiency" />
-                        <proficiency-checkbox label="Athletics" v-model:proficiency="form.athletics_proficiency" v-model:expertise="form.athletics_expertise"/>
+
+                        <div v-for="skill in skillsByStat('strength')">
+                            <proficiency-checkbox :label="skill.name" v-model:proficiency="form[skill.slug + '_proficiency']" v-model:expertise="form[skill.slug + '_expertise']"/>
+                        </div>
                     </div>
                     <div class="col-span-1 mb-10 px-1" v-on:change="setSkills('dexterity')">
                         <!-- dexterity -->
@@ -177,9 +180,10 @@
                         <jet-input-error :message="form.errors.dexterity" class="mt-2"/>
 
                         <proficiency-checkbox label="Save" slug="dexterity_save" v-model:proficiency="form.dexterity_save_proficiency" />
-                        <proficiency-checkbox label="Acrobatics" v-model:proficiency="form.acrobatics_proficiency" v-model:expertise="form.acrobatics_expertise"/>
-                        <proficiency-checkbox label="Sleightof Hand" v-model:proficiency="form.sleight_of_hand_proficiency" v-model:expertise="form.sleight_of_hand_expertise"/>
-                        <proficiency-checkbox label="Stealth" v-model:proficiency="form.stealth_proficiency" v-model:expertise="form.stealth_expertise"/>
+
+                        <div v-for="skill in skillsByStat('dexterity')">
+                            <proficiency-checkbox :label="skill.name" v-model:proficiency="form[skill.slug + '_proficiency']" v-model:expertise="form[skill.slug + '_expertise']"/>
+                        </div>
                     </div>
                     <div class="col-span-1 mb-10 px-1" v-on:change="setSkills('constitution')">
                         <!-- constitution -->
@@ -196,11 +200,10 @@
                         <jet-input-error :message="form.errors.intelligence" class="mt-2"/>
 
                         <proficiency-checkbox label="Save" slug="intelligence_save" v-model:proficiency="form.intelligence_save_proficiency" />
-                        <proficiency-checkbox label="Arcana" v-model:proficiency="form.arcana_proficiency" v-model:expertise="form.arcana_expertise"/>
-                        <proficiency-checkbox label="History" v-model:proficiency="form.history_proficiency" v-model:expertise="form.history_expertise"/>
-                        <proficiency-checkbox label="Investigation" v-model:proficiency="form.investigation_proficiency" v-model:expertise="form.investigation_expertise"/>
-                        <proficiency-checkbox label="Nature" v-model:proficiency="form.nature_proficiency" v-model:expertise="form.nature_expertise"/>
-                        <proficiency-checkbox label="Religion" v-model:proficiency="form.religion_proficiency" v-model:expertise="form.religion_expertise"/>
+
+                        <div v-for="skill in skillsByStat('intelligence')">
+                            <proficiency-checkbox :label="skill.name" v-model:proficiency="form[skill.slug + '_proficiency']" v-model:expertise="form[skill.slug + '_expertise']"/>
+                        </div>
                     </div>
                     <div class="col-span-1 mb-10 px-1" v-on:change="setSkills('wisdom')">
                         <!-- wisdom -->
@@ -209,11 +212,10 @@
                         <jet-input-error :message="form.errors.wisdom" class="mt-2"/>
 
                         <proficiency-checkbox label="Save" slug="wisdom_save" v-model:proficiency="form.wisdom_save_proficiency" />
-                        <proficiency-checkbox label="Animal Handling" v-model:proficiency="form.animal_handling_proficiency" v-model:expertise="form.animal_handling_expertise"/>
-                        <proficiency-checkbox label="Insight" v-model:proficiency="form.insight_proficiency" v-model:expertise="form.insight_expertise"/>
-                        <proficiency-checkbox label="Medicine" v-model:proficiency="form.medicine_proficiency" v-model:expertise="form.medicine_expertise"/>
-                        <proficiency-checkbox label="Perception" v-model:proficiency="form.perception_proficiency" v-model:expertise="form.perception_expertise"/>
-                        <proficiency-checkbox label="Survival" v-model:proficiency="form.survival_proficiency" v-model:expertise="form.survival_expertise"/>
+
+                        <div v-for="skill in skillsByStat('wisdom')">
+                            <proficiency-checkbox :label="skill.name" v-model:proficiency="form[skill.slug + '_proficiency']" v-model:expertise="form[skill.slug + '_expertise']"/>
+                        </div>
                     </div>
                     <div class="col-span-1 mb-10 px-1" v-on:change="setSkills('charisma')">
                         <!-- charisma -->
@@ -222,10 +224,10 @@
                         <jet-input-error :message="form.errors.charisma" class="mt-2"/>
 
                         <proficiency-checkbox label="Save" slug="charisma_save" v-model:proficiency="form.charisma_save_proficiency" />
-                        <proficiency-checkbox label="Deception" v-model:proficiency="form.deception_proficiency" v-model:expertise="form.deception_expertise"/>
-                        <proficiency-checkbox label="Intimidation" v-model:proficiency="form.intimidation_proficiency" v-model:expertise="form.intimidation_expertise"/>
-                        <proficiency-checkbox label="Performance" v-model:proficiency="form.performance_proficiency" v-model:expertise="form.performance_expertise"/>
-                        <proficiency-checkbox label="Persuasion" v-model:proficiency="form.persuasion_proficiency" v-model:expertise="form.persuasion_expertise"/>
+
+                        <div v-for="skill in skillsByStat('charisma')">
+                            <proficiency-checkbox :label="skill.name" v-model:proficiency="form[skill.slug + '_proficiency']" v-model:expertise="form[skill.slug + '_expertise']"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -248,9 +250,11 @@
                             <jet-input type="number" id="strength_save" class="mt-1 block w-full" v-model.number="form.strength_save" required/>
                             <jet-input-error :message="form.errors.strength_save" class="mt-2"/>
 
-                            <jet-label for="athletics" value="Athletics" />
-                            <jet-input type="number" id="athletics" class="mt-1 block w-full" v-model.number="form.athletics" required/>
-                            <jet-input-error :message="form.errors.athletics" class="mt-2"/>
+                            <div v-for="skill in skillsByStat('strength')">
+                                <jet-label :for="skill.slug" :value="skill.name" class="mt-4"/>
+                                <jet-input type="number" :id="skill.slug" class="mt-1 block w-full" v-model.number="form[skill.slug]" required/>
+                                <jet-input-error :message="form.errors[skill.slug]" class="mt-2"/>
+                            </div>
                         </div>
                         <div class="col-span-1 mb-10 px-1">
                             <!-- dexterity -->
@@ -258,17 +262,11 @@
                             <jet-input type="number" id="dexterity_save" class="mt-1 block w-full" v-model.number="form.dexterity_save" required/>
                             <jet-input-error :message="form.errors.dexterity_save" class="mt-2"/>
 
-                            <jet-label for="acrobatics" value="Acrobatics" class="mt-4"/>
-                            <jet-input type="number" id="acrobatics" class="mt-1 block w-full" v-model.number="form.acrobatics" required/>
-                            <jet-input-error :message="form.errors.acrobatics" class="mt-2"/>
-
-                            <jet-label for="sleight_of_hand" value="Sleight of Hand" class="mt-4"/>
-                            <jet-input type="number" id="sleight_of_hand" class="mt-1 block w-full" v-model.number="form.sleight_of_hand" required/>
-                            <jet-input-error :message="form.errors.sleight_of_hand" class="mt-2"/>
-
-                            <jet-label for="stealth" value="Stealth" class="mt-4"/>
-                            <jet-input type="number" id="stealth" class="mt-1 block w-full" v-model.number="form.stealth" required/>
-                            <jet-input-error :message="form.errors.stealth" class="mt-2"/>
+                            <div v-for="skill in skillsByStat('dexterity')">
+                                <jet-label :for="skill.slug" :value="skill.name" class="mt-4"/>
+                                <jet-input type="number" :id="skill.slug" class="mt-1 block w-full" v-model.number="form[skill.slug]" required/>
+                                <jet-input-error :message="form.errors[skill.slug]" class="mt-2"/>
+                            </div>
 
                         </div>
                         <div class="col-span-1 mb-10 px-1">
@@ -284,25 +282,11 @@
                             <jet-input type="number" id="intelligence_save" class="mt-1 block w-full" v-model.number="form.intelligence_save" required/>
                             <jet-input-error :message="form.errors.intelligence_save" class="mt-2"/>
 
-                            <jet-label for="arcana" value="Arcana" class="mt-4"/>
-                            <jet-input type="number" id="arcana" class="mt-1 block w-full" v-model.number="form.arcana" required/>
-                            <jet-input-error :message="form.errors.arcana" class="mt-2"/>
-
-                            <jet-label for="history" value="History" class="mt-4"/>
-                            <jet-input type="number" id="history" class="mt-1 block w-full" v-model.number="form.history" required/>
-                            <jet-input-error :message="form.errors.history" class="mt-2"/>
-
-                            <jet-label for="investigation" value="Investigation" class="mt-4"/>
-                            <jet-input type="number" id="investigation" class="mt-1 block w-full" v-model.number="form.investigation" required/>
-                            <jet-input-error :message="form.errors.investigation" class="mt-2"/>
-
-                            <jet-label for="nature" value="Nature" class="mt-4"/>
-                            <jet-input type="number" id="nature" class="mt-1 block w-full" v-model.number="form.nature" required/>
-                            <jet-input-error :message="form.errors.nature" class="mt-2"/>
-
-                            <jet-label for="religion" value="Religion" class="mt-4"/>
-                            <jet-input type="number" id="religion" class="mt-1 block w-full" v-model.number="form.religion" required/>
-                            <jet-input-error :message="form.errors.religion" class="mt-2"/>
+                            <div v-for="skill in skillsByStat('intelligence')">
+                                <jet-label :for="skill.slug" :value="skill.name" class="mt-4"/>
+                                <jet-input type="number" :id="skill.slug" class="mt-1 block w-full" v-model.number="form[skill.slug]" required/>
+                                <jet-input-error :message="form.errors[skill.slug]" class="mt-2"/>
+                            </div>
 
                         </div>
                         <div class="col-span-1 mb-10 px-1">
@@ -311,25 +295,11 @@
                             <jet-input type="number" id="wisdom_save" class="mt-1 block w-full" v-model.number="form.wisdom_save" required/>
                             <jet-input-error :message="form.errors.wisdom_save" class="mt-2"/>
 
-                            <jet-label for="animal_handling" value="Animal Handling" class="mt-4"/>
-                            <jet-input type="number" id="animal_handling" class="mt-1 block w-full" v-model.number="form.animal_handling" required/>
-                            <jet-input-error :message="form.errors.animal_handling" class="mt-2"/>
-
-                            <jet-label for="insight" value="Insight" class="mt-4"/>
-                            <jet-input type="number" id="insight" class="mt-1 block w-full" v-model.number="form.insight" required/>
-                            <jet-input-error :message="form.errors.insight" class="mt-2"/>
-
-                            <jet-label for="medicine" value="Medicine" class="mt-4"/>
-                            <jet-input type="number" id="medicine" class="mt-1 block w-full" v-model.number="form.medicine" required/>
-                            <jet-input-error :message="form.errors.medicine" class="mt-2"/>
-
-                            <jet-label for="perception" value="Perception" class="mt-4"/>
-                            <jet-input type="number" id="perception" class="mt-1 block w-full" v-model.number="form.perception" required/>
-                            <jet-input-error :message="form.errors.perception" class="mt-2"/>
-
-                            <jet-label for="survival" value="Survival" class="mt-4"/>
-                            <jet-input type="number" id="survival" class="mt-1 block w-full" v-model.number="form.survival" required/>
-                            <jet-input-error :message="form.errors.survival" class="mt-2"/>
+                            <div v-for="skill in skillsByStat('wisdom')">
+                                <jet-label :for="skill.slug" :value="skill.name" class="mt-4"/>
+                                <jet-input type="number" :id="skill.slug" class="mt-1 block w-full" v-model.number="form[skill.slug]" required/>
+                                <jet-input-error :message="form.errors[skill.slug]" class="mt-2"/>
+                            </div>
 
                         </div>
                         <div class="col-span-1 mb-10 px-1">
@@ -338,21 +308,11 @@
                             <jet-input type="number" id="charisma_save" class="mt-1 block w-full" v-model.number="form.charisma_save" required/>
                             <jet-input-error :message="form.errors.charisma_save" class="mt-2"/>
 
-                            <jet-label for="deception" value="Deception" class="mt-4"/>
-                            <jet-input type="number" id="deception" class="mt-1 block w-full" v-model.number="form.deception" required/>
-                            <jet-input-error :message="form.errors.deception" class="mt-2"/>
-
-                            <jet-label for="intimidation" value="Intimidation" class="mt-4"/>
-                            <jet-input type="number" id="intimidation" class="mt-1 block w-full" v-model.number="form.intimidation" required/>
-                            <jet-input-error :message="form.errors.intimidation" class="mt-2"/>
-
-                            <jet-label for="performance" value="Performance" class="mt-4"/>
-                            <jet-input type="number" id="performance" class="mt-1 block w-full" v-model.number="form.performance" required/>
-                            <jet-input-error :message="form.errors.performance" class="mt-2"/>
-
-                            <jet-label for="persuasion" value="Persuasion" class="mt-4"/>
-                            <jet-input type="number" id="persuasion" class="mt-1 block w-full" v-model.number="form.persuasion" required/>
-                            <jet-input-error :message="form.errors.persuasion" class="mt-2"/>
+                            <div v-for="skill in skillsByStat('charisma')">
+                                <jet-label :for="skill.slug" :value="skill.name" class="mt-4"/>
+                                <jet-input type="number" :id="skill.slug" class="mt-1 block w-full" v-model.number="form[skill.slug]" required/>
+                                <jet-input-error :message="form.errors[skill.slug]" class="mt-2"/>
+                            </div>
 
                         </div>
                     </div>
@@ -470,6 +430,7 @@
     import DiceArrayInput from '@/Components/DiceArrayInput'
 
     import { CreatureComponent } from '@/Mixins/CreatureComponent';
+    import { CreatureSkills } from '@/Mixins/CreatureSkills';
 
     export default {
         components: {
@@ -485,7 +446,7 @@
             ProficiencyCheckbox,
             DiceArrayInput,
         },
-        mixins: [CreatureComponent],
+        mixins: [CreatureComponent, CreatureSkills],
         data() {
             return {
                 form: this.$inertia.form({

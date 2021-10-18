@@ -52,7 +52,7 @@
         </div>
         <div class="flex flex-wrap justify-around">
 
-            <jet-secondary-button class="m-1" size="xs" @click="roll(skill.name, creature[skill.slug], 'ability')" v-for="skill in creature.proficient_skills">
+            <jet-secondary-button class="m-1" size="xs" @click="roll(skill.name, creature[skill.slug], 'ability')" v-for="skill in proficientSkills">
                 {{ skill.name }}
             </jet-secondary-button>
 
@@ -71,6 +71,7 @@
 
     import { Flash } from '@/Mixins/Flash';
     import { CreatureComponent } from '@/Mixins/CreatureComponent';
+    import { CreatureSkills } from '@/Mixins/CreatureSkills';
 
     export default {
         components: {
@@ -79,7 +80,7 @@
             JetDialogModal,
             GridSection,
         },
-        mixins: [Flash, CreatureComponent],
+        mixins: [Flash, CreatureComponent, CreatureSkills],
         data() {
             return {
                 rest_length: null,
