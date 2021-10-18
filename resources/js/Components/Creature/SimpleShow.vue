@@ -1,18 +1,15 @@
 <template>
-    <div class="rounded-md m-2 overflow-hidden" :class="hpColor">
+    <div class="rounded-md m-2 overflow-hidden flex flex-col" :class="hpColor">
         <simple-heading :creature="creature" :type="type"/>
 
-        <!-- <stats :creature="creature" :type="type"/> -->
+        <div class="bg-gray-200 dark:bg-gray-900 p-1 flex-grow">
+            <simple-stats :creature="creature" :type="type"/>
 
-        <div class="grid lg:grid-cols-2">
-
-            <div class="flex flex-col">
                 <!-- <additional-stats :creature="creature" :type="type" v-if="creature.show_additional_stats"/>
 
                 <actions class="flex-grow" :creature="creature" :type="type"/>
 
                 <dice :creature="creature" :disabled="disabled" v-if="creature.show_dice"/> -->
-            </div>
 
 
         </div>
@@ -21,7 +18,7 @@
 
 <script>
     import SimpleHeading from '@/Components/Creature/SimpleHeading'
-    import Stats from '@/Components/Creature/Stats'
+    import SimpleStats from '@/Components/Creature/SimpleStats'
     import Spells from '@/Components/Creature/Spells'
     import Resources from '@/Components/Creature/Resources'
     import Modifiers from '@/Components/Creature/Modifiers'
@@ -35,7 +32,7 @@
     export default {
         components: {
             SimpleHeading,
-            Stats,
+            SimpleStats,
             Spells,
             Resources,
             Modifiers,
@@ -48,11 +45,11 @@
         computed: {
             hpColor() {
                 if(this.creature.hp_current <= 0) {
-                    return 'bg-red-200 dark:bg-red-900';
+                    return 'bg-red-200 border border-red-200 dark:bg-red-900 dark:border-red-900';
                 } else if(this.creature.hp_current <= this.creature.hp_max/2) {
-                    return 'bg-yellow-200 dark:bg-yellow-900';
+                    return 'bg-yellow-200 border border-yellow-200 dark:bg-yellow-900 dark:border-yellow-900';
                 } else {
-                    return 'bg-green-200 dark:bg-green-900';
+                    return 'bg-green-200 border border-green-200 dark:bg-green-900 dark:border-green-900';
                 }
             },
         },

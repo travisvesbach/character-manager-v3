@@ -41,9 +41,8 @@ class Encounter extends Model
 
         if($monster && $monster->weight) {
             return $monster->weight + 1;
-        } else {
-            return 1;
         }
+        return 1;
     }
 
     public function nextNameNumber($name) {

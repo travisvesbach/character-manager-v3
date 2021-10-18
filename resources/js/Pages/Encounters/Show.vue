@@ -39,7 +39,7 @@
             <add-monsters class="ml-auto" :encounter="encounter" :monsters="monsters"/>
         </div>
 
-        <div class="grid md:grid-cols-4">
+        <div class="grid grid-cols-1 md:grid-cols-4">
 
             <grid-section class="col-span-3">
                 <draggable class="grid md:grid-cols-2 xl:grid-cols-3"
@@ -57,9 +57,9 @@
 
             </grid-section>
 
-            <div class="col-span-1">
+            <div class="col-span-1 flex flex-col">
                 <dice />
-                <grid-section title="Notepad">
+                <grid-section class="flex-grow" title="Notepad">
                     <textarea id="notes" class="w-full h-full p-0 form-input bg-transparent dark:bg-transparent" style="min-height: 12rem;" v-model="encounter.notes" @blur="updateEncounter(true)"/>
                 </grid-section>
             </div>
