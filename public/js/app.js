@@ -22472,6 +22472,7 @@ __webpack_require__.r(__webpack_exports__);
         id: this.creature.id
       });
       form["delete"](this.getRoute('destroy'));
+      this.delete_creature = false;
     }
   }
 });
@@ -25249,6 +25250,11 @@ __webpack_require__.r(__webpack_exports__);
       drag: false,
       encounter_monsters: JSON.parse(JSON.stringify(this.encounter.monsters))
     };
+  },
+  watch: {
+    encounter: function encounter() {
+      this.encounter_monsters = JSON.parse(JSON.stringify(this.encounter.monsters));
+    }
   },
   methods: {
     ownerOrAdmin: function ownerOrAdmin() {
@@ -30891,8 +30897,8 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   "stroke-linecap": "round",
   "stroke-linejoin": "round",
   "stroke-width": "2",
-  d: "M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 6h16M4 10h16M4 14h16M4 18h16\" /> ")], -1
+  d: "M4 6h16M4 10h16M4 14h16M4 18h16"
+})], -1
 /* HOISTED */
 );
 

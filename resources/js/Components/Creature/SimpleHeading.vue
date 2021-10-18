@@ -3,8 +3,7 @@
         <div>
             <div class="flex items-baseline">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 drag-handle cursor-move" fill="none" viewBox="0 0 24 24" stroke="currentColor" title="Drag and drop to sort">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                    <!-- <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" /> -->
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
                 </svg>
                 <Link :href="creature.path" class="text-2xl font-bold" title="Show">
                     {{ creature.display_name }}
@@ -158,6 +157,7 @@
                     id: this.creature.id,
                 });
                 form.delete(this.getRoute('destroy'));
+                this.delete_creature = false;
             }
         }
     }

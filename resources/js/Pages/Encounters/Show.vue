@@ -132,7 +132,12 @@
             return {
                 delete_encounter: false,
                 drag: false,
-                encounter_monsters: JSON.parse(JSON.stringify(this.encounter.monsters))
+                encounter_monsters: JSON.parse(JSON.stringify(this.encounter.monsters)),
+            }
+        },
+        watch: {
+            encounter: function() {
+                this.encounter_monsters = JSON.parse(JSON.stringify(this.encounter.monsters));
             }
         },
         methods: {

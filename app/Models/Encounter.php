@@ -33,11 +33,12 @@ class Encounter extends Model
     }
 
     public function monsters() {
-        return $this->hasMany(EncounterMonster::class)->orderBy('weight');
+        return $this->hasMany(EncounterMonster::class);
     }
 
     public function nextAvailableWeight() {
-        $monster = $this->monsters()->orderBy('weight', 'desc')->first();
+        $monster = $this->monsters->sortByDesc('weight')->first();
+
         if($monster && $monster->weight) {
             return $monster->weight + 1;
         } else {
