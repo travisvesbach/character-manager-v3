@@ -42,15 +42,18 @@
         <div class="grid md:grid-cols-4">
 
             <grid-section class="col-span-3">
-                <!-- <div class="grid md:grid-cols-2 xl:grid-cols-3"> -->
-                    <!-- <div class="col-span-1" v-for="monster in encounter.monsters"> -->
-                        <draggable class="grid md:grid-cols-2 xl:grid-cols-3" v-model="encounter_monsters" @change="updateMonsterWeights" @start="drag=true" @end="drag=false" handle=".drag-handle" item-key="id">
-                            <template #item="element">
-                                <simple-show class="col-span-1" :creature="element.element" type="Encounter Monster"/>
-                            </template>
-                        </draggable>
-                    <!-- </div> -->
-                <!-- </div> -->
+                <draggable class="grid md:grid-cols-2 xl:grid-cols-3"
+                    v-model="encounter_monsters"
+                    v-bind="{animation: 200}"
+                    @change="updateMonsterWeights"
+                    @start="drag=true"
+                    @end="drag=false"
+                    handle=".drag-handle"
+                    item-key="id">
+                    <template #item="element">
+                        <simple-show class="col-span-1" :creature="element.element" type="Encounter Monster"/>
+                    </template>
+                </draggable>
 
             </grid-section>
 

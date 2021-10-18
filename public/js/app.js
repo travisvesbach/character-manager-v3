@@ -30882,16 +30882,17 @@ var _hoisted_2 = {
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
-  "class": "h-5 w-5 drag-handle",
+  "class": "h-4 w-4 drag-handle cursor-move",
   fill: "none",
   viewBox: "0 0 24 24",
-  stroke: "currentColor"
+  stroke: "currentColor",
+  title: "Drag and drop to sort"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
   "stroke-linecap": "round",
   "stroke-linejoin": "round",
   "stroke-width": "2",
   d: "M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"
-})], -1
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 6h16M4 10h16M4 14h16M4 18h16\" /> ")], -1
 /* HOISTED */
 );
 
@@ -36621,12 +36622,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "col-span-3"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"grid md:grid-cols-2 xl:grid-cols-3\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"col-span-1\" v-for=\"monster in encounter.monsters\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_draggable, {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_draggable, (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
             "class": "grid md:grid-cols-2 xl:grid-cols-3",
             modelValue: $data.encounter_monsters,
             "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
               return $data.encounter_monsters = $event;
-            }),
+            })
+          }, {
+            animation: 200
+          }, {
             onChange: $options.updateMonsterWeights,
             onStart: _cache[2] || (_cache[2] = function ($event) {
               return $data.drag = true;
@@ -36636,7 +36640,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             }),
             handle: ".drag-handle",
             "item-key": "id"
-          }, {
+          }), {
             item: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (element) {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_simple_show, {
                 "class": "col-span-1",
@@ -36649,9 +36653,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             _: 1
             /* STABLE */
 
-          }, 8
-          /* PROPS */
-          , ["modelValue", "onChange"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" </div> ")];
+          }, 16
+          /* FULL_PROPS */
+          , ["modelValue", "onChange"])];
         }),
         _: 1
         /* STABLE */
