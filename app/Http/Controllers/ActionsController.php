@@ -17,7 +17,7 @@ class ActionsController extends Controller
         $action->fill($validated);
         $action->save();
 
-        return redirect($action->creature->path())->with(['flash_message' => $action->name . ' added to ' . $action->creature->name, 'flash_status' => 'success']);
+        return back()->with(['flash_message' => $action->name . ' added to ' . $action->creature->name, 'flash_status' => 'success']);
     }
 
     public function update(ActionRequest $request, Action $action) {
@@ -27,7 +27,7 @@ class ActionsController extends Controller
 
         $action->update($validated);
 
-        return redirect($action->creature->path())->with(['flash_message' => $action->creature->name . '\'s ' .  $action->name . ' updated', 'flash_status' => 'success']);
+        return back()->with(['flash_message' => $action->creature->name . '\'s ' .  $action->name . ' updated', 'flash_status' => 'success']);
     }
 
     public function destroy(Action $action) {
@@ -35,6 +35,6 @@ class ActionsController extends Controller
 
         $action->delete();
 
-        return redirect($action->creature->path)->with(['flash_message' => $action->creature->name . '\'s ' .  $action->name . ' deleted', 'flash_status' => 'danger']);
+        return back()->with(['flash_message' => $action->creature->name . '\'s ' .  $action->name . ' deleted', 'flash_status' => 'danger']);
     }
 }

@@ -17,7 +17,7 @@ class ResourcesController extends Controller
         $resource->fill($validated);
         $resource->save();
 
-        return redirect($resource->creature->path())->with(['flash_message' => $resource->name . ' added to ' . $resource->creature->name, 'flash_status' => 'success']);
+        return back()->with(['flash_message' => $resource->name . ' added to ' . $resource->creature->name, 'flash_status' => 'success']);
     }
 
     public function update(ResourceRequest $request, Resource $resource) {
@@ -28,10 +28,10 @@ class ResourcesController extends Controller
         $resource->update($validated);
 
         if($request->input('no_alert')) {
-            return redirect($resource->creature->path());
+            return back();
         }
 
-        return redirect($resource->creature->path())->with(['flash_message' => $resource->creature->name . '\'s ' .  $resource->name . ' updated', 'flash_status' => 'success']);
+        return back()->with(['flash_message' => $resource->creature->name . '\'s ' .  $resource->name . ' updated', 'flash_status' => 'success']);
     }
 
     public function destroy(Resource $resource) {
@@ -39,6 +39,6 @@ class ResourcesController extends Controller
 
         $resource->delete();
 
-        return redirect($resource->creature->path)->with(['flash_message' => $resource->creature->name . '\'s ' .  $resource->name . ' deleted', 'flash_status' => 'danger']);
+        return back()->with(['flash_message' => $resource->creature->name . '\'s ' .  $resource->name . ' deleted', 'flash_status' => 'danger']);
     }
 }

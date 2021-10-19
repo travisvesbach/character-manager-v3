@@ -5,7 +5,10 @@
         <div class="bg-gray-200 dark:bg-gray-900 p-1 flex-grow">
             <simple-stats :creature="creature" :type="type"/>
 
+            <simple-modifiers :creature="creature" :type="type" v-if="creature.modifiers.length > 0"/>
+
             <simple-actions :creature="creature" :type="type"/>
+
 
                 <!-- <additional-stats :creature="creature" :type="type" v-if="creature.show_additional_stats"/>
 
@@ -23,7 +26,7 @@
     import SimpleStats from '@/Components/Creature/SimpleStats'
     import Spells from '@/Components/Creature/Spells'
     import Resources from '@/Components/Creature/Resources'
-    import Modifiers from '@/Components/Creature/Modifiers'
+    import SimpleModifiers from '@/Components/Creature/SimpleModifiers'
     import SimpleActions from '@/Components/Creature/SimpleActions'
     import Notepad from '@/Components/Creature/Notepad'
     import Dice from '@/Components/Dice'
@@ -37,7 +40,7 @@
             SimpleStats,
             Spells,
             Resources,
-            Modifiers,
+            SimpleModifiers,
             SimpleActions,
             Notepad,
             Dice,

@@ -17,7 +17,7 @@ class ModifiersController extends Controller
         $modifier->fill($validated);
         $modifier->save();
 
-        return redirect($modifier->creature->path())->with(['flash_message' => $modifier->name . ' added to ' . $modifier->creature->name, 'flash_status' => 'success']);
+        return back()->with(['flash_message' => $modifier->name . ' added to ' . $modifier->creature->name, 'flash_status' => 'success']);
     }
 
     public function update(ModifierRequest $request, Modifier $modifier) {
@@ -28,10 +28,10 @@ class ModifiersController extends Controller
         $modifier->update($validated);
 
         if($request->input('no_alert')) {
-            return redirect($modifier->creature->path());
+            return back();
         }
 
-        return redirect($modifier->creature->path())->with(['flash_message' => $modifier->creature->name . '\'s ' .  $modifier->name . ' updated', 'flash_status' => 'success']);
+        return back()->with(['flash_message' => $modifier->creature->name . '\'s ' .  $modifier->name . ' updated', 'flash_status' => 'success']);
     }
 
     public function destroy(Modifier $modifier) {
@@ -39,6 +39,6 @@ class ModifiersController extends Controller
 
         $modifier->delete();
 
-        return redirect($modifier->creature->path)->with(['flash_message' => $modifier->creature->name . '\'s ' .  $modifier->name . ' deleted', 'flash_status' => 'danger']);
+        return back()->with(['flash_message' => $modifier->creature->name . '\'s ' .  $modifier->name . ' deleted', 'flash_status' => 'danger']);
     }
 }
