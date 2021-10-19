@@ -38,7 +38,7 @@
     import Dice from '@/Components/Dice'
     import AdditionalStats from '@/Components/Creature/AdditionalStats'
 
-    import { CreatureComponent } from '@/Mixins/CreatureComponent';
+    import { CreatureBase } from '@/Mixins/Creature/Base';
 
     export default {
         components: {
@@ -52,7 +52,7 @@
             Dice,
             AdditionalStats,
         },
-        mixins: [CreatureComponent],
+        mixins: [CreatureBase],
         methods: {
             getWidth(item) {
                 let sections = {

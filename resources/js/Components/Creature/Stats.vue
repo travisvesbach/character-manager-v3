@@ -52,8 +52,8 @@
     import GridSection from '@/Components/GridSection';
 
     import { Flash } from '@/Mixins/Flash';
-    import { CreatureComponent } from '@/Mixins/CreatureComponent';
-    import { CreatureSkills } from '@/Mixins/CreatureSkills';
+    import { CreatureBase } from '@/Mixins/Creature/Base';
+    import { CreatureSkills } from '@/Mixins/Creature/Skills';
 
     export default {
         components: {
@@ -62,7 +62,7 @@
             JetDialogModal,
             GridSection,
         },
-        mixins: [Flash, CreatureComponent, CreatureSkills],
+        mixins: [Flash, CreatureBase, CreatureSkills],
         data() {
             return {
                 rest_length: null,

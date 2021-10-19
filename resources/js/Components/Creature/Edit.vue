@@ -306,8 +306,8 @@
     import ProficiencyCheckbox from '@/Components/ProficiencyCheckbox'
     import DiceArrayInput from '@/Components/DiceArrayInput'
 
-    import { CreatureComponent } from '@/Mixins/CreatureComponent';
-    import { CreatureSkills } from '@/Mixins/CreatureSkills';
+    import { CreatureBase } from '@/Mixins/Creature/Base';
+    import { CreatureSkills } from '@/Mixins/Creature/Skills';
 
     export default {
         components: {
@@ -323,7 +323,7 @@
             ProficiencyCheckbox,
             DiceArrayInput,
         },
-        mixins: [CreatureComponent, CreatureSkills],
+        mixins: [CreatureBase, CreatureSkills],
         data() {
             return {
                 form: this.$inertia.form({

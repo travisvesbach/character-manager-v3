@@ -187,7 +187,7 @@
     import GridSection from '@/Components/GridSection'
     import JetCheckbox from '@/Jetstream/Checkbox'
 
-    import { CreatureComponent } from '@/Mixins/CreatureComponent';
+    import { CreatureBase } from '@/Mixins/Creature/Base';
 
     export default {
         components: {
@@ -205,7 +205,7 @@
             GridSection,
             JetCheckbox,
         },
-        mixins: [CreatureComponent],
+        mixins: [CreatureBase],
         data() {
             return {
                 show_modal: false,
@@ -244,7 +244,7 @@
                         id: null,
                         name: null,
                         creature_id: this.creature.id,
-                        creature_type: 'App\\Models\\'+this.type,
+                        creature_type: 'App\\Models\\'+this.getModel(),
                         ability: false,
                         ability_dice: [{
                             count: 0,

@@ -137,7 +137,7 @@
     import GridSection from '@/Components/GridSection'
 
     import { Flash } from '@/Mixins/Flash';
-    import { CreatureComponent } from '@/Mixins/CreatureComponent';
+    import { CreatureBase } from '@/Mixins/Creature/Base';
 
     export default {
         components: {
@@ -154,7 +154,7 @@
             CounterSlot,
             GridSection,
         },
-        mixins: [Flash, CreatureComponent],
+        mixins: [Flash, CreatureBase],
         data() {
             return {
                 show_modal: false,
@@ -185,7 +185,7 @@
                         id: null,
                         name: null,
                         creature_id: this.creature.id,
-                        creature_type: 'App\\Models\\'+this.type,
+                        creature_type: 'App\\Models\\'+this.getModel(),
                         type: null,
                         total: null,
                         counter_type: 'slots',

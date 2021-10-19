@@ -180,7 +180,7 @@
 
                 form.patch(route('encounters.update_monster_weights', form.id), {
                     preserveState: true,
-                    // preserveScroll: true,
+                    preserveScroll: true,
                 });
 
             }

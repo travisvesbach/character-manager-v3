@@ -1,4 +1,4 @@
-export const CreatureComponent = {
+export const CreatureBase = {
     props: ['creature', 'type'],
     emits: ['updated'],
     computed: {
@@ -26,6 +26,9 @@ export const CreatureComponent = {
             }
 
             return this.route(this.type.toLowerCase().replace(/ /g, "_") + 's.' + method, $attributes);
+        },
+        getModel() {
+            return this.type.replace(/ /g, "");
         },
         updateCreature(no_alert = false) {
             let form = this.$inertia.form({

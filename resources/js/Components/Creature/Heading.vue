@@ -138,7 +138,7 @@
     import JetInputError from '@/Jetstream/InputError'
 
     import { Flash } from '@/Mixins/Flash';
-    import { CreatureComponent } from '@/Mixins/CreatureComponent';
+    import { CreatureBase } from '@/Mixins/Creature/Base';
 
     export default {
         components: {
@@ -165,7 +165,7 @@
                 }),
             }
         },
-        mixins: [Flash, CreatureComponent],
+        mixins: [Flash, CreatureBase],
         methods: {
             roll(item, modifier) {
                 let result =  dice.roll();

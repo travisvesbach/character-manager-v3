@@ -9,7 +9,7 @@
     import JetCheckbox from '@/Jetstream/Checkbox'
 
     import { Flash } from '@/Mixins/Flash';
-    import { CreatureComponent } from '@/Mixins/CreatureComponent';
+    import { CreatureBase } from '@/Mixins/Creature/Base';
 
     export default {
         components: {
@@ -20,7 +20,7 @@
                 notes: this.creature.notes,
             }
         },
-        mixins: [Flash, CreatureComponent],
+        mixins: [Flash, CreatureBase],
         methods: {
             update() {
                 if(this.notes != this.creature.notes) {

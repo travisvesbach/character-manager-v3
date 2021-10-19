@@ -92,7 +92,7 @@
     import GridSection from '@/Components/GridSection'
 
     import { Flash } from '@/Mixins/Flash';
-    import { CreatureComponent } from '@/Mixins/CreatureComponent';
+    import { CreatureBase } from '@/Mixins/Creature/Base';
 
     export default {
         components: {
@@ -107,7 +107,7 @@
             CounterSlot,
             GridSection,
         },
-        mixins: [Flash, CreatureComponent],
+        mixins: [Flash, CreatureBase],
         data() {
             return {
                 accordion_key: 0,

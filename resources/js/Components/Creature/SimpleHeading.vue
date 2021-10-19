@@ -62,7 +62,7 @@
     import { Link } from '@inertiajs/inertia-vue3'
 
     import { Flash } from '@/Mixins/Flash';
-    import { CreatureComponent } from '@/Mixins/CreatureComponent';
+    import { CreatureBase } from '@/Mixins/Creature/Base';
 
     export default {
         components: {
@@ -80,7 +80,7 @@
                 hp_calculator: null,
             }
         },
-        mixins: [Flash, CreatureComponent],
+        mixins: [Flash, CreatureBase],
         methods: {
             roll(item, modifier) {
                 let result =  dice.roll();

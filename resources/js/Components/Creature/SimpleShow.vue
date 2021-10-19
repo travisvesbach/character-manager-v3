@@ -5,6 +5,8 @@
         <div class="bg-gray-200 dark:bg-gray-900 p-1 flex-grow">
             <simple-stats :creature="creature" :type="type"/>
 
+            <simple-actions :creature="creature" :type="type"/>
+
                 <!-- <additional-stats :creature="creature" :type="type" v-if="creature.show_additional_stats"/>
 
                 <actions class="flex-grow" :creature="creature" :type="type"/>
@@ -22,12 +24,12 @@
     import Spells from '@/Components/Creature/Spells'
     import Resources from '@/Components/Creature/Resources'
     import Modifiers from '@/Components/Creature/Modifiers'
-    import Actions from '@/Components/Creature/Actions'
+    import SimpleActions from '@/Components/Creature/SimpleActions'
     import Notepad from '@/Components/Creature/Notepad'
     import Dice from '@/Components/Dice'
     import AdditionalStats from '@/Components/Creature/AdditionalStats'
 
-    import { CreatureComponent } from '@/Mixins/CreatureComponent';
+    import { CreatureBase } from '@/Mixins/Creature/Base';
 
     export default {
         components: {
@@ -36,12 +38,12 @@
             Spells,
             Resources,
             Modifiers,
-            Actions,
+            SimpleActions,
             Notepad,
             Dice,
             AdditionalStats,
         },
-        mixins: [CreatureComponent],
+        mixins: [CreatureBase],
         computed: {
             hpColor() {
                 if(this.creature.hp_current <= 0) {
