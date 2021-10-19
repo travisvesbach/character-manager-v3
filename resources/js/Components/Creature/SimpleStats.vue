@@ -51,14 +51,9 @@
             </div>
         </div>
         <div class="flex flex-wrap justify-around">
-
-            <jet-secondary-button class="m-1" size="xs" @click="roll(skill.name, creature[skill.slug], 'ability')" v-for="skill in proficientSkills">
+            <jet-secondary-button class="m-1" size="xs" @click="roll(skill.name, creature[skill.slug], 'ability')" v-for="skill in proficientSkills('ability')">
                 {{ skill.name }}
             </jet-secondary-button>
-
-<!--             <button class="block btn-text" :class="proficiencyClass(creature.athletics_proficiency)" @click="roll('Athletics', creature.athletics, 'ability')" :disabled="disabled">
-                Athletics: {{ displayStat(creature.athletics) }}
-            </button> -->
         </div>
     </div>
 </template>
