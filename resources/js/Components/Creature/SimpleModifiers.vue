@@ -10,15 +10,9 @@
 </template>
 
 <script>
-    import JetCheckbox from '@/Jetstream/Checkbox'
-
-    import { CreatureBase } from '@/Mixins/Creature/Base';
     import { CreatureModifiers } from '@/Mixins/Creature/Modifiers';
 
     export default {
-        components: {
-            JetCheckbox,
-        },
-        mixins: [CreatureBase, CreatureModifiers],
+        mixins: [CreatureModifiers],
     }
 </script>

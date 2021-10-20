@@ -1,4 +1,19 @@
+import JetButton from '@/Jetstream/Button'
+import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+import JetInput from '@/Jetstream/Input'
+import CounterSlot from '@/Components/CounterSlot'
+
+import { Flash } from '@/Mixins/Flash';
+import { CreatureBase } from '@/Mixins/Creature/Base';
+
 export const CreatureResources = {
+    components: {
+        JetButton,
+        JetSecondaryButton,
+        JetInput,
+        CounterSlot,
+    },
+    mixins: [Flash, CreatureBase],
     data() {
         return {
             form: this.$inertia.form({}),

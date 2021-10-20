@@ -234,7 +234,7 @@ class Creature extends Model
             $this->hit_dice = $hit_dice_array;
             if($this->hp_temp != 0) {
                 $this->hp_temp = 0;
-                array_push($output, 'Temp HP removed.');
+                array_push($output, 'Temp HP reset.');
             }
         }
         if($this->spellcaster) {

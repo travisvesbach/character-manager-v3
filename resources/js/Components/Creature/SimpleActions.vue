@@ -59,22 +59,9 @@
 </template>
 
 <script>
-    import JetButton from '@/Jetstream/Button'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
-    import Accordion from '@/Components/Accordion'
-    import AccordionItem from '@/Components/AccordionItem'
-
-    import { Flash } from '@/Mixins/Flash';
-    import { CreatureBase } from '@/Mixins/Creature/Base';
     import { CreatureActions } from '@/Mixins/Creature/Actions';
 
     export default {
-        components: {
-            JetButton,
-            JetSecondaryButton,
-            Accordion,
-            AccordionItem,
-        },
-        mixins: [Flash, CreatureBase, CreatureActions],
+        mixins: [CreatureActions],
     }
 </script>

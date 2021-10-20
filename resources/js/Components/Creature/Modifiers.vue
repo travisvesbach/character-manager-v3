@@ -185,9 +185,7 @@
     import DiceArrayInput from '@/Components/DiceArrayInput'
     import CounterSlot from '@/Components/CounterSlot'
     import GridSection from '@/Components/GridSection'
-    import JetCheckbox from '@/Jetstream/Checkbox'
 
-    import { CreatureBase } from '@/Mixins/Creature/Base';
     import { CreatureModifiers } from '@/Mixins/Creature/Modifiers';
 
     export default {
@@ -204,9 +202,8 @@
             DiceArrayInput,
             CounterSlot,
             GridSection,
-            JetCheckbox,
         },
-        mixins: [CreatureBase, CreatureModifiers],
+        mixins: [CreatureModifiers],
         data() {
             return {
                 show_modal: false,

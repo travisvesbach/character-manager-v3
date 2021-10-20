@@ -20476,28 +20476,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
-/* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
-/* harmony import */ var _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/DangerButton */ "./resources/js/Jetstream/DangerButton.vue");
-/* harmony import */ var _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/DialogModal */ "./resources/js/Jetstream/DialogModal.vue");
-/* harmony import */ var _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/ConfirmationModal */ "./resources/js/Jetstream/ConfirmationModal.vue");
-/* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
-/* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
-/* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
-/* harmony import */ var _Components_SelectInput__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/SelectInput */ "./resources/js/Components/SelectInput.vue");
-/* harmony import */ var _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Components/DiceArrayInput */ "./resources/js/Components/DiceArrayInput.vue");
-/* harmony import */ var _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Components/CounterSlot */ "./resources/js/Components/CounterSlot.vue");
-/* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
-/* harmony import */ var _Jetstream_Checkbox__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Jetstream/Checkbox */ "./resources/js/Jetstream/Checkbox.vue");
-/* harmony import */ var _Components_Accordion__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Components/Accordion */ "./resources/js/Components/Accordion.vue");
-/* harmony import */ var _Components_AccordionItem__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/Components/AccordionItem */ "./resources/js/Components/AccordionItem.vue");
-/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
-/* harmony import */ var _Mixins_Creature_Actions__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @/Mixins/Creature/Actions */ "./resources/js/Mixins/Creature/Actions.js");
-
-
-
-
+/* harmony import */ var _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/DangerButton */ "./resources/js/Jetstream/DangerButton.vue");
+/* harmony import */ var _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/DialogModal */ "./resources/js/Jetstream/DialogModal.vue");
+/* harmony import */ var _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/ConfirmationModal */ "./resources/js/Jetstream/ConfirmationModal.vue");
+/* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
+/* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
+/* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
+/* harmony import */ var _Components_SelectInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Components/SelectInput */ "./resources/js/Components/SelectInput.vue");
+/* harmony import */ var _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Components/DiceArrayInput */ "./resources/js/Components/DiceArrayInput.vue");
+/* harmony import */ var _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/CounterSlot */ "./resources/js/Components/CounterSlot.vue");
+/* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
+/* harmony import */ var _Jetstream_Checkbox__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Jetstream/Checkbox */ "./resources/js/Jetstream/Checkbox.vue");
+/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
+/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
+/* harmony import */ var _Mixins_Creature_Actions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Mixins/Creature/Actions */ "./resources/js/Mixins/Creature/Actions.js");
 
 
 
@@ -20514,23 +20506,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__["default"],
-    JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__["default"],
-    JetDangerButton: _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_2__["default"],
-    JetDialogModal: _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_3__["default"],
-    JetConfirmationModal: _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__["default"],
-    JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_5__["default"],
-    JetInput: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_6__["default"],
-    JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_7__["default"],
-    SelectInput: _Components_SelectInput__WEBPACK_IMPORTED_MODULE_8__["default"],
-    DiceArrayInput: _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_9__["default"],
-    CounterSlot: _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_10__["default"],
-    GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_11__["default"],
-    JetCheckbox: _Jetstream_Checkbox__WEBPACK_IMPORTED_MODULE_12__["default"],
-    Accordion: _Components_Accordion__WEBPACK_IMPORTED_MODULE_13__["default"],
-    AccordionItem: _Components_AccordionItem__WEBPACK_IMPORTED_MODULE_14__["default"]
+    JetDangerButton: _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_0__["default"],
+    JetDialogModal: _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_1__["default"],
+    JetConfirmationModal: _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_2__["default"],
+    JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_3__["default"],
+    JetInput: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_4__["default"],
+    JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_5__["default"],
+    SelectInput: _Components_SelectInput__WEBPACK_IMPORTED_MODULE_6__["default"],
+    DiceArrayInput: _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_7__["default"],
+    CounterSlot: _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_8__["default"],
+    GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_9__["default"],
+    JetCheckbox: _Jetstream_Checkbox__WEBPACK_IMPORTED_MODULE_10__["default"]
   },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_15__.Flash, _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_16__.CreatureBase, _Mixins_Creature_Actions__WEBPACK_IMPORTED_MODULE_17__.CreatureActions],
+  mixins: [_Mixins_Creature_Actions__WEBPACK_IMPORTED_MODULE_13__.CreatureActions],
   data: function data() {
     return {
       show_modal: false,
@@ -21454,24 +21442,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
-/* harmony import */ var _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Dropdown */ "./resources/js/Jetstream/Dropdown.vue");
-/* harmony import */ var _Jetstream_DropdownLink__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/DropdownLink */ "./resources/js/Jetstream/DropdownLink.vue");
-/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
-/* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
-/* harmony import */ var _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/DangerButton */ "./resources/js/Jetstream/DangerButton.vue");
-/* harmony import */ var _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Jetstream/ConfirmationModal */ "./resources/js/Jetstream/ConfirmationModal.vue");
-/* harmony import */ var _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Jetstream/DialogModal */ "./resources/js/Jetstream/DialogModal.vue");
-/* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
-/* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
-/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
-
-
-
-
-
-
+/* harmony import */ var _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Dropdown */ "./resources/js/Jetstream/Dropdown.vue");
+/* harmony import */ var _Jetstream_DropdownLink__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/DropdownLink */ "./resources/js/Jetstream/DropdownLink.vue");
+/* harmony import */ var _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/DialogModal */ "./resources/js/Jetstream/DialogModal.vue");
+/* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
+/* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
+/* harmony import */ var _Mixins_Creature_Heading__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Mixins/Creature/Heading */ "./resources/js/Mixins/Creature/Heading.js");
 
 
 
@@ -21480,22 +21456,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    JetInput: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_0__["default"],
-    JetDropdown: _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_1__["default"],
-    JetDropdownLink: _Jetstream_DropdownLink__WEBPACK_IMPORTED_MODULE_2__["default"],
-    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_3__["default"],
-    JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_4__["default"],
-    JetDangerButton: _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_5__["default"],
-    JetDialogModal: _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_7__["default"],
-    JetConfirmationModal: _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_6__["default"],
-    JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_8__["default"],
-    JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_9__["default"]
+    JetDropdown: _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__["default"],
+    JetDropdownLink: _Jetstream_DropdownLink__WEBPACK_IMPORTED_MODULE_1__["default"],
+    JetDialogModal: _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_2__["default"],
+    JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_3__["default"],
+    JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
     return {
-      delete_creature: false,
       clone_creature: false,
-      hp_calculator: null,
       hp_temp_calculator: null,
       form: this.$inertia.form({
         id: this.creature.id,
@@ -21503,13 +21472,8 @@ __webpack_require__.r(__webpack_exports__);
       })
     };
   },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_10__.Flash, _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_11__.CreatureBase],
+  mixins: [_Mixins_Creature_Heading__WEBPACK_IMPORTED_MODULE_5__.CreatureHeading],
   methods: {
-    roll: function roll(item, modifier) {
-      var result = dice.roll();
-      var message = this.creature.display_name + ':<br>' + item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
-      this.flash(message, 'primary');
-    },
     adjustCurrentHp: function adjustCurrentHp() {
       if (Number.isInteger(this.creature.hp_current) && Number.isInteger(this.hp_calculator)) {
         this.creature.hp_current += this.hp_calculator;
@@ -21615,11 +21579,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Components/DiceArrayInput */ "./resources/js/Components/DiceArrayInput.vue");
 /* harmony import */ var _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Components/CounterSlot */ "./resources/js/Components/CounterSlot.vue");
 /* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
-/* harmony import */ var _Jetstream_Checkbox__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Jetstream/Checkbox */ "./resources/js/Jetstream/Checkbox.vue");
-/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
-/* harmony import */ var _Mixins_Creature_Modifiers__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/Mixins/Creature/Modifiers */ "./resources/js/Mixins/Creature/Modifiers.js");
-
-
+/* harmony import */ var _Mixins_Creature_Modifiers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Mixins/Creature/Modifiers */ "./resources/js/Mixins/Creature/Modifiers.js");
 
 
 
@@ -21646,10 +21606,9 @@ __webpack_require__.r(__webpack_exports__);
     SelectInput: _Components_SelectInput__WEBPACK_IMPORTED_MODULE_8__["default"],
     DiceArrayInput: _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_9__["default"],
     CounterSlot: _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_10__["default"],
-    GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_11__["default"],
-    JetCheckbox: _Jetstream_Checkbox__WEBPACK_IMPORTED_MODULE_12__["default"]
+    GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_11__["default"]
   },
-  mixins: [_Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_13__.CreatureBase, _Mixins_Creature_Modifiers__WEBPACK_IMPORTED_MODULE_14__.CreatureModifiers],
+  mixins: [_Mixins_Creature_Modifiers__WEBPACK_IMPORTED_MODULE_12__.CreatureModifiers],
   data: function data() {
     return {
       show_modal: false,
@@ -21710,27 +21669,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
-/* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
-/* harmony import */ var _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/DangerButton */ "./resources/js/Jetstream/DangerButton.vue");
-/* harmony import */ var _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/DialogModal */ "./resources/js/Jetstream/DialogModal.vue");
-/* harmony import */ var _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/ConfirmationModal */ "./resources/js/Jetstream/ConfirmationModal.vue");
-/* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
-/* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
-/* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
-/* harmony import */ var _Components_SelectInput__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/SelectInput */ "./resources/js/Components/SelectInput.vue");
-/* harmony import */ var _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Components/DiceArrayInput */ "./resources/js/Components/DiceArrayInput.vue");
-/* harmony import */ var _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Components/CounterSlot */ "./resources/js/Components/CounterSlot.vue");
-/* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
-/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
-/* harmony import */ var _Mixins_Creature_Resources__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/Mixins/Creature/Resources */ "./resources/js/Mixins/Creature/Resources.js");
-
-
-
-
-
-
+/* harmony import */ var _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/DangerButton */ "./resources/js/Jetstream/DangerButton.vue");
+/* harmony import */ var _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/DialogModal */ "./resources/js/Jetstream/DialogModal.vue");
+/* harmony import */ var _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/ConfirmationModal */ "./resources/js/Jetstream/ConfirmationModal.vue");
+/* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
+/* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
+/* harmony import */ var _Components_SelectInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Components/SelectInput */ "./resources/js/Components/SelectInput.vue");
+/* harmony import */ var _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Components/DiceArrayInput */ "./resources/js/Components/DiceArrayInput.vue");
+/* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
+/* harmony import */ var _Mixins_Creature_Resources__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Mixins/Creature/Resources */ "./resources/js/Mixins/Creature/Resources.js");
 
 
 
@@ -21742,20 +21689,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__["default"],
-    JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__["default"],
-    JetDangerButton: _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_2__["default"],
-    JetDialogModal: _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_3__["default"],
-    JetConfirmationModal: _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__["default"],
-    JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_5__["default"],
-    JetInput: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_6__["default"],
-    JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_7__["default"],
-    SelectInput: _Components_SelectInput__WEBPACK_IMPORTED_MODULE_8__["default"],
-    DiceArrayInput: _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_9__["default"],
-    CounterSlot: _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_10__["default"],
-    GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_11__["default"]
+    JetDangerButton: _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_0__["default"],
+    JetDialogModal: _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_1__["default"],
+    JetConfirmationModal: _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_2__["default"],
+    JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_3__["default"],
+    JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_4__["default"],
+    SelectInput: _Components_SelectInput__WEBPACK_IMPORTED_MODULE_5__["default"],
+    DiceArrayInput: _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_6__["default"],
+    GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_12__.Flash, _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_13__.CreatureBase, _Mixins_Creature_Resources__WEBPACK_IMPORTED_MODULE_14__.CreatureResources],
+  mixins: [_Mixins_Creature_Resources__WEBPACK_IMPORTED_MODULE_8__.CreatureResources],
   data: function data() {
     return {
       show_modal: false,
@@ -21888,28 +21831,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
-/* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
-/* harmony import */ var _Components_Accordion__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/Accordion */ "./resources/js/Components/Accordion.vue");
-/* harmony import */ var _Components_AccordionItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/AccordionItem */ "./resources/js/Components/AccordionItem.vue");
-/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
-/* harmony import */ var _Mixins_Creature_Actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Mixins/Creature/Actions */ "./resources/js/Mixins/Creature/Actions.js");
-
-
-
-
-
-
+/* harmony import */ var _Mixins_Creature_Actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Mixins/Creature/Actions */ "./resources/js/Mixins/Creature/Actions.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__["default"],
-    JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Accordion: _Components_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"],
-    AccordionItem: _Components_AccordionItem__WEBPACK_IMPORTED_MODULE_3__["default"]
-  },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_4__.Flash, _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_5__.CreatureBase, _Mixins_Creature_Actions__WEBPACK_IMPORTED_MODULE_6__.CreatureActions]
+  mixins: [_Mixins_Creature_Actions__WEBPACK_IMPORTED_MODULE_0__.CreatureActions]
 });
 
 /***/ }),
@@ -21925,47 +21850,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
-/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
-/* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
-/* harmony import */ var _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/DangerButton */ "./resources/js/Jetstream/DangerButton.vue");
-/* harmony import */ var _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/ConfirmationModal */ "./resources/js/Jetstream/ConfirmationModal.vue");
-/* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
-
-
-
-
-
-
-
-
+/* harmony import */ var _Mixins_Creature_Heading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Mixins/Creature/Heading */ "./resources/js/Mixins/Creature/Heading.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    JetInput: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_0__["default"],
-    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_1__["default"],
-    JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_2__["default"],
-    JetDangerButton: _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_3__["default"],
-    JetConfirmationModal: _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__["default"],
-    JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_5__["default"],
-    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_6__.Link
-  },
-  data: function data() {
-    return {
-      delete_creature: false,
-      hp_calculator: null
-    };
-  },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_7__.Flash, _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_8__.CreatureBase],
+  mixins: [_Mixins_Creature_Heading__WEBPACK_IMPORTED_MODULE_0__.CreatureHeading],
   methods: {
-    roll: function roll(item, modifier) {
-      var result = dice.roll();
-      var message = this.creature.display_name + ':<br>' + item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
-      this.flash(message, 'primary');
-    },
+    // modified from creature/heading.vue so that when adding extra hp, it is converted to hp_temp
     adjustHp: function adjustHp() {
       var calc_amount = this.hp_calculator;
       var update = false;
@@ -22012,41 +21902,14 @@ __webpack_require__.r(__webpack_exports__);
 
       this.hp_calculator = null;
     },
-    rollHitDice: function rollHitDice(dice_index) {
-      if (this.creature.hp_current >= this.creature.hp_max) {
-        this.flash('Already at full HP', 'danger');
-      } else if (this.creature.hit_dice[dice_index].current == 0) {
-        this.flash('Out of Hit Dice', 'danger');
-      } else {
-        this.creature.hit_dice[dice_index].current--;
-        var output = [];
-        var result = dice.roll(this.creature.hit_dice[dice_index].size);
-        var total = result + this.creature.constitution_mod;
-        output.push(this.creature.display_name + ' rolled a hit dice:');
-
-        if (this.creature.hp_current < 0) {
-          output.push('HP is less than 0; setting HP to 0.');
-          this.creature.hp_current = 0;
-        }
-
-        output.push('Previous: ' + this.creature.hp_current + ' HP');
-        output.push('Recovered: [' + result + '] + ' + this.creature.constitution_mod + ' = ' + total + ' HP');
-        this.creature.hp_current = this.creature.hp_current + total;
-
-        if (this.creature.hp_current > this.creature.hp_max) {
-          this.creature.hp_current = this.creature.hp_max;
-        }
-
-        output.push('New Total: ' + this.creature.hp_current + ' HP');
-        this.flash(output.join('<br>'), 'primary');
-        this.updateCreature(true);
-      }
-    },
     deleteCreature: function deleteCreature() {
       var form = this.$inertia.form({
         id: this.creature.id
       });
-      form["delete"](this.getRoute('destroy'));
+      form["delete"](this.getRoute('destroy'), {
+        preserveState: true,
+        preserveScroll: true
+      });
       this.delete_creature = false;
     }
   }
@@ -22065,17 +21928,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Jetstream_Checkbox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Checkbox */ "./resources/js/Jetstream/Checkbox.vue");
-/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
-/* harmony import */ var _Mixins_Creature_Modifiers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Mixins/Creature/Modifiers */ "./resources/js/Mixins/Creature/Modifiers.js");
-
-
+/* harmony import */ var _Mixins_Creature_Modifiers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Mixins/Creature/Modifiers */ "./resources/js/Mixins/Creature/Modifiers.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    JetCheckbox: _Jetstream_Checkbox__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  mixins: [_Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_1__.CreatureBase, _Mixins_Creature_Modifiers__WEBPACK_IMPORTED_MODULE_2__.CreatureModifiers]
+  mixins: [_Mixins_Creature_Modifiers__WEBPACK_IMPORTED_MODULE_0__.CreatureModifiers]
 });
 
 /***/ }),
@@ -22110,28 +21966,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
-/* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
-/* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
-/* harmony import */ var _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/CounterSlot */ "./resources/js/Components/CounterSlot.vue");
-/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
-/* harmony import */ var _Mixins_Creature_Resources__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Mixins/Creature/Resources */ "./resources/js/Mixins/Creature/Resources.js");
-
-
-
-
-
-
+/* harmony import */ var _Mixins_Creature_Resources__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Mixins/Creature/Resources */ "./resources/js/Mixins/Creature/Resources.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__["default"],
-    JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__["default"],
-    JetInput: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_2__["default"],
-    CounterSlot: _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_3__["default"]
-  },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_4__.Flash, _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_5__.CreatureBase, _Mixins_Creature_Resources__WEBPACK_IMPORTED_MODULE_6__.CreatureResources]
+  mixins: [_Mixins_Creature_Resources__WEBPACK_IMPORTED_MODULE_0__.CreatureResources]
 });
 
 /***/ }),
@@ -22244,100 +22082,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
-/* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
-/* harmony import */ var _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/DialogModal */ "./resources/js/Jetstream/DialogModal.vue");
-/* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
-/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
-/* harmony import */ var _Mixins_Creature_Skills__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Mixins/Creature/Skills */ "./resources/js/Mixins/Creature/Skills.js");
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-
-
-
-
-
-
+/* harmony import */ var _Mixins_Creature_Stats__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Mixins/Creature/Stats */ "./resources/js/Mixins/Creature/Stats.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__["default"],
-    JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__["default"],
-    JetDialogModal: _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_2__["default"],
-    GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_3__["default"]
-  },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_4__.Flash, _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_5__.CreatureBase, _Mixins_Creature_Skills__WEBPACK_IMPORTED_MODULE_6__.CreatureSkills],
-  data: function data() {
-    return {
-      rest_length: null
-    };
-  },
-  methods: {
-    roll: function roll(item, modifier, type) {
-      var modifiers = this.creature.modifiers.filter(function (value) {
-        return value.enabled && value[type];
-      });
-      var total = dice.roll();
-      var message = this.creature.display_name + ':<br>' + item + ': [' + total + ']' + (modifier ? ' + ' + modifier : '');
-      total += modifier;
-
-      var _iterator = _createForOfIteratorHelper(modifiers),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var mod = _step.value;
-
-          var _iterator2 = _createForOfIteratorHelper(mod[type + '_dice']),
-              _step2;
-
-          try {
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-              var mod_dice = _step2.value;
-              message += mod_dice.count > 0 ? ' + [' : '';
-
-              for (var x = 0; x < mod_dice.count; x++) {
-                var result = dice.roll(mod_dice.size);
-                message += (x > 0 ? ', ' : '') + result;
-                total += result;
-              }
-
-              message += mod_dice.count > 0 ? ']' : '';
-
-              if (mod_dice.modifier) {
-                message += mod_dice.modifier ? ' + ' + mod_dice.modifier : '';
-                total += mod_dice.modifier;
-              }
-
-              message += ' [' + mod.name + ']';
-            }
-          } catch (err) {
-            _iterator2.e(err);
-          } finally {
-            _iterator2.f();
-          }
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-
-      message += ' = ' + total;
-      this.flash(message, 'primary');
-    },
-    displayStat: function displayStat(stat) {
-      return (stat > 0 ? '+' : '') + stat;
-    },
-    proficiencyClass: function proficiencyClass(proficient) {
-      return proficient ? 'italic' : '';
-    }
-  }
+  mixins: [_Mixins_Creature_Stats__WEBPACK_IMPORTED_MODULE_0__.CreatureStats]
 });
 
 /***/ }),
@@ -22434,107 +22182,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
-/* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
-/* harmony import */ var _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/DialogModal */ "./resources/js/Jetstream/DialogModal.vue");
-/* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
-/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
-/* harmony import */ var _Mixins_Creature_Skills__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Mixins/Creature/Skills */ "./resources/js/Mixins/Creature/Skills.js");
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-
-
-
-
+/* harmony import */ var _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/DialogModal */ "./resources/js/Jetstream/DialogModal.vue");
+/* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
+/* harmony import */ var _Mixins_Creature_Stats__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Mixins/Creature/Stats */ "./resources/js/Mixins/Creature/Stats.js");
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__["default"],
-    JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__["default"],
-    JetDialogModal: _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_2__["default"],
-    GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_3__["default"]
+    JetDialogModal: _Jetstream_DialogModal__WEBPACK_IMPORTED_MODULE_0__["default"],
+    GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_4__.Flash, _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_5__.CreatureBase, _Mixins_Creature_Skills__WEBPACK_IMPORTED_MODULE_6__.CreatureSkills],
-  data: function data() {
-    return {
-      rest_length: null
-    };
-  },
+  mixins: [_Mixins_Creature_Stats__WEBPACK_IMPORTED_MODULE_2__.CreatureStats],
   methods: {
-    roll: function roll(item, modifier, type) {
-      var modifiers = this.creature.modifiers.filter(function (value) {
-        return value.enabled && value[type];
-      });
-      var total = dice.roll();
-      var message = this.creature.display_name + ':<br>' + item + ': [' + total + ']' + (modifier ? ' + ' + modifier : '');
-      total += modifier;
-
-      var _iterator = _createForOfIteratorHelper(modifiers),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var mod = _step.value;
-
-          var _iterator2 = _createForOfIteratorHelper(mod[type + '_dice']),
-              _step2;
-
-          try {
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-              var mod_dice = _step2.value;
-              message += mod_dice.count > 0 ? ' + [' : '';
-
-              for (var x = 0; x < mod_dice.count; x++) {
-                var result = dice.roll(mod_dice.size);
-                message += (x > 0 ? ', ' : '') + result;
-                total += result;
-              }
-
-              message += mod_dice.count > 0 ? ']' : '';
-
-              if (mod_dice.modifier) {
-                message += mod_dice.modifier ? ' + ' + mod_dice.modifier : '';
-                total += mod_dice.modifier;
-              }
-
-              message += ' [' + mod.name + ']';
-            }
-          } catch (err) {
-            _iterator2.e(err);
-          } finally {
-            _iterator2.f();
-          }
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-
-      message += ' = ' + total;
-      this.flash(message, 'primary');
-    },
-    displayStat: function displayStat(stat) {
-      return (stat > 0 ? '+' : '') + stat;
-    },
-    proficiencyClass: function proficiencyClass(proficient) {
-      return proficient ? 'italic' : '';
-    },
     rest: function rest() {
       var form = this.$inertia.form({
         id: this.creature.id,
         length: this.rest_length
       });
       form.patch(this.getRoute('rest'), {
-        preserveState: true // preserveScroll: true,
-
+        preserveState: true,
+        preserveScroll: true
       });
       this.rest_length = null;
     },
@@ -28387,7 +28055,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.ownerOrAdmin ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_dropdown_link, {
         key: 7,
         onClick: _cache[1] || (_cache[1] = function ($event) {
-          return $data.delete_creature = true;
+          return _ctx.delete_creature = true;
         }),
         as: "button"
       }, {
@@ -28417,7 +28085,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn-text",
     onClick: _cache[2] || (_cache[2] = function ($event) {
-      return $options.roll('Initiative', _ctx.creature.initiative);
+      return _ctx.roll('Initiative', _ctx.creature.initiative);
     }),
     disabled: _ctx.disabled
   }, " Initiative: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.initiative), 9
@@ -28456,9 +28124,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onKeyup: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
       return $options.adjustCurrentHp();
     }, ["enter"])),
-    modelValue: $data.hp_calculator,
+    modelValue: _ctx.hp_calculator,
     "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-      return $data.hp_calculator = $event;
+      return _ctx.hp_calculator = $event;
     }),
     modelModifiers: {
       number: true
@@ -28496,9 +28164,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" delete confirmation "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_confirmation_modal, {
-    show: $data.delete_creature,
+    show: _ctx.delete_creature,
     onClose: _cache[10] || (_cache[10] = function ($event) {
-      return $data.delete_creature = false;
+      return _ctx.delete_creature = false;
     })
   }, {
     title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -28514,7 +28182,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
         onClick: _cache[9] || (_cache[9] = function ($event) {
-          return $data.delete_creature = false;
+          return _ctx.delete_creature = false;
         })
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30029,11 +29697,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "ml-auto btn-text",
     onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $data.delete_creature = true;
+      return _ctx.delete_creature = true;
     })
   }, _hoisted_6)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
     onClick: _cache[1] || (_cache[1] = function ($event) {
-      return $options.roll('Initiative', _ctx.creature.initiative);
+      return _ctx.roll('Initiative', _ctx.creature.initiative);
     }),
     size: "xs",
     disabled: _ctx.disabled
@@ -30060,9 +29728,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onKeyup: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
       return $options.adjustHp();
     }, ["enter"])),
-    modelValue: $data.hp_calculator,
+    modelValue: _ctx.hp_calculator,
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $data.hp_calculator = $event;
+      return _ctx.hp_calculator = $event;
     }),
     modelModifiers: {
       number: true
@@ -30070,9 +29738,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["modelValue"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" delete confirmation "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_confirmation_modal, {
-    show: $data.delete_creature,
+    show: _ctx.delete_creature,
     onClose: _cache[5] || (_cache[5] = function ($event) {
-      return $data.delete_creature = false;
+      return _ctx.delete_creature = false;
     })
   }, {
     title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30088,7 +29756,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
         onClick: _cache[4] || (_cache[4] = function ($event) {
-          return $data.delete_creature = false;
+          return _ctx.delete_creature = false;
         })
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30644,7 +30312,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
     size: "xs",
     onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $options.roll('Strength', _ctx.creature.strength_mod, 'ability');
+      return _ctx.roll('Strength', _ctx.creature.strength_mod, 'ability');
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30657,7 +30325,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "mt-1",
     size: "xs",
     onClick: _cache[1] || (_cache[1] = function ($event) {
-      return $options.roll('Strength Save', _ctx.creature.strength_save, 'save');
+      return _ctx.roll('Strength Save', _ctx.creature.strength_save, 'save');
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30669,7 +30337,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
     size: "xs",
     onClick: _cache[2] || (_cache[2] = function ($event) {
-      return $options.roll('Dexterity', _ctx.creature.dexterity_mod, 'ability');
+      return _ctx.roll('Dexterity', _ctx.creature.dexterity_mod, 'ability');
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30682,7 +30350,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "mt-1",
     size: "xs",
     onClick: _cache[3] || (_cache[3] = function ($event) {
-      return $options.roll('Dexterity Save', _ctx.creature.dexterity_save, 'save');
+      return _ctx.roll('Dexterity Save', _ctx.creature.dexterity_save, 'save');
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30694,7 +30362,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
     size: "xs",
     onClick: _cache[4] || (_cache[4] = function ($event) {
-      return $options.roll('Constitution', _ctx.creature.constitution_mod, 'ability');
+      return _ctx.roll('Constitution', _ctx.creature.constitution_mod, 'ability');
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30707,7 +30375,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "mt-1",
     size: "xs",
     onClick: _cache[5] || (_cache[5] = function ($event) {
-      return $options.roll('Constitution Save', _ctx.creature.constitution_save, 'save');
+      return _ctx.roll('Constitution Save', _ctx.creature.constitution_save, 'save');
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30719,7 +30387,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
     size: "xs",
     onClick: _cache[6] || (_cache[6] = function ($event) {
-      return $options.roll('Intelligence', _ctx.creature.intelligence_mod, 'ability');
+      return _ctx.roll('Intelligence', _ctx.creature.intelligence_mod, 'ability');
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30732,7 +30400,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "mt-1",
     size: "xs",
     onClick: _cache[7] || (_cache[7] = function ($event) {
-      return $options.roll('Intelligence Save', _ctx.creature.intelligence_save, 'save');
+      return _ctx.roll('Intelligence Save', _ctx.creature.intelligence_save, 'save');
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30744,7 +30412,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
     size: "xs",
     onClick: _cache[8] || (_cache[8] = function ($event) {
-      return $options.roll('Wisdom', _ctx.creature.wisdom_mod, 'ability');
+      return _ctx.roll('Wisdom', _ctx.creature.wisdom_mod, 'ability');
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30757,7 +30425,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "mt-1",
     size: "xs",
     onClick: _cache[9] || (_cache[9] = function ($event) {
-      return $options.roll('Wisdom Save', _ctx.creature.wisdom_save, 'save');
+      return _ctx.roll('Wisdom Save', _ctx.creature.wisdom_save, 'save');
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30769,7 +30437,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
     size: "xs",
     onClick: _cache[10] || (_cache[10] = function ($event) {
-      return $options.roll('Charisma', _ctx.creature.charisma_mod, 'ability');
+      return _ctx.roll('Charisma', _ctx.creature.charisma_mod, 'ability');
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30782,7 +30450,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "mt-1",
     size: "xs",
     onClick: _cache[11] || (_cache[11] = function ($event) {
-      return $options.roll('Charisma Save', _ctx.creature.charisma_save, 'save');
+      return _ctx.roll('Charisma Save', _ctx.creature.charisma_save, 'save');
     })
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30796,7 +30464,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "mt-1 mx-1",
       size: "xs",
       onClick: function onClick($event) {
-        return $options.roll(skill.name, _ctx.creature[skill.slug], 'ability');
+        return _ctx.roll(skill.name, _ctx.creature[skill.slug], 'ability');
       }
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -31123,21 +30791,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
           "class": "block btn-text",
           onClick: function onClick($event) {
-            return $options.roll($options.capitalize(stat), _ctx.creature[stat + '_mod'], 'ability');
+            return _ctx.roll($options.capitalize(stat), _ctx.creature[stat + '_mod'], 'ability');
           },
           disabled: _ctx.disabled
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.capitalize(stat)) + ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature[stat]) + " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat(_ctx.creature[stat + '_mod'])) + ")", 1
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.capitalize(stat)) + ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature[stat]) + " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.displayStat(_ctx.creature[stat + '_mod'])) + ")", 1
         /* TEXT */
         )], 8
         /* PROPS */
         , _hoisted_2), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.skillsByStat(stat), function (skill) {
           return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block btn-text", $options.proficiencyClass(_ctx.creature[skill.slug + '_proficiency'])]),
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block btn-text", _ctx.proficiencyClass(_ctx.creature[skill.slug + '_proficiency'])]),
             onClick: function onClick($event) {
-              return $options.roll(skill.name, _ctx.creature[skill.slug], skill.type);
+              return _ctx.roll(skill.name, _ctx.creature[skill.slug], skill.type);
             },
             disabled: _ctx.disabled
-          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(skill.type == 'save' ? skill.name.substr(skill.name.indexOf(' ') + 1) : skill.name) + ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.displayStat(_ctx.creature[skill.slug])), 11
+          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(skill.type == 'save' ? skill.name.substr(skill.name.indexOf(' ') + 1) : skill.name) + ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.displayStat(_ctx.creature[skill.slug])), 11
           /* TEXT, CLASS, PROPS */
           , _hoisted_3)]);
         }), 256
@@ -31149,7 +30817,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "class": "mr-2",
           size: "xs",
           onClick: _cache[0] || (_cache[0] = function ($event) {
-            return $data.rest_length = 'short';
+            return _ctx.rest_length = 'short';
           })
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -31161,7 +30829,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
           size: "xs",
           onClick: _cache[1] || (_cache[1] = function ($event) {
-            return $data.rest_length = 'long';
+            return _ctx.rest_length = 'long';
           })
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -31183,24 +30851,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), 256
   /* UNKEYED_FRAGMENT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" action modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_dialog_modal, {
-    show: $data.rest_length,
+    show: _ctx.rest_length,
     "max-width": "xl",
     onClose: _cache[3] || (_cache[3] = function ($event) {
-      return $data.rest_length = null;
+      return _ctx.rest_length = null;
     })
   }, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_7];
     }),
     content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Take a " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.rest_length) + " rest? ", 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Take a " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.rest_length) + " rest? ", 1
       /* TEXT */
       )];
     }),
     footerend: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
         onClick: _cache[2] || (_cache[2] = function ($event) {
-          return $data.rest_length = null;
+          return _ctx.rest_length = null;
         })
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -38327,13 +37995,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CreatureActions": () => (/* binding */ CreatureActions)
 /* harmony export */ });
+/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
+/* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
+/* harmony import */ var _Components_Accordion__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/Accordion */ "./resources/js/Components/Accordion.vue");
+/* harmony import */ var _Components_AccordionItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/AccordionItem */ "./resources/js/Components/AccordionItem.vue");
+/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
+/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+
+
+
+
+
+
 var CreatureActions = {
+  components: {
+    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__["default"],
+    JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Accordion: _Components_Accordion__WEBPACK_IMPORTED_MODULE_2__["default"],
+    AccordionItem: _Components_AccordionItem__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_4__.Flash, _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_5__.CreatureBase],
   methods: {
     roll: function roll(action) {
       var advantage = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -38452,7 +38139,7 @@ var CreatureActions = {
       this.creature.modifiers.filter(function (value) {
         return value.enabled && value['damage'];
       }).forEach(function (modifier) {
-        if (modifier.damage_as == 'attack') {
+        if (modifier.damage_as == 'attack' && action.attack && action.attack_does_damage) {
           damage = this.rollDamage(damage, modifier.damage_dice, critical, modifier.name);
         }
 
@@ -38806,6 +38493,60 @@ var CreatureBase = {
 
 /***/ }),
 
+/***/ "./resources/js/Mixins/Creature/Heading.js":
+/*!*************************************************!*\
+  !*** ./resources/js/Mixins/Creature/Heading.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CreatureHeading": () => (/* binding */ CreatureHeading)
+/* harmony export */ });
+/* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
+/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
+/* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
+/* harmony import */ var _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/DangerButton */ "./resources/js/Jetstream/DangerButton.vue");
+/* harmony import */ var _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/ConfirmationModal */ "./resources/js/Jetstream/ConfirmationModal.vue");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
+/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
+
+
+
+
+
+
+
+
+var CreatureHeading = {
+  components: {
+    JetInput: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_0__["default"],
+    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_1__["default"],
+    JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_2__["default"],
+    JetDangerButton: _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_3__["default"],
+    JetConfirmationModal: _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_5__.Link
+  },
+  data: function data() {
+    return {
+      delete_creature: false,
+      hp_calculator: null
+    };
+  },
+  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_6__.Flash, _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_7__.CreatureBase],
+  methods: {
+    roll: function roll(item, modifier) {
+      var result = dice.roll();
+      var message = this.creature.display_name + ':<br>' + item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
+      this.flash(message, 'primary');
+    }
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/Mixins/Creature/Modifiers.js":
 /*!***************************************************!*\
   !*** ./resources/js/Mixins/Creature/Modifiers.js ***!
@@ -38817,7 +38558,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CreatureModifiers": () => (/* binding */ CreatureModifiers)
 /* harmony export */ });
+/* harmony import */ var _Jetstream_Checkbox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Checkbox */ "./resources/js/Jetstream/Checkbox.vue");
+/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
+
+
 var CreatureModifiers = {
+  components: {
+    JetCheckbox: _Jetstream_Checkbox__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  mixins: [_Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_1__.CreatureBase],
   data: function data() {
     return {
       form: this.$inertia.form({})
@@ -38975,7 +38724,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CreatureResources": () => (/* binding */ CreatureResources)
 /* harmony export */ });
+/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
+/* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
+/* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
+/* harmony import */ var _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/CounterSlot */ "./resources/js/Components/CounterSlot.vue");
+/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
+/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
+
+
+
+
+
+
 var CreatureResources = {
+  components: {
+    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__["default"],
+    JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__["default"],
+    JetInput: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_2__["default"],
+    CounterSlot: _Components_CounterSlot__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_4__.Flash, _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_5__.CreatureBase],
   data: function data() {
     return {
       form: this.$inertia.form({})
@@ -39342,6 +39110,109 @@ var CreatureSpells = {
       }
 
       this.updateCreature(true);
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/Mixins/Creature/Stats.js":
+/*!***********************************************!*\
+  !*** ./resources/js/Mixins/Creature/Stats.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CreatureStats": () => (/* binding */ CreatureStats)
+/* harmony export */ });
+/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
+/* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
+/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
+/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
+/* harmony import */ var _Mixins_Creature_Skills__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Mixins/Creature/Skills */ "./resources/js/Mixins/Creature/Skills.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+
+
+
+
+var CreatureStats = {
+  components: {
+    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__["default"],
+    JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_2__.Flash, _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_3__.CreatureBase, _Mixins_Creature_Skills__WEBPACK_IMPORTED_MODULE_4__.CreatureSkills],
+  data: function data() {
+    return {
+      rest_length: null
+    };
+  },
+  methods: {
+    roll: function roll(item, modifier, type) {
+      var modifiers = this.creature.modifiers.filter(function (value) {
+        return value.enabled && value[type];
+      });
+      var total = dice.roll();
+      var message = this.creature.display_name + ':<br>' + item + ': [' + total + ']' + (modifier ? ' + ' + modifier : '');
+      total += modifier;
+
+      var _iterator = _createForOfIteratorHelper(modifiers),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var mod = _step.value;
+
+          var _iterator2 = _createForOfIteratorHelper(mod[type + '_dice']),
+              _step2;
+
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var mod_dice = _step2.value;
+              message += mod_dice.count > 0 ? ' + [' : '';
+
+              for (var x = 0; x < mod_dice.count; x++) {
+                var result = dice.roll(mod_dice.size);
+                message += (x > 0 ? ', ' : '') + result;
+                total += result;
+              }
+
+              message += mod_dice.count > 0 ? ']' : '';
+
+              if (mod_dice.modifier) {
+                message += mod_dice.modifier ? ' + ' + mod_dice.modifier : '';
+                total += mod_dice.modifier;
+              }
+
+              message += ' [' + mod.name + ']';
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      message += ' = ' + total;
+      this.flash(message, 'primary');
+    },
+    displayStat: function displayStat(stat) {
+      return (stat > 0 ? '+' : '') + stat;
+    },
+    proficiencyClass: function proficiencyClass(proficient) {
+      return proficient ? 'italic' : '';
     }
   }
 };

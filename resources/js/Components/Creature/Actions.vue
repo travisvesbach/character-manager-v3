@@ -237,8 +237,6 @@
 </template>
 
 <script>
-    import JetButton from '@/Jetstream/Button'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
     import JetDangerButton from '@/Jetstream/DangerButton'
     import JetDialogModal from '@/Jetstream/DialogModal'
     import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
@@ -250,8 +248,6 @@
     import CounterSlot from '@/Components/CounterSlot'
     import GridSection from '@/Components/GridSection'
     import JetCheckbox from '@/Jetstream/Checkbox'
-    import Accordion from '@/Components/Accordion'
-    import AccordionItem from '@/Components/AccordionItem'
 
     import { Flash } from '@/Mixins/Flash';
     import { CreatureBase } from '@/Mixins/Creature/Base';
@@ -259,8 +255,6 @@
 
     export default {
         components: {
-            JetButton,
-            JetSecondaryButton,
             JetDangerButton,
             JetDialogModal,
             JetConfirmationModal,
@@ -272,10 +266,8 @@
             CounterSlot,
             GridSection,
             JetCheckbox,
-            Accordion,
-            AccordionItem,
         },
-        mixins: [Flash, CreatureBase, CreatureActions],
+        mixins: [CreatureActions],
         data() {
             return {
                 show_modal: false,

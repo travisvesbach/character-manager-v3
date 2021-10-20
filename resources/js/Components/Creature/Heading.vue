@@ -126,38 +126,25 @@
 </template>
 
 <script>
-    import JetInput from '@/Jetstream/Input'
     import JetDropdown from '@/Jetstream/Dropdown'
     import JetDropdownLink from '@/Jetstream/DropdownLink'
-    import JetButton from '@/Jetstream/Button'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
-    import JetDangerButton from '@/Jetstream/DangerButton'
-    import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
     import JetDialogModal from '@/Jetstream/DialogModal'
     import JetLabel from '@/Jetstream/Label'
     import JetInputError from '@/Jetstream/InputError'
 
-    import { Flash } from '@/Mixins/Flash';
-    import { CreatureBase } from '@/Mixins/Creature/Base';
+    import { CreatureHeading } from '@/Mixins/Creature/Heading';
 
     export default {
         components: {
-            JetInput,
             JetDropdown,
             JetDropdownLink,
-            JetButton,
-            JetSecondaryButton,
-            JetDangerButton,
             JetDialogModal,
-            JetConfirmationModal,
             JetLabel,
             JetInputError,
         },
         data() {
             return {
-                delete_creature: false,
                 clone_creature: false,
-                hp_calculator: null,
                 hp_temp_calculator: null,
                 form: this.$inertia.form({
                     id: this.creature.id,
@@ -165,14 +152,8 @@
                 }),
             }
         },
-        mixins: [Flash, CreatureBase],
+        mixins: [CreatureHeading],
         methods: {
-            roll(item, modifier) {
-                let result =  dice.roll();
-                let message = this.creature.display_name + ':<br>' +
-                    item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
-                this.flash(message, 'primary');
-            },
             adjustCurrentHp() {
                 if (Number.isInteger(this.creature.hp_current) && Number.isInteger(this.hp_calculator)) {
                     this.creature.hp_current += this.hp_calculator;

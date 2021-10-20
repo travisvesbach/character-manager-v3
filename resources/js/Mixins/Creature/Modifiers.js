@@ -1,4 +1,12 @@
+import JetCheckbox from '@/Jetstream/Checkbox'
+
+import { CreatureBase } from '@/Mixins/Creature/Base';
+
 export const CreatureModifiers = {
+    components: {
+        JetCheckbox,
+    },
+    mixins: [CreatureBase],
     data() {
         return {
             form: this.$inertia.form({}),

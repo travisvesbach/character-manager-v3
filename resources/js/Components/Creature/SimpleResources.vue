@@ -22,22 +22,9 @@
 </template>
 
 <script>
-    import JetButton from '@/Jetstream/Button'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
-    import JetInput from '@/Jetstream/Input'
-    import CounterSlot from '@/Components/CounterSlot'
-
-    import { Flash } from '@/Mixins/Flash';
-    import { CreatureBase } from '@/Mixins/Creature/Base';
     import { CreatureResources } from '@/Mixins/Creature/Resources';
 
     export default {
-        components: {
-            JetButton,
-            JetSecondaryButton,
-            JetInput,
-            CounterSlot,
-        },
-        mixins: [Flash, CreatureBase, CreatureResources],
+        mixins: [CreatureResources],
     }
 </script>

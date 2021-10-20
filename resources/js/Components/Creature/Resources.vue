@@ -123,39 +123,29 @@
 </template>
 
 <script>
-    import JetButton from '@/Jetstream/Button'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
     import JetDangerButton from '@/Jetstream/DangerButton'
     import JetDialogModal from '@/Jetstream/DialogModal'
     import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
     import JetLabel from '@/Jetstream/Label'
-    import JetInput from '@/Jetstream/Input'
     import JetInputError from '@/Jetstream/InputError'
     import SelectInput from '@/Components/SelectInput'
     import DiceArrayInput from '@/Components/DiceArrayInput'
-    import CounterSlot from '@/Components/CounterSlot'
     import GridSection from '@/Components/GridSection'
 
-    import { Flash } from '@/Mixins/Flash';
-    import { CreatureBase } from '@/Mixins/Creature/Base';
     import { CreatureResources } from '@/Mixins/Creature/Resources';
 
     export default {
         components: {
-            JetButton,
-            JetSecondaryButton,
             JetDangerButton,
             JetDialogModal,
             JetConfirmationModal,
             JetLabel,
-            JetInput,
             JetInputError,
             SelectInput,
             DiceArrayInput,
-            CounterSlot,
             GridSection,
         },
-        mixins: [Flash, CreatureBase, CreatureResources],
+        mixins: [CreatureResources],
         data() {
             return {
                 show_modal: false,

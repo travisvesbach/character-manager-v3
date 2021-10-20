@@ -53,41 +53,12 @@
 </template>
 
 <script>
-    import JetInput from '@/Jetstream/Input'
-    import JetButton from '@/Jetstream/Button'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
-    import JetDangerButton from '@/Jetstream/DangerButton'
-    import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
-    import JetLabel from '@/Jetstream/Label'
-    import { Link } from '@inertiajs/inertia-vue3'
-
-    import { Flash } from '@/Mixins/Flash';
-    import { CreatureBase } from '@/Mixins/Creature/Base';
+    import { CreatureHeading } from '@/Mixins/Creature/Heading';
 
     export default {
-        components: {
-            JetInput,
-            JetButton,
-            JetSecondaryButton,
-            JetDangerButton,
-            JetConfirmationModal,
-            JetLabel,
-            Link,
-        },
-        data() {
-            return {
-                delete_creature: false,
-                hp_calculator: null,
-            }
-        },
-        mixins: [Flash, CreatureBase],
+        mixins: [CreatureHeading],
         methods: {
-            roll(item, modifier) {
-                let result =  dice.roll();
-                let message = this.creature.display_name + ':<br>' +
-                    item + ': [' + result + ']' + (modifier ? ' + ' + modifier : '') + ' = ' + (result + modifier);
-                this.flash(message, 'primary');
-            },
+            // modified from creature/heading.vue so that when adding extra hp, it is converted to hp_temp
             adjustHp() {
                 let calc_amount = this.hp_calculator;
                 let update = false;
@@ -126,37 +97,14 @@
                 }
                 this.hp_calculator = null;
             },
-            rollHitDice(dice_index) {
-                if (this.creature.hp_current >= this.creature.hp_max) {
-                    this.flash('Already at full HP', 'danger');
-                } else if (this.creature.hit_dice[dice_index].current == 0) {
-                    this.flash('Out of Hit Dice', 'danger');
-                } else {
-                    this.creature.hit_dice[dice_index].current--;
-                    let output = [];
-                    let result = dice.roll(this.creature.hit_dice[dice_index].size);
-                    let total = result + this.creature.constitution_mod;
-                    output.push(this.creature.display_name + ' rolled a hit dice:');
-                    if(this.creature.hp_current < 0) {
-                        output.push('HP is less than 0; setting HP to 0.');
-                        this.creature.hp_current = 0;
-                    }
-                    output.push('Previous: ' + this.creature.hp_current + ' HP');
-                    output.push('Recovered: [' + result + '] + ' + this.creature.constitution_mod + ' = ' + total + ' HP');
-                    this.creature.hp_current = this.creature.hp_current + total;
-                    if (this.creature.hp_current > this.creature.hp_max) {
-                        this.creature.hp_current = this.creature.hp_max;
-                    }
-                    output.push('New Total: ' + this.creature.hp_current + ' HP');
-                    this.flash(output.join('<br>'), 'primary');
-                    this.updateCreature(true);
-                }
-            },
             deleteCreature() {
                 let form = this.$inertia.form({
                     id: this.creature.id,
                 });
-                form.delete(this.getRoute('destroy'));
+                form.delete(this.getRoute('destroy'), {
+                    preserveState: true,
+                    preserveScroll: true,
+                });
                 this.delete_creature = false;
             }
         }

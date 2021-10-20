@@ -1,4 +1,19 @@
+import JetButton from '@/Jetstream/Button'
+import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+import Accordion from '@/Components/Accordion'
+import AccordionItem from '@/Components/AccordionItem'
+
+import { Flash } from '@/Mixins/Flash';
+import { CreatureBase } from '@/Mixins/Creature/Base';
+
 export const CreatureActions = {
+    components: {
+        JetButton,
+        JetSecondaryButton,
+        Accordion,
+        AccordionItem,
+    },
+    mixins: [Flash, CreatureBase],
     methods: {
         roll(action, advantage = null) {
             let critical = null;
@@ -82,7 +97,7 @@ export const CreatureActions = {
 
             // roll active damage modifiers
             this.creature.modifiers.filter(value => value.enabled && value['damage']).forEach(function(modifier) {
-                if(modifier.damage_as == 'attack') {
+                if(modifier.damage_as == 'attack' && action.attack && action.attack_does_damage ) {
                     damage = this.rollDamage(damage, modifier.damage_dice, critical, modifier.name);
                 }
                 if (modifier.damage_as == 'save') {
