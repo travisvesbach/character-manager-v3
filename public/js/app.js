@@ -21687,31 +21687,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
-/* harmony import */ var _Jetstream_Checkbox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Checkbox */ "./resources/js/Jetstream/Checkbox.vue");
-/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
-/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
-
-
+/* harmony import */ var _Mixins_Creature_Notepad__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Mixins/Creature/Notepad */ "./resources/js/Mixins/Creature/Notepad.js");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  data: function data() {
-    return {
-      notes: this.creature.notes
-    };
-  },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_2__.Flash, _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_3__.CreatureBase],
-  methods: {
-    update: function update() {
-      if (this.notes != this.creature.notes) {
-        this.creature.notes = this.notes;
-        this.updateCreature(true);
-      }
-    }
-  }
+  mixins: [_Mixins_Creature_Notepad__WEBPACK_IMPORTED_MODULE_1__.CreatureNotepad]
 });
 
 /***/ }),
@@ -22097,6 +22080,25 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleNotepad.vue?vue&type=script&lang=js":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleNotepad.vue?vue&type=script&lang=js ***!
+  \****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Mixins_Creature_Notepad__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Mixins/Creature/Notepad */ "./resources/js/Mixins/Creature/Notepad.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  mixins: [_Mixins_Creature_Notepad__WEBPACK_IMPORTED_MODULE_0__.CreatureNotepad]
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleResources.vue?vue&type=script&lang=js":
 /*!******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleResources.vue?vue&type=script&lang=js ***!
@@ -22151,12 +22153,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Creature_SimpleResources__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/Creature/SimpleResources */ "./resources/js/Components/Creature/SimpleResources.vue");
 /* harmony import */ var _Components_Creature_SimpleModifiers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Components/Creature/SimpleModifiers */ "./resources/js/Components/Creature/SimpleModifiers.vue");
 /* harmony import */ var _Components_Creature_SimpleActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Components/Creature/SimpleActions */ "./resources/js/Components/Creature/SimpleActions.vue");
-/* harmony import */ var _Components_Creature_Notepad__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Components/Creature/Notepad */ "./resources/js/Components/Creature/Notepad.vue");
-/* harmony import */ var _Components_Dice__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Components/Dice */ "./resources/js/Components/Dice.vue");
-/* harmony import */ var _Components_Creature_AdditionalStats__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/Creature/AdditionalStats */ "./resources/js/Components/Creature/AdditionalStats.vue");
-/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
-
-
+/* harmony import */ var _Components_Creature_SimpleNotepad__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Components/Creature/SimpleNotepad */ "./resources/js/Components/Creature/SimpleNotepad.vue");
+/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
 
 
 
@@ -22173,11 +22171,9 @@ __webpack_require__.r(__webpack_exports__);
     SimpleResources: _Components_Creature_SimpleResources__WEBPACK_IMPORTED_MODULE_3__["default"],
     SimpleModifiers: _Components_Creature_SimpleModifiers__WEBPACK_IMPORTED_MODULE_4__["default"],
     SimpleActions: _Components_Creature_SimpleActions__WEBPACK_IMPORTED_MODULE_5__["default"],
-    Notepad: _Components_Creature_Notepad__WEBPACK_IMPORTED_MODULE_6__["default"],
-    Dice: _Components_Dice__WEBPACK_IMPORTED_MODULE_7__["default"],
-    AdditionalStats: _Components_Creature_AdditionalStats__WEBPACK_IMPORTED_MODULE_8__["default"]
+    SimpleNotepad: _Components_Creature_SimpleNotepad__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
-  mixins: [_Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_9__.CreatureBase],
+  mixins: [_Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_7__.CreatureBase],
   computed: {
     hpColor: function hpColor() {
       if (this.creature.hp_current <= 0) {
@@ -29192,15 +29188,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "min-height": "12rem"
         },
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-          return $data.notes = $event;
+          return _ctx.notes = $event;
         }),
         onBlur: _cache[1] || (_cache[1] = function () {
-          return $options.update && $options.update.apply($options, arguments);
+          return _ctx.update && _ctx.update.apply(_ctx, arguments);
         }),
         disabled: !_ctx.ownerOrAdmin
       }, null, 40
       /* PROPS, HYDRATE_EVENTS */
-      , _hoisted_1), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.notes]])];
+      , _hoisted_1), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.notes]])];
     }),
     _: 1
     /* STABLE */
@@ -30176,6 +30172,44 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleNotepad.vue?vue&type=template&id=b577f82c":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleNotepad.vue?vue&type=template&id=b577f82c ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "border-t border-color pt-1 mt-1"
+};
+var _hoisted_2 = ["disabled"];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+    id: "notes",
+    "class": "w-full h-full p-0 form-input bg-transparent dark:bg-transparent",
+    style: {
+      "min-height": "6rem"
+    },
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return _ctx.notes = $event;
+    }),
+    onBlur: _cache[1] || (_cache[1] = function () {
+      return _ctx.update && _ctx.update.apply(_ctx, arguments);
+    }),
+    disabled: !_ctx.ownerOrAdmin
+  }, null, 40
+  /* PROPS, HYDRATE_EVENTS */
+  , _hoisted_2), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.notes]])]);
+}
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleResources.vue?vue&type=template&id=89477724":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleResources.vue?vue&type=template&id=89477724 ***!
@@ -30296,7 +30330,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "bg-gray-200 dark:bg-gray-900 p-1 flex-grow"
+  "class": "bg-gray-200 dark:bg-gray-900 p-1 flex-grow flex flex-col"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_simple_heading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("simple-heading");
@@ -30310,6 +30344,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_simple_spells = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("simple-spells");
 
   var _component_simple_resources = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("simple-resources");
+
+  var _component_simple_notepad = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("simple-notepad");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["rounded-md m-2 overflow-hidden flex flex-col", $options.hpColor])
@@ -30346,7 +30382,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: _ctx.type
   }, null, 8
   /* PROPS */
-  , ["creature", "type"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <additional-stats :creature=\"creature\" :type=\"type\" v-if=\"creature.show_additional_stats\"/>\n\n\n                <dice :creature=\"creature\" :disabled=\"disabled\" v-if=\"creature.show_dice\"/> ")])], 2
+  , ["creature", "type"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_simple_notepad, {
+    "class": "flex-grow",
+    creature: _ctx.creature,
+    type: _ctx.type
+  }, null, 8
+  /* PROPS */
+  , ["creature", "type"])])], 2
   /* CLASS */
   );
 }
@@ -38882,6 +38924,40 @@ var CreatureModifiers = {
       this.form.enabled = modifier.enabled;
       this.form.no_alert = true;
       this.saveModifier();
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/Mixins/Creature/Notepad.js":
+/*!*************************************************!*\
+  !*** ./resources/js/Mixins/Creature/Notepad.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CreatureNotepad": () => (/* binding */ CreatureNotepad)
+/* harmony export */ });
+/* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
+/* harmony import */ var _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Mixins/Creature/Base */ "./resources/js/Mixins/Creature/Base.js");
+
+
+var CreatureNotepad = {
+  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_0__.Flash, _Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_1__.CreatureBase],
+  data: function data() {
+    return {
+      notes: this.creature.notes
+    };
+  },
+  methods: {
+    update: function update() {
+      if (this.notes != this.creature.notes) {
+        this.creature.notes = this.notes;
+        this.updateCreature(true);
+      }
     }
   }
 };
@@ -67014,6 +67090,32 @@ _SimpleModifiers_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["defau
 
 /***/ }),
 
+/***/ "./resources/js/Components/Creature/SimpleNotepad.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/Components/Creature/SimpleNotepad.vue ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SimpleNotepad_vue_vue_type_template_id_b577f82c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SimpleNotepad.vue?vue&type=template&id=b577f82c */ "./resources/js/Components/Creature/SimpleNotepad.vue?vue&type=template&id=b577f82c");
+/* harmony import */ var _SimpleNotepad_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SimpleNotepad.vue?vue&type=script&lang=js */ "./resources/js/Components/Creature/SimpleNotepad.vue?vue&type=script&lang=js");
+
+
+
+_SimpleNotepad_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].render = _SimpleNotepad_vue_vue_type_template_id_b577f82c__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_SimpleNotepad_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].__file = "resources/js/Components/Creature/SimpleNotepad.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_SimpleNotepad_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+/***/ }),
+
 /***/ "./resources/js/Components/Creature/SimpleResources.vue":
 /*!**************************************************************!*\
   !*** ./resources/js/Components/Creature/SimpleResources.vue ***!
@@ -69311,6 +69413,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Components/Creature/SimpleNotepad.vue?vue&type=script&lang=js":
+/*!************************************************************************************!*\
+  !*** ./resources/js/Components/Creature/SimpleNotepad.vue?vue&type=script&lang=js ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SimpleNotepad_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SimpleNotepad_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./SimpleNotepad.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleNotepad.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/Components/Creature/SimpleResources.vue?vue&type=script&lang=js":
 /*!**************************************************************************************!*\
   !*** ./resources/js/Components/Creature/SimpleResources.vue?vue&type=script&lang=js ***!
@@ -70715,6 +70833,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SimpleModifiers_vue_vue_type_template_id_15acdb45__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SimpleModifiers_vue_vue_type_template_id_15acdb45__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./SimpleModifiers.vue?vue&type=template&id=15acdb45 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleModifiers.vue?vue&type=template&id=15acdb45");
+
+
+/***/ }),
+
+/***/ "./resources/js/Components/Creature/SimpleNotepad.vue?vue&type=template&id=b577f82c":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/Components/Creature/SimpleNotepad.vue?vue&type=template&id=b577f82c ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SimpleNotepad_vue_vue_type_template_id_b577f82c__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_SimpleNotepad_vue_vue_type_template_id_b577f82c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./SimpleNotepad.vue?vue&type=template&id=b577f82c */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/Creature/SimpleNotepad.vue?vue&type=template&id=b577f82c");
 
 
 /***/ }),

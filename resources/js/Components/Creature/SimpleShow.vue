@@ -2,7 +2,7 @@
     <div class="rounded-md m-2 overflow-hidden flex flex-col" :class="hpColor">
         <simple-heading :creature="creature" :type="type"/>
 
-        <div class="bg-gray-200 dark:bg-gray-900 p-1 flex-grow">
+        <div class="bg-gray-200 dark:bg-gray-900 p-1 flex-grow flex flex-col">
             <simple-stats :creature="creature" :type="type"/>
 
             <simple-modifiers :creature="creature" :type="type" v-if="creature.modifiers.length > 0"/>
@@ -13,10 +13,7 @@
 
             <simple-resources :creature="creature" :type="type" v-if="creature.resources.length > 0"/>
 
-                <!-- <additional-stats :creature="creature" :type="type" v-if="creature.show_additional_stats"/>
-
-
-                <dice :creature="creature" :disabled="disabled" v-if="creature.show_dice"/> -->
+            <simple-notepad class="flex-grow" :creature="creature" :type="type"/>
 
 
         </div>
@@ -30,9 +27,7 @@
     import SimpleResources from '@/Components/Creature/SimpleResources'
     import SimpleModifiers from '@/Components/Creature/SimpleModifiers'
     import SimpleActions from '@/Components/Creature/SimpleActions'
-    import Notepad from '@/Components/Creature/Notepad'
-    import Dice from '@/Components/Dice'
-    import AdditionalStats from '@/Components/Creature/AdditionalStats'
+    import SimpleNotepad from '@/Components/Creature/SimpleNotepad'
 
     import { CreatureBase } from '@/Mixins/Creature/Base';
 
@@ -44,9 +39,7 @@
             SimpleResources,
             SimpleModifiers,
             SimpleActions,
-            Notepad,
-            Dice,
-            AdditionalStats,
+            SimpleNotepad,
         },
         mixins: [CreatureBase],
         computed: {

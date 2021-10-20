@@ -6,28 +6,13 @@
 
 <script>
     import GridSection from '@/Components/GridSection'
-    import JetCheckbox from '@/Jetstream/Checkbox'
 
-    import { Flash } from '@/Mixins/Flash';
-    import { CreatureBase } from '@/Mixins/Creature/Base';
+    import { CreatureNotepad } from '@/Mixins/Creature/Notepad';
 
     export default {
         components: {
             GridSection
         },
-        data() {
-            return {
-                notes: this.creature.notes,
-            }
-        },
-        mixins: [Flash, CreatureBase],
-        methods: {
-            update() {
-                if(this.notes != this.creature.notes) {
-                    this.creature.notes = this.notes;
-                    this.updateCreature(true);
-                }
-            }
-        }
+        mixins: [CreatureNotepad]
     }
 </script>
