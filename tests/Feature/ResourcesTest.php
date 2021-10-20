@@ -31,8 +31,7 @@ class ResourcesTest extends TestCase
         $resource = Resource::factory()->raw(['creature_id' => $character->id, 'creature_type' => 'App\Models\Character']);
 
         $response = $this->actingAs($character->user)
-            ->post(route('resources.store'), $resource)
-            ->assertRedirect($character->path());
+            ->post(route('resources.store'), $resource);
 
         $this->assertDatabaseHas('resources', ['name' => $resource['name']]);
         $this->assertCount(1, $character->resources);
@@ -45,8 +44,7 @@ class ResourcesTest extends TestCase
         $attributes = Resource::factory()->raw(['creature_id' => $character->id, 'creature_type' => 'App\Models\Character']);
 
         $this->actingAs($character->user)
-            ->patch(route('resources.update', $resource), $attributes)
-            ->assertRedirect($character->path());
+            ->patch(route('resources.update', $resource), $attributes);
 
         $this->assertDatabaseHas('resources', ['name' => $attributes['name']]);
     }
@@ -70,8 +68,7 @@ class ResourcesTest extends TestCase
         $resource = Resource::factory()->create(['creature_id' => $character->id, 'creature_type' => 'App\Models\Character']);
 
         $this->actingAs($character->user)
-            ->delete(route('resources.destroy', $resource))
-            ->assertRedirect($character->path());
+            ->delete(route('resources.destroy', $resource));
 
         $this->assertDatabaseMissing('resources', $resource->only('id'));
     }

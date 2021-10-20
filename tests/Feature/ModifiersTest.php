@@ -30,8 +30,7 @@ class ModifiersTest extends TestCase
         $modifier = Modifier::factory()->raw(['creature_id' => $character->id, 'creature_type' => 'App\Models\Character']);
 
         $this->actingAs($character->user)
-            ->post(route('modifiers.store'), $modifier)
-            ->assertRedirect($character->path());
+            ->post(route('modifiers.store'), $modifier);
 
         $this->assertDatabaseHas('modifiers', ['name' => $modifier['name']]);
 
@@ -46,8 +45,7 @@ class ModifiersTest extends TestCase
         $attributes = Modifier::factory()->raw(['creature_id' => $character->id, 'creature_type' => 'App\Models\Character']);
 
         $this->actingAs($character->user)
-            ->patch(route('modifiers.update', $modifier), $attributes)
-            ->assertRedirect($character->path());
+            ->patch(route('modifiers.update', $modifier), $attributes);
 
         $this->assertDatabaseHas('modifiers', ['name' => $attributes['name']]);
     }
@@ -71,8 +69,7 @@ class ModifiersTest extends TestCase
         $modifier = Modifier::factory()->create(['creature_id' => $character->id, 'creature_type' => 'App\Models\Character']);
 
         $this->actingAs($character->user)
-            ->delete(route('modifiers.destroy', $modifier))
-            ->assertRedirect($character->path());
+            ->delete(route('modifiers.destroy', $modifier));
 
         $this->assertDatabaseMissing('modifiers', $modifier->only('id'));
     }

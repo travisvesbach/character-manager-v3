@@ -30,8 +30,7 @@ class ActionsTest extends TestCase
         $action = Action::factory()->raw(['creature_id' => $character->id, 'creature_type' => 'App\Models\Character']);
 
         $this->actingAs($character->user)
-            ->post(route('actions.store'), $action)
-            ->assertRedirect($character->path());
+            ->post(route('actions.store'), $action);
 
         $this->assertDatabaseHas('actions', ['name' => $action['name']]);
 
@@ -45,8 +44,7 @@ class ActionsTest extends TestCase
         $attributes = Action::factory()->raw(['creature_id' => $character->id, 'creature_type' => 'App\Models\Character']);
 
         $this->actingAs($character->user)
-            ->patch(route('actions.update', $action), $attributes)
-            ->assertRedirect($character->path());
+            ->patch(route('actions.update', $action), $attributes);
 
         $this->assertDatabaseHas('actions', ['name' => $attributes['name']]);
     }
@@ -70,8 +68,7 @@ class ActionsTest extends TestCase
         $action = Action::factory()->create(['creature_id' => $character->id, 'creature_type' => 'App\Models\Character']);
 
         $this->actingAs($character->user)
-            ->delete(route('actions.destroy', $action))
-            ->assertRedirect($character->path());
+            ->delete(route('actions.destroy', $action));
 
         $this->assertDatabaseMissing('actions', $action->only('id'));
     }
