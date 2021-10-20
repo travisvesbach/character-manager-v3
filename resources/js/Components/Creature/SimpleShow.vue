@@ -9,10 +9,10 @@
 
             <simple-actions :creature="creature" :type="type"/>
 
+            <simple-spells :creature="creature" :type="type" v-if="creature.spellcaster"/>
 
                 <!-- <additional-stats :creature="creature" :type="type" v-if="creature.show_additional_stats"/>
 
-                <actions class="flex-grow" :creature="creature" :type="type"/>
 
                 <dice :creature="creature" :disabled="disabled" v-if="creature.show_dice"/> -->
 
@@ -24,7 +24,7 @@
 <script>
     import SimpleHeading from '@/Components/Creature/SimpleHeading'
     import SimpleStats from '@/Components/Creature/SimpleStats'
-    import Spells from '@/Components/Creature/Spells'
+    import SimpleSpells from '@/Components/Creature/SimpleSpells'
     import Resources from '@/Components/Creature/Resources'
     import SimpleModifiers from '@/Components/Creature/SimpleModifiers'
     import SimpleActions from '@/Components/Creature/SimpleActions'
@@ -38,7 +38,7 @@
         components: {
             SimpleHeading,
             SimpleStats,
-            Spells,
+            SimpleSpells,
             Resources,
             SimpleModifiers,
             SimpleActions,

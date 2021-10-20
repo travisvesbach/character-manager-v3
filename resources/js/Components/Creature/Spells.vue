@@ -23,9 +23,9 @@
                 <jet-input type="number" class="w-14" :class="disabled ? 'hidden' : ''" v-model.number="creature.spell_points_current" @change="usePoints();"/>
                 <span :class="disabled ? 'hidden' : ''">/</span> {{creature.spell_points_max}}
             </div>
-            <div v-for="(cost, level) in spell_point_costs">
-                <button class="btn-text" v-if="level != 0 && level <= creature.spell_level" @click="usePoints(cost)" :disabled="disabled">
-                    {{level}}: {{cost}} points
+            <div v-for="(cost, index) in spell_point_costs_available">
+                <button class="btn-text" @click="usePoints(cost)" :disabled="disabled">
+                    {{index+1}}: {{cost}} points
                 </button>
             </div>
         </div>
@@ -93,6 +93,7 @@
 
     import { Flash } from '@/Mixins/Flash';
     import { CreatureBase } from '@/Mixins/Creature/Base';
+    import { CreatureSpells } from '@/Mixins/Creature/Spells';
 
     export default {
         components: {
@@ -107,56 +108,20 @@
             CounterSlot,
             GridSection,
         },
-        mixins: [Flash, CreatureBase],
+        mixins: [Flash, CreatureBase, CreatureSpells],
         data() {
             return {
                 accordion_key: 0,
                 model_show: false,
-                spell_point_costs: [2,3,5,6,7,9,10,11,13],
-                form: {},
                 prepared_spells: [],
             };
         },
         computed: {
-            filteredSpellLists() {
-                let list = [];
-                if(this.creature.spellcaster) {
-                    for(let i=0;i<10;i++) {
-                        let level_list = this.creature['spell_list_' + i];
-                        if(level_list && level_list.length > 0) {
-                            if(this.creature.spell_list_type == 'known' || i == 0) {
-                                list.push([i, level_list]);
-                            } else if(this.creature.spell_prepared) {
-                                let common = level_list.filter(value => this.creature.spell_prepared.includes(value));
-                                if(common.length > 0) {
-                                    list.push([i, common]);
-                                }
-                            }
-                        }
-                    }
-                    this.accordion_key++;
-                }
-                return list;
-            },
             preparedCount() {
                 return this.prepared_spells ? this.prepared_spells.length : 0;
             }
         },
         methods: {
-            ordinalSuffix(num) {
-                let j = num % 10
-                let k = num % 100;
-                if (j == 1 && k != 11) {
-                    return num + "st";
-                }
-                if (j == 2 && k != 12) {
-                    return num + "nd";
-                }
-                if (j == 3 && k != 13) {
-                    return num + "rd";
-                }
-                return num + "th";
-            },
             openModal() {
                 this.prepared_spells = this.creature.spell_prepared || [];
                 this.model_show = true;
@@ -168,18 +133,6 @@
                 this.creature.spell_prepared = this.prepared_spells;
                 this.updateCreature();
                 this.closeModal();
-            },
-            updateSlot(level, index) {
-                this.creature['spell_slots_' + level][index] = !this.creature['spell_slots_' + level][index];
-                this.updateCreature(true);
-            },
-            usePoints(cost = null) {
-                if (this.creature.spell_points_current >= cost) {
-                    this.creature.spell_points_current -= cost;
-                } else if(cost != null) {
-                    this.flash('Not enough spell points remaining', 'danger');
-                }
-                this.updateCreature();
             },
         },
     }

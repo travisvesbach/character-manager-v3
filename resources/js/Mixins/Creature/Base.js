@@ -190,7 +190,7 @@ export const CreatureBase = {
 
             form.patch(this.getRoute('update'), {
                 preserveState: true,
-                // preserveScroll: true,
+                preserveScroll: true,
             });
         }
     }
