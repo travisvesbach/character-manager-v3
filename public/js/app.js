@@ -29998,7 +29998,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "bg-gray-200 dark:bg-gray-900 p-1 flex-grow flex flex-col"
+  "class": "bg-gray-100 dark:bg-gray-900 p-1 flex-grow flex flex-col"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_simple_heading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("simple-heading");
@@ -30033,19 +30033,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: _ctx.type
   }, null, 8
   /* PROPS */
-  , ["creature", "type"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_simple_actions, {
-    creature: _ctx.creature,
-    type: _ctx.type
-  }, null, 8
-  /* PROPS */
-  , ["creature", "type"]), _ctx.creature.spellcaster ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_simple_spells, {
+  , ["creature", "type"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.creature.actions.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_simple_actions, {
     key: 1,
     creature: _ctx.creature,
     type: _ctx.type
   }, null, 8
   /* PROPS */
-  , ["creature", "type"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.creature.resources.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_simple_resources, {
+  , ["creature", "type"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.creature.spellcaster ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_simple_spells, {
     key: 2,
+    creature: _ctx.creature,
+    type: _ctx.type
+  }, null, 8
+  /* PROPS */
+  , ["creature", "type"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.creature.resources.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_simple_resources, {
+    key: 3,
     creature: _ctx.creature,
     type: _ctx.type
   }, null, 8

@@ -2,12 +2,12 @@
     <div class="rounded-md m-2 overflow-hidden flex flex-col" :class="hpColor">
         <simple-heading :creature="creature" :type="type"/>
 
-        <div class="bg-gray-200 dark:bg-gray-900 p-1 flex-grow flex flex-col">
+        <div class="bg-gray-100 dark:bg-gray-900 p-1 flex-grow flex flex-col">
             <simple-stats :creature="creature" :type="type"/>
 
             <simple-modifiers :creature="creature" :type="type" v-if="creature.modifiers.length > 0"/>
 
-            <simple-actions :creature="creature" :type="type"/>
+            <simple-actions :creature="creature" :type="type" v-if="creature.actions.length > 0"/>
 
             <simple-spells :creature="creature" :type="type" v-if="creature.spellcaster"/>
 
