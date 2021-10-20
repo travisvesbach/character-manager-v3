@@ -11,6 +11,8 @@
 
             <simple-spells :creature="creature" :type="type" v-if="creature.spellcaster"/>
 
+            <simple-resources :creature="creature" :type="type" v-if="creature.resources.length > 0"/>
+
                 <!-- <additional-stats :creature="creature" :type="type" v-if="creature.show_additional_stats"/>
 
 
@@ -25,7 +27,7 @@
     import SimpleHeading from '@/Components/Creature/SimpleHeading'
     import SimpleStats from '@/Components/Creature/SimpleStats'
     import SimpleSpells from '@/Components/Creature/SimpleSpells'
-    import Resources from '@/Components/Creature/Resources'
+    import SimpleResources from '@/Components/Creature/SimpleResources'
     import SimpleModifiers from '@/Components/Creature/SimpleModifiers'
     import SimpleActions from '@/Components/Creature/SimpleActions'
     import Notepad from '@/Components/Creature/Notepad'
@@ -39,7 +41,7 @@
             SimpleHeading,
             SimpleStats,
             SimpleSpells,
-            Resources,
+            SimpleResources,
             SimpleModifiers,
             SimpleActions,
             Notepad,
