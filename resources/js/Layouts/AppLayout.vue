@@ -31,15 +31,15 @@
                                     </jet-nav-link>
                                     <jet-nav-link :href="route('characters.index')" :active="route().current('characters*')" title="Characters">
                                         <!-- Characters -->
-                                        <user-icon class="h-4 w-4"/>
+                                        <character-icon class="h-6 w-6"/>
                                     </jet-nav-link>
                                     <jet-nav-link :href="route('encounters.index')" :active="route().current('encounters*')" title="Encounters">
                                         <!-- Encounters -->
-                                        <encounter-icon class="h-4 w-4"/>
+                                        <encounter-icon class="h-6 w-6"/>
                                     </jet-nav-link>
                                     <jet-nav-link :href="route('monsters.index')" :active="route().current('monsters*')" title="Monsters">
                                         <!-- Monsters -->
-                                        <monster-icon class="h-4 w-4"/>
+                                        <monster-icon class="h-6 w-6"/>
                                     </jet-nav-link>
                                     <flash v-bind:message="$page.props.flash.message" v-bind:status="$page.props.flash.status" v-bind:timestamp="$page.props.flash.timestamp"></flash>
                                 </div>
@@ -192,7 +192,7 @@
     import Flash from '@/Components/Flash'
     import EncounterIcon from '@/Components/Icons/Encounter'
     import MonsterIcon from '@/Components/Icons/Monster'
-    import UserIcon from '@/Components/Icons/User'
+    import CharacterIcon from '@/Components/Icons/Character'
 
     export default defineComponent({
         props: {
@@ -213,7 +213,7 @@
             Flash,
             EncounterIcon,
             MonsterIcon,
-            UserIcon,
+            CharacterIcon,
         },
 
         data() {

@@ -7,8 +7,8 @@
         <div class="w-full md:w-3/4 xl:w-1/2 mx-auto pb-10 sm:px-6 lg:px-8 m-2">
 
             <div class="flex mb-1 mx-2 items-end">
-                <div class="flex items-center">
-                    <monster-icon class="h-6 w-6"/>
+                <div class="flex items-end">
+                    <monster-icon class="h-8 w-8"/>
                     <span class="ml-1">{{ monsters.length }} {{ monsters.length == 1 ? 'monster' : 'monsters' }}</span>
                 </div>
 

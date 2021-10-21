@@ -6,8 +6,8 @@
 
         <div class="w-full md:w-3/4 xl:w-1/2 mx-auto pb-10 sm:px-6 lg:px-8 m-2">
             <div class="flex mb-1 mx-2 items-end">
-                <div class="flex items-center">
-                    <user-icon class="h-6 w-6"/>
+                <div class="flex items-end">
+                    <character-icon class="h-8 w-8"/>
                     <span class="ml-1">{{ characters.length }} {{ characters.length == 1 ? 'character' : 'characters' }}</span>
                 </div>
 
@@ -61,7 +61,7 @@
                                 <template #content>
                                     <div>
                                         <jet-dropdown-link @click.native="toggleArchive(character)" as="button">
-                                            Archive Character
+                                            {{ character.archive_date ? 'Unarchive' : 'Archive' }} Character
                                         </jet-dropdown-link>
                                         <jet-dropdown-link :href="route('characters.edit', character.id)">
                                             Edit Character
@@ -113,7 +113,7 @@
     import JetCheckbox from '@/Jetstream/Checkbox'
     import JetLabel from '@/Jetstream/Label'
     import { Link } from '@inertiajs/inertia-vue3'
-    import UserIcon from '@/Components/Icons/User'
+    import CharacterIcon from '@/Components/Icons/Character'
 
     export default {
         props: ['characters'],
@@ -130,7 +130,7 @@
             Link,
             JetCheckbox,
             JetLabel,
-            UserIcon,
+            CharacterIcon,
         },
         data() {
             return {
