@@ -38,6 +38,7 @@
                                     <jet-nav-link :href="route('monsters.index')" :active="route().current('monsters*')">
                                         Monsters
                                     </jet-nav-link>
+                                    <flash v-bind:message="$page.props.flash.message" v-bind:status="$page.props.flash.status" v-bind:timestamp="$page.props.flash.timestamp"></flash>
                                 </div>
                             </div>
 
@@ -112,6 +113,8 @@
                             <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                 Dashboard
                             </jet-responsive-nav-link>
+
+                            <flash v-bind:message="$page.props.flash.message" v-bind:status="$page.props.flash.status" v-bind:timestamp="$page.props.flash.timestamp"></flash>
                         </div>
 
                         <!-- Responsive Settings Options -->
@@ -167,8 +170,6 @@
                     <slot></slot>
                 </main>
 
-                <!-- Flash Message -->
-                <flash v-bind:message="$page.props.flash.message" v-bind:status="$page.props.flash.status" v-bind:timestamp="$page.props.flash.timestamp"></flash>
             </div>
         </div>
     </div>

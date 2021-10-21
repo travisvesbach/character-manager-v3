@@ -60,6 +60,18 @@
     @apply dark:text-yellow-600 dark:hover:text-yellow-500 dark:focus:text-yellow-500;
 }
 
+.nav-link {
+    @apply inline-flex items-center ml-3 px-1 pt-1 border-b-2 text-sm font-medium leading-5 focus:outline-none transition h-full;
+}
+
+.nav-link-inactive {
+    @apply border-transparent dark:hover:border-yellow-500 dark:focus:border-yellow-500;
+}
+
+.nav-link-active {
+    @apply border-indigo-400 text-gray-900 focus:border-indigo-700 dark:text-yellow-500 dark:border-yellow-500 dark:focus:border-yellow-500;
+}
+
 .text-color {
     @apply text-gray-600;
     @apply dark:text-gray-300;

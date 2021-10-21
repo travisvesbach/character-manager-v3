@@ -1,5 +1,5 @@
 <template>
-    <Link :href="href" class="inline-flex items-center ml-3 px-1 pt-1 border-b-2 text-sm font-medium leading-5 focus:outline-none transition h-full" :class="classes">
+    <Link :href="href" class="nav-link" :class="classes">
         <slot />
     </Link>
 </template>
@@ -17,8 +17,8 @@
         computed: {
             classes() {
                 return this.active
-                    ? 'border-indigo-400 text-gray-900 focus:border-indigo-700 dark:text-yellow-500 dark:border-yellow-500 dark:focus:border-yellow-500'
-                    : 'border-transparent dark:hover:border-yellow-500 dark:focus:border-yellow-500 link-color'
+                    ? 'nav-link-active'
+                    : 'nav-link-inactive link-color'
 
 
 
