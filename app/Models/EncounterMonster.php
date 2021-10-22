@@ -11,6 +11,8 @@ class EncounterMonster extends Creature
 {
     use HasFactory;
 
+    protected $touches = ['encounter'];
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);

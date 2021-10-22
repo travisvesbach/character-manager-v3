@@ -40,7 +40,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-4">
-
             <grid-section class="col-span-3">
                 <draggable class="grid md:grid-cols-2 xl:grid-cols-3"
                     v-model="encounter_monsters"
@@ -63,9 +62,7 @@
                     <textarea id="notes" class="w-full h-full p-0 form-input bg-transparent dark:bg-transparent" style="min-height: 12rem;" v-model="encounter.notes" @blur="updateEncounter(true)"/>
                 </grid-section>
             </div>
-
         </div>
-
 
         <!-- delete confirmation -->
         <jet-confirmation-modal :show="delete_encounter" @close="delete_encounter = false">

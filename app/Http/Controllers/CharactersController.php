@@ -12,7 +12,7 @@ use Carbon\Carbon;
 class CharactersController extends Controller
 {
     public function index() {
-        $characters = auth()->user()->characters->sortBy('name');
+        $characters = auth()->user()->characters->sortBy('name')->values();
         return Inertia::render('Characters/Index', compact(['characters']));
     }
 

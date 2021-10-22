@@ -11,7 +11,7 @@ use App\Http\Requests\EncounterRequest;
 class EncountersController extends Controller
 {
     public function index() {
-        $encounters = auth()->user()->encounters->sortBy('name');
+        $encounters = auth()->user()->encounters->loadCount('monsters')->sortBy('name')->values();
         return Inertia::render('Encounters/Index', compact(['encounters']));
     }
 

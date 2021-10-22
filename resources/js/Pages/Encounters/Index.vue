@@ -24,6 +24,7 @@
                 <thead>
                     <tr class="border-b-2 border-color">
                         <th class="p-1 text-left">Name</th>
+                        <th class="p-1 text-left">Monster Count</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,7 @@
                         <td class="py-2 px-1">
                             <Link :href="encounter.path" class="text-lg link-color" v-html="highlight(encounter.name)"/>
                         </td>
+                        <td class="py-2 px-1" v-html="encounter.monsters_count"/>
                         <td class="py-2 px-1" v-if="ownerOrAdmin(encounter)">
                             <!-- dropdown -->
                             <jet-dropdown align="right" width="48" class="hover-target">

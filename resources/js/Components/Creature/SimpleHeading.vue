@@ -2,8 +2,8 @@
     <div class="p-1">
         <div>
             <div class="flex items-baseline">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 drag-handle cursor-move" fill="none" viewBox="0 0 24 24" stroke="currentColor" title="Drag and drop to sort">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 drag-handle cursor-move" fill="currentColor" viewBox="0 0 512 512" stroke="currentColor" title="Drag and drop to sort">
+                    <path d="M256 34.47l-90.51 90.51h67.883v108.393H124.98V165.49L34.47 256l90.51 90.51v-67.883h108.393V387.02H165.49L256 477.53l90.51-90.51h-67.883V278.627H387.02v67.883L477.53 256l-90.51-90.51v67.883H278.627V124.98h67.883L256 34.47z"/>
                 </svg>
                 <Link :href="creature.path" class="text-2xl font-bold" title="Show">
                     {{ creature.display_name }}

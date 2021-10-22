@@ -49,7 +49,7 @@ class EncounterMonstersController extends Controller
             $this->authorize('update', $encounter_monster);
         }
 
-        $encounter_monster->load(['resources', 'modifiers', 'actions']);
+        $encounter_monster->load(['resources', 'modifiers', 'actions', 'encounter']);
 
         return Inertia::render('EncounterMonsters/Show', compact(['encounter_monster']));
     }

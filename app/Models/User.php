@@ -77,18 +77,18 @@ class User extends Authenticatable
     }
 
     public function characters() {
-        return $this->hasMany(Character::class)->orderBy('name');
+        return $this->hasMany(Character::class);
     }
 
     public function monsters() {
-        return $this->hasMany(Monster::class)->orderBy('name');
+        return $this->hasMany(Monster::class);
     }
 
     public function encounters() {
-        return $this->hasMany(Encounter::class)->orderBy('name');
+        return $this->hasMany(Encounter::class);
     }
 
     public function encounterMonsters() {
-        return $this->hasMany(EncounterMonsters::class)->orderBy('name');
+        return $this->hasMany(EncounterMonsters::class);
     }
 }

@@ -8,7 +8,7 @@
             <div class="flex mb-1 mx-2 items-end">
                 <div class="flex items-end">
                     <character-icon class="h-8 w-8"/>
-                    <span class="ml-1">{{ characters.length }} {{ characters.length == 1 ? 'character' : 'characters' }}</span>
+                    <span class="ml-1">{{ characterCount }} {{ characterCount == 1 ? 'character' : 'characters' }}</span>
                 </div>
 
                 <div class="ml-auto">
@@ -161,6 +161,12 @@
                 }
                 return result;
             },
+            characterCount() {
+                if(!this.show_archived) {
+                    return this.characters.filter((obj) => obj.archive_date == null).length;
+                }
+                return this.characters.length;
+            }
         },
         methods: {
             ownerOrAdmin(character) {
