@@ -41,12 +41,8 @@
                         </td>
                         <td class="py-2 px-1" v-html="highlight(character.class)"/>
                         <td class="py-2 px-1" v-html="highlight(character.race)"/>
-                        <td class="py-2 px-1">
-                            {{ character.level }}
-                        </td>
-                        <td class="py-2 px-1">
-                            {{ character.archive_date ?? '' }}
-                        </td>
+                        <td class="py-2 px-1" v-html="character.level"/>
+                        <td class="py-2 px-1" v-html="character.archive_date ?? '&#8212'"/>
                         <td class="py-2 px-1" v-if="ownerOrAdmin(character)">
                             <!-- dropdown -->
                             <jet-dropdown align="right" width="48" class="hover-target">

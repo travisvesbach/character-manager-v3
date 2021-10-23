@@ -1444,6 +1444,10 @@ select {
 .list-disc {
 	list-style-type: disc;
 }
+.auto-cols-min {
+	grid-auto-columns: -webkit-min-content;
+	grid-auto-columns: min-content;
+}
 .grid-cols-6 {
 	grid-template-columns: repeat(6, minmax(0, 1fr));
 }

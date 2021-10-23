@@ -143,7 +143,7 @@
                     <div class="col-span-1 px-1" v-if="type == 'Monster' || type == 'Encounter Monster'">
                         <!-- source -->
                         <jet-label for="source" value="Source" class="mt-4"/>
-                        <jet-input type="text" id="source" class="mt-1 w-full" placeholder="Monster Manual p341" v-model="form.source" required/>
+                        <jet-input type="text" id="source" class="mt-1 w-full" placeholder="Monster Manual p341" v-model="form.source"/>
                         <jet-input-error :message="form.errors.alignment" class="mt-2"/>
                     </div>
                     <div class="col-span-1 px-1" v-if="type == 'Monster'">

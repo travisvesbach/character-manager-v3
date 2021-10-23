@@ -28,7 +28,8 @@
                 <thead>
                     <tr class="border-b-2 border-color">
                         <th class="p-1 text-left">Name</th>
-                        <th class="p-1 text-left">Monster Count</th>
+                        <th class="p-1 text-left">Monsters</th>
+                        <th class="p-1 text-left">Experience</th>
                         <th class="p-1 text-left">Difficulty</th>
                     </tr>
                 </thead>
@@ -38,6 +39,7 @@
                             <Link :href="encounter.path" class="text-lg link-color" v-html="highlight(encounter.name)"/>
                         </td>
                         <td class="py-2 px-1" v-html="encounter.monsters_count"/>
+                        <td class="py-2 px-1" v-html="encounter.experience"/>
                         <td class="py-2 px-1" v-html="encounter.difficulty"/>
                         <td class="py-2 px-1" v-if="ownerOrAdmin(encounter)">
                             <!-- dropdown -->

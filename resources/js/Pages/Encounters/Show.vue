@@ -57,6 +57,14 @@
             </grid-section>
 
             <div class="col-span-1 flex flex-col">
+                <grid-section title="Info">
+                    <div class="grid grid-cols-2">
+                        <div class="font-bold">Experience:</div>
+                        <div>{{ encounter.experience }}</div>
+                        <div class="font-bold">Difficulty:</div>
+                        <div v-html="encounter.difficulty"/>
+                    </div>
+                </grid-section>
                 <dice />
                 <grid-section class="flex-grow" title="Notepad">
                     <textarea id="notes" class="w-full h-full p-0 form-input bg-transparent dark:bg-transparent" style="min-height: 12rem;" v-model="encounter.notes" @blur="updateEncounter(true)"/>
