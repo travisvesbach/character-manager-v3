@@ -112,12 +112,8 @@ class Encounter extends Model
             }
         }
 
-
         $encounter_multipliers = [1, 1.5, 2, 2.5, 3, 4];
         $monster_count = $this->loadCount('monsters')->monsters_count;
-
-
-        // dd($monster_count);
 
         if($monster_count == 1) {
             $index = $this->multiplierByPartySize(0, $party_size);
@@ -147,9 +143,9 @@ class Encounter extends Model
 
     public function multiplierByPartySize($index, $party_size) {
         if($party_size < 3) {
-            return $index == 5 ? $index : $index++;
+            return $index == 5 ? $index : $index + 1;
         } elseif($party_size > 5) {
-            return $index == 0 ? $index : $index--;
+            return $index == 0 ? $index : $index - 1;
         } else {
             return $index;
         }
