@@ -41,7 +41,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-4">
             <grid-section class="col-span-3">
-                <draggable class="grid md:grid-cols-2 xl:grid-cols-3"
+                <draggable class="grid md:grid-cols-2 xl:grid-cols-3 "
                     v-model="encounter_monsters"
                     v-bind="{animation: 200}"
                     @change="updateMonsterWeights"

@@ -1,6 +1,5 @@
 export const CreatureBase = {
     props: ['creature', 'type'],
-    emits: ['updated'],
     computed: {
         ownerOrAdmin() {
             if(this.$page.props.user.id == this.creature.user_id || this.$page.props.user.admin) {

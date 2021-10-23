@@ -27,6 +27,11 @@
                     </span>
                     <jet-input type="number" class="w-10 text-sm p-1 ml-1" @keyup.enter="adjustHp()" v-model.number="hp_calculator"/>
                 </div>
+                <button class="mt-auto mb-1 btn-text" @click="toggleContent">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 transform ease-in duration-200" :class="show_content ? '-rotate-90' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
             </div>
         </div>
 
@@ -57,7 +62,16 @@
 
     export default {
         mixins: [CreatureHeading],
+        data() {
+            return {
+                show_content: false,
+            }
+        },
         methods: {
+            toggleContent() {
+                this.show_content = !this.show_content;
+                this.$emit('toggleShow')
+            },
             // modified from creature/heading.vue so that when adding extra hp, it is converted to hp_temp
             adjustHp() {
                 let calc_amount = this.hp_calculator;

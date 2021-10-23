@@ -125,7 +125,7 @@ class Encounter extends Model
             $index = $this->multiplierByPartySize(3, $party_size);
         } elseif($monster_count <= 14) {
             $index = $this->multiplierByPartySize(4, $party_size);
-        } elseif($monster_count > 15) {
+        } elseif($monster_count >= 15) {
             $index = $this->multiplierByPartySize(5, $party_size);
         }
 
