@@ -18,6 +18,8 @@ class Encounter extends Model
 
     protected $appends = [
         'path',
+        'experience',
+        'difficulty',
     ];
 
     public function path() {
@@ -51,5 +53,25 @@ class Encounter extends Model
             return $monster->name_number + 1;
         }
         return 0;
+    }
+
+    public function experience() {
+        $experience = 0;
+        foreach($this->monsters as $monster) {
+            $experience += $monster->experience;
+        }
+        return $experience;
+    }
+
+    public function getExperienceAttribute() {
+        return $this->experience();
+    }
+
+    public function difficulty() {
+
+    }
+
+    public function getDifficultyAttribute() {
+        return $this->difficulty();
     }
 }

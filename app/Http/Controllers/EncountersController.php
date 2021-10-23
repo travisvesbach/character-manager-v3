@@ -12,7 +12,9 @@ class EncountersController extends Controller
 {
     public function index() {
         $encounters = auth()->user()->encounters->loadCount('monsters')->sortBy('name')->values();
-        return Inertia::render('Encounters/Index', compact(['encounters']));
+        $party = auth()->user()->party;
+
+        return Inertia::render('Encounters/Index', compact(['encounters', 'party']));
     }
 
     public function create() {

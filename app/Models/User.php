@@ -33,6 +33,7 @@ class User extends Authenticatable
         'theme',
         'font',
         'admin',
+        'party',
     ];
 
     /**
@@ -54,6 +55,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'party'             => 'array',
     ];
 
     /**

@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/users/{user}/edit', [UsersController::class, 'edit'])->name('users.edit');
     Route::patch('/users/{user}', [UsersController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
+    Route::patch('/users/{user}/party', [UsersController::class, 'updateParty'])->name('users.party');
 
     Route::resource('characters', CharactersController::class);
     Route::patch('/characters/{character}/rest', [CharactersController::class, 'rest'])->name('characters.rest');

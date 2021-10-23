@@ -1,8 +1,16 @@
 <template>
-    <div v-for="(object, index) in modelValue">
-        <dice-input id="hit_dice" class="mt-1 inline-block" v-model:count="object.count" v-model:size="object.size" v-model:modifier="object.modifier" v-model:type="object.type" :same="same" @input="update(object)"/>
-        <jet-secondary-button class="ml-2" @click.prevent="modelValue.splice(index, 1)" v-if="modelValue && modelValue.length > 1" title="Remove Dice">&#x2212</jet-secondary-button>
-        <jet-secondary-button class="ml-2" @click.prevent="add" v-if="multiple && index+1 == modelValue.length" title="Add Dice">+</jet-secondary-button>
+    <div v-for="(object, index) in modelValue" class="mt-1 flex">
+        <dice-input id="hit_dice" class="inline-block" v-model:count="object.count" v-model:size="object.size" v-model:modifier="object.modifier" v-model:type="object.type" :same="same" @input="update(object)"/>
+        <jet-secondary-button class="ml-2" @click.prevent="modelValue.splice(index, 1)" v-if="modelValue && modelValue.length > 1" title="Remove Dice">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+            </svg>
+        </jet-secondary-button>
+        <jet-secondary-button class="ml-2" @click.prevent="add" v-if="multiple && index+1 == modelValue.length" title="Add Dice">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+        </jet-secondary-button>
     </div>
 </template>
 

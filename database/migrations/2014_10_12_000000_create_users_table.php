@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('theme')->default('light');
             $table->string('font')->default('default');
             $table->boolean('admin')->default(false);
+            $table->json('party')->nullable();
             $table->timestamps();
         });
     }

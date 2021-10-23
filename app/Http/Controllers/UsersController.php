@@ -85,4 +85,16 @@ class UsersController extends Controller
 
         return redirect('/users')->with(['flash_message' => $user->name . ' deleted', 'flash_status' => 'danger']);
     }
+
+    public function updateParty(Request $request, User $user) {
+        $this->authorize('manageUsers', User::class);
+        request()->validate([
+            'party' => ['required', 'array'],
+        ]);
+
+        $user->party = request()->input('party');
+        $user->save();
+
+        return redirect(route('encounters.index'));
+    }
 }
