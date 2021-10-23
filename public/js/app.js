@@ -20442,6 +20442,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     hasActions: function hasActions() {
       return !!this.$slots.actions;
+    },
+    widthClass: function widthClass() {
+      return 'md:w-' + this.width;
     }
   }
 });
@@ -25880,7 +25883,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onSubmit: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return _ctx.$emit('submitted');
     }, ["prevent"])),
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["w-full mx-auto py-10", 'md:w-' + $props.width])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["w-full mx-auto py-10", $options.widthClass])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_card, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createSlots)({
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")];
@@ -35982,7 +35985,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
         size: "sm",
         "class": "ml-2",
-        title: "Party",
+        title: "Party members",
         onClick: $options.openPartyModal
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {

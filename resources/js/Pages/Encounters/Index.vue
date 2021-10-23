@@ -18,7 +18,7 @@
                 <Link :href="route('encounters.create')" class="btn btn-primary" :as="'button'">
                         New Encounter
                 </Link>
-                <jet-button size="sm" class="ml-2" title="Party" @click="openPartyModal">
+                <jet-button size="sm" class="ml-2" title="Party members" @click="openPartyModal">
                     <character-icon class="h-6 w-6"/>
                 </jet-button>
             </div>

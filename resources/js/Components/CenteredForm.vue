@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="$emit('submitted')" class="w-full mx-auto py-10" :class="'md:w-' + width">
+    <form @submit.prevent="$emit('submitted')" class="w-full mx-auto py-10" :class="widthClass">
         <card>
             <slot></slot>
             <template #footerend v-if="hasActions">
@@ -25,6 +25,9 @@
             hasActions() {
                 return !! this.$slots.actions;
             },
+            widthClass() {
+                return 'md:w-' + this.width;
+            }
         }
     }
 </script>
