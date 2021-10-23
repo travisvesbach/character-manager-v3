@@ -42,10 +42,6 @@ class EncounterMonster extends Creature
         return $this->path();
     }
 
-    public function user() {
-        return $this->belongsTo(User::class);
-    }
-
     public function encounter() {
         return $this->belongsTo(Encounter::class);
     }

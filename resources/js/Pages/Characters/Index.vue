@@ -150,7 +150,6 @@
                 }, this);
                 if(this.search) {
                     let searching = this.search.toLowerCase();
-                    console.log('here');
                     result = result.filter(function(character) {
                         if (character.name.toLowerCase().includes(searching) || character.class.toLowerCase().includes(searching) || character.race.toLowerCase().includes(searching)) {
                             return true;
