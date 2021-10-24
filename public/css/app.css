@@ -2809,6 +2809,10 @@ input[type=checkbox] {
 	--tw-text-opacity: 1;
 	color: rgba(112, 201, 137, var(--tw-text-opacity));
 }
+.dark .dark\:text-gray-500 {
+	--tw-text-opacity: 1;
+	color: rgba(107, 114, 128, var(--tw-text-opacity));
+}
 .dark .dark\:hover\:bg-gray-600:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgba(75, 85, 99, var(--tw-bg-opacity));

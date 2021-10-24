@@ -22006,8 +22006,6 @@ __webpack_require__.r(__webpack_exports__);
     SimpleModifiers: _Components_Creature_SimpleModifiers__WEBPACK_IMPORTED_MODULE_4__["default"],
     SimpleActions: _Components_Creature_SimpleActions__WEBPACK_IMPORTED_MODULE_5__["default"],
     SimpleNotepad: _Components_Creature_SimpleNotepad__WEBPACK_IMPORTED_MODULE_6__["default"],
-    Accordion: Accordion,
-    AccordionItem: AccordionItem,
     TransitionExpand: _Components_TransitionExpand__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   mixins: [_Mixins_Creature_Base__WEBPACK_IMPORTED_MODULE_8__.CreatureBase],
@@ -22223,6 +22221,17 @@ __webpack_require__.r(__webpack_exports__);
       return input.replace(/(^\w|\s\w)(\S*)/g, function (_, m1, m2) {
         return m1.toUpperCase() + m2.toLowerCase();
       });
+    },
+    proficiencyClass: function proficiencyClass(skill) {
+      if (this.creature[skill.slug + '_expertise']) {
+        return 'text-gray-600 dark:text-gray-300';
+      }
+
+      if (this.creature[skill.slug + '_proficiency']) {
+        return 'text-gray-400 dark:text-gray-500';
+      }
+
+      return 'invisible';
     }
   }
 });
@@ -31002,20 +31011,21 @@ var _hoisted_1 = {
 };
 var _hoisted_2 = ["onClick", "disabled"];
 var _hoisted_3 = ["onClick", "disabled"];
+var _hoisted_4 = ["title"];
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Rests")], -1
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Rests")], -1
 /* HOISTED */
 );
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Short Rest ");
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Short Rest ");
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Long Rest ");
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Long Rest ");
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Confirm Rest ");
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Confirm Rest ");
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Rest ");
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Rest ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_secondary_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-secondary-button");
@@ -31041,20 +31051,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* PROPS */
         , _hoisted_2), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.skillsByStat(stat), function (skill) {
           return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block btn-text", _ctx.proficiencyClass(_ctx.creature[skill.slug + '_proficiency'])]),
+            "class": "block btn-text",
             onClick: function onClick($event) {
               return _ctx.roll(skill.name, _ctx.creature[skill.slug], skill.type);
             },
             disabled: _ctx.disabled
-          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(skill.type == 'save' ? skill.name.substr(skill.name.indexOf(' ') + 1) : skill.name) + ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.displayStat(_ctx.creature[skill.slug])), 11
-          /* TEXT, CLASS, PROPS */
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($options.proficiencyClass(skill)),
+            title: _ctx.creature[skill.slug + '_expertise'] ? 'Expertise' : 'Proficient'
+          }, "•", 10
+          /* CLASS, PROPS */
+          , _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(skill.type == 'save' ? skill.name.substr(skill.name.indexOf(' ') + 1) : skill.name) + ": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.displayStat(_ctx.creature[skill.slug])), 1
+          /* TEXT */
+          )], 8
+          /* PROPS */
           , _hoisted_3)]);
         }), 256
         /* UNKEYED_FRAGMENT */
         )), stat == 'constitution' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: 0,
           "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["border-t dark:border-gray-600 mt-6 pt-1", _ctx.disabled ? 'hidden' : ''])
-        }, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
+        }, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
           "class": "mr-2",
           size: "xs",
           onClick: _cache[0] || (_cache[0] = function ($event) {
@@ -31062,7 +31079,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           })
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [_hoisted_5];
+            return [_hoisted_6];
           }),
           _: 1
           /* STABLE */
@@ -31074,7 +31091,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           })
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [_hoisted_6];
+            return [_hoisted_7];
           }),
           _: 1
           /* STABLE */
@@ -31099,7 +31116,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_7];
+      return [_hoisted_8];
     }),
     content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Take a " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.rest_length) + " rest? ", 1
@@ -31113,7 +31130,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_8];
+          return [_hoisted_9];
         }),
         _: 1
         /* STABLE */
@@ -31123,7 +31140,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $options.rest
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_9];
+          return [_hoisted_10];
         }),
         _: 1
         /* STABLE */
@@ -40096,9 +40113,6 @@ var CreatureStats = {
     },
     displayStat: function displayStat(stat) {
       return (stat > 0 ? '+' : '') + stat;
-    },
-    proficiencyClass: function proficiencyClass(proficient) {
-      return proficient ? 'italic' : '';
     }
   }
 };

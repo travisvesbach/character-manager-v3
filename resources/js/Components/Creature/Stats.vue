@@ -5,7 +5,8 @@
                 <strong>{{ capitalize(stat) }}: {{ creature[stat] }} ({{ displayStat(creature[stat + '_mod']) }})</strong>
             </button>
             <div v-for="skill in skillsByStat(stat)">
-                <button class="block btn-text" :class="proficiencyClass(creature[skill.slug + '_proficiency'])" @click="roll(skill.name, creature[skill.slug], skill.type)" :disabled="disabled">
+                <button class="block btn-text" @click="roll(skill.name, creature[skill.slug], skill.type)" :disabled="disabled">
+                    <span :class="proficiencyClass(skill)" :title="creature[skill.slug + '_expertise'] ? 'Expertise' : 'Proficient'">&#8226;</span>
                     {{ skill.type == 'save' ? skill.name.substr(skill.name.indexOf(' ') + 1) : skill.name }}: {{ displayStat(creature[skill.slug]) }}
                 </button>
             </div>
@@ -73,6 +74,15 @@
             },
             capitalize(input) {
                 return input.replace(/(^\w|\s\w)(\S*)/g, (_,m1,m2) => m1.toUpperCase()+m2.toLowerCase());
+            },
+            proficiencyClass(skill) {
+                if(this.creature[skill.slug + '_expertise']) {
+                    return 'text-gray-600 dark:text-gray-300';
+                }
+                if(this.creature[skill.slug + '_proficiency']) {
+                    return 'text-gray-400 dark:text-gray-500';
+                }
+                return 'invisible';
             }
         }
     }

@@ -46,8 +46,5 @@ export const CreatureStats = {
         displayStat(stat) {
             return (stat > 0 ? '+' : '') + stat;
         },
-        proficiencyClass(proficient) {
-            return proficient ? 'italic' : '';
-        }
     }
 }

@@ -43,8 +43,6 @@
             SimpleModifiers,
             SimpleActions,
             SimpleNotepad,
-            Accordion,
-            AccordionItem,
             TransitionExpand
         },
         mixins: [CreatureBase],
