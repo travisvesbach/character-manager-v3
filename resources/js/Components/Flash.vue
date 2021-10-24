@@ -36,7 +36,7 @@
 
             <template #footerend>
                 <jet-button class="ml-2" @click="show_modal = false">
-                    Done
+                    Close
                 </jet-button>
             </template>
         </jet-dialog-modal>

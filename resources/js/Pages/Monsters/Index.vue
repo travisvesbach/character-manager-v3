@@ -1,7 +1,7 @@
 <template>
     <app-layout title="monsters">
         <template #header>
-            Monsters
+            Monster Library
         </template>
 
         <div class="w-full md:w-3/4 xl:w-1/2 mx-auto pb-10 sm:px-6 lg:px-8 m-2">
@@ -17,6 +17,25 @@
                 <Link :href="route('monsters.create')" class="btn btn-primary" :as="'button'">
                         New Monster
                 </Link>
+                <help-modal class="ml-2">
+                    <template #header>
+                        Monster Library
+                    </template>
+                    <template #content>
+                        <p class="mb-4">
+                            Monsters can be added to the Monster Library in order to be used in encounters.
+                        </p>
+                        <p class="mb-4">
+                            Monsters in the library are to be used as a base for encounter monsters.  If you have a monster that has special stats, but only for one encounter, you should add the base monster to the encounter and edit it there.  However, if you have a recurring rival or npc, you can clone the base monster and keep the special one in the library so you don't have to remake that creature repeatedly.
+                        </p>
+                        <p class="mb-4">
+                            Monsters can be marked as Public or Private.  Public monsters are available for everyone to use in their encounters, but only the monster creator or an admin can edit them in the library.  Private monsters are only available to the monster's creator.  If adding a general monster from a sourcebook, it should be added as Public in order so that we don't end up with multiple copies of the same monsters.  Always check to make sure the monster you're going to create doesn't already exist.  An admin will go through on occasion and remove duplicates.
+                        </p>
+                        <p class="mb-4">
+                            Encounters use monsters' experience values to calculate difficulty.  When adding sourcebook monsters, please enter in the correct experience value.  When adding custom monsters, do your best to determine to proper challenge ratings and experience values for those monsters.
+                        </p>
+                    </template>
+                </help-modal>
             </div>
 
             <div class="border-b-2 w-full border-color"></div>
@@ -109,6 +128,7 @@
     import JetInput from '@/Jetstream/Input'
     import { Link } from '@inertiajs/inertia-vue3'
     import MonsterIcon from '@/Components/Icons/Monster'
+    import HelpModal from '@/Components/HelpModal'
 
     export default {
         props: ['monsters'],
@@ -124,6 +144,7 @@
             JetInput,
             Link,
             MonsterIcon,
+            HelpModal,
         },
         data() {
             return {

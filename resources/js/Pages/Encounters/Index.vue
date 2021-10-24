@@ -21,6 +21,22 @@
                 <jet-button size="sm" class="ml-2" title="Party members" @click="openPartyModal">
                     <character-icon class="h-6 w-6"/>
                 </jet-button>
+                <help-modal class="ml-2">
+                    <template #header>
+                        Encounters
+                    </template>
+                    <template #content>
+                        <p class="mb-4">
+                            Encounters can be used by dungeon masters to manage encounters.  Monsters can be added to them to track HP and resources, handle dice rolls, etc.
+                        </p>
+                        <p class="mb-4">
+                            Once a monster is added to an encounter, it is completely separate from the monsters in the Monster Library.  An encoutner's monsters can be edited however you want.  Perhaps you need a one-off goblin a magical bow or has better stats than a standard goblin?  You can edit a goblin to use inside the encounter.
+                        </p>
+                        <p class="mb-4">
+                            Setting a party will enable the encounter difficulty calculater.  The calculator follows the rules outlined on pages 82-83 of the Dungeon Master's Guide.
+                        </p>
+                    </template>
+                </help-modal>
             </div>
 
             <div class="border-b-2 w-full border-color"></div>
@@ -155,6 +171,7 @@
     import { Link } from '@inertiajs/inertia-vue3'
     import EncounterIcon from '@/Components/Icons/Encounter'
     import CharacterIcon from '@/Components/Icons/Character'
+    import HelpModal from '@/Components/HelpModal'
 
     export default {
         props: ['encounters'],
@@ -175,6 +192,7 @@
             JetLabel,
             EncounterIcon,
             CharacterIcon,
+            HelpModal,
         },
         data() {
             return {

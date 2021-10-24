@@ -39,7 +39,7 @@
                                         <!-- Encounters -->
                                         <encounter-icon class="h-6 w-6"/>
                                     </jet-nav-link>
-                                    <jet-nav-link :href="route('monsters.index')" :active="route().current('monsters*')" title="Monsters">
+                                    <jet-nav-link :href="route('monsters.index')" :active="route().current('monsters*')" title="Monster Library">
                                         <!-- Monsters -->
                                         <monster-icon class="h-6 w-6"/>
                                     </jet-nav-link>

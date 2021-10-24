@@ -21,6 +21,22 @@
                 <Link :href="route('characters.create')" class="btn btn-primary" :as="'button'">
                         New Character
                 </Link>
+                <help-modal class="ml-2">
+                    <template #header>
+                        Characters
+                    </template>
+                    <template #content>
+                        <p class="mb-4">
+                            Characters are Player Characters.  Start by creating a character.  When viewing a character, a seconday navigation bar is visibile that can be used to quickly switch between active (non-archived) characters.
+                        </p>
+                        <p class="mb-4">
+                            Characters can have actions, resources, spells, modifiers, etc. once they are created.  All stats can be rolled by click in them.  Using the dropdown next the a character's name, different sections of the character sheet can be shown/hidden as necessary.
+                        </p>
+                        <p class="mb-4">
+                            Archiving a character removes it from the main index list as well as from the secondary navigation bar.  Archiving is useful if you have characters that don't get used often or anymore and you don't want them taking up space in the secondary navbar.
+                        </p>
+                    </template>
+                </help-modal>
             </div>
 
             <div class="border-b-2 w-full border-color"></div>
@@ -110,6 +126,7 @@
     import JetLabel from '@/Jetstream/Label'
     import { Link } from '@inertiajs/inertia-vue3'
     import CharacterIcon from '@/Components/Icons/Character'
+    import HelpModal from '@/Components/HelpModal'
 
     export default {
         props: ['characters'],
@@ -127,6 +144,7 @@
             JetCheckbox,
             JetLabel,
             CharacterIcon,
+            HelpModal,
         },
         data() {
             return {
