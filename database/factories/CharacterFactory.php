@@ -74,10 +74,6 @@ class CharacterFactory extends Factory
             'skill_modifiers' => [],
             'spellcaster' => false,
             'notes' => $this->faker->sentence(4),
-            'show_resources' => 1,
-            'show_modifiers' => 1,
-            'show_notes' => 1,
-            'show_dice' => 1,
 
             'race' => 'Human',
             'class' => 'Wizard',

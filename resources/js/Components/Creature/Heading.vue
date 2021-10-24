@@ -1,7 +1,7 @@
 <template>
     <div class="px-5 py-2">
-        <div class="grid sm:grid-cols-2 md:grid-cols-4">
-            <div class="col-span-1">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5">
+            <div class="sm:col-span-2">
                 <div class="hover-trigger flex items-center">
                     <h2 class="text-4xl heading-color">{{ creature.display_name }}</h2>
                     <jet-dropdown align="left" width="48" class="hover-target ml-1">
@@ -29,6 +29,9 @@
                                 </jet-dropdown-link>
                                 <jet-dropdown-link @click.native="toggleAdditionalStats" v-if="ownerOrAdmin">
                                     {{ creature.show_additional_stats ? 'Hide' : 'Show' }} Additional Stats
+                                </jet-dropdown-link>
+                                <jet-dropdown-link @click.native="toggleTempHp" v-if="ownerOrAdmin && !disabled">
+                                    {{ creature.show_temp_hp ? 'Hide' : 'Show' }} Temp HP
                                 </jet-dropdown-link>
                                 <jet-dropdown-link @click.native="clone_creature = true" as="button" v-if="type == 'Monster'">
                                     Clone {{ creature.display_name }}
@@ -61,7 +64,7 @@
                         </button>
                     </div>
                 </div>
-                <div class=" my-1 md:my-0">
+                <div class="my-1 md:my-0">
                     Hit Dice:
                     <button class="block btn-text" v-for="(hit_dice, index) in creature.hit_dice" @click="rollHitDice(index)" :disabled="disabled">
                         {{ hit_dice.current }}/{{ hit_dice.count }}d{{ hit_dice.size }}
@@ -73,7 +76,7 @@
                         <span class="text-xs">Calc:</span> <jet-input type="number" class="w-16 p-1 mt-1" @keyup.enter="adjustCurrentHp()" v-model.number="hp_calculator"/> <span class="invisible">/ {{creature.hp_max}}</span>
                     </div>
                 </div>
-                <div class="text-right my-1 md:my-0" v-if="!disabled">
+                <div class="text-right my-1 md:my-0" v-if="!disabled && creature.show_temp_hp">
                     Temp HP: <jet-input type="number" class="w-16 p-1" v-model.number="creature.hp_temp" @blur="updateCreature"/><br>
                     <span class="text-xs">Calc:</span> <jet-input type="number" class="w-16 p-1 mt-1" @keyup.enter="adjustTempHp()" v-model.number="hp_temp_calculator"/>
                 </div>
@@ -212,6 +215,10 @@
             },
             toggleAdditionalStats() {
                 this.creature.show_additional_stats = !this.creature.show_additional_stats;
+                this.updateCreature();
+            },
+            toggleTempHp() {
+                this.creature.show_temp_hp = !this.creature.show_temp_hp;
                 this.updateCreature();
             },
             deleteCreature() {

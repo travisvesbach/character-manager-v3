@@ -142,6 +142,7 @@ class CreateCharactersTable extends Migration
             $table->boolean('show_notes')->default(1);
             $table->boolean('show_dice')->default(1);
             $table->boolean('show_additional_stats')->default(1);
+            $table->boolean('show_temp_hp')->default(1);
             $table->string('damage_vulnerabilities')->nullable();
             $table->string('damage_resistances')->nullable();
             $table->string('damage_immunities')->nullable();

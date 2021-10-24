@@ -21525,6 +21525,10 @@ __webpack_require__.r(__webpack_exports__);
       this.creature.show_additional_stats = !this.creature.show_additional_stats;
       this.updateCreature();
     },
+    toggleTempHp: function toggleTempHp() {
+      this.creature.show_temp_hp = !this.creature.show_temp_hp;
+      this.updateCreature();
+    },
     deleteCreature: function deleteCreature() {
       this.form["delete"](this.getRoute('destroy'));
     },
@@ -28031,10 +28035,10 @@ var _hoisted_1 = {
   "class": "px-5 py-2"
 };
 var _hoisted_2 = {
-  "class": "grid sm:grid-cols-2 md:grid-cols-4"
+  "class": "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5"
 };
 var _hoisted_3 = {
-  "class": "col-span-1"
+  "class": "sm:col-span-2"
 };
 var _hoisted_4 = {
   "class": "hover-trigger flex items-center"
@@ -28076,7 +28080,7 @@ var _hoisted_11 = {
 };
 var _hoisted_12 = ["disabled"];
 var _hoisted_13 = {
-  "class": " my-1 md:my-0"
+  "class": "my-1 md:my-0"
 };
 
 var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Hit Dice: ");
@@ -28235,8 +28239,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.type == 'Monster' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_dropdown_link, {
+      , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.ownerOrAdmin && !_ctx.disabled ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_dropdown_link, {
         key: 5,
+        onClick: $options.toggleTempHp
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.show_temp_hp ? 'Hide' : 'Show') + " Temp HP ", 1
+          /* TEXT */
+          )];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.type == 'Monster' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_dropdown_link, {
+        key: 6,
         onClick: _cache[0] || (_cache[0] = function ($event) {
           return $data.clone_creature = true;
         }),
@@ -28251,7 +28269,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* STABLE */
 
       })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.ownerOrAdmin ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_dropdown_link, {
-        key: 6,
+        key: 7,
         href: _ctx.getRoute('edit')
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -28265,7 +28283,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, 8
       /* PROPS */
       , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.ownerOrAdmin ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_dropdown_link, {
-        key: 7,
+        key: 8,
         onClick: _cache[1] || (_cache[1] = function ($event) {
           return _ctx.delete_creature = true;
         }),
@@ -28347,7 +28365,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["modelValue"]), _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_24, "/ " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.creature.hp_max), 1
   /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), !_ctx.disabled ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), !_ctx.disabled && _ctx.creature.show_temp_hp ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
     type: "number",
     "class": "w-16 p-1",
     modelValue: _ctx.creature.hp_temp,
@@ -39351,6 +39369,7 @@ var CreatureBase = {
         show_notes: this.creature.show_notes,
         show_dice: this.creature.show_dice,
         show_additional_stats: this.creature.show_additional_stats,
+        show_temp_hp: this.creature.show_temp_hp,
         damage_vulnerabilities: this.creature.damage_vulnerabilities,
         damage_resistances: this.creature.damage_resistances,
         damage_immunities: this.creature.damage_immunities,

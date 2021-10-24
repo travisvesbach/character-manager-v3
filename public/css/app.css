@@ -1120,6 +1120,9 @@ select {
 .col-span-3 {
 	grid-column: span 3 / span 3;
 }
+.col-span-2 {
+	grid-column: span 2 / span 2;
+}
 .m-1 {
 	margin: 0.25rem;
 }
@@ -3107,6 +3110,10 @@ input[type=checkbox] {
 
 	.md\:grid-cols-4 {
 		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+
+	.md\:grid-cols-5 {
+		grid-template-columns: repeat(5, minmax(0, 1fr));
 	}
 
 	.md\:gap-6 {

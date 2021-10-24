@@ -156,6 +156,7 @@ export const CreatureBase = {
                 show_notes:                     this.creature.show_notes,
                 show_dice:                      this.creature.show_dice,
                 show_additional_stats:          this.creature.show_additional_stats,
+                show_temp_hp:                  this.creature.show_temp_hp,
                 damage_vulnerabilities:         this.creature.damage_vulnerabilities,
                 damage_resistances:             this.creature.damage_resistances,
                 damage_immunities:              this.creature.damage_immunities,
