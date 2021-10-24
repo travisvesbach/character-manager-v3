@@ -21159,22 +21159,22 @@ __webpack_require__.r(__webpack_exports__);
 
       return result;
     },
-    strengthModBase: function strengthModBase() {
+    strengthModifier: function strengthModifier() {
       return this.getStatModifier(this.form.strength);
     },
-    dexterityModBase: function dexterityModBase() {
+    dexterityModifier: function dexterityModifier() {
       return this.getStatModifier(this.form.dexterity);
     },
-    constitutionModBase: function constitutionModBase() {
+    constitutionModifier: function constitutionModifier() {
       return this.getStatModifier(this.form.constitution);
     },
-    intelligenceModBase: function intelligenceModBase() {
+    intelligenceModifier: function intelligenceModifier() {
       return this.getStatModifier(this.form.intelligence);
     },
-    wisdomModBase: function wisdomModBase() {
+    wisdomModifier: function wisdomModifier() {
       return this.getStatModifier(this.form.wisdom);
     },
-    charismaModBase: function charismaModBase() {
+    charismaModifier: function charismaModifier() {
       return this.getStatModifier(this.form.charisma);
     }
   },
@@ -21288,11 +21288,11 @@ __webpack_require__.r(__webpack_exports__);
       if (this.form.skills_auto_filled) {
         for (var i = 0; i < this.stats.length; i++) {
           if (stat == this.stats[i] || stat == 'all') {
-            this.setSkill(this.stats[i] + '_mod', this[this.stats[i] + 'ModBase']);
+            this.setSkill(this.stats[i] + '_mod', this[this.stats[i] + 'Modifier']);
             var stat_skills = this.skillsByStat(this.stats[i]);
 
             for (var j = 0; j < stat_skills.length; j++) {
-              this.setSkill(stat_skills[j].slug, this[this.stats[i] + 'ModBase']);
+              this.setSkill(stat_skills[j].slug, this[this.stats[i] + 'Modifier']);
             }
           }
         }

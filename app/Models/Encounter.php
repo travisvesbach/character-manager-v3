@@ -93,6 +93,10 @@ class Encounter extends Model
     }
 
     public function difficulty() {
+        if(!auth()->user() || !auth()->user()->party) {
+            return '&#8212';
+        }
+
         $party_xp_thresholds = [
             'easy' => 0,
             'medium' => 0,
@@ -101,9 +105,7 @@ class Encounter extends Model
 
         ];
         $party_size = 0;
-        if(!auth()->user()->party) {
-            return '&#8212';
-        }
+
         foreach(auth()->user()->party as $group) {
             $party_size += $group['count'];
             $thresholds = $this->xp_thresholds[$group['level']];

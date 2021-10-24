@@ -774,22 +774,22 @@
                 }
                 return result;
             },
-            strengthModBase() {
+            strengthModifier() {
                 return this.getStatModifier(this.form.strength);
             },
-            dexterityModBase() {
+            dexterityModifier() {
                 return this.getStatModifier(this.form.dexterity);
             },
-            constitutionModBase() {
+            constitutionModifier() {
                 return this.getStatModifier(this.form.constitution);
             },
-            intelligenceModBase() {
+            intelligenceModifier() {
                 return this.getStatModifier(this.form.intelligence);
             },
-            wisdomModBase() {
+            wisdomModifier() {
                 return this.getStatModifier(this.form.wisdom);
             },
-            charismaModBase() {
+            charismaModifier() {
                 return this.getStatModifier(this.form.charisma);
             },
         },
@@ -880,10 +880,10 @@
                 if(this.form.skills_auto_filled) {
                     for(let i=0; i < this.stats.length; i++) {
                         if(stat == this.stats[i] || stat == 'all') {
-                            this.setSkill(this.stats[i] + '_mod', this[this.stats[i] + 'ModBase']);
+                            this.setSkill(this.stats[i] + '_mod', this[this.stats[i] + 'Modifier']);
                             let stat_skills = this.skillsByStat(this.stats[i]);
                             for(let j=0; j < stat_skills.length; j++) {
-                                this.setSkill(stat_skills[j].slug, this[this.stats[i] + 'ModBase']);
+                                this.setSkill(stat_skills[j].slug, this[this.stats[i] + 'Modifier']);
                             }
                         }
                     }
