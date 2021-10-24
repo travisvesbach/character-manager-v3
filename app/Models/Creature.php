@@ -100,6 +100,8 @@ class Creature extends Model
         'persuasion',
         'persuasion_proficiency',
         'persuasion_expertise',
+        'show_additional_stats',
+        'skill_modifiers',
         'spellcaster',
         'spell_type',
         'spell_dc',
@@ -129,13 +131,11 @@ class Creature extends Model
         'spell_list_9',
         'spell_prepare_count',
         'spell_prepared',
-        'spell_counters',
         'notes',
         'show_resources',
         'show_modifiers',
         'show_notes',
         'show_dice',
-        'show_additional_stats',
         'skills_auto_filled',
         'damage_vulnerabilities',
         'damage_resistances',
@@ -147,6 +147,7 @@ class Creature extends Model
 
     protected $casts = [
         'hit_dice'                  => 'array',
+        'skill_modifiers'           => 'array',
         'spell_slots_1'             => 'array',
         'spell_slots_2'             => 'array',
         'spell_slots_3'             => 'array',
@@ -167,7 +168,6 @@ class Creature extends Model
         'spell_list_8'              => 'array',
         'spell_list_9'              => 'array',
         'spell_prepared'            => 'array',
-        'spell_counters'            => 'array',
     ];
 
 

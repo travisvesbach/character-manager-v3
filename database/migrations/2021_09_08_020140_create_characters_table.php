@@ -105,6 +105,8 @@ class CreateCharactersTable extends Migration
             $table->integer('persuasion')->default(0);
             $table->boolean('persuasion_proficiency')->default(0);
             $table->boolean('persuasion_expertise')->default(0);
+            $table->boolean('skills_auto_filled')->default(1);
+            $table->json('skill_modifiers')->nullable();
             $table->boolean('spellcaster')->default(0);
             $table->string('spell_type')->default('slots');
             $table->integer('spell_dc')->nullable();
@@ -134,14 +136,12 @@ class CreateCharactersTable extends Migration
             $table->json('spell_list_9')->nullable();
             $table->integer('spell_prepare_count')->nullable();
             $table->json('spell_prepared')->nullable();
-            $table->json('spell_counters')->nullable();
             $table->text('notes')->nullable();
             $table->boolean('show_resources')->default(1);
             $table->boolean('show_modifiers')->default(1);
             $table->boolean('show_notes')->default(1);
             $table->boolean('show_dice')->default(1);
             $table->boolean('show_additional_stats')->default(1);
-            $table->boolean('skills_auto_filled')->default(1);
             $table->string('damage_vulnerabilities')->nullable();
             $table->string('damage_resistances')->nullable();
             $table->string('damage_immunities')->nullable();

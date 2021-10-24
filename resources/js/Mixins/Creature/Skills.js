@@ -135,10 +135,21 @@ export const CreatureSkills = {
         }
     },
     methods: {
-        skillsByStat(stat, type = null) {
+        skillsByStat(stat) {
             let result = this.skills;
             result = result.filter(function(skill) {
                 if(skill.stat == stat) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            return result;
+        },
+        skillsByType(type) {
+            let result = this.skills;
+            result = result.filter(function(skill) {
+                if(skill.type == type) {
                     return true;
                 } else {
                     return false;

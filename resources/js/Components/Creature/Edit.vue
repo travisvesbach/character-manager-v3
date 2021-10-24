@@ -161,7 +161,7 @@
                     Enter stats and mark skill proficiencies and/or expertise. The first checkbox of each skill is proficiency and the second is expertise.
                 </p>
                 <div class="grid sm:grid-cols-2 md:grid-cols-3">
-                    <div class="col-span-1 mb-10 px-1" v-for="stat in stats" v-on:change="setSkills(stat)">
+                    <div class="col-span-1 mb-10 px-1" v-for="stat in stats" @change="setSkills(stat)">
                         <jet-label :for="stat" :value="stat + ' Score'" class="mt-4 capitalize"/>
                         <jet-input type="number" :id="stat" class="mt-1 block w-full" v-model.number="form[stat]" required/>
                         <jet-input-error :message="form.errors[stat]" class="mt-2"/>
@@ -183,11 +183,30 @@
                 <p>
                     {{ skillsText }}
                 </p>
+                <div v-if="form.skills_auto_filled">
+                    <div class="mt-2">
+                        Special Modifiers
+                    </div>
+                    <div class="mb-10 px-1">
+                        <div class="mt-2 flex" v-for="(modifier, index) in skill_modifiers">
+                            <input type="checkbox" class="form-input" :id="modifier.slug" v-model="form.skill_modifiers" :value="modifier.slug" @change="setSkills()"/>
+                            <div class="ml-1">
+                                <jet-label class="w-max" :for="modifier.slug" :value="modifier.name"/>
+                                <div class="text-sm text-secondary-color"> {{ modifier.description }}</div>
+                            </div>
+                        </div>
+                        <jet-input-error :message="form.errors[skill_modifiers]" class="mt-2"/>
+                    </div>
+                </div>
                 <div v-if="!form.skills_auto_filled">
+                    <div class="mt-2">
+                        Proficiency Bonus: {{ proficiencyBonus }}<br>
+                        * proficient skills
+                    </div>
                     <div class="grid sm:grid-cols-2 md:grid-cols-3">
                         <div class="col-span-1 mb-10 px-1" v-for="stat in stats">
                             <div v-for="skill in skillsByStat(stat)">
-                                <jet-label :for="skill.slug" :value="skill.name" class="mt-4"/>
+                                <jet-label :for="skill.slug" :value="skill.name + (form[skill.slug + '_proficiency'] ? '*' : '')" class="mt-4" :class="form[skill.slug + '_proficiency'] ? 'italic' : ''"/>
                                 <jet-input type="number" :id="skill.slug" class="mt-1 block w-full" v-model.number="form[skill.slug]" required/>
                                 <jet-input-error :message="form.errors[skill.slug]" class="mt-2"/>
                             </div>
@@ -305,6 +324,7 @@
     import SelectInput from '@/Components/SelectInput'
     import ProficiencyCheckbox from '@/Components/ProficiencyCheckbox'
     import DiceArrayInput from '@/Components/DiceArrayInput'
+    import JetCheckbox from '@/Jetstream/Checkbox'
 
     import { CreatureBase } from '@/Mixins/Creature/Base';
     import { CreatureSkills } from '@/Mixins/Creature/Skills';
@@ -322,10 +342,28 @@
             SelectInput,
             ProficiencyCheckbox,
             DiceArrayInput,
+            JetCheckbox,
         },
         mixins: [CreatureBase, CreatureSkills],
         data() {
             return {
+                skill_modifiers: [
+                    {
+                        name: 'Cloak of Protection',
+                        slug: 'cloak_of_protection',
+                        description: 'Adds +1 to all saving throws. AC bonus must be added manually.'
+                    },
+                    {
+                        name: 'Jack of all Trades',
+                        slug: 'jack_of_all_trades',
+                        description: 'Adds half proficiency, rounded down, to all ability checks that this creature isn\'t proficient in. Initiative bonus must be added manually.'
+                    },
+                    {
+                        name: 'Ring of Protection',
+                        slug: 'ring_of_protection',
+                        description: 'Adds +1 to all saving throws. AC bonus must be added manually.'
+                    },
+                ],
                 form: this.$inertia.form({
                     id: null,
                     name: null,
@@ -419,7 +457,7 @@
                     persuasion_proficiency: false,
                     persuasion_expertise: false,
                     skills_auto_filled: true,
-                    special_skill_modifiers: [],
+                    skill_modifiers: [],
                     spellcaster: false,
                     spell_type: 'slots',
                     spell_dc: null,
@@ -568,7 +606,7 @@
                     persuasion_proficiency: this.creature.persuasion_proficiency,
                     persuasion_expertise: this.creature.persuasion_expertise,
                     skills_auto_filled: this.creature.skills_auto_filled,
-                    special_skill_modifiers: this.creature.special_skill_modifiers,
+                    skill_modifiers: this.creature.skill_modifiers,
                     spellcaster: this.creature.spellcaster,
                     spell_type: this.creature.spell_type,
                     spell_dc: this.creature.spell_dc,
@@ -736,22 +774,22 @@
                 }
                 return result;
             },
-            baseStrengthMod() {
+            strengthModBase() {
                 return this.getStatModifier(this.form.strength);
             },
-            baseDexterityMod() {
+            dexterityModBase() {
                 return this.getStatModifier(this.form.dexterity);
             },
-            baseConstitutionMod() {
+            constitutionModBase() {
                 return this.getStatModifier(this.form.constitution);
             },
-            baseIntelligenceMod() {
+            intelligenceModBase() {
                 return this.getStatModifier(this.form.intelligence);
             },
-            baseWisdomMod() {
+            wisdomModBase() {
                 return this.getStatModifier(this.form.wisdom);
             },
-            baseCharismaMod() {
+            charismaModBase() {
                 return this.getStatModifier(this.form.charisma);
             },
         },
@@ -840,65 +878,28 @@
             },
             setSkills(stat = 'all') {
                 if(this.form.skills_auto_filled) {
-                    if(stat == 'strength' || stat == 'all') {
-                        this.setSkill('strength_mod', this.baseStrengthMod);
-                        this.setSkill('strength_save', this.baseStrengthMod);
-                        this.setSkill('athletics', this.baseStrengthMod);
-                    }
-                    if(stat == 'dexterity' || stat == 'all') {
-                        this.setSkill('dexterity_mod', this.baseDexterityMod);
-                        this.setSkill('dexterity_save', this.baseDexterityMod);
-                        this.setSkill('acrobatics', this.baseDexterityMod);
-                        this.setSkill('sleight_of_hand', this.baseDexterityMod);
-                        this.setSkill('stealth', this.baseDexterityMod);
-                    }
-                    if(stat == 'constitution' || stat == 'all') {
-                        this.setSkill('constitution_mod', this.baseConstitutionMod);
-                        this.setSkill('constitution_save', this.baseConstitutionMod);
-                    }
-                    if(stat == 'intelligence' || stat == 'all') {
-                        this.setSkill('intelligence_mod', this.baseIntelligenceMod);
-                        this.setSkill('intelligence_save', this.baseIntelligenceMod);
-                        this.setSkill('arcana', this.baseIntelligenceMod);
-                        this.setSkill('history', this.baseIntelligenceMod);
-                        this.setSkill('investigation', this.baseIntelligenceMod);
-                        this.setSkill('nature', this.baseIntelligenceMod);
-                        this.setSkill('religion', this.baseIntelligenceMod);
-                    }
-                    if(stat == 'wisdom' || stat == 'all') {
-                        this.setSkill('wisdom_mod', this.baseWisdomMod);
-                        this.setSkill('wisdom_save', this.baseWisdomMod);
-                        this.setSkill('animal_handling', this.baseWisdomMod);
-                        this.setSkill('insight', this.baseWisdomMod);
-                        this.setSkill('medicine', this.baseWisdomMod);
-                        this.setSkill('perception', this.baseWisdomMod);
-                        this.setSkill('survival', this.baseWisdomMod);
-                    }
-                    if(stat == 'charisma' || stat == 'all') {
-                        this.setSkill('charisma_mod', this.baseCharismaMod);
-                        this.setSkill('charisma_save', this.baseCharismaMod);
-                        this.setSkill('deception', this.baseCharismaMod);
-                        this.setSkill('intimidation', this.baseCharismaMod);
-                        this.setSkill('performance', this.baseCharismaMod);
-                        this.setSkill('persuasion', this.baseCharismaMod);
+                    for(let i=0; i < this.stats.length; i++) {
+                        if(stat == this.stats[i] || stat == 'all') {
+                            this.setSkill(this.stats[i] + '_mod', this[this.stats[i] + 'ModBase']);
+                            let stat_skills = this.skillsByStat(this.stats[i]);
+                            for(let j=0; j < stat_skills.length; j++) {
+                                this.setSkill(stat_skills[j].slug, this[this.stats[i] + 'ModBase']);
+                            }
+                        }
                     }
 
-                    // if(this.special_skill_modifiers.includes('cloakOfProtection')) {
-                    //     this.strength_save = this.strength_save + 1;
-                    //     this.dexterity_save = this.dexterity_save + 1;
-                    //     this.constitution_save = this.constitution_save + 1;
-                    //     this.intelligence_save = this.intelligence_save + 1;
-                    //     this.wisdom_save = this.wisdom_save + 1;
-                    //     this.charisma_save = this.charisma_save + 1;
-                    // }
-                    // if(this.special_skill_modifiers.includes('ringOfProtection')) {
-                    //     this.strength_save = this.strength_save + 1;
-                    //     this.dexterity_save = this.dexterity_save + 1;
-                    //     this.constitution_save = this.constitution_save + 1;
-                    //     this.intelligence_save = this.intelligence_save + 1;
-                    //     this.wisdom_save = this.wisdom_save + 1;
-                    //     this.charisma_save = this.charisma_save + 1;
-                    // }
+                    if(this.form.skill_modifiers.includes('cloak_of_protection')) {
+                        let saves = this.skillsByType('save')
+                        for(let i=0;i < saves.length; i++) {
+                            this.form[saves[i]['slug']] = this.form[saves[i]['slug']] + 1;
+                        }
+                    }
+                    if(this.form.skill_modifiers.includes('ring_of_protection')) {
+                        let saves = this.skillsByType('save')
+                        for(let i=0;i < saves.length; i++) {
+                            this.form[saves[i]['slug']] = this.form[saves[i]['slug']] + 1;
+                        }
+                    }
 
                 }
             },
@@ -906,10 +907,13 @@
                 this.form[skill] = stat_modifier;
                 if(this.form[skill+'_proficiency']) {
                     this.form[skill] += ((this.form[skill+'_expertise'] ? 2 : 1) * this.proficiencyBonus);
+                } else if(this.form.skill_modifiers.includes('jack_of_all_trades') && !this.form[skill+'_expertise'] && !skill.includes('_save')) {
+                    this.form[skill] += Math.floor(this.proficiencyBonus / 2);
                 }
             },
             toggleAutoSkills() {
                 this.form.skills_auto_filled = !this.form.skills_auto_filled;
+                this.form.skill_modifiers = [];
                 if(this.form.skills_auto_filled) {
                     this.setSkills();
                 }

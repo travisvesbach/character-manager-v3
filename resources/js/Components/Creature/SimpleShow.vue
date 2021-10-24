@@ -30,8 +30,6 @@
     import SimpleModifiers from '@/Components/Creature/SimpleModifiers'
     import SimpleActions from '@/Components/Creature/SimpleActions'
     import SimpleNotepad from '@/Components/Creature/SimpleNotepad'
-    import Accordion from '@/Components/Accordion'
-    import AccordionItem from '@/Components/AccordionItem'
     import TransitionExpand from '@/Components/TransitionExpand'
 
     import { CreatureBase } from '@/Mixins/Creature/Base';

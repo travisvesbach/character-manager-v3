@@ -97,6 +97,10 @@ input[type=number] {
     -moz-appearance:textfield;
 }
 
+input[type=checkbox] {
+    @apply h-5 w-5 cursor-pointer dark:text-yellow-500 dark:hover:text-yellow-500 dark:hover:bg-yellow-500;
+}
+
 .card {
     @apply bg-white;
     @apply dark:bg-gray-700;

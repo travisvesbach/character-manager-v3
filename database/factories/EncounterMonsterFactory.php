@@ -71,6 +71,7 @@ class EncounterMonsterFactory extends Factory
             'performance' => $this->faker->numberBetween(1, 20),
             'persuasion' => $this->faker->numberBetween(1, 20),
             'skills_auto_filled' => true,
+            'skill_modifiers' => [],
             'spellcaster' => false,
             'notes' => $this->faker->sentence(4),
             'show_resources' => 1,
