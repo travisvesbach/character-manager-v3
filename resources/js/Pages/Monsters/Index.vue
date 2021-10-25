@@ -79,6 +79,9 @@
 
                                 <template #content>
                                     <div>
+                                        <jet-dropdown-link @click.native="clone_monster = monster" as="button">
+                                            Clone {{ monster.display_name }}
+                                        </jet-dropdown-link>
                                         <jet-dropdown-link :href="route('monsters.edit', monster.id)">
                                             Edit Monster
                                         </jet-dropdown-link>
@@ -114,6 +117,29 @@
             </template>
         </jet-confirmation-modal>
 
+        <!-- clone -->
+        <jet-dialog-modal type="form" :show="clone_monster" @close="closeClone" @submitted="cloneMonster">
+            <template #header>
+                Clone {{ clone_monster.display_name }}
+            </template>
+
+            <template #content>
+                <!-- name -->
+                <jet-label for="name" value="Name for Clone"/>
+                <jet-input type="text" id="name" class="mt-1 w-full" v-model="clone_form.name" required/>
+                <jet-input-error :message="clone_form.errors.name" class="mt-2"/>
+            </template>
+
+            <template #footerend>
+                <jet-secondary-button @click.native="closeClone">
+                    Cancel
+                </jet-secondary-button>
+                <jet-button class="ml-2" :class="{ 'opacity-25': clone_form.processing }" :disabled="clone_form.processing">
+                    Clone {{ clone_monster.display_name }}
+                </jet-button>
+            </template>
+        </jet-dialog-modal>
+
     </app-layout>
 </template>
 
@@ -125,7 +151,10 @@
     import JetSecondaryButton from '@/Jetstream/SecondaryButton'
     import JetDangerButton from '@/Jetstream/DangerButton'
     import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
+    import JetDialogModal from '@/Jetstream/DialogModal'
+    import JetLabel from '@/Jetstream/Label'
     import JetInput from '@/Jetstream/Input'
+    import JetInputError from '@/Jetstream/InputError'
     import { Link } from '@inertiajs/inertia-vue3'
     import MonsterIcon from '@/Components/Icons/Monster'
     import HelpModal from '@/Components/HelpModal'
@@ -141,7 +170,10 @@
             JetSecondaryButton,
             JetDangerButton,
             JetConfirmationModal,
+            JetDialogModal,
+            JetLabel,
             JetInput,
+            JetInputError,
             Link,
             MonsterIcon,
             HelpModal,
@@ -150,6 +182,11 @@
             return {
                 search: null,
                 delete_monster: false,
+                clone_monster: false,
+                clone_form: this.$inertia.form({
+                    id: null,
+                    name: null,
+                }),
             }
         },
         computed: {
@@ -190,6 +227,15 @@
                 form.delete(route('monsters.destroy', form.id));
                 this.delete_monster = false;
             },
+            cloneMonster() {
+                this.clone_form.id = this.clone_monster.id;
+                this.clone_form.post(route('monsters.clone', this.clone_form.id));
+                this.closeClone();
+            },
+            closeClone() {
+                this.clone_form.name = null;
+                this.clone_monster = false;
+            }
         }
     }
 </script>
