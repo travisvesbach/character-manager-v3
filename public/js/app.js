@@ -35380,7 +35380,7 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "mb-4"
-}, " Characters can have actions, resources, spells, modifiers, etc. once they are created. All stats can be rolled by click on them. Using the dropdown next the a character's name, different sections of the character sheet can be shown/hidden as necessary. ", -1
+}, " Characters can have actions, resources, spells, modifiers, etc. once they are created. All stats can be rolled by clicking on them. Using the dropdown next the a character's name, different sections of the character sheet can be shown/hidden as necessary. ", -1
 /* HOISTED */
 );
 
