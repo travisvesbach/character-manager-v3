@@ -13,6 +13,7 @@ use App\Http\Controllers\ActionsController;
 use App\Http\Controllers\MonstersController;
 use App\Http\Controllers\EncountersController;
 use App\Http\Controllers\EncounterMonstersController;
+use App\Http\Controllers\DiceTablesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,4 +79,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::patch('/encounters/{encounter}/monsters/{encounter_monster}', [EncounterMonstersController::class, 'update'])->name('encounter_monsters.update');
     Route::delete('/encounters/{encounter}/monsters/{encounter_monster}', [EncounterMonstersController::class, 'destroy'])->name('encounter_monsters.destroy');
     Route::patch('/encounters/{encounter}/monsters/{encounter_monster}/rest', [EncounterMonstersController::class, 'rest'])->name('encounter_monsters.rest');
+
+    Route::resource('dice_tables', DiceTablesController::class);
 });
