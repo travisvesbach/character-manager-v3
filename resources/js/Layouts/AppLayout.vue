@@ -31,17 +31,21 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                                         </svg>
                                     </jet-nav-link>
+                                    <!-- Characters -->
                                     <jet-nav-link :href="route('characters.index')" :active="route().current('characters*')" title="Characters">
-                                        <!-- Characters -->
                                         <character-icon class="h-6 w-6"/>
                                     </jet-nav-link>
+                                    <!-- Encounters -->
                                     <jet-nav-link :href="route('encounters.index')" :active="route().current('encounters*')" title="Encounters">
-                                        <!-- Encounters -->
                                         <encounter-icon class="h-6 w-6"/>
                                     </jet-nav-link>
+                                    <!-- Monsters -->
                                     <jet-nav-link :href="route('monsters.index')" :active="route().current('monsters*')" title="Monster Library">
-                                        <!-- Monsters -->
                                         <monster-icon class="h-6 w-6"/>
+                                    </jet-nav-link>
+                                    <!-- Dice Tables -->
+                                    <jet-nav-link :href="route('dice_tables.index')" :active="route().current('dice_tables*')" title="Dice Tables">
+                                        <dice-icon class="h-6 w-6"/>
                                     </jet-nav-link>
                                     <flash v-bind:message="$page.props.flash.message" v-bind:status="$page.props.flash.status" v-bind:timestamp="$page.props.flash.timestamp"></flash>
                                 </div>
@@ -195,6 +199,7 @@
     import EncounterIcon from '@/Components/Icons/Encounter'
     import MonsterIcon from '@/Components/Icons/Monster'
     import CharacterIcon from '@/Components/Icons/Character'
+    import DiceIcon from '@/Components/Icons/Dice'
 
     export default defineComponent({
         props: {
@@ -216,6 +221,7 @@
             EncounterIcon,
             MonsterIcon,
             CharacterIcon,
+            DiceIcon,
         },
 
         data() {

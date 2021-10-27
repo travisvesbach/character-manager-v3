@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             MonsterSeeder::class,
             EncounterSeeder::class,
             EncounterMonsterSeeder::class,
+            DiceTableSeeder::class,
         ]);
     }
 }

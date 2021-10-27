@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\DiceTable;
 
-class DiceTable extends Seeder
+class DiceTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

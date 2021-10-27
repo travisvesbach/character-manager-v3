@@ -146,4 +146,29 @@ class DiceTablesTest extends TestCase
         $user->delete();
         $this->assertCount(0, DiceTable::all());
     }
+
+    /** @test **/
+    public function a_dice_table_must_include_all_numbers_in_ranges_between_first_and_last_number() {
+        $this->signIn();
+
+        $attributes = DiceTable::factory()->raw();
+
+        $attributes['rows'] = [
+            [
+                'range' => [1],
+                'result' => '1',
+            ],
+            [
+                'range' => [3],
+                'result' => '3',
+            ],
+            [
+                'range' => [4],
+                'result' => '4',
+            ],
+        ];
+
+        $this->post(route('dice_tables.store'), $attributes)->assertSessionHasErrors('rows');
+
+    }
 }

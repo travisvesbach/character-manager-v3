@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-span-1 px-1" v-if="type == 'Encounter Monster'">
                         <!-- name_number -->
-                        <jet-label for="name_number" value="Name Number" class="mt-4 inline-block"/>
+                        <jet-label for="name_number" value="Name Number" class="mt-4"/>
                         <jet-input type="number" id="name_number" class="mt-1 w-full" v-model.number="form.name_number"/>
                         <jet-input-error :message="form.errors.name_number" class="mt-2"/>
                     </div>
