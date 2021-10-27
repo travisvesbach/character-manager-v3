@@ -46,12 +46,14 @@ class DiceTablesTest extends TestCase
 
     /** @test **/
     public function a_user_can_update_their_dice_table() {
-
+        // $this->withoutExceptionHandling();
         $dice_table = DiceTable::factory()->create();
 
         $attributes = DiceTable::factory()->raw();
         $attributes['user_id'] = $dice_table->user_id;
         $attributes['name'] = 'changed';
+
+        // var_dump($dice_table->path());
 
         $this->actingAs($dice_table->user)
             ->patch($dice_table->path(), $attributes)
@@ -148,11 +150,54 @@ class DiceTablesTest extends TestCase
     }
 
     /** @test **/
+    public function a_dice_tables_ranges_must_start_with_1() {
+        $this->signIn();
+
+        $attributes = DiceTable::factory()->raw();
+        $attributes['rows'] = [
+            [
+                'range' => [2],
+                'result' => '2',
+            ],
+            [
+                'range' => [3],
+                'result' => '3',
+            ],
+            [
+                'range' => [4],
+                'result' => '4',
+            ],
+        ];
+        $this->post(route('dice_tables.store'), $attributes)->assertSessionHasErrors('rows');
+    }
+
+    /** @test **/
+    public function a_dice_table_ranges_start_cannot_be_greater_than_its_end() {
+        $this->signIn();
+
+        $attributes = DiceTable::factory()->raw();
+        $attributes['rows'] = [
+            [
+                'range' => [1,2],
+                'result' => '2',
+            ],
+            [
+                'range' => [4,3],
+                'result' => '3',
+            ],
+            [
+                'range' => [5,6],
+                'result' => '4',
+            ],
+        ];
+        $this->post(route('dice_tables.store'), $attributes)->assertSessionHasErrors('rows');
+    }
+
+    /** @test **/
     public function a_dice_table_must_include_all_numbers_in_ranges_between_first_and_last_number() {
         $this->signIn();
 
         $attributes = DiceTable::factory()->raw();
-
         $attributes['rows'] = [
             [
                 'range' => [1],
@@ -167,8 +212,76 @@ class DiceTablesTest extends TestCase
                 'result' => '4',
             ],
         ];
-
         $this->post(route('dice_tables.store'), $attributes)->assertSessionHasErrors('rows');
+    }
 
+    /** @test **/
+    public function a_dice_table_range_start_cannot_be_empty() {
+        $this->signIn();
+
+        $attributes = DiceTable::factory()->raw();
+        $attributes['rows'] = [
+            [
+                'range' => [1],
+                'result' => '1',
+            ],
+            [
+                'range' => [],
+                'result' => '2',
+            ],
+            [
+                'range' => [3],
+                'result' => '3',
+            ],
+        ];
+        $this->post(route('dice_tables.store'), $attributes)->assertSessionHasErrors('rows');
+    }
+
+    /** @test **/
+    public function a_dice_table_result_cannot_be_empty() {
+        $this->signIn();
+
+        $attributes = DiceTable::factory()->raw();
+        $attributes['rows'] = [
+            [
+                'range' => [1],
+                'result' => '1',
+            ],
+            [
+                'range' => [2],
+                'result' => '',
+            ],
+            [
+                'range' => [3],
+                'result' => '3',
+            ],
+        ];
+        $this->post(route('dice_tables.store'), $attributes)->assertSessionHasErrors('rows');
+    }
+
+    /** @test **/
+    public function a_dice_table_range_cannot_have_duplicate_numbers() {
+        $this->signIn();
+
+        $attributes = DiceTable::factory()->raw();
+        $attributes['rows'] = [
+            [
+                'range' => [1],
+                'result' => '1',
+            ],
+            [
+                'range' => [2],
+                'result' => '',
+            ],
+            [
+                'range' => [3],
+                'result' => '3',
+            ],
+            [
+                'range' => [3],
+                'result' => '3',
+            ],
+        ];
+        $this->post(route('dice_tables.store'), $attributes)->assertSessionHasErrors('rows');
     }
 }
