@@ -36,22 +36,24 @@ class RangeNoDuplicates implements Rule
         $counter = $value[0]['range'][0];
         foreach($value as $row) {
             foreach($row['range'] as $num) {
-                if(in_array($num, $all_numbers)) {
-                    array_push($this->duplicates, $num);
-                } else {
-                    array_push($all_numbers, $num);
-                }
-                if($counter < $num) {
-                    while($counter < $num) {
-                        if(in_array($counter, $all_numbers)) {
-                            array_push($this->duplicates, $counter);
-                        } else {
-                            array_push($all_numbers, $counter);
-                        }
-                        $counter++;
+                if($num != null) {
+                    if(in_array($num, $all_numbers)) {
+                        array_push($this->duplicates, $num);
+                    } else {
+                        array_push($all_numbers, $num);
                     }
+                    if($counter < $num) {
+                        while($counter < $num) {
+                            if(in_array($counter, $all_numbers)) {
+                                array_push($this->duplicates, $counter);
+                            } else {
+                                array_push($all_numbers, $counter);
+                            }
+                            $counter++;
+                        }
+                    }
+                    $counter++;
                 }
-                $counter++;
             }
         }
         if(count($this->duplicates) > 0) {

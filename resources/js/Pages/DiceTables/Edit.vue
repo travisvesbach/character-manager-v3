@@ -59,6 +59,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <jet-input-error :message="form.errors.rows" class="mt-2"/>
             </div>
 
             <template #actions>

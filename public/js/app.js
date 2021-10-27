@@ -24672,7 +24672,16 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  mixins: [_Mixins_DiceTable__WEBPACK_IMPORTED_MODULE_1__.DiceTable]
+  mixins: [_Mixins_DiceTable__WEBPACK_IMPORTED_MODULE_1__.DiceTable],
+  methods: {
+    formatRange: function formatRange(range) {
+      if (range[0] && range[1] && range[1] != null) {
+        return range[0] + ' - ' + range[1];
+      } else {
+        return range[0];
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -36425,7 +36434,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
           }), 256
           /* UNKEYED_FRAGMENT */
-          ))])])])];
+          ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: $data.form.errors.rows,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
+          , ["message"])])];
         }),
         _: 1
         /* STABLE */
@@ -36957,7 +36971,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.dice_table.rows, function (row) {
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
               "class": "py-2 px-1",
-              innerHTML: row.range
+              innerHTML: $options.formatRange(row.range)
             }, null, 8
             /* PROPS */
             , _hoisted_14), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {

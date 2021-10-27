@@ -44,6 +44,6 @@ class RangeStartsWithOne implements Rule
      */
     public function message()
     {
-        return 'Range doesn\'t start with 1.';
+        return 'First Range doesn\'t start with 1.';
     }
 }

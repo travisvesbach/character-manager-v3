@@ -54,7 +54,7 @@
                 </thead>
                 <tbody>
                     <tr class="border-b-2 border-color hover-trigger" v-for="row in dice_table.rows">
-                        <td class="py-2 px-1" v-html="row.range"/>
+                        <td class="py-2 px-1" v-html="formatRange(row.range)"/>
                         <td class="py-2 px-4" v-html="row.result"/>
                     </tr>
                 </tbody>
@@ -94,6 +94,15 @@
             GridSection,
         },
         mixins: [DiceTable],
+        methods: {
+            formatRange(range) {
+                if(range[0] && range[1] && range[1] != null) {
+                    return range[0] + ' - ' + range[1];
+                } else {
+                    return range[0];
+                }
+            }
+        }
     }
 </script>
 
