@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\RangeStartsWithOne;
 use App\Rules\RangeInOrder;
-use App\Rules\RangeNotSkipNumbers;
 use App\Rules\RowNotEmpty;
 use App\Rules\RangeNoDuplicates;
 
@@ -37,7 +36,6 @@ class DiceTableRequest extends FormRequest
                 new RangeStartsWithOne($this->input('rows')),
                 new RangeNoDuplicates($this->input('rows')),
                 new RangeInOrder($this->input('rows')),
-                new RangeNotSkipNumbers($this->input('rows')),
             ],
             'public'    => 'required|boolean',
         ];

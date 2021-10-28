@@ -8,6 +8,7 @@ class RangeInOrder implements Rule
 {
 
     protected $required = true;
+    protected $missing = [];
 
     /**
      * Create a new rule instance.
@@ -31,15 +32,24 @@ class RangeInOrder implements Rule
         if(!$this->required) {
             return true;
         }
-        $next = 1;
+        $counter = $value[0]['range'][0];
         foreach($value as $row) {
-            if($row['range'][0] != $next) {
-                return false;
+            foreach($row['range'] as $index => $num) {
+                if($num && $counter <= $num) {
+                    if($counter < $num && $index == 0) {
+                        while($counter != $num) {
+                            array_push($this->missing, $counter);
+                            $counter++;
+                        }
+                    } else {
+                        $counter = $num;
+                    }
+                    $counter++;
+                }
             }
-            if($row['range'][0] != null && isset($row['range'][1]) && $row['range'][1] != null && $row['range'][0] > $row['range'][1]) {
-                return false;
-            }
-            $next = (isset($row['range'][1]) ? $row['range'][1] : $row['range'][0]) + 1;
+        }
+        if(count($this->missing) > 0) {
+            return false;
         }
         return true;
     }
@@ -51,6 +61,6 @@ class RangeInOrder implements Rule
      */
     public function message()
     {
-        return 'A range\'s start can\'t be greater than its end.';
+        return 'Ranges numbers are missing or out of order: ' . implode(', ', $this->missing);
     }
 }

@@ -35,14 +35,14 @@ class RangeNoDuplicates implements Rule
         $all_numbers = [];
         $counter = $value[0]['range'][0];
         foreach($value as $row) {
-            foreach($row['range'] as $num) {
+            foreach($row['range'] as $index => $num) {
                 if($num != null) {
                     if(in_array($num, $all_numbers)) {
                         array_push($this->duplicates, $num);
                     } else {
                         array_push($all_numbers, $num);
                     }
-                    if($counter < $num) {
+                    if($counter < $num && $index == 1) {
                         while($counter < $num) {
                             if(in_array($counter, $all_numbers)) {
                                 array_push($this->duplicates, $counter);

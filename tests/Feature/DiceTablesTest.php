@@ -284,4 +284,30 @@ class DiceTablesTest extends TestCase
         ];
         $this->post(route('dice_tables.store'), $attributes)->assertSessionHasErrors('rows');
     }
+
+    /** @test **/
+    public function dice_table_test_passing() {
+        $this->signIn();
+
+        $attributes = DiceTable::factory()->raw();
+        $attributes['rows'] = [
+            [
+                'range' => [1,5],
+                'result' => '1',
+            ],
+            [
+                'range' => [6],
+                'result' => '2',
+            ],
+            [
+                'range' => [7,11],
+                'result' => '3',
+            ],
+            [
+                'range' => [12],
+                'result' => '4',
+            ],
+        ];
+        $this->post(route('dice_tables.store'), $attributes)->assertSessionHasNoErrors();
+    }
 }
