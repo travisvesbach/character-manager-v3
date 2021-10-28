@@ -24585,7 +24585,7 @@ __webpack_require__.r(__webpack_exports__);
         name: null,
         "public": null,
         rows: [{
-          range: [null, null],
+          range: [1, null],
           result: null
         }]
       })
@@ -24602,6 +24602,16 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    addRow: function addRow() {
+      var _this$form$rows$at$ra;
+
+      var number = (_this$form$rows$at$ra = this.form.rows.at(-1).range[1]) !== null && _this$form$rows$at$ra !== void 0 ? _this$form$rows$at$ra : this.form.rows.at(-1).range[0];
+      number = number ? number + 1 : null;
+      this.form.rows.push({
+        range: [number, null],
+        result: null
+      });
+    },
     submit: function submit() {
       if (this.editing) {
         this.form.patch(route('dice_tables.update', this.form.id));
@@ -36506,12 +36516,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), index + 1 == $data.form.rows.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_secondary_button, {
               key: 1,
               "class": "mt-0.5",
-              onClick: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-                return $data.form.rows.push({
-                  range: [null, null],
-                  result: null
-                });
-              }, ["prevent"])),
+              onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.addRow, ["prevent"]),
               title: "Add Row"
             }, {
               "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -36520,7 +36525,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               _: 1
               /* STABLE */
 
-            })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
+            }, 8
+            /* PROPS */
+            , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
           }), 256
           /* UNKEYED_FRAGMENT */
           ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {

@@ -50,7 +50,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
                                     </svg>
                                 </jet-secondary-button>
-                                <jet-secondary-button class="mt-0.5" @click.prevent="form.rows.push({ range: [null,null], result: null })" v-if="index+1 == form.rows.length" title="Add Row">
+                                <jet-secondary-button class="mt-0.5" @click.prevent="addRow" v-if="index+1 == form.rows.length" title="Add Row">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                     </svg>
@@ -105,7 +105,7 @@
                     name: null,
                     public: null,
                     rows: [{
-                        range: [null,null],
+                        range: [1,null],
                         result: null,
                     }],
                 }),
@@ -122,6 +122,11 @@
             }
         },
         methods: {
+            addRow() {
+                let number = this.form.rows.at(-1).range[1] ?? this.form.rows.at(-1).range[0];
+                number = number ? number + 1 : null;
+                this.form.rows.push({ range: [number ,null], result: null })
+            },
             submit() {
                 if(this.editing) {
                     this.form.patch(route('dice_tables.update', this.form.id));
