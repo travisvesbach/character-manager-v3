@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\DiceTable;
 
 class Resource extends Model
 {
@@ -20,6 +21,7 @@ class Resource extends Model
             'slots',
             'recover',
             'dice',
+            'dice_table_id',
     ];
 
     protected $casts = [
@@ -29,6 +31,10 @@ class Resource extends Model
 
     public function creature() {
         return $this->morphTo();
+    }
+
+    public function diceTable() {
+        return $this->belongsTo(DiceTable::class);
     }
 
     public function rest($length) {

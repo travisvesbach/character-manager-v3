@@ -69,4 +69,8 @@ class DiceTablesController extends Controller
 
         return redirect(route('dice_tables.index'))->with(['flash_message' => $dice_table->name . ' deleted', 'flash_status' => 'danger']);
     }
+
+    public function selectList() {
+        return json_encode(DiceTable::userOrPublic(auth()->user()->id)->orderBy('name')->select(['id', 'name'])->get()->toArray());
+    }
 }

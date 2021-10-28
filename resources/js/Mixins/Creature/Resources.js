@@ -34,6 +34,7 @@ export const CreatureResources = {
                     current: resource.current,
                     recover: resource.recover,
                     dice: JSON.parse(JSON.stringify(resource.dice)),
+                    dice_table_id: resource.dice_table_id,
                     no_alert: false,
                     editing: true,
                 });
@@ -54,6 +55,7 @@ export const CreatureResources = {
                         size: null,
                         modifier: null,
                     }],
+                    dice_table_id: null,
                     no_alert: false,
                 });
             }

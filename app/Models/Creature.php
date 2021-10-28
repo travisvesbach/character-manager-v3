@@ -191,7 +191,7 @@ class Creature extends Model
     }
 
     public function resources() {
-        return $this->morphMany(Resource::class, 'creature');
+        return $this->morphMany(Resource::class, 'creature')->with('DiceTable');
     }
 
     public function modifiers() {

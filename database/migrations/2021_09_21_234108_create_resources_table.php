@@ -27,6 +27,7 @@ class CreateResourcesTable extends Migration
             $table->json('slots')->nullable();
             $table->string('recover')->nullable();
             $table->json('dice')->nullable();
+            $table->integer('dice_table_id')->nullable();
         });
     }
 

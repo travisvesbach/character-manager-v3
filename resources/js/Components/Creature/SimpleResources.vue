@@ -16,15 +16,19 @@
                         {{ dice.count }}d{{ dice.size }}{{ dice.modifier ? '+' + dice.modifier : '' }}
                     </span>
                 </jet-secondary-button>
+                <jet-secondary-button size="xs" class="ml-auto inline-block" @click="rollTable(resource.dice_table)" v-if="resource.type == 'dice table'" :disabled="disabled">
+                    Roll
+                </jet-secondary-button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import { CreatureResources } from '@/Mixins/Creature/Resources';
+    import { CreatureResources } from '@/Mixins/Creature/Resources'
+    import { DiceTableRoll } from '@/Mixins/DiceTableRoll'
 
     export default {
-        mixins: [CreatureResources],
+        mixins: [CreatureResources, DiceTableRoll],
     }
 </script>

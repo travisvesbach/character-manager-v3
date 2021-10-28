@@ -35,6 +35,7 @@ class CharactersController extends Controller
         $this->authorize('update', $character);
 
         $character->load(['resources', 'modifiers', 'actions']);
+        $character->resources->load('diceTable');
 
         $characters = auth()->user()->characters()->whereNull('archive_date')->select(['id', 'name', 'level', 'race', 'class'])->orderBy('name')->get();
 

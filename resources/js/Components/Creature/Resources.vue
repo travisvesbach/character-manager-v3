@@ -22,6 +22,9 @@
                         {{ dice.count }}d{{ dice.size }}{{ dice.modifier ? '+' + dice.modifier : '' }}
                     </span>
                 </jet-secondary-button>
+                <jet-secondary-button size="xs" class="ml-auto inline-block" @click="rollTable(resource.dice_table)" v-if="resource.type == 'dice table'" :disabled="disabled">
+                    Roll
+                </jet-secondary-button>
             </div>
         </div>
 
@@ -44,7 +47,7 @@
                     <div class="col-span-1 px-1 mt-4 sm:mt-0">
                         <!-- type -->
                         <jet-label for="type" value="Type"/>
-                        <select-input id="type" class="mt-1 w-full" v-model="form.type" :options="['counter', 'dice']" required/>
+                        <select-input id="type" class="mt-1 w-full" v-model="form.type" :options="['counter', 'dice', 'dice table']" required/>
                         <jet-input-error :message="form.errors.type" class="mt-2"/>
                     </div>
                 </div>
@@ -79,6 +82,13 @@
                     <jet-label for="dice" value="Dice" class="mt-4"/>
                     <dice-array-input v-model="form.dice" :current="true" :multiple="true"/>
                     <jet-input-error :message="form.errors.dice" class="mt-2"/>
+                </div>
+
+                <div v-if="form.type == 'dice table'" class="px-1">
+                    <!-- dice_table_id -->
+                    <jet-label for="dice_table_id" value="Dice Table" class="mt-4"/>
+                    <select-input class="w-full" v-model="form.dice_table_id" :options="diceTableOptions"/>
+                    <jet-input-error :message="form.errors.dice_table_id" class="mt-2"/>
                 </div>
             </template>
 
@@ -132,7 +142,8 @@
     import DiceArrayInput from '@/Components/DiceArrayInput'
     import GridSection from '@/Components/GridSection'
 
-    import { CreatureResources } from '@/Mixins/Creature/Resources';
+    import { CreatureResources } from '@/Mixins/Creature/Resources'
+    import { DiceTableRoll } from '@/Mixins/DiceTableRoll'
 
     export default {
         components: {
@@ -145,17 +156,30 @@
             DiceArrayInput,
             GridSection,
         },
-        mixins: [CreatureResources],
+        mixins: [CreatureResources, DiceTableRoll],
         data() {
             return {
                 show_modal: false,
                 show_delete_modal: false,
+                dice_tables: null,
             };
+        },
+        computed: {
+            diceTableOptions() {
+                let options = [];
+                if(this.dice_tables) {
+                    this.dice_tables.forEach(table => {
+                        options.push([table.id, table.name]);
+                    });
+                }
+                return options;
+            }
         },
         methods: {
             openModal(resource = null) {
                 this.setForm(resource);
                 this.show_modal = true;
+                this.getDiceTables();
             },
             closeModal() {
                 this.show_modal = false;
@@ -175,6 +199,12 @@
                 this.closeModal();
                 this.show_delete_modal = false;
             },
+            getDiceTables() {
+                axios.get(route('dice_tables.select_list')).then((response) => {
+                    console.log(response.data);
+                    this.dice_tables = response.data;
+                });
+            }
         }
     }
 </script>

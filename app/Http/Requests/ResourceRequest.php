@@ -35,6 +35,7 @@ class ResourceRequest extends FormRequest
             'slots'             => '',
             'recover'           => 'max:255',
             'dice'              => ['required_if:type,dice', 'nullable', new DiceArray($this->type == 'dice')],
+            'dice_table_id'     => 'required_if:type,dice table|integer|nullable',
         ];
     }
 }

@@ -11,6 +11,7 @@ import JetLabel from '@/Jetstream/Label'
 import JetInputError from '@/Jetstream/InputError'
 
 import { Flash } from '@/Mixins/Flash'
+import { DiceTableRoll } from '@/Mixins/DiceTableRoll'
 
 export const DiceTable = {
     components: {
@@ -24,7 +25,7 @@ export const DiceTable = {
         JetDangerButton,
         JetConfirmationModal,
     },
-    mixins: [Flash],
+    mixins: [Flash, DiceTableRoll],
     data() {
         return {
             delete_dice_table: false,
@@ -44,19 +45,5 @@ export const DiceTable = {
             form.delete(route('monsters.destroy', form.id));
             this.delete_dice_table = false;
         },
-        rollTable(table) {
-            let message = table.name + ': [';
-
-            let roll_result = dice.roll(table.dice_size);
-            message += roll_result + '] = ';
-            for(let i=0; i<table.rows.length;i++) {
-                if(roll_result == table.rows[i].range[0] || (table.rows[i].range.length == 2 && roll_result >= table.rows[i].range[0] && roll_result <= table.rows[i].range[1])) {
-                    message += table.rows[i].result;
-                    break;
-                }
-            }
-
-            this.flash(message, 'primary');
-        }
     }
 }

@@ -21667,6 +21667,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Components/DiceArrayInput */ "./resources/js/Components/DiceArrayInput.vue");
 /* harmony import */ var _Components_GridSection__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Components/GridSection */ "./resources/js/Components/GridSection.vue");
 /* harmony import */ var _Mixins_Creature_Resources__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Mixins/Creature/Resources */ "./resources/js/Mixins/Creature/Resources.js");
+/* harmony import */ var _Mixins_DiceTableRoll__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Mixins/DiceTableRoll */ "./resources/js/Mixins/DiceTableRoll.js");
+
 
 
 
@@ -21687,18 +21689,33 @@ __webpack_require__.r(__webpack_exports__);
     DiceArrayInput: _Components_DiceArrayInput__WEBPACK_IMPORTED_MODULE_6__["default"],
     GridSection: _Components_GridSection__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
-  mixins: [_Mixins_Creature_Resources__WEBPACK_IMPORTED_MODULE_8__.CreatureResources],
+  mixins: [_Mixins_Creature_Resources__WEBPACK_IMPORTED_MODULE_8__.CreatureResources, _Mixins_DiceTableRoll__WEBPACK_IMPORTED_MODULE_9__.DiceTableRoll],
   data: function data() {
     return {
       show_modal: false,
-      show_delete_modal: false
+      show_delete_modal: false,
+      dice_tables: null
     };
+  },
+  computed: {
+    diceTableOptions: function diceTableOptions() {
+      var options = [];
+
+      if (this.dice_tables) {
+        this.dice_tables.forEach(function (table) {
+          options.push([table.id, table.name]);
+        });
+      }
+
+      return options;
+    }
   },
   methods: {
     openModal: function openModal() {
       var resource = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       this.setForm(resource);
       this.show_modal = true;
+      this.getDiceTables();
     },
     closeModal: function closeModal() {
       this.show_modal = false;
@@ -21720,6 +21737,14 @@ __webpack_require__.r(__webpack_exports__);
       this.form["delete"](route('resources.destroy', this.form.id));
       this.closeModal();
       this.show_delete_modal = false;
+    },
+    getDiceTables: function getDiceTables() {
+      var _this = this;
+
+      axios.get(route('dice_tables.select_list')).then(function (response) {
+        console.log(response.data);
+        _this.dice_tables = response.data;
+      });
     }
   }
 });
@@ -21965,9 +21990,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Mixins_Creature_Resources__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Mixins/Creature/Resources */ "./resources/js/Mixins/Creature/Resources.js");
+/* harmony import */ var _Mixins_DiceTableRoll__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Mixins/DiceTableRoll */ "./resources/js/Mixins/DiceTableRoll.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mixins: [_Mixins_Creature_Resources__WEBPACK_IMPORTED_MODULE_0__.CreatureResources]
+  mixins: [_Mixins_Creature_Resources__WEBPACK_IMPORTED_MODULE_0__.CreatureResources, _Mixins_DiceTableRoll__WEBPACK_IMPORTED_MODULE_1__.DiceTableRoll]
 });
 
 /***/ }),
@@ -29377,23 +29404,23 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 var _hoisted_7 = {
   key: 1
 };
-var _hoisted_8 = {
-  "class": "grid grid-cols-1 sm:grid-cols-2"
-};
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Roll ");
+
 var _hoisted_9 = {
-  "class": "col-span-1 px-1"
+  "class": "grid grid-cols-1 sm:grid-cols-2"
 };
 var _hoisted_10 = {
-  "class": "col-span-1 px-1 mt-4 sm:mt-0"
+  "class": "col-span-1 px-1"
 };
 var _hoisted_11 = {
-  key: 0
+  "class": "col-span-1 px-1 mt-4 sm:mt-0"
 };
 var _hoisted_12 = {
-  "class": "grid grid-cols-1 sm:grid-cols-2"
+  key: 0
 };
 var _hoisted_13 = {
-  "class": "col-span-1 px-1"
+  "class": "grid grid-cols-1 sm:grid-cols-2"
 };
 var _hoisted_14 = {
   "class": "col-span-1 px-1"
@@ -29402,21 +29429,28 @@ var _hoisted_15 = {
   "class": "col-span-1 px-1"
 };
 var _hoisted_16 = {
+  "class": "col-span-1 px-1"
+};
+var _hoisted_17 = {
   key: 1,
   "class": "px-1"
 };
+var _hoisted_18 = {
+  key: 2,
+  "class": "px-1"
+};
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete ");
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete ");
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Save ");
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Save ");
 
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to delete this resource? ");
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to delete this resource? ");
 
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete Resource ");
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Delete Resource ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_secondary_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-secondary-button");
@@ -29528,6 +29562,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
         }, 1032
         /* PROPS, DYNAMIC_SLOTS */
+        , ["onClick", "disabled"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), resource.type == 'dice table' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_secondary_button, {
+          key: 3,
+          size: "xs",
+          "class": "ml-auto inline-block",
+          onClick: function onClick($event) {
+            return _ctx.rollTable(resource.dice_table);
+          },
+          disabled: _ctx.disabled
+        }, {
+          "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+            return [_hoisted_8];
+          }),
+          _: 2
+          /* DYNAMIC */
+
+        }, 1032
+        /* PROPS, DYNAMIC_SLOTS */
         , ["onClick", "disabled"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 2
         /* CLASS */
         );
@@ -29546,7 +29597,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           )];
         }),
         content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" name "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" name "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "name",
             value: "Name"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
@@ -29565,7 +29616,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" type "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" type "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "type",
             value: "Type"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
@@ -29575,7 +29626,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
               return _ctx.form.type = $event;
             }),
-            options: ['counter', 'dice'],
+            options: ['counter', 'dice', 'dice table'],
             required: ""
           }, null, 8
           /* PROPS */
@@ -29584,7 +29635,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])])]), _ctx.form.type == 'counter' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" counter_type "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])])]), _ctx.form.type == 'counter' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" counter_type "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "counter_type",
             value: "Counter Type",
             "class": "mt-4"
@@ -29604,7 +29655,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" total "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" total "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "total",
             value: "Total",
             "class": "mt-4"
@@ -29627,7 +29678,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" recover "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" recover "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "recover",
             value: "Recover",
             "class": "mt-4"
@@ -29646,7 +29697,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
-          , ["message"])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.form.type == 'dice' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" dice "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+          , ["message"])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.form.type == 'dice' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" dice "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
             "for": "dice",
             value: "Dice",
             "class": "mt-4"
@@ -29664,17 +29715,35 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "mt-2"
           }, null, 8
           /* PROPS */
+          , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.form.type == 'dice table' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" dice_table_id "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+            "for": "dice_table_id",
+            value: "Dice Table",
+            "class": "mt-4"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_select_input, {
+            "class": "w-full",
+            modelValue: _ctx.form.dice_table_id,
+            "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+              return _ctx.form.dice_table_id = $event;
+            }),
+            options: $options.diceTableOptions
+          }, null, 8
+          /* PROPS */
+          , ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+            message: _ctx.form.errors.dice_table_id,
+            "class": "mt-2"
+          }, null, 8
+          /* PROPS */
           , ["message"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
         }),
         footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_ctx.form.editing ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_danger_button, {
             key: 0,
-            onClick: _cache[7] || (_cache[7] = function ($event) {
+            onClick: _cache[8] || (_cache[8] = function ($event) {
               return $data.show_delete_modal = true;
             })
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_17];
+              return [_hoisted_19];
             }),
             _: 1
             /* STABLE */
@@ -29686,7 +29755,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onClick: $options.closeModal
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_18];
+              return [_hoisted_20];
             }),
             _: 1
             /* STABLE */
@@ -29700,7 +29769,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             disabled: _ctx.form.processing
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_19];
+              return [_hoisted_21];
             }),
             _: 1
             /* STABLE */
@@ -29716,7 +29785,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* PROPS */
       , ["show", "onClose", "onSubmitted"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_confirmation_modal, {
         show: $data.show_delete_modal,
-        onClose: _cache[9] || (_cache[9] = function ($event) {
+        onClose: _cache[10] || (_cache[10] = function ($event) {
           return $data.show_delete_modal = false;
         })
       }, {
@@ -29726,16 +29795,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           )];
         }),
         content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_20];
+          return [_hoisted_22];
         }),
         footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
-            onClick: _cache[8] || (_cache[8] = function ($event) {
+            onClick: _cache[9] || (_cache[9] = function ($event) {
               return $data.show_delete_modal = false;
             })
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_21];
+              return [_hoisted_23];
             }),
             _: 1
             /* STABLE */
@@ -29748,7 +29817,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             disabled: _ctx.form.processing
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_22];
+              return [_hoisted_24];
             }),
             _: 1
             /* STABLE */
@@ -30401,6 +30470,9 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 var _hoisted_6 = {
   key: 1
 };
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Roll ");
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_counter_slot = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("counter-slot");
 
@@ -30460,6 +30532,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }), 256
         /* UNKEYED_FRAGMENT */
         ))];
+      }),
+      _: 2
+      /* DYNAMIC */
+
+    }, 1032
+    /* PROPS, DYNAMIC_SLOTS */
+    , ["onClick", "disabled"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), resource.type == 'dice table' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_secondary_button, {
+      key: 3,
+      size: "xs",
+      "class": "ml-auto inline-block",
+      onClick: function onClick($event) {
+        return _ctx.rollTable(resource.dice_table);
+      },
+      disabled: _ctx.disabled
+    }, {
+      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+        return [_hoisted_7];
       }),
       _: 2
       /* DYNAMIC */
@@ -41171,6 +41260,7 @@ var CreatureResources = {
           current: resource.current,
           recover: resource.recover,
           dice: JSON.parse(JSON.stringify(resource.dice)),
+          dice_table_id: resource.dice_table_id,
           no_alert: false,
           editing: true
         });
@@ -41191,6 +41281,7 @@ var CreatureResources = {
             size: null,
             modifier: null
           }],
+          dice_table_id: null,
           no_alert: false
         });
       }
@@ -41654,6 +41745,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
 /* harmony import */ var _Mixins_Flash__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Mixins/Flash */ "./resources/js/Mixins/Flash.js");
+/* harmony import */ var _Mixins_DiceTableRoll__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Mixins/DiceTableRoll */ "./resources/js/Mixins/DiceTableRoll.js");
+
 
 
 
@@ -41678,7 +41771,7 @@ var DiceTable = {
     JetDangerButton: _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_7__["default"],
     JetConfirmationModal: _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_8__["default"]
   },
-  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_11__.Flash],
+  mixins: [_Mixins_Flash__WEBPACK_IMPORTED_MODULE_11__.Flash, _Mixins_DiceTableRoll__WEBPACK_IMPORTED_MODULE_12__.DiceTableRoll],
   data: function data() {
     return {
       delete_dice_table: false
@@ -41698,7 +41791,25 @@ var DiceTable = {
       });
       form["delete"](route('monsters.destroy', form.id));
       this.delete_dice_table = false;
-    },
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/Mixins/DiceTableRoll.js":
+/*!**********************************************!*\
+  !*** ./resources/js/Mixins/DiceTableRoll.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DiceTableRoll": () => (/* binding */ DiceTableRoll)
+/* harmony export */ });
+var DiceTableRoll = {
+  methods: {
     rollTable: function rollTable(table) {
       var message = table.name + ': [';
       var roll_result = dice.roll(table.dice_size);

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Resource;
 
 class DiceTable extends Model
 {
@@ -26,8 +27,20 @@ class DiceTable extends Model
         'rows' => 'array',
     ];
 
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($dice_table) {
+            $dice_table->resources()->delete();
+        });
+    }
+
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function resources() {
+        return $this->hasMany(Resource::class);
     }
 
     public function path() {
@@ -39,8 +52,11 @@ class DiceTable extends Model
     }
 
     public function diceSize() {
-        $rows = $this->rows;
-        return end(end($rows)['range']);
+        if($this->rows) {
+            $rows = $this->rows;
+            return end(end($rows)['range']);
+        }
+        return null;
     }
 
     public function getDiceSizeAttribute() {
