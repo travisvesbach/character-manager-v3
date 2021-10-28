@@ -26,6 +26,7 @@ class DiceTablesController extends Controller
         $dice_table = new DiceTable;
         $dice_table->fill($validated);
         $dice_table->user_id = auth()->user()->id;
+        $dice_table->cleanRows();
         $dice_table->save();
 
         return redirect($dice_table->path())->with(['flash_message' => $dice_table->name . ' created', 'flash_status' => 'success']);
@@ -51,6 +52,8 @@ class DiceTablesController extends Controller
         $validated = $request->validated();
 
         $dice_table->update($validated);
+        $dice_table->cleanRows();
+        $dice_table->save();
 
         if($request->input('no_alert')) {
             return redirect($dice_table->path());

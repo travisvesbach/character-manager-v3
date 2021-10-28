@@ -47,11 +47,18 @@ class DiceTable extends Model
         return $this->diceSize();
     }
 
-
     public function scopeUserOrPublic($query, $user_id) {
         return $query->where(function($q) use($user_id) {
             $q->where('user_id', $user_id)
                 ->orWhere('public', 1);
         });
+    }
+
+    public function cleanRows() {
+        $rows = $this->rows;
+        foreach($rows as $index => $row) {
+            $rows[$index]['range'] = array_filter($row['range'], function($v) { return !is_null($v); });
+        }
+        $this->rows = $rows;
     }
 }

@@ -36848,7 +36848,7 @@ var _hoisted_11 = {
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", {
   "class": "border-b-2 border-color"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
-  "class": "p-1 text-left"
+  "class": "p-1 text-left "
 }, "Range"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "py-1 px-4 text-left"
 }, "Result")])], -1
@@ -36970,7 +36970,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.dice_table.rows, function (row) {
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
-              "class": "py-2 px-1",
+              "class": "py-2 px-1 whitespace-nowrap",
               innerHTML: $options.formatRange(row.range)
             }, null, 8
             /* PROPS */
@@ -41705,7 +41705,7 @@ var DiceTable = {
       message += roll_result + '] = ';
 
       for (var i = 0; i < table.rows.length; i++) {
-        if (table.rows[i].range.includes(roll_result)) {
+        if (roll_result == table.rows[i].range[0] || table.rows[i].range.length == 2 && roll_result >= table.rows[i].range[0] && roll_result <= table.rows[i].range[1]) {
           message += table.rows[i].result;
           break;
         }

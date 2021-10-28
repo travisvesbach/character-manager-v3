@@ -48,13 +48,13 @@
             <table class="w-full">
                 <thead>
                     <tr class="border-b-2 border-color">
-                        <th class="p-1 text-left">Range</th>
+                        <th class="p-1 text-left ">Range</th>
                         <th class="py-1 px-4 text-left">Result</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="border-b-2 border-color hover-trigger" v-for="row in dice_table.rows">
-                        <td class="py-2 px-1" v-html="formatRange(row.range)"/>
+                        <td class="py-2 px-1 whitespace-nowrap" v-html="formatRange(row.range)"/>
                         <td class="py-2 px-4" v-html="row.result"/>
                     </tr>
                 </tbody>
