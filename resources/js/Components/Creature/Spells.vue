@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <accordion :key="accordion_key">
+        <accordion>
             <accordion-item :id="'list_' + index + '_accordion'" class="mt-2" v-for="(list, index) in filteredSpellLists" v-if="filteredSpellLists.length > 0" :key="index">
                 <template v-slot:title>
                     {{ list[0] == 0 ? 'Cantrips' : ordinalSuffix(list[0]) + ' Level' }}:
