@@ -61,6 +61,6 @@ class RangeInOrder implements Rule
      */
     public function message()
     {
-        return 'Ranges numbers are missing or out of order: ' . implode(', ', $this->missing);
+        return 'Range numbers are missing or out of order: ' . implode(', ', $this->missing);
     }
 }
