@@ -42,7 +42,7 @@ export const DiceTable = {
             let form = this.$inertia.form({
                 id: this.delete_dice_table.id,
             });
-            form.delete(route('monsters.destroy', form.id));
+            form.delete(route('dice_tables.destroy', form.id));
             this.delete_dice_table = false;
         },
     }

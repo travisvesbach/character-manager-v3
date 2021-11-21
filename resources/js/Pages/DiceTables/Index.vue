@@ -93,11 +93,11 @@
         <!-- delete confirmation -->
         <jet-confirmation-modal :show="delete_dice_table" @close="delete_dice_table = false">
             <template #title>
-                Delete Monster
+                Delete Dice Table
             </template>
 
             <template #content>
-                Are you sure you want to delete this monster?
+                Are you sure you want to delete this dice table?
             </template>
 
             <template #footer>
@@ -105,7 +105,7 @@
                     Cancel
                 </jet-secondary-button>
                 <jet-danger-button class="ml-2" @click.native="deleteDiceTable">
-                    Delete Monster
+                    Delete
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>

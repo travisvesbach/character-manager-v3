@@ -240,6 +240,7 @@
                     id: this.delete_encounter.id,
                 });
                 form.delete(route('encounters.destroy', form.id));
+                this.delete_encounter = false;
             },
             openPartyModal() {
                 this.form.party = this.$page.props.user.party ? JSON.parse(JSON.stringify(this.$page.props.user.party)) : [{ count: null, level: null }];
