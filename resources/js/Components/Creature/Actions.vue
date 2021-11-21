@@ -113,7 +113,7 @@
 
                             <div>
                                 <jet-checkbox id="auto" v-model:checked="form.auto" :disabled="form.attack"/>
-                                <jet-label class="inline-block ml-1" for="auto" value="Auto Hit"/>
+                                <jet-label class="inline-block ml-1" for="auto" value="Auto"/>
                                 <jet-input-error :message="form.errors.auto" class="mt-2"/>
                             </div>
                         </div>
