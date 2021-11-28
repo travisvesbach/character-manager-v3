@@ -46,12 +46,12 @@
                             </td>
                             <td class="py-2 px-1">
                                 <jet-secondary-button class="mr-2 mt-0.5" @click.prevent="form.rows.splice(index, 1)" v-if="form.rows && form.rows.length > 1" title="Remove Row">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="https://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
                                     </svg>
                                 </jet-secondary-button>
                                 <jet-secondary-button class="mt-0.5" @click.prevent="addRow" v-if="index+1 == form.rows.length" title="Add Row">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="https://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                     </svg>
                                 </jet-secondary-button>

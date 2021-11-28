@@ -89,7 +89,7 @@
                     <div class="col-span-1 px-1">
                         <!-- ac_source -->
                         <jet-label for="ac_source" value="AC Source" class="mt-4"/>
-                        <jet-input type="text" id="ac_source" class="mt-1 w-full" placeholder="leather armor" v-model="form.ac_source" required/>
+                        <jet-input type="text" id="ac_source" class="mt-1 w-full" placeholder="leather armor" v-model="form.ac_source"/>
                         <jet-input-error :message="form.errors.ac_source" class="mt-2"/>
                     </div>
                     <div class="col-span-1 px-1">

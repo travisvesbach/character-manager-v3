@@ -4,7 +4,7 @@
             <strong>
                 <slot name="title"></slot>
             </strong>
-            <svg xmlns="http://www.w3.org/2000/svg" class="transform ease-in duration-200" :class="iconClasses" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="https://www.w3.org/2000/svg" class="transform ease-in duration-200" :class="iconClasses" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
         </button>

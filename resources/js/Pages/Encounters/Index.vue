@@ -62,7 +62,7 @@
                             <jet-dropdown align="right" width="48" class="hover-target">
                                 <template #trigger>
                                     <button class="ml-auto flex link link-color">
-                                        <svg class="fill-current h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <svg class="fill-current h-8 w-8" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                         </svg>
                                     </button>
@@ -125,12 +125,12 @@
                             <jet-input type="number" class="inline-block" v-model.number="obj.level" required/>
                             <div>
                                 <jet-secondary-button class="mr-2 mt-0.5" @click.prevent="form.party.splice(index, 1)" v-if="form.party && form.party.length > 1" title="Remove Party Member">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="https://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
                                     </svg>
                                 </jet-secondary-button>
                                 <jet-secondary-button class="mt-0.5" @click.prevent="addParty" v-if="index+1 == form.party.length" title="Add Party Member">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="https://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                     </svg>
                                 </jet-secondary-button>

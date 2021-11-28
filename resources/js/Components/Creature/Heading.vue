@@ -7,7 +7,7 @@
                     <jet-dropdown align="left" width="48" class="hover-target ml-1">
                         <template #trigger>
                             <button class="flex link link-color">
-                                <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <svg class="fill-current h-6 w-6" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                 </svg>
                             </button>
@@ -56,7 +56,7 @@
 
             <div class="col-span-3 flex justify-between flex-wrap">
                 <div class="flex flex-col justify-between my-1 md:my-0">
-                    <p>AC: {{ creature.ac }} <span class="text-xs text-secondary-color">({{ creature.ac_source }})</span></p>
+                    <p>AC: {{ creature.ac }} <span class="text-xs text-secondary-color" v-if="creature.ac_source">({{ creature.ac_source }})</span></p>
                     <p>Speed: {{ creature.speed }}</p>
                     <div>
                         <button class="btn-text" @click="roll('Initiative', creature.initiative)" :disabled="disabled">

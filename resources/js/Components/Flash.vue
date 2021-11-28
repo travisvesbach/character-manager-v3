@@ -2,13 +2,13 @@
     <div class="h-full">
         <div class="alert-flash flex flex-col items-end">
             <div id="alert" class="rounded py-3 px-5 my-2 opacity-90" v-bind:class="getStatusClasses(messageObj.status)" role="alert" v-for="messageObj in flash_array">
-                <span v-html="messageObj.message"/>
+                <span class="whitespace-pre-wrap" v-html="messageObj.message"/>
             </div>
         </div>
 
 
         <button class="nav-link nav-link-inactive link-color" :title="'View the last ' + flash_history.length + ' flash messages'" @click="show_modal = true">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="https://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
             </svg>
         </button>
@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="rounded py-3 px-5 my-2 opacity-90" v-bind:class="getStatusClasses(messageObj.status)" v-for="messageObj in flash_history">
-                    <span v-html="messageObj.message"/>
+                    <span class="whitespace-pre-wrap" v-html="messageObj.message"/>
                 </div>
 
             </template>

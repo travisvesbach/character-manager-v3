@@ -59,7 +59,9 @@
                         <span class="text-sm font-medium mr-2">Notes</span>
                     </template>
                     <template v-slot:content>
-                        {{ action.notes }}
+                        <div class="whitespace-pre-wrap">
+                            {{ action.notes }}
+                        </div>
                     </template>
                 </accordion-item>
             </accordion>
