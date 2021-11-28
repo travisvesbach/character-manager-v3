@@ -1,8 +1,8 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/fonts/GermaniaOne-Regular.ttf": "/fonts/GermaniaOne-Regular.ttf",
-    "/fonts/MedievalSharp-Regular.ttf": "/fonts/MedievalSharp-Regular.ttf",
-    "/fonts/PirataOne-Regular.ttf": "/fonts/PirataOne-Regular.ttf",
-    "/fonts/UncialAntiqua-Regular.ttf": "/fonts/UncialAntiqua-Regular.ttf"
+    "/js/app.js": "/js/app.js?id=dc579bf0c502ee25a208",
+    "/css/app.css": "/css/app.css?id=c803292c560fc9e7bf85",
+    "/fonts/GermaniaOne-Regular.ttf": "/fonts/GermaniaOne-Regular.ttf?id=f7dfb62748806f1b892e",
+    "/fonts/MedievalSharp-Regular.ttf": "/fonts/MedievalSharp-Regular.ttf?id=973ad012a95a90ed6166",
+    "/fonts/PirataOne-Regular.ttf": "/fonts/PirataOne-Regular.ttf?id=db357e09c3cc15b44df6",
+    "/fonts/UncialAntiqua-Regular.ttf": "/fonts/UncialAntiqua-Regular.ttf?id=8367e9599a5d1a0b0a41"
 }

@@ -5,7 +5,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="grid lg:grid-cols-2 gap-8">
-                    <grid-section class="sm:rounded-lg" title="Recent Characters" icon="Character">
+                    <grid-section class="sm:rounded-lg overflow-hidden" title="Recent Characters" icon="Character">
                         <table class="w-full">
                             <thead>
                                 <tr class="border-b-2 border-color">
@@ -30,7 +30,7 @@
                         </table>
                     </grid-section>
 
-                    <grid-section class="sm:rounded-lg" title="Recent Encounters" icon="Encounter">
+                    <grid-section class="sm:rounded-lg overflow-hidden" title="Recent Encounters" icon="Encounter">
                         <table class="w-full">
                             <thead>
                                 <tr class="border-b-2 border-color">
